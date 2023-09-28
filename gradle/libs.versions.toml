@@ -1,0 +1,43 @@
+[versions]
+agp = "8.1.1"
+kotlin = "1.9.10"
+androidxComposeBom = "2023.09.02"
+androidxActivity = "1.7.2"
+composeCompiler = "1.5.3"
+
+# Project Settings
+project-minSdk = "29"
+project-compileSdk = "34"
+project-appId = "app.futured.kmpfuturedtemplate.android"
+project-android-namespace = "app.futured.kmpfuturedtemplate.android"
+project-shared-namespace = "app.futured.kmpfuturedtemplate"
+project-versionCode = "1"
+project-versionName = "1.0"
+project-jvmTarget = "11"
+
+[libraries]
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+
+[plugins]
+com-android-application = { id = "com.android.application", version.ref = "agp" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = {id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+
+[bundles]
+compose-bundle = [
+    "androidx-compose-foundation",
+    "androidx-compose-ui",
+    "androidx-compose-ui-tooling",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-material3"
+]
