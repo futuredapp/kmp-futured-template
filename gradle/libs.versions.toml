@@ -14,6 +14,8 @@ project-shared-namespace = "app.futured.kmpfuturedtemplate"
 project-versionCode = "1"
 project-versionName = "1.0"
 project-jvmTarget = "11"
+project-baseName = "shared"
+project-bundleId = "app.futured.kmpfuturedtemplate.shared"
 
 [libraries]
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }

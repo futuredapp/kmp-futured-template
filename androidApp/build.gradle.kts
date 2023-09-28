@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.shared)
+    implementation(projects.shared.app)
 
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
