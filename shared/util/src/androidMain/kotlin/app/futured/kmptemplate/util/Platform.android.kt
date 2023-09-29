@@ -1,6 +1,4 @@
-package app.futured.app
-
-import app.futured.kmptemplate.app.Platform
+package app.futured.kmptemplate.util
 
 class AndroidPlatform : Platform {
     override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"

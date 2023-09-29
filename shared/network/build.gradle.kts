@@ -42,7 +42,7 @@ kotlin {
 }
 
 android {
-    namespace = projectSettings.shared.namespace.get()
+    namespace = projectSettings.shared.network.namespace.get()
     compileSdk = projectSettings.compileSdk.get().toInt()
     defaultConfig {
         minSdk = projectSettings.minSdk.get().toInt()

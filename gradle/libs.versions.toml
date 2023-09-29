@@ -4,13 +4,21 @@ kotlin = "1.9.10"
 androidxComposeBom = "2023.09.02"
 androidxActivity = "1.7.2"
 composeCompiler = "1.5.3"
+decompose = "2.1.0"
+essenty = "1.2.0"
+koin = "3.5.0"
+coroutines = "1.7.3"
 
 # Project Settings
 project-minSdk = "29"
 project-compileSdk = "34"
 project-appId = "app.futured.kmpfuturedtemplate.android"
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
-project-shared-namespace = "app.futured.kmpfuturedtemplate"
+project-shared-app-namespace = "app.futured.kmpfuturedtemplate.app.android"
+project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.android"
+project-shared-network-namespace = "app.futured.kmpfuturedtemplate.network.android"
+project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
+project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
 project-versionCode = "1"
 project-versionName = "1.0"
 project-jvmTarget = "11"
@@ -18,6 +26,7 @@ project-baseName = "shared"
 project-bundleId = "app.futured.kmpfuturedtemplate.shared"
 
 [libraries]
+# Compose
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
@@ -25,15 +34,29 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+# Koin
+#koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android" }
+
+# KotlinX
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# AndroidX
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+
+# Decompose
+decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
+essenty = { group = "com.arkivanov.essenty", name = "lifecycle:", version.ref = "essenty" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = {id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-parcelize = {id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 [bundles]
 compose-bundle = [

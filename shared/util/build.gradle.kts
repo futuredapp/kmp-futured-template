@@ -16,7 +16,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -24,13 +24,6 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = projectSettings.baseName.get()
-            binaryOptions += "bundleId" to projectSettings.bundleId.get()
-
-            linkerOpts += "-lsqlite3"
-
-            export(libs.decompose)
-            export(libs.essenty)
-            export(projects.shared.feature)
         }
     }
 
@@ -38,11 +31,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 //put your multiplatform dependencies here
-                implementation(projects.shared.network)
-
-                // Decompose
                 implementation(libs.decompose)
 
+//                val koinBom = platform(libs.koin.bom)
+//                implementation(koinBom)
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
         val commonTest by getting {
@@ -50,18 +44,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-
-        val iosMain by getting {
-            dependencies {
-                api(projects.shared.feature)
-                api(libs.decompose)
-            }
-        }
     }
 }
 
 android {
-    namespace = projectSettings.shared.app.namespace.get()
+    namespace = projectSettings.shared.util.namespace.get()
     compileSdk = projectSettings.compileSdk.get().toInt()
     defaultConfig {
         minSdk = projectSettings.minSdk.get().toInt()

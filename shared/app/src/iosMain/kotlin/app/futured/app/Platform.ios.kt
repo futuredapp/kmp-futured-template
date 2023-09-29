@@ -1,5 +1,6 @@
 package app.futured.app
 
+import app.futured.kmptemplate.app.Platform
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {

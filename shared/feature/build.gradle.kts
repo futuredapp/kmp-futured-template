@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 private val projectSettings = libs.versions.project
@@ -30,7 +31,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                implementation(libs.decompose)
+                implementation(libs.koin.core)
+
+                implementation(projects.shared.network)
+                implementation(projects.shared.persistance)
+                implementation(projects.shared.util)
             }
         }
         val commonTest by getting {
@@ -42,7 +48,7 @@ kotlin {
 }
 
 android {
-    namespace = projectSettings.shared.namespace.get()
+    namespace = projectSettings.shared.feature.namespace.get()
     compileSdk = projectSettings.compileSdk.get().toInt()
     defaultConfig {
         minSdk = projectSettings.minSdk.get().toInt()
