@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation(projects.shared.app)
+    implementation(projects.shared.feature)
 
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
@@ -50,4 +51,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.activity.compose)
+
+    implementation(libs.decompose)
+    implementation(libs.decompose.compose.ext)
+
+    implementation(libs.koin.android)
 }

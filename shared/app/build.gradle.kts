@@ -37,11 +37,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                implementation(projects.shared.feature)
                 implementation(projects.shared.network)
 
                 // Decompose
                 implementation(libs.decompose)
+                implementation(libs.koin.core)
 
             }
         }

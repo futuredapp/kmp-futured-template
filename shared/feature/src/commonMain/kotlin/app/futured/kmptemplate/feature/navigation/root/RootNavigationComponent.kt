@@ -1,5 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
+import app.futured.kmptemplate.feature.ui.login.LoginComponent
+import app.futured.kmptemplate.feature.ui.login.LoginEvent
 import app.futured.kmptemplate.util.arch.ViewModelComponent
 import app.futured.kmptemplate.util.ext.viewModel
 import com.arkivanov.decompose.ComponentContext
@@ -19,15 +21,20 @@ internal class RootNavigationComponent(
     private val slotNavigator = SlotNavigation<RootDestination>()
     override val slot: Value<ChildSlot<RootDestination, RootNavigationEntry>> = childSlot(
         source = slotNavigator,
-        initialConfiguration = { null },
+        initialConfiguration = { RootDestination.Login },
         handleBackButton = false,
         childFactory = { destination, childContext ->
             when (destination) {
+                RootDestination.Login -> LoginComponent(childContext, ::handleLoginEvent)
+                    .let { RootNavigationEntry.Login(it) }
                 RootDestination.Home -> TODO()
-                RootDestination.Login -> TODO()
             }
         },
     )
+
+    private fun handleLoginEvent(loginEvent: LoginEvent) = when (loginEvent) {
+        else -> {}
+    }
 
     private fun onViewModelEvent(event: RootNavigationEvent) = when (event) {
         else -> {/*todo*/

@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
+import app.futured.kmptemplate.feature.ui.login.LoginScreen
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
@@ -20,6 +21,6 @@ sealed class RootDestination : Parcelable {
 }
 
 sealed class RootNavigationEntry {
-    data object Login : RootNavigationEntry()
+    data class Login(val screen: LoginScreen) : RootNavigationEntry()
     data class Home(val navigation: HomeNavigation) : RootNavigationEntry()
 }
