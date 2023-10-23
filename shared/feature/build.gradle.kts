@@ -1,3 +1,5 @@
+import app.futured.kmptemplate.gradle.ext.iosTargets
+
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
@@ -18,9 +20,7 @@ kotlin {
         }
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    iosTargets()
 
     sourceSets {
         val commonMain by getting {

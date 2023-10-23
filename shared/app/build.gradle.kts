@@ -1,3 +1,5 @@
+import app.futured.kmptemplate.gradle.ext.iosTargets
+
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
@@ -17,11 +19,7 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach {
+    iosTargets {
         it.binaries.framework {
             baseName = projectSettings.baseName.get()
             binaryOptions += "bundleId" to projectSettings.bundleId.get()
