@@ -20,6 +20,7 @@ project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.andro
 project-shared-network-namespace = "app.futured.kmpfuturedtemplate.network.android"
 project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
+project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
 project-versionCode = "1"
 project-versionName = "1.0"
 project-jvmTarget = "11"

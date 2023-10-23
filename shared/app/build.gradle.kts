@@ -16,7 +16,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -29,16 +29,20 @@ kotlin {
             // Enable if SQLite is used in project (such as Apollo cache, or SQLDelight)
             // linkerOpts += "-lsqlite3"
 
+            export(projects.shared.platform)
+            export(projects.shared.util)
+            export(projects.shared.feature)
+
             export(libs.decompose)
             export(libs.essenty)
             export(libs.kotlinx.immutableCollections)
-            export(projects.shared.feature)
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(projects.shared.platform)
                 implementation(projects.shared.feature)
                 implementation(projects.shared.network)
 
@@ -54,7 +58,10 @@ kotlin {
 
         val iosMain by getting {
             dependencies {
+                api(projects.shared.platform)
+                api(projects.shared.util)
                 api(projects.shared.feature)
+
                 api(libs.decompose)
                 api(libs.kotlinx.immutableCollections)
             }
