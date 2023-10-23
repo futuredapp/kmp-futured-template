@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.com.android.library)
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlin.parcelize)
+    id(libs.plugins.com.android.library.get().pluginId)
+    id(libs.plugins.kotlin.multiplatform.get().pluginId)
+    id(libs.plugins.kotlin.parcelize.get().pluginId)
 }
 
 private val projectSettings = libs.versions.project
