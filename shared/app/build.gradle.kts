@@ -1,11 +1,10 @@
+import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }
-
-private val projectSettings = libs.versions.project
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -14,15 +13,15 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = projectSettings.jvmTarget.get()
+                jvmTarget = ProjectSettings.Kotlin.JvmTarget
             }
         }
     }
 
     iosTargets {
         it.binaries.framework {
-            baseName = projectSettings.baseName.get()
-            binaryOptions += "bundleId" to projectSettings.bundleId.get()
+            baseName = ProjectSettings.IOS.FrameworkName
+            binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
 
             // Enable if SQLite is used in project (such as Apollo cache, or SQLDelight)
             // linkerOpts += "-lsqlite3"
@@ -70,13 +69,13 @@ kotlin {
 }
 
 android {
-    namespace = projectSettings.shared.app.namespace.get()
-    compileSdk = projectSettings.compileSdk.get().toInt()
+    namespace = libs.versions.project.shared.app.namespace.get()
+    compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
-        minSdk = projectSettings.minSdk.get().toInt()
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
+        targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }
