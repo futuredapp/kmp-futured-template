@@ -13,11 +13,11 @@ object KmpApplication {
 
     fun initializeSharedApplication(
         nativePlatformModule: NativePlatformModule,
-        appDeclaration: KoinAppDeclaration? = null
+        appDeclaration: KoinAppDeclaration? = null,
     ) {
         AppInjection.initializeInjection(
             nativePlatformModule = nativePlatformModule,
-            appDeclaration = appDeclaration
+            appDeclaration = appDeclaration,
         )
 
         println("Shared application was initialized.")

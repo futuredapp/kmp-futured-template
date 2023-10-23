@@ -6,6 +6,6 @@ import com.arkivanov.decompose.value.MutableValue
 internal class HomeNavigationViewModel :
     SharedViewModel<HomeNavigationViewState, HomeNavigationEvent, Nothing>() {
     override val viewState: MutableValue<HomeNavigationViewState> = MutableValue(
-        HomeNavigationViewState()
+        HomeNavigationViewState(),
     )
 }

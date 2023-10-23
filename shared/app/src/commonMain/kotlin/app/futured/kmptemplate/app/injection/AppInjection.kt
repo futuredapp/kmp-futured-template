@@ -14,7 +14,7 @@ internal object AppInjection {
 
     fun initializeInjection(
         nativePlatformModule: NativePlatformModule,
-        appDeclaration: KoinAppDeclaration?
+        appDeclaration: KoinAppDeclaration?,
     ) {
         startKoin {
             if (appDeclaration != null) {

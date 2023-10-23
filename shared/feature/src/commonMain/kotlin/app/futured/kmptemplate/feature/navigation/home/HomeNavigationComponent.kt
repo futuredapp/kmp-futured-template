@@ -38,7 +38,7 @@ internal class HomeNavigationComponent(
                 HomeDestination.Second -> SecondComponent(childContext, ::handleSecondEvents)
                     .let { HomeNavigationEntry.Second(it) }
             }
-        }
+        },
     )
 
     override val output: (HomeNavigationEvent) -> Unit

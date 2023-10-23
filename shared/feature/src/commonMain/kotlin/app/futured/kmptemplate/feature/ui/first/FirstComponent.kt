@@ -7,7 +7,7 @@ import com.arkivanov.decompose.value.MutableValue
 
 internal class FirstComponent(
     componentContext: ComponentContext,
-    override val output: (FirstEvent) -> Unit
+    override val output: (FirstEvent) -> Unit,
 ) : ViewModelComponent<FirstViewModel, FirstEvent>(componentContext), FirstScreen {
     override val viewModel: FirstViewModel by viewModel()
     override val viewState: MutableValue<FirstViewState> = viewModel.viewState
