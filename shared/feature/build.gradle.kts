@@ -34,9 +34,11 @@ kotlin {
                 implementation(projects.shared.util)
             }
         }
+
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.testCommon)
+                implementation(libs.kotlin.testAnnotationsCommon)
             }
         }
     }

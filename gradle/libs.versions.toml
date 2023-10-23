@@ -55,6 +55,10 @@ decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref
 decompose-compose-ext = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack", version.ref = "decompose" }
 essenty = { group = "com.arkivanov.essenty", name = "lifecycle:", version.ref = "essenty" }
 
+# Testing
+kotlin-testCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-common", version.ref = "kotlin" }
+kotlin-testAnnotationsCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-annotations-common", version.ref = "kotlin" }
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
