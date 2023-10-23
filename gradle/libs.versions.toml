@@ -7,7 +7,8 @@ composeCompiler = "1.5.3"
 decompose = "2.1.0"
 essenty = "1.2.0"
 koin = "3.5.0"
-coroutines = "1.7.3"
+kotlinx-coroutines = "1.7.3"
+kotlinx-immutableCollections = "0.3.5"
 
 # Project Settings
 project-minSdk = "29"
@@ -40,7 +41,8 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 
 # KotlinX
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-immutableCollections = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutableCollections"}
 
 # AndroidX
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }

@@ -26,10 +26,12 @@ kotlin {
             baseName = projectSettings.baseName.get()
             binaryOptions += "bundleId" to projectSettings.bundleId.get()
 
-            linkerOpts += "-lsqlite3"
+            // Enable if SQLite is used in project (such as Apollo cache, or SQLDelight)
+            // linkerOpts += "-lsqlite3"
 
             export(libs.decompose)
             export(libs.essenty)
+            export(libs.kotlinx.immutableCollections)
             export(projects.shared.feature)
         }
     }
@@ -40,10 +42,8 @@ kotlin {
                 implementation(projects.shared.feature)
                 implementation(projects.shared.network)
 
-                // Decompose
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
-
             }
         }
         val commonTest by getting {
@@ -56,6 +56,7 @@ kotlin {
             dependencies {
                 api(projects.shared.feature)
                 api(libs.decompose)
+                api(libs.kotlinx.immutableCollections)
             }
         }
     }

@@ -33,6 +33,7 @@ kotlin {
             dependencies {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
+                implementation(libs.kotlinx.immutableCollections)
 
                 implementation(projects.shared.network)
                 implementation(projects.shared.persistance)
