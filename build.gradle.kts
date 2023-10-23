@@ -1,3 +1,3 @@
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
-}
+import app.futured.kmptemplate.gradle.task.CleanTask
+
+tasks.register<CleanTask>("clean")
