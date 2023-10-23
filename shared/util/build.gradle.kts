@@ -17,24 +17,14 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = projectSettings.baseName.get()
-        }
-    }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
                 implementation(libs.decompose)
-
-//                val koinBom = platform(libs.koin.bom)
-//                implementation(koinBom)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
             }
