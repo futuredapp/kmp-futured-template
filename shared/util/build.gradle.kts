@@ -1,9 +1,11 @@
+import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import app.futured.kmptemplate.gradle.ext.iosTargets
+
 plugins {
-    alias(libs.plugins.com.android.library)
-    alias(libs.plugins.kotlin.multiplatform)
+    id(libs.plugins.com.android.library.get().pluginId)
+    id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }
 
-private val projectSettings = libs.versions.project
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -12,14 +14,12 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = projectSettings.jvmTarget.get()
+                jvmTarget = ProjectSettings.Kotlin.JvmTarget
             }
         }
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    iosTargets()
 
     sourceSets {
         val commonMain by getting {
@@ -40,13 +40,13 @@ kotlin {
 }
 
 android {
-    namespace = projectSettings.shared.util.namespace.get()
-    compileSdk = projectSettings.compileSdk.get().toInt()
+    namespace = libs.versions.project.shared.util.namespace.get()
+    compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
-        minSdk = projectSettings.minSdk.get().toInt()
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
+        targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }

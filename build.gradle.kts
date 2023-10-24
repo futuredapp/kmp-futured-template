@@ -1,12 +1,3 @@
-plugins {
-    //trick: for the same plugin versions in all sub-modules
-    alias(libs.plugins.com.android.application) apply false
-    alias(libs.plugins.com.android.library) apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.multiplatform) apply false
-    alias(libs.plugins.kotlin.parcelize) apply false
-}
+import app.futured.kmptemplate.gradle.task.CleanTask
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
-}
+tasks.register<CleanTask>("clean")

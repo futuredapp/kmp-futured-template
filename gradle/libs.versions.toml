@@ -1,6 +1,7 @@
 [versions]
 agp = "8.1.2"
 kotlin = "1.9.10"
+desugarLibs = "1.1.5"
 androidxComposeBom = "2023.09.02"
 androidxActivity = "1.7.2"
 composeCompiler = "1.5.3"
@@ -10,10 +11,7 @@ koin = "3.5.0"
 kotlinx-coroutines = "1.7.3"
 kotlinx-immutableCollections = "0.3.5"
 
-# Project Settings
-project-minSdk = "29"
-project-compileSdk = "34"
-project-appId = "app.futured.kmpfuturedtemplate.android"
+# Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
 project-shared-app-namespace = "app.futured.kmpfuturedtemplate.app.android"
 project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.android"
@@ -21,13 +19,9 @@ project-shared-network-namespace = "app.futured.kmpfuturedtemplate.network.andro
 project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
 project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
-project-versionCode = "1"
-project-versionName = "1.0"
-project-jvmTarget = "11"
-project-baseName = "shared"
-project-bundleId = "app.futured.kmpfuturedtemplate.shared"
 
 [libraries]
+
 # Compose
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
@@ -43,7 +37,7 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 
 # KotlinX
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
-kotlinx-immutableCollections = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutableCollections"}
+kotlinx-immutableCollections = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutableCollections" }
 
 # AndroidX
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
@@ -53,18 +47,25 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 # Decompose
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-compose-ext = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack", version.ref = "decompose" }
-essenty = { group = "com.arkivanov.essenty", name = "lifecycle:", version.ref = "essenty" }
+essenty = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
 
 # Testing
 kotlin-testCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-common", version.ref = "kotlin" }
 kotlin-testAnnotationsCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-annotations-common", version.ref = "kotlin" }
 
+# Desugar
+androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarLibs"}
+
+# Gradle Plugins
+gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin"}
+gradlePlugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
-kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-multiplatform = {id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-parcelize = {id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 [bundles]
 compose-bundle = [
