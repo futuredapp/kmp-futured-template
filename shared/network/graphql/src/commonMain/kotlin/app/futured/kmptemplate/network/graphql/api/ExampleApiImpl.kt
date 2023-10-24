@@ -11,7 +11,7 @@ internal class ExampleApiImpl(
     override val apiAdapter: ApolloApiAdapter,
 ) : ExampleApi, ApiManager {
 
-    override suspend fun getUser(): NetworkResult<List<EpisodeFragment>> = executeQuery(GetEpisodesQuery())
+    override suspend fun getEpisodes(): NetworkResult<List<EpisodeFragment>> = executeQuery(GetEpisodesQuery())
         .map { data ->
             val results = data.episodes?.results ?: emptyList()
             results.mapNotNull { result -> result?.episodeFragment }
