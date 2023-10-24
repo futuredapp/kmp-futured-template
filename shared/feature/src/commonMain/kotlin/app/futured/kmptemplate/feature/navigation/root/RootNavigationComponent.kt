@@ -37,7 +37,7 @@ internal class RootNavigationComponent(
     }
 
     private fun onViewModelEvent(event: RootNavigationEvent) = when (event) {
-        else -> {/*todo*/
+        else -> { /*todo*/
         }
     }
 }

@@ -1,0 +1,65 @@
+build:
+  maxIssues: 50
+  excludeCorrectable: false
+  weights:
+  # complexity: 2
+  # LongParameterList: 1
+  # style: 1
+  # comments: 1
+
+config:
+  validation: true
+  warningsAsErrors: false
+  checkExhaustiveness: false
+  # when writing own rules with new properties, exclude the property path e.g.: 'my_rule_set,.*>.*>[my_property]'
+  excludes: ''
+
+naming:
+  active: true
+  MatchingDeclarationName:
+    active: false
+  FunctionNaming:
+    active: true
+    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
+    functionPattern: '[a-z][a-zA-Z0-9]*'
+    excludeClassPattern: '$^'
+    ignoreAnnotated:
+      - Composable
+      - Preview
+
+style:
+  active: true
+  UnusedPrivateProperty:
+    active: true
+    allowedNames: '_|ignored|expected|serialVersionUID|commonMain|iosMain|androidMain|commonTest|iosTest|androidTest|debug|enterprise|release'
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated:
+      - Composable
+      - Preview
+  MaxLineLength:
+    active: true
+    maxLineLength: 130 # Keep aligned with .editorconfig file to prevent false positives
+  MagicNumber:
+    active: true
+    ignoreAnnotated:
+      - Preview
+  DestructuringDeclarationWithTooManyEntries:
+    active: true
+    ignoreAnnotated:
+      - Composable
+
+complexity:
+  LongParameterList:
+    active: true
+    ignoreAnnotated:
+      - Composable
+  TooManyFunctions:
+    active: true
+    thresholdInInterfaces: 20
+    thresholdInClasses: 20
+  LongMethod:
+    active: true
+    ignoreAnnotated:
+      - Composable
+      - Preview

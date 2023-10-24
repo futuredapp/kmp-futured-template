@@ -3,6 +3,7 @@ import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 plugins {
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.conventions.lint.get().pluginId)
 }
 
 android {
@@ -90,6 +91,7 @@ android {
 
 dependencies {
     coreLibraryDesugaring(libs.androidTools.desugarLibs)
+    lintChecks(libs.lint.compose)
 
     implementation(projects.shared.app)
     implementation(projects.shared.feature)

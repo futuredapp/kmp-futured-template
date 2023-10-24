@@ -12,9 +12,9 @@ open class CleanTask : Delete() {
 
     @TaskAction
     fun cleanProject() {
-        project.rootProject.buildDir.deleteRecursively()
+        project.rootProject.layout.buildDirectory.asFile.get().deleteRecursively()
         project.subprojects.forEach {
-            delete(it.buildDir)
+            it.layout.buildDirectory.asFile.get().deleteRecursively()
         }
     }
 }

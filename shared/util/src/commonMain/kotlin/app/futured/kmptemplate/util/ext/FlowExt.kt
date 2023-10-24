@@ -1,4 +1,4 @@
-package app.futured.preventivka.util.ext
+package app.futured.kmptemplate.util.ext
 
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value

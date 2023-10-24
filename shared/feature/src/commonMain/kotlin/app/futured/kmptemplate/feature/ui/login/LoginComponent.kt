@@ -7,7 +7,7 @@ import com.arkivanov.decompose.value.MutableValue
 
 internal class LoginComponent(
     componentContext: ComponentContext,
-    override val output: (LoginEvent) -> Unit
+    override val output: (LoginEvent) -> Unit,
 ) : ViewModelComponent<LoginViewModel, LoginEvent>(componentContext), LoginScreen {
     override val viewModel: LoginViewModel by viewModel()
     override val viewState: MutableValue<LoginViewState> = viewModel.viewState

@@ -10,6 +10,9 @@ essenty = "1.2.0"
 koin = "3.5.0"
 kotlinx-coroutines = "1.7.3"
 kotlinx-immutableCollections = "0.3.5"
+ktlintGradlePlugin = "11.6.1"
+detektGradlePlugin = "1.23.1"
+composeLint = "1.2.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
@@ -54,11 +57,16 @@ kotlin-testCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-common
 kotlin-testAnnotationsCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-annotations-common", version.ref = "kotlin" }
 
 # Desugar
-androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarLibs"}
+androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarLibs" }
+
+# Lint
+lint-compose = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "composeLint" }
 
 # Gradle Plugins
-gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin"}
+gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 gradlePlugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+gradlePlugin-ktlint = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
+gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
@@ -66,6 +74,9 @@ com-android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+
+# Precompiled script plugins
+conventions-lint = { id = "conventions-lint" }
 
 [bundles]
 compose-bundle = [
