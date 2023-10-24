@@ -13,4 +13,5 @@ dependencies {
     implementation(libs.gradlePlugin.android)
     implementation(libs.gradlePlugin.ktlint)
     implementation(libs.gradlePlugin.detekt)
+    implementation(libs.gradlePlugin.apollo)
 }

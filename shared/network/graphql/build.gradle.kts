@@ -5,6 +5,7 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.apollo.get().pluginId)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -24,7 +25,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // put your multiplatform dependencies here
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.bundles.apollo.bundle)
             }
         }
 
@@ -38,7 +41,7 @@ kotlin {
 }
 
 android {
-    namespace = libs.versions.project.shared.network.namespace.get()
+    namespace = libs.versions.project.shared.network.graphql.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion
@@ -46,5 +49,17 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+}
+
+apollo {
+    service("ExampleRickAndMortyService") {
+        packageName.set(libs.versions.project.shared.network.graphql.packageName.get())
+        schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+
+        introspection {
+            endpointUrl.set("https://rickandmortyapi.com/graphql")
+            schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+        }
     }
 }

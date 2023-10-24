@@ -29,7 +29,8 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.immutableCollections)
 
-                implementation(projects.shared.network)
+                implementation(projects.shared.network.graphql)
+                implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistance)
                 implementation(projects.shared.util)
             }
