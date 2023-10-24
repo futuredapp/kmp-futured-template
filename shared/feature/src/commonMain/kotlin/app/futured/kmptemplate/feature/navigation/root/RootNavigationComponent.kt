@@ -7,6 +7,7 @@ import app.futured.kmptemplate.util.ext.viewModel
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
+import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.value.Value
 
@@ -33,6 +34,7 @@ internal class RootNavigationComponent(
     )
 
     private fun handleLoginEvent(loginEvent: LoginEvent) = when (loginEvent) {
+        LoginEvent.NavigateHomeEvent -> slotNavigator.activate(RootDestination.Home)
         else -> {}
     }
 

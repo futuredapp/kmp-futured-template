@@ -23,8 +23,20 @@ sealed class HomeDestination : Parcelable {
     data object Third : HomeDestination()
 }
 
-sealed class HomeNavigationEntry {
-    data class First(val screen: FirstScreen) : HomeNavigationEntry()
-    data class Second(val screen: SecondScreen) : HomeNavigationEntry()
-    data class Third(val screen: ThirdScreen) : HomeNavigationEntry()
+interface HomeNavigationEntry
+
+interface Destination {
+
+}
+
+interface Sheet : Destination {
+
+}
+
+interface Dialog: Destination {
+
+}
+
+class Router() {
+    val stack: Value<ChildStack<HomeDestination, HomeNavigationEntry>>
 }

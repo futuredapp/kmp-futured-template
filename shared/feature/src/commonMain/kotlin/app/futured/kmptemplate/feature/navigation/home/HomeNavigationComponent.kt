@@ -30,13 +30,13 @@ internal class HomeNavigationComponent(
         childFactory = { configuration, childContext ->
             when (configuration) {
                 HomeDestination.First -> FirstComponent(childContext, ::handleFirstEvents)
-                    .let { HomeNavigationEntry.First(it) }
+//                    .let { HomeNavigationEntry.First(it) }
 
                 HomeDestination.Third -> ThirdComponent(childContext, ::handleThirdEvents)
-                    .let { HomeNavigationEntry.Third(it) }
+//                    .let { HomeNavigationEntry.Third(it) }
 
                 HomeDestination.Second -> SecondComponent(childContext, ::handleSecondEvents)
-                    .let { HomeNavigationEntry.Second(it) }
+//                    .let { HomeNavigationEntry.Second(it) }
             }
         }
     )

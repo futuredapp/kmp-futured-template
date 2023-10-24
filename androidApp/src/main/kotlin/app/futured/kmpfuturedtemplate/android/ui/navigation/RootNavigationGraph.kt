@@ -25,7 +25,11 @@ fun RootNavGraph(
                 modifier = Modifier.fillMaxSize(),
             )
 
-            is RootNavigationEntry.Home -> TODO()
+            is RootNavigationEntry.Home -> HomeNavGraph(
+                homeNavigation = childInstance.navigation,
+                modifier = Modifier.fillMaxSize(),
+            )
+
             null -> Unit
         }
     }

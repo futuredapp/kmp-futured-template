@@ -1,8 +1,12 @@
 package app.futured.kmpfuturedtemplate.android.ui.screen
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import app.futured.kmptemplate.feature.ui.login.LoginScreen
 import app.futured.kmptemplate.feature.ui.login.LoginViewState
@@ -25,5 +29,12 @@ private fun Content(
     actions: LoginScreen.Actions,
     modifier: Modifier = Modifier
 ) {
-    Text(text = "Hi from login")
+    Box(modifier = modifier) {
+        Column(modifier = Modifier.align(Alignment.Center)) {
+            Text(text = "Hi from login")
+            OutlinedButton(onClick = actions::onNavigateHome) {
+                Text(text = "Home")
+            }
+        }
+    }
 }
