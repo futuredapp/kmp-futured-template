@@ -36,7 +36,5 @@
     <issue id="ComposeModifierMissing" severity="warning" />
     <issue id="ComposeViewModelForwarding" severity="warning" />
     <issue id="ComposeParameterOrder" severity="warning" />
-    <issue id="ComposeCompositionLocalUsage">
-        <option name="allowed-composition-locals" value="LocalPreventivkaTypography,LocalPreventivkaColorScheme,LocalPreventivkaDimensions,LocalPreventivkaShapes" />
-    </issue>
+    <issue id="ComposeCompositionLocalUsage"/>
 </lint>

@@ -1,9 +1,13 @@
+fragment episodeFragment on Episode {
+    id,
+    name,
+    episode
+}
+
 query GetEpisodes {
     episodes {
         results {
-            id
-            name
-            episode
+            ...episodeFragment
         }
     }
 }
