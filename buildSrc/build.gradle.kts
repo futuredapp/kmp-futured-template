@@ -14,4 +14,7 @@ dependencies {
     implementation(libs.gradlePlugin.ktlint)
     implementation(libs.gradlePlugin.detekt)
     implementation(libs.gradlePlugin.apollo)
+    implementation(libs.gradlePlugin.ksp)
+    implementation(libs.gradlePlugin.ktorfit)
+    implementation(libs.gradlePlugin.kotlinx.serialization)
 }
