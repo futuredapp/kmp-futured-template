@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.rest.injection
 
-import app.futured.kmptemplate.network.rest.api.ExampleApi
+import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.result.NetworkErrorParser
 import app.futured.kmptemplate.network.rest.result.NetworkResultConverterFactory
 import de.jensklingenberg.ktorfit.Ktorfit
@@ -46,5 +46,5 @@ fun networkRestModule() = module {
             .build()
     }
 
-    single { get<Ktorfit>().create<ExampleApi>() }
+    single { get<Ktorfit>().create<StarWarsApi>() }
 }
