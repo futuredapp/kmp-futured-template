@@ -1,14 +1,15 @@
 package app.futured.kmptemplate.network.graphql.interceptor
 
+import co.touchlab.kermit.Logger
 import com.apollographql.apollo3.network.http.LoggingInterceptor
 
 internal class LoggingInterceptorFactory {
 
     fun create(): LoggingInterceptor {
-        // TODO create a logger of your choice (for example Kermit `Logger.withTag("ApolloClient")`) and use it in `log` lambda
+        val logger = Logger.withTag("Apollo")
         return LoggingInterceptor(
-            level = LoggingInterceptor.Level.HEADERS,
-            log = { log -> println(log) },
+            level = LoggingInterceptor.Level.BASIC,
+            log = { log -> logger.d { log } },
         )
     }
 }

@@ -3,6 +3,7 @@ package app.futured.kmptemplate.feature.ui.login
 import app.futured.kmptemplate.network.graphql.api.RickAndMortyApi
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.util.arch.SharedViewModel
+import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.value.MutableValue
 
 internal class LoginViewModel(
@@ -10,7 +11,9 @@ internal class LoginViewModel(
     private val rickAndMortyApi: RickAndMortyApi,
 ) : SharedViewModel<LoginViewState, LoginEvent, Nothing>(),
     LoginScreen.Actions {
+
     override val viewState: MutableValue<LoginViewState> = MutableValue(LoginViewState())
+    private val logger = Logger.withTag("LoginViewModel")
 
     init {
         testRestApiClient()
@@ -19,11 +22,11 @@ internal class LoginViewModel(
 
     private fun testRestApiClient() = launchWithHandler {
         val networkResult = starWarsApi.getPerson(3)
-        println(networkResult)
+        logger.d { networkResult.toString() }
     }
 
     private fun testGraphqlApiClient() = launchWithHandler {
         val networkResult = rickAndMortyApi.getEpisodes()
-        println(networkResult)
+        logger.d { networkResult.toString() }
     }
 }

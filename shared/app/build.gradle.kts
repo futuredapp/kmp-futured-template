@@ -47,6 +47,7 @@ kotlin {
 
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
+                implementation(libs.logging.kermit)
             }
         }
 
@@ -79,5 +80,9 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
