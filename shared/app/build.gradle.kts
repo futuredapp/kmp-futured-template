@@ -1,10 +1,17 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import co.touchlab.skie.configuration.AnalyticsTier
+import co.touchlab.skie.configuration.DefaultArgumentInterop
+import co.touchlab.skie.configuration.EnumInterop
+import co.touchlab.skie.configuration.FlowInterop
+import co.touchlab.skie.configuration.SealedInterop
+import co.touchlab.skie.configuration.SuspendInterop
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    alias(libs.plugins.skie)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -84,5 +91,20 @@ android {
 
     buildFeatures {
         buildConfig = true
+    }
+}
+
+skie {
+    analytics {
+        disableUpload.set(true) // This is explicitly disabled, consider supporting authors by enabling.
+    }
+    features {
+        group {
+            DefaultArgumentInterop.Enabled(false)
+            SuspendInterop.Enabled(true)
+            FlowInterop.Enabled(true)
+            EnumInterop.Enabled(true)
+            SealedInterop.Enabled(true)
+        }
     }
 }
