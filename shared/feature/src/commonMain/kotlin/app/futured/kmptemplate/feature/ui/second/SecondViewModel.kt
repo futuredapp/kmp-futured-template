@@ -8,7 +8,7 @@ internal class SecondViewModel :
     SecondScreen.Actions {
     override val viewState: MutableValue<SecondViewState> = MutableValue(SecondViewState())
 
-    override fun onBack() {
-        // todo
-    }
+    override fun onBack() = sendOutput(SecondEvent.NavigateBack)
+
+    override fun onNext() = sendOutput(SecondEvent.NavigateNext)
 }

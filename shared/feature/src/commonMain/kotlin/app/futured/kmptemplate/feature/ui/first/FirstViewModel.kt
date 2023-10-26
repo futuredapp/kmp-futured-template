@@ -8,7 +8,7 @@ internal class FirstViewModel :
     FirstScreen.Actions {
     override val viewState: MutableValue<FirstViewState> = MutableValue(FirstViewState())
 
-    override fun onBack() {
-        // todo
-    }
+    override fun onBack() = sendOutput(FirstEvent.NavigateBack)
+
+    override fun onNext() = sendOutput(FirstEvent.NavigateNext)
 }

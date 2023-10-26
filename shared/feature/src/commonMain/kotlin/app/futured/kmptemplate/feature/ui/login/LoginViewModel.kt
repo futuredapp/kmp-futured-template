@@ -29,4 +29,6 @@ internal class LoginViewModel(
         val networkResult = rickAndMortyApi.getEpisodes()
         logger.d { networkResult.toString() }
     }
+
+    override fun onLoginClick() = sendOutput(LoginEvent.NavigateToHome)
 }
