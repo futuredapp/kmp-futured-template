@@ -15,7 +15,13 @@
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
 		1193BEE82AEA8A8200C6203F /* KotlinState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE72AEA8A8200C6203F /* KotlinState.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEEB2AEA97C900C6203F /* RootView.swift */; };
+		1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF12AEA987D00C6203F /* RootNavigationView.swift */; };
+		1193BEF42AEA988D00C6203F /* HomeNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF32AEA988D00C6203F /* HomeNavigationView.swift */; };
+		1193BEF62AEA989600C6203F /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF52AEA989600C6203F /* FirstView.swift */; };
+		1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF72AEA989F00C6203F /* SecondView.swift */; };
+		1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF92AEA98A800C6203F /* ThirdView.swift */; };
+		1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEFB2AEA9FA000C6203F /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,8 +46,14 @@
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
 		1193BEE72AEA8A8200C6203F /* KotlinState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinState.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
+		1193BEEB2AEA97C900C6203F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		1193BEF12AEA987D00C6203F /* RootNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationView.swift; sourceTree = "<group>"; };
+		1193BEF32AEA988D00C6203F /* HomeNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationView.swift; sourceTree = "<group>"; };
+		1193BEF52AEA989600C6203F /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		1193BEF72AEA989F00C6203F /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		1193BEF92AEA98A800C6203F /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
+		1193BEFB2AEA9FA000C6203F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +89,7 @@
 			children = (
 				1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */,
 				1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */,
+				1193BEEB2AEA97C900C6203F /* RootView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -86,9 +99,46 @@
 			children = (
 				1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */,
 				1193BEE72AEA8A8200C6203F /* KotlinState.swift */,
-				1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */,
 			);
 			path = Architecture;
+			sourceTree = "<group>";
+		};
+		1193BEED2AEA985200C6203F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEEF2AEA986000C6203F /* Screen */,
+				1193BEEE2AEA985B00C6203F /* Navigation */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1193BEEE2AEA985B00C6203F /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEF02AEA986900C6203F /* Interop */,
+				1193BEF12AEA987D00C6203F /* RootNavigationView.swift */,
+				1193BEF32AEA988D00C6203F /* HomeNavigationView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		1193BEEF2AEA986000C6203F /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEF52AEA989600C6203F /* FirstView.swift */,
+				1193BEF72AEA989F00C6203F /* SecondView.swift */,
+				1193BEF92AEA98A800C6203F /* ThirdView.swift */,
+				1193BEFB2AEA9FA000C6203F /* LoginView.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		1193BEF02AEA986900C6203F /* Interop */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */,
+			);
+			path = Interop;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -111,11 +161,11 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				1193BEED2AEA985200C6203F /* Views */,
 				1193BEE22AEA89D800C6203F /* Architecture */,
 				1113BA3C2AE6969700ABDE61 /* App */,
 				1113BA392AE6955200ABDE61 /* Platform */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
@@ -221,13 +271,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
+				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
+				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
 				1193BEE82AEA8A8200C6203F /* KotlinState.swift in Sources */,
+				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
+				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
 				1113BA3B2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift in Sources */,
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
+				1193BEF42AEA988D00C6203F /* HomeNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -340,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
