@@ -21,6 +21,7 @@ kotlinx-serialization = "1.6.0"
 timber = "5.0.1"
 kermit = "2.0.2"
 skie = "0.5.0"
+buildkonfig = "0.14.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
@@ -29,6 +30,7 @@ project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.andro
 project-shared-network-graphql-namespace = "app.futured.kmpfuturedtemplate.network.graphql.android"
 project-shared-network-graphql-packageName = "app.futured.kmpfuturedtemplate.network.graphql"
 project-shared-network-rest-namespace = "app.futured.kmpfuturedtemplate.network.rest.android"
+project-shared-network-rest-packageName = "app.futured.kmpfuturedtemplate.network.rest"
 project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
 project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
@@ -108,6 +110,7 @@ apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
