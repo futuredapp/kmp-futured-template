@@ -12,6 +12,7 @@
 		1113BA3B2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift */; };
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
+		111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */; };
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
 		1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEEB2AEA97C900C6203F /* RootView.swift */; };
@@ -43,6 +44,7 @@
 		1113BA3A2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlatformModuleImpl.swift; sourceTree = "<group>"; };
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
+		111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EventsEffect.swift"; sourceTree = "<group>"; };
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
 		1193BEEB2AEA97C900C6203F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */,
 				119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */,
+				111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				1113BA3B2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift in Sources */,
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
+				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,
 				1193BEF42AEA988D00C6203F /* HomeNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
