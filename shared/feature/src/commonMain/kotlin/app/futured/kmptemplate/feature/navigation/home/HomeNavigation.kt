@@ -8,9 +8,10 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.coroutines.flow.StateFlow
 
 interface HomeNavigation {
-    val stack: Value<ChildStack<HomeDestination, HomeNavigationEntry>>
+    val stack: StateFlow<ChildStack<HomeDestination, HomeNavigationEntry>>
     val actions: Actions
 
     interface Actions {

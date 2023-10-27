@@ -3,7 +3,7 @@ import shared
 
 struct SecondView: View {
     
-    @ObservedObject @KotlinState private var viewState: SecondViewState
+    @ObservedObject @KotlinStateFlow private var viewState: SecondViewState
     private let actions: SecondScreenActions
     
     init(_ screen: SecondScreen) {

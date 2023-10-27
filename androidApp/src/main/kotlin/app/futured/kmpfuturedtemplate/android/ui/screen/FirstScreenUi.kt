@@ -19,13 +19,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.first.FirstViewState
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
 @Composable
 fun FirstScreenUi(
@@ -33,7 +33,7 @@ fun FirstScreenUi(
     modifier: Modifier = Modifier,
 ) {
     val actions = screen.actions
-    val viewState by screen.viewState.subscribeAsState()
+    val viewState by screen.viewState.collectAsState()
 
     Content(viewState = viewState, actions = actions, modifier = modifier)
 }
@@ -59,7 +59,9 @@ private fun Content(
         },
     ) { paddingValues ->
         Column(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

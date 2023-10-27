@@ -13,7 +13,6 @@
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
-		1193BEE82AEA8A8200C6203F /* KotlinState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE72AEA8A8200C6203F /* KotlinState.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
 		1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEEB2AEA97C900C6203F /* RootView.swift */; };
 		1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF12AEA987D00C6203F /* RootNavigationView.swift */; };
@@ -22,6 +21,7 @@
 		1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF72AEA989F00C6203F /* SecondView.swift */; };
 		1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF92AEA98A800C6203F /* ThirdView.swift */; };
 		1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEFB2AEA9FA000C6203F /* LoginView.swift */; };
+		119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,7 +44,6 @@
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
-		1193BEE72AEA8A8200C6203F /* KotlinState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinState.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
 		1193BEEB2AEA97C900C6203F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1193BEF12AEA987D00C6203F /* RootNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationView.swift; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		1193BEFB2AEA9FA000C6203F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		119C5F4A2AEBC40200CB58E3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinStateFlow.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */,
-				1193BEE72AEA8A8200C6203F /* KotlinState.swift */,
+				119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -285,11 +285,11 @@
 			files = (
 				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
+				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
-				1193BEE82AEA8A8200C6203F /* KotlinState.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
 				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
 				1113BA3B2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift in Sources */,

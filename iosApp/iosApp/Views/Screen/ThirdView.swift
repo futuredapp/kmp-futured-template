@@ -3,7 +3,7 @@ import shared
 
 struct ThirdView: View {
     
-    @ObservedObject @KotlinState private var viewState: ThirdViewState
+    @ObservedObject @KotlinStateFlow private var viewState: ThirdViewState
     private let actions: ThirdScreenActions
     
     init(_ screen: ThirdScreen) {

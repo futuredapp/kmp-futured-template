@@ -8,6 +8,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.shareIn
@@ -28,7 +29,7 @@ abstract class SharedViewModel<VS : ViewState, OUTPUT_EVENT : OutputEvent<VS>, U
     UseCaseExecutionScope,
     KoinComponent {
 
-    abstract val viewState: MutableValue<VS>
+    abstract val viewState: MutableStateFlow<VS>
 
     // region Lifecycle
 

@@ -5,13 +5,15 @@ import app.futured.kmptemplate.feature.navigation.home.HomeNavigationEvent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
 import app.futured.kmptemplate.feature.ui.login.LoginEvent
 import app.futured.kmptemplate.util.arch.ViewModelComponent
+import app.futured.kmptemplate.util.ext.asStateFlow
+import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import app.futured.kmptemplate.util.ext.viewModel
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
-import com.arkivanov.decompose.value.Value
+import kotlinx.coroutines.flow.StateFlow
 
 internal class RootNavigationComponent(
     componentContext: ComponentContext,
@@ -23,7 +25,7 @@ internal class RootNavigationComponent(
 
     private val slotNavigator = SlotNavigation<RootDestination>()
 
-    override val slot: Value<ChildSlot<RootDestination, RootNavigationEntry>> = childSlot(
+    override val slot: StateFlow<ChildSlot<RootDestination, RootNavigationEntry>> = childSlot(
         source = slotNavigator,
         initialConfiguration = { RootDestination.Login },
         handleBackButton = false,
@@ -38,7 +40,7 @@ internal class RootNavigationComponent(
                 )
             }
         },
-    )
+    ).asStateFlow(componentCoroutineScope())
 
     private fun onRootNavigationEvent(event: RootNavigationEvent) = Unit
 

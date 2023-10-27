@@ -3,11 +3,11 @@ import shared
 
 struct FirstView: View {
     
-    @ObservedObject @KotlinState private var viewState: FirstViewState
+    @ObservedObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
     
     init(_ screen: FirstScreen) {
-        self._viewState = .init(screen.viewState)
+        self._viewState = .init(screen.viewState)       
         self.actions = screen.actions
     }
     
