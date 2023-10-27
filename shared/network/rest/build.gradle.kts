@@ -5,9 +5,10 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.ksp.get().pluginId)
-    id(libs.plugins.ktorfit.get().pluginId)
-    id(libs.plugins.kotlin.serialization.get().pluginId)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktorfit)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)

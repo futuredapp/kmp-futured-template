@@ -1,6 +1,8 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 
 plugins {
+    // Wondering why not `alias`? https://github.com/gradle/gradle/issues/17968
+    // (this is only for plugins we already have dependency on in `buildSrc`)
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
