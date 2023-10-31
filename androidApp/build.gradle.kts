@@ -101,7 +101,7 @@ dependencies {
     implementation(projects.shared.util)
 
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose.bundle)
+    implementation(libs.bundles.compose)
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.ktx)

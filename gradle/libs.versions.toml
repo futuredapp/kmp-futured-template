@@ -116,7 +116,7 @@ buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig"
 conventions-lint = { id = "conventions-lint" }
 
 [bundles]
-compose-bundle = [
+compose = [
     "androidx-compose-foundation",
     "androidx-compose-ui",
     "androidx-compose-ui-tooling",
@@ -124,13 +124,13 @@ compose-bundle = [
     "androidx-compose-material3"
 ]
 
-apollo-bundle = [
+apollo = [
     "network-apollo-runtime",
     "network-apollo-normalizedCache-core",
     "network-apollo-normalizedCache-sqlite"
 ]
 
-ktorfit-bundle = [
+ktorfit = [
     "network-ktorfit-lib",
     "network-ktor-client-contentNegotiation",
     "network-ktor-client-serialization",

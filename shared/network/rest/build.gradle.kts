@@ -32,7 +32,7 @@ kotlin {
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.bundles.ktorfit.bundle)
+                implementation(libs.bundles.ktorfit)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.logging.kermit)
             }

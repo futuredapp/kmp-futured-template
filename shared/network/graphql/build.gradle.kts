@@ -30,7 +30,7 @@ kotlin {
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.bundles.apollo.bundle)
+                implementation(libs.bundles.apollo)
                 implementation(libs.logging.kermit)
             }
         }
