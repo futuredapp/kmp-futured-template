@@ -30,9 +30,7 @@ kotlin {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
-
-            // Enable if SQLite is used in project (such as Apollo cache, or SQLDelight)
-            linkerOpts += "-lsqlite3"
+            isStatic = true
 
             export(projects.shared.platform)
             export(projects.shared.util)
