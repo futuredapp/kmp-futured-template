@@ -7,10 +7,7 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -22,13 +19,13 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 implementation(libs.koin.core)
             }
         }
 
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
                 implementation(libs.kotlin.testAnnotationsCommon)
