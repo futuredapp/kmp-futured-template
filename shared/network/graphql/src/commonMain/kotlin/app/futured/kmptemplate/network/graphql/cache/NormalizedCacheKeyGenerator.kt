@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.network.graphql.cache
 
 import app.futured.kmptemplate.network.graphql.cache.NormalizedCacheKeyGenerator.Companion.KNOWN_TYPES
+import co.touchlab.kermit.Logger
 import com.apollographql.apollo3.cache.normalized.api.CacheKey
 import com.apollographql.apollo3.cache.normalized.api.CacheKeyGenerator
 import com.apollographql.apollo3.cache.normalized.api.CacheKeyGeneratorContext
@@ -28,6 +29,8 @@ internal class NormalizedCacheKeyGenerator : CacheKeyGenerator {
         const val DEFAULT_ID_FIELD: IdField = "id"
     }
 
+    private val logger = Logger.withTag("NormalizedCacheKeyGenerator")
+
     /**
      * Returns a [CacheKey] for the given object or null if the object doesn't have an id
      *
@@ -41,7 +44,7 @@ internal class NormalizedCacheKeyGenerator : CacheKeyGenerator {
 
         val idField = KNOWN_TYPES[typename] ?: DEFAULT_ID_FIELD
         val id = obj[idField] as? String ?: run {
-            // logger.w { "Cache keygen miss for type: $typename, assumed ID field: $idField" }
+            logger.w { "Cache keygen miss for type: $typename, assumed ID field was: $idField" }
             return null
         }
 

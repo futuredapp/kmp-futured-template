@@ -31,6 +31,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.ktorfit.bundle)
                 implementation(libs.kotlinx.serialization.json)
+                implementation(libs.logging.kermit)
             }
         }
 

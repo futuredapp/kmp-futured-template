@@ -28,6 +28,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.apollo.bundle)
+                implementation(libs.logging.kermit)
             }
         }
 

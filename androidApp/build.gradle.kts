@@ -107,7 +107,9 @@ dependencies {
     implementation(libs.decompose)
     implementation(libs.decompose.compose.ext)
 
-    implementation(libs.koin.android)
-
     implementation(libs.kotlinx.immutableCollections)
+    implementation(libs.kotlinx.coroutines.core)
+
+    implementation(libs.koin.android)
+    implementation(libs.logging.timber)
 }

@@ -18,6 +18,8 @@ apollo = "3.8.2"
 ktorfit = "1.9.1" # Must be compatible with: `ksp`
 ktor = "2.3.4" # Must be compatible with: `ktorfit`
 kotlinx-serialization = "1.6.0"
+timber = "5.0.1"
+kermit = "2.0.2"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
@@ -70,14 +72,19 @@ androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_li
 # Lint
 lint-compose = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "composeLint" }
 
+# Logging
+logging-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+logging-kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+
 # Network
 network-apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
 network-apollo-normalizedCache-core = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache", version.ref = "apollo" }
 network-apollo-normalizedCache-sqlite = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache-sqlite", version.ref = "apollo" }
 network-ktorfit-ksp = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-ksp", version.ref = "ktorfit" }
 network-ktorfit-lib = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib", version.ref = "ktorfit" }
-network-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor"}
-network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor"}
+network-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
+network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+network-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 network-ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 # Gradle Plugins
@@ -123,5 +130,6 @@ ktorfit-bundle = [
     "network-ktorfit-lib",
     "network-ktor-client-contentNegotiation",
     "network-ktor-client-serialization",
+    "network-ktor-client-logging",
     "network-ktor-serialization-kotlinx-json"
 ]
