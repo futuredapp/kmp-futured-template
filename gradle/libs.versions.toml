@@ -13,12 +13,15 @@ kotlinx-immutableCollections = "0.3.5"
 ktlintGradlePlugin = "11.6.1"
 detektGradlePlugin = "1.23.1"
 composeLint = "1.2.0"
+apollo = "3.8.2"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
 project-shared-app-namespace = "app.futured.kmpfuturedtemplate.app.android"
 project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.android"
-project-shared-network-namespace = "app.futured.kmpfuturedtemplate.network.android"
+project-shared-network-graphql-namespace = "app.futured.kmpfuturedtemplate.network.graphql.android"
+project-shared-network-graphql-packageName = "app.futured.kmpfuturedtemplate.network.graphql"
+project-shared-network-rest-namespace = "app.futured.kmpfuturedtemplate.network.rest.android"
 project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
 project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
@@ -62,11 +65,17 @@ androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_li
 # Lint
 lint-compose = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "composeLint" }
 
+# Network
+network-apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
+network-apollo-normalizedCache-core = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache", version.ref = "apollo" }
+network-apollo-normalizedCache-sqlite = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache-sqlite", version.ref = "apollo" }
+
 # Gradle Plugins
 gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 gradlePlugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 gradlePlugin-ktlint = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
 gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
+gradlePlugin-apollo = { group = "com.apollographql.apollo3", name = "apollo-gradle-plugin", version.ref = "apollo" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
@@ -74,6 +83,7 @@ com-android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+apollo = { id = "com.apollographql.apollo3" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
@@ -85,4 +95,10 @@ compose-bundle = [
     "androidx-compose-ui-tooling",
     "androidx-compose-ui-tooling-preview",
     "androidx-compose-material3"
+]
+
+apollo-bundle = [
+    "network-apollo-runtime",
+    "network-apollo-normalizedCache-core",
+    "network-apollo-normalizedCache-sqlite"
 ]
