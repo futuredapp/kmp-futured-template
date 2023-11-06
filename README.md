@@ -24,6 +24,38 @@ Project description.
 
 ## Project Setup
 
+### Product Flavors
+
+The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin to achieve build flavors in network module.
+There are two product flavors: `dev` and `prod`, which select API url used in `:shared:network:rest` and `:shared:network:graphql` modules.
+
+In general, the build flavor can be specified as a Gradle build flag
+```shell
+./gradlew whateverTask -P buildkonfig.flavor=dev
+```
+
+Please, refer to `:shared:network:*` module Gradle config.
+
+#### Android
+
+During local development, the build flavor can be specified in `gradle.properties` file like so:
+```properties
+buildkonfig.flavor=dev
+```
+
+#### iOS
+
+On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
+where each file per build configuration specifies a `KMM_FLAVOR` environment variable.
+
+This variable is then used in shared framework build step to pass the flavor as Gradle build flag:
+```shell
+./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMM_FLAVOR
+```
+
+Currently, the `Debug` build configuration uses `staging` flavor and `Release` configuration uses `prod` flavor.
+When adding new build configurations, please make sure to also define the `KMM_FLAVOR` variable using the aforementioned method.
+
 ### Crashlytics
 
 We can have symbolicated Kotlin crash reports on iOS.
@@ -54,38 +86,6 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 # Upload
 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp ${GSPFILE} -p ios ${DSYMFILE}
 ```
-
-## Build Configuration
-
-The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin to achieve build flavors in network module.
-There are two product flavors: `dev` and `prod`, which select API url used in `:shared:network:rest` and `:shared:network:graphql` modules.
-
-In general, the build flavor can be specified as a Gradle build flag
-```shell
-./gradlew whateverTask -P buildkonfig.flavor=dev
-```
-
-Please, refer to `:shared:network:*` module Gradle config.
-
-### Android
-
-During local development, the build flavor can be specified in `gradle.properties` file like so:
-```properties
-buildkonfig.flavor=dev
-```
-
-### iOS
-
-On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
-where each file per build configuration specifies a `KMM_FLAVOR` environment variable.
-
-This variable is then used in shared framework build step to pass the flavor as Gradle build flag:
-```shell
-./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMM_FLAVOR
-```
-
-Currently, the `Debug` build configuration uses `staging` flavor and `Release` configuration uses `prod` flavor.
-When adding new build configurations, please make sure to also define the `KMM_FLAVOR` variable using the aforementioned method.
 
 ## Used Tools
 
