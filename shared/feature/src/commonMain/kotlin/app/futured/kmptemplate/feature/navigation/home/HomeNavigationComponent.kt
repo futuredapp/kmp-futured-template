@@ -6,23 +6,29 @@ import app.futured.kmptemplate.feature.ui.second.SecondComponent
 import app.futured.kmptemplate.feature.ui.second.SecondEvent
 import app.futured.kmptemplate.feature.ui.third.ThirdComponent
 import app.futured.kmptemplate.feature.ui.third.ThirdEvent
-import app.futured.kmptemplate.util.arch.ViewModelComponent
-import app.futured.kmptemplate.util.ext.viewModel
+import app.futured.kmptemplate.util.ext.asStateFlow
+import app.futured.kmptemplate.util.ext.componentCoroutineScope
+import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.value.Value
+import com.arkivanov.decompose.router.stack.navigate
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.push
+import kotlinx.coroutines.flow.StateFlow
 
 internal class HomeNavigationComponent(
     componentContext: ComponentContext,
-) : ViewModelComponent<HomeNavigationViewModel, HomeNavigationEvent>(componentContext),
-    HomeNavigation {
+    private val output: (HomeNavigationEvent) -> Unit,
+) : HomeNavigation,
+    HomeNavigation.Actions,
+    ComponentContext by componentContext {
 
+    override val actions: HomeNavigation.Actions = this
     private val stackNavigator = StackNavigation<HomeDestination>()
 
-    override val viewModel: HomeNavigationViewModel by viewModel()
-    override val stack: Value<ChildStack<HomeDestination, HomeNavigationEntry>> = childStack(
+    override val stack: StateFlow<ChildStack<HomeDestination, HomeNavigationEntry>> = childStack(
         source = stackNavigator,
         key = HomeNavigationComponent::class.simpleName.toString(),
         initialStack = { listOf(HomeDestination.First) },
@@ -39,20 +45,31 @@ internal class HomeNavigationComponent(
                     .let { HomeNavigationEntry.Second(it) }
             }
         },
-    )
+    ).asStateFlow(componentCoroutineScope())
 
-    override val output: (HomeNavigationEvent) -> Unit
-        get() = TODO("Not yet implemented")
+    // region HomeNavigation.Actions
 
-    private fun handleFirstEvents(event: FirstEvent) {
-        // todo
+    override fun iosPopTo(newStack: List<Child<HomeDestination, HomeNavigationEntry>>) {
+        stackNavigator.navigate { newStack.map { it.configuration } }
     }
 
-    private fun handleSecondEvents(event: SecondEvent) {
-        // todo
+    // endregion
+
+    // region Screen events
+
+    private fun handleFirstEvents(event: FirstEvent) = when (event) {
+        FirstEvent.NavigateBack -> output(HomeNavigationEvent.NavigateBack)
+        FirstEvent.NavigateNext -> stackNavigator.push(HomeDestination.Second)
     }
 
-    private fun handleThirdEvents(event: ThirdEvent) {
-        // todo
+    private fun handleSecondEvents(event: SecondEvent) = when (event) {
+        SecondEvent.NavigateBack -> stackNavigator.pop()
+        SecondEvent.NavigateNext -> stackNavigator.push(HomeDestination.Third)
     }
+
+    private fun handleThirdEvents(event: ThirdEvent) = when (event) {
+        ThirdEvent.NavigateBack -> stackNavigator.pop()
+    }
+
+    // endregion
 }

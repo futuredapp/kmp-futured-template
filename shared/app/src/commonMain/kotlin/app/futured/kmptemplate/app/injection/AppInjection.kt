@@ -2,6 +2,7 @@ package app.futured.kmptemplate.app.injection
 
 import app.futured.kmptemplate.feature.injection.featureModule
 import app.futured.kmptemplate.network.graphql.injection.networkGraphqlModule
+import app.futured.kmptemplate.network.rest.injection.networkRestModule
 import app.futured.kmptemplate.platform.injection.NativePlatformModule
 import app.futured.kmptemplate.platform.injection.platformModule
 import org.koin.core.context.startKoin
@@ -25,7 +26,8 @@ internal object AppInjection {
             modules(
                 platformModule(nativePlatformModule = nativePlatformModule),
                 featureModule(),
-                networkGraphqlModule()
+                networkGraphqlModule(),
+                networkRestModule()
             )
         }
     }

@@ -1,6 +1,8 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 
 plugins {
+    // Wondering why not `alias`? https://github.com/gradle/gradle/issues/17968
+    // (this is only for plugins we already have dependency on in `buildSrc`)
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
@@ -96,9 +98,10 @@ dependencies {
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
+    implementation(projects.shared.util)
 
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose.bundle)
+    implementation(libs.bundles.compose)
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.ktx)
@@ -107,7 +110,9 @@ dependencies {
     implementation(libs.decompose)
     implementation(libs.decompose.compose.ext)
 
-    implementation(libs.koin.android)
-
     implementation(libs.kotlinx.immutableCollections)
+    implementation(libs.kotlinx.coroutines.core)
+
+    implementation(libs.koin.android)
+    implementation(libs.logging.timber)
 }

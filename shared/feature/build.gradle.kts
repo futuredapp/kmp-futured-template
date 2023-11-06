@@ -8,6 +8,10 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
 }
 
+dependencies {
+    implementation(platform(libs.androidx.compose.bom))
+}
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()
@@ -23,16 +27,24 @@ kotlin {
     iosTargets()
 
     sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.compose.runtime)
+            }
+        }
         val commonMain by getting {
             dependencies {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.immutableCollections)
+                implementation(libs.kotlinx.coroutines.core)
 
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistance)
                 implementation(projects.shared.util)
+                implementation(libs.logging.kermit)
+                implementation(libs.skie.annotations)
             }
         }
 
@@ -54,5 +66,13 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }

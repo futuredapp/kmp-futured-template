@@ -3,13 +3,20 @@ package app.futured.kmptemplate.feature.navigation.home
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.second.SecondScreen
 import app.futured.kmptemplate.feature.ui.third.ThirdScreen
+import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.coroutines.flow.StateFlow
 
 interface HomeNavigation {
-    val stack: Value<ChildStack<HomeDestination, HomeNavigationEntry>>
+    val stack: StateFlow<ChildStack<HomeDestination, HomeNavigationEntry>>
+    val actions: Actions
+
+    interface Actions {
+        fun iosPopTo(newStack: List<Child<HomeDestination, HomeNavigationEntry>>)
+    }
 }
 
 sealed class HomeDestination : Parcelable {

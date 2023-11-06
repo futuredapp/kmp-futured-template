@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.network.graphql.injection
 
-import app.futured.kmptemplate.network.graphql.api.ExampleApi
-import app.futured.kmptemplate.network.graphql.api.ExampleApiImpl
+import app.futured.kmptemplate.network.graphql.api.RickAndMortyApi
+import app.futured.kmptemplate.network.graphql.api.RickAndMortyApiImpl
 import app.futured.kmptemplate.network.graphql.cache.NetworkCache
 import app.futured.kmptemplate.network.graphql.cache.NetworkCacheImpl
 import app.futured.kmptemplate.network.graphql.cache.NetworkNormalizedCacheFactory
@@ -33,7 +33,7 @@ fun networkGraphqlModule() = module {
 
     // region Public API
 
-    singleOf(::ExampleApiImpl) bind ExampleApi::class
+    singleOf(::RickAndMortyApiImpl) bind RickAndMortyApi::class
     singleOf(::NetworkCacheImpl) bind NetworkCache::class
 
 // endregion

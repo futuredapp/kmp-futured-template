@@ -27,6 +27,7 @@ kotlin {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.logging.kermit)
             }
         }
 
