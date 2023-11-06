@@ -21,6 +21,7 @@ kotlinx-serialization = "1.6.0"
 timber = "5.0.1"
 kermit = "2.0.2"
 skie = "0.5.0"
+buildkonfig = "0.14.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
@@ -29,6 +30,7 @@ project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.andro
 project-shared-network-graphql-namespace = "app.futured.kmpfuturedtemplate.network.graphql.android"
 project-shared-network-graphql-packageName = "app.futured.kmpfuturedtemplate.network.graphql"
 project-shared-network-rest-namespace = "app.futured.kmpfuturedtemplate.network.rest.android"
+project-shared-network-rest-packageName = "app.futured.kmpfuturedtemplate.network.rest"
 project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
 project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
@@ -91,15 +93,11 @@ network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-clien
 network-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 network-ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
-# Gradle Plugins
+# Gradle Plugins used in buildSrc
 gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 gradlePlugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 gradlePlugin-ktlint = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
 gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
-gradlePlugin-apollo = { group = "com.apollographql.apollo3", name = "apollo-gradle-plugin", version.ref = "apollo" }
-gradlePlugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
-gradlePlugin-ktorfit = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-gradle-plugin", version.ref = "ktorfit" }
-gradlePlugin-kotlinx-serialization = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
@@ -107,11 +105,12 @@ com-android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-apollo = { id = "com.apollographql.apollo3" }
-ksp = { id = "com.google.devtools.ksp" }
-ktorfit = { id = "de.jensklingenberg.ktorfit" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

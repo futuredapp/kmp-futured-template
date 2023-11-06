@@ -1,13 +1,16 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.ksp.get().pluginId)
-    id(libs.plugins.ktorfit.get().pluginId)
-    id(libs.plugins.kotlin.serialization.get().pluginId)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktorfit)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.buildkonfig)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -67,5 +70,25 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+}
+
+buildkonfig {
+    packageName = libs.versions.project.shared.network.rest.packageName.get()
+
+    with(ProjectSettings.Kotlin.ProductFlavors.Dev) {
+        defaultConfigs {
+            buildConfigField(STRING, "apiUrl", RestApiUrl)
+        }
+
+        defaultConfigs(flavor = NAME) {
+            buildConfigField(STRING, "apiUrl", RestApiUrl)
+        }
+    }
+
+    with(ProjectSettings.Kotlin.ProductFlavors.Prod) {
+        defaultConfigs(flavor = NAME) {
+            buildConfigField(STRING, "apiUrl", RestApiUrl)
+        }
     }
 }

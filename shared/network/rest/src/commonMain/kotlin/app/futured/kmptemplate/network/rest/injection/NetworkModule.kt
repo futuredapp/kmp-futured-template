@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.network.rest.injection
 
+import app.futured.kmpfuturedtemplate.network.rest.BuildKonfig
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.logging.KtorKermitLogger
 import app.futured.kmptemplate.network.rest.result.NetworkErrorParser
@@ -20,9 +21,7 @@ import org.koin.dsl.module
 
 fun networkRestModule() = module {
 
-    single(named("apiUrl")) {
-        "https://swapi.dev/api/"
-    }
+    single(named("apiUrl")) { BuildKonfig.apiUrl }
 
     single(named("restApiJson")) {
         Json {
