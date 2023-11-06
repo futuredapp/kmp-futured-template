@@ -1,7 +1,7 @@
 package app.futured.kmpfuturedtemplate.android
 
 import android.app.Application
-import app.futured.kmpfuturedtemplate.android.injection.NativePlatformModuleImpl
+import app.futured.kmpfuturedtemplate.android.tools.binding.PlatformBindingsImpl
 import org.koin.android.ext.koin.androidContext
 import timber.log.Timber
 import app.futured.kmptemplate.app.KmpApplication as SharedApp
@@ -15,7 +15,9 @@ class App : Application() {
     }
 
     private fun initializeKmp() {
-        SharedApp.initializeSharedApplication(nativePlatformModule = NativePlatformModuleImpl()) {
+        SharedApp.initializeSharedApplication(
+            platformBindings = PlatformBindingsImpl()
+        ) {
             androidContext(this@App)
         }
     }
