@@ -3,7 +3,7 @@ import shared
 
 struct LoginView: View {
     
-    @ObservedObject @KotlinState private var viewState: LoginViewState
+    @ObservedObject @KotlinStateFlow private var viewState: LoginViewState
     private let actions: LoginScreenActions
     private let suspendActions: LoginScreenSuspendActions
     

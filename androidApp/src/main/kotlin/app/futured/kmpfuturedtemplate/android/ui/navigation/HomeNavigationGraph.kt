@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import app.futured.kmpfuturedtemplate.android.ui.screen.FirstScreenUi
@@ -19,7 +20,7 @@ fun HomeNavGraph(
     homeNavigation: HomeNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val stack by homeNavigation.stack.subscribeAsState()
+    val stack by homeNavigation.stack.collectAsState()
 
     Surface(
         modifier = modifier,

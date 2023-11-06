@@ -4,12 +4,9 @@ import app.futured.kmptemplate.network.graphql.api.RickAndMortyApi
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import co.touchlab.kermit.Logger
-import com.arkivanov.decompose.value.MutableValue
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class LoginViewModel(
     private val starWarsApi: StarWarsApi,
@@ -18,7 +15,7 @@ internal class LoginViewModel(
     LoginScreen.Actions,
     LoginScreen.SuspendActions {
 
-    override val viewState: MutableValue<LoginViewState> = MutableValue(LoginViewState())
+    override val viewState: MutableStateFlow<LoginViewState> = MutableStateFlow(LoginViewState())
     private val logger = Logger.withTag("LoginViewModel")
 
     init {

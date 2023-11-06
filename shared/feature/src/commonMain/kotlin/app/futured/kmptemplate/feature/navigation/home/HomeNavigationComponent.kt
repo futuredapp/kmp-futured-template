@@ -6,6 +6,8 @@ import app.futured.kmptemplate.feature.ui.second.SecondComponent
 import app.futured.kmptemplate.feature.ui.second.SecondEvent
 import app.futured.kmptemplate.feature.ui.third.ThirdComponent
 import app.futured.kmptemplate.feature.ui.third.ThirdEvent
+import app.futured.kmptemplate.util.ext.asStateFlow
+import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
@@ -14,7 +16,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
-import com.arkivanov.decompose.value.Value
+import kotlinx.coroutines.flow.StateFlow
 
 internal class HomeNavigationComponent(
     componentContext: ComponentContext,
@@ -26,7 +28,7 @@ internal class HomeNavigationComponent(
     override val actions: HomeNavigation.Actions = this
     private val stackNavigator = StackNavigation<HomeDestination>()
 
-    override val stack: Value<ChildStack<HomeDestination, HomeNavigationEntry>> = childStack(
+    override val stack: StateFlow<ChildStack<HomeDestination, HomeNavigationEntry>> = childStack(
         source = stackNavigator,
         key = HomeNavigationComponent::class.simpleName.toString(),
         initialStack = { listOf(HomeDestination.First) },
@@ -43,7 +45,7 @@ internal class HomeNavigationComponent(
                     .let { HomeNavigationEntry.Second(it) }
             }
         },
-    )
+    ).asStateFlow(componentCoroutineScope())
 
     // region HomeNavigation.Actions
 

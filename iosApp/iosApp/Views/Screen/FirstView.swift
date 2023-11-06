@@ -3,12 +3,17 @@ import shared
 
 struct FirstView: View {
     
-    @ObservedObject @KotlinState private var viewState: FirstViewState
+    @ObservedObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
+    private let events: SkieSwiftFlow<FirstUiEvent>
+    
+    @State private var alertVisible: Bool = false
+    @State private var alertText: String = ""
     
     init(_ screen: FirstScreen) {
         self._viewState = .init(screen.viewState)
         self.actions = screen.actions
+        self.events = screen.events
     }
     
     var body: some View {
@@ -18,5 +23,15 @@ struct FirstView: View {
             Button("Go back", action: actions.onBack)
         }
         .navigationTitle("First screen")
+        .eventsEffect(for: events) { event in
+            switch onEnum(of: event) {
+            case .showToast(let event):
+                alertText = event.text
+                alertVisible = true
+            }
+        }
+        .alert(alertText, isPresented: $alertVisible) {
+            Button("Close", action: {alertVisible = false})
+        }
     }
 }

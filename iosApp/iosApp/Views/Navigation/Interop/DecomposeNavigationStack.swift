@@ -13,7 +13,7 @@ struct DecomposeNavigationStack<
     Entry: AnyObject,
     Content: View
 >: View {
-    @ObservedObject @KotlinState private var kotlinStack: ChildStack<Destination, Entry>
+    @ObservedObject @KotlinStateFlow private var kotlinStack: ChildStack<Destination, Entry>
     private let setPath: ([Child]) -> Void
     @ViewBuilder private let content: (Entry) -> Content
 
@@ -36,7 +36,7 @@ struct DecomposeNavigationStack<
     }
 
     init(
-        kotlinStack: Value<ChildStack<Destination, Entry>>,
+        kotlinStack: SkieSwiftStateFlow<ChildStack<Destination, Entry>>,
         setPath: @escaping ([Child]) -> Void,
         @ViewBuilder content: @escaping (Entry) -> Content
     ) {

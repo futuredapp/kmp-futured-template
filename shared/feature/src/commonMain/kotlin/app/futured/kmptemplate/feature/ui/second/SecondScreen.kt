@@ -1,9 +1,9 @@
 package app.futured.kmptemplate.feature.ui.second
 
-import com.arkivanov.decompose.value.MutableValue
+import kotlinx.coroutines.flow.StateFlow
 
 interface SecondScreen {
-    val viewState: MutableValue<SecondViewState>
+    val viewState: StateFlow<SecondViewState>
     val actions: Actions
 
     interface Actions {
