@@ -7,8 +7,8 @@ import com.arkivanov.decompose.value.MutableValue
 
 internal class SecondComponent(
     componentContext: ComponentContext,
-    override val output: (SecondEvent) -> Unit
 ) : ViewModelComponent<SecondViewModel, SecondEvent>(componentContext), SecondScreen {
+    override val output: (SecondEvent) -> Unit = {}
     override val viewModel: SecondViewModel by viewModel()
     override val viewState: MutableValue<SecondViewState> = viewModel.viewState
     override val actions: SecondScreen.Actions = viewModel

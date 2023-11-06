@@ -1,9 +1,9 @@
 package app.futured.kmptemplate.feature.ui.third
 
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigationEntry
+import app.futured.kmptemplate.util.arch.Component
 import com.arkivanov.decompose.value.MutableValue
 
-interface ThirdScreen: HomeNavigationEntry {
+interface ThirdScreen : Component {
     val viewState: MutableValue<ThirdViewState>
     val actions: Actions
 

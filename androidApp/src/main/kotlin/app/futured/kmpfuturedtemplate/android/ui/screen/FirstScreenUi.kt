@@ -1,5 +1,6 @@
 package app.futured.kmpfuturedtemplate.android.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,5 +26,7 @@ private fun Content(
     actions: FirstScreen.Actions,
     modifier: Modifier = Modifier
 ) {
-    Text(text = "Hi from First")
+    Text(text = "Hi from First + ${viewState.title}", modifier = Modifier.clickable {
+        actions.onNext()
+    })
 }

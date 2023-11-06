@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.root
 
+import app.futured.kmptemplate.feature.navigation.home.HomeNavigationComponent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
 import app.futured.kmptemplate.feature.ui.login.LoginEvent
 import app.futured.kmptemplate.util.arch.ViewModelComponent
@@ -28,14 +29,16 @@ internal class RootNavigationComponent(
             when (destination) {
                 RootDestination.Login -> LoginComponent(childContext, ::handleLoginEvent)
                     .let { RootNavigationEntry.Login(it) }
-                RootDestination.Home -> TODO()
+                RootDestination.Home -> HomeNavigationComponent(childContext).let {
+                    RootNavigationEntry.Home(it)
+                }
             }
         },
     )
 
     private fun handleLoginEvent(loginEvent: LoginEvent) = when (loginEvent) {
         LoginEvent.NavigateHomeEvent -> slotNavigator.activate(RootDestination.Home)
-        else -> {}
+        else -> {  }
     }
 
     private fun onViewModelEvent(event: RootNavigationEvent) = when (event) {

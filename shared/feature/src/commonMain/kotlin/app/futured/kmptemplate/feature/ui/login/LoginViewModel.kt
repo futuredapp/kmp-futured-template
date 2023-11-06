@@ -8,6 +8,6 @@ internal class LoginViewModel : SharedViewModel<LoginViewState, LoginEvent, Noth
     override val viewState: MutableValue<LoginViewState> = MutableValue(LoginViewState())
 
     override fun onNavigateHome() {
-        sendOutput()
+        sendOutput(LoginEvent.NavigateHomeEvent)
     }
 }

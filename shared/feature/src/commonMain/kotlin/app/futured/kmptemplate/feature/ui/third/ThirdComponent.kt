@@ -7,8 +7,8 @@ import com.arkivanov.decompose.value.MutableValue
 
 internal class ThirdComponent(
     componentContext: ComponentContext,
-    override val output: (ThirdEvent) -> Unit
 ) : ViewModelComponent<ThirdViewModel, ThirdEvent>(componentContext), ThirdScreen {
+    override val output: (ThirdEvent) -> Unit = {}
     override val viewModel: ThirdViewModel by viewModel()
     override val viewState: MutableValue<ThirdViewState> = viewModel.viewState
     override val actions: ThirdScreen.Actions = viewModel
