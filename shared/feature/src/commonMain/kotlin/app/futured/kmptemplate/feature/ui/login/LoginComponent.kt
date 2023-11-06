@@ -12,4 +12,5 @@ internal class LoginComponent(
     override val viewModel: LoginViewModel by viewModel()
     override val viewState: MutableValue<LoginViewState> = viewModel.viewState
     override val actions: LoginScreen.Actions = viewModel
+    override val suspendActions: LoginScreen.SuspendActions = viewModel
 }

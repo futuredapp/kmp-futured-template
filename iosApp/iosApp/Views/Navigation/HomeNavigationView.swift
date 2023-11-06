@@ -24,7 +24,7 @@ struct HomeNavigationView: View {
             kotlinStack: stack,
             setPath: actions.iosPopTo
         ) { entry in
-            switch HomeNavigationEntryKs(entry) {
+            switch onEnum(of: entry) {
             case .first(let entry):
                 FirstView(entry.screen)
             case .second(let entry):
@@ -32,25 +32,6 @@ struct HomeNavigationView: View {
             case .third(let entry):
                 ThirdView(entry.screen)
             }
-        }
-    }
-}
-
-private enum HomeNavigationEntryKs {
-    
-    case first(HomeNavigationEntry.First)
-    case second(HomeNavigationEntry.Second)
-    case third(HomeNavigationEntry.Third)
-    
-    public init(_ obj: HomeNavigationEntry) {
-        if let obj = obj as? shared.HomeNavigationEntry.First {
-            self = .first(obj)
-        } else if let obj = obj as? shared.HomeNavigationEntry.Second {
-            self = .second(obj)
-        } else if let obj = obj as? shared.HomeNavigationEntry.Third {
-            self = .third(obj)
-        } else {
-            fatalError("Invalid enum value. Replace with SKIE.")
         }
     }
 }

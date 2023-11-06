@@ -35,6 +35,7 @@ kotlin {
                 implementation(projects.shared.persistance)
                 implementation(projects.shared.util)
                 implementation(libs.logging.kermit)
+                implementation(libs.skie.annotations)
             }
         }
 

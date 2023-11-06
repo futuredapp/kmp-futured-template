@@ -20,6 +20,7 @@ ktor = "2.3.4" # Must be compatible with: `ktorfit`
 kotlinx-serialization = "1.6.0"
 timber = "5.0.1"
 kermit = "2.0.2"
+skie = "0.5.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
@@ -76,6 +77,9 @@ lint-compose = { group = "com.slack.lint.compose", name = "compose-lint-checks",
 logging-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 logging-kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
+# SKIE
+skie-annotations = { group = "co.touchlab.skie", name = "configuration-annotations", version.ref = "skie" }
+
 # Network
 network-apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
 network-apollo-normalizedCache-core = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache", version.ref = "apollo" }
@@ -107,6 +111,7 @@ apollo = { id = "com.apollographql.apollo3" }
 ksp = { id = "com.google.devtools.ksp" }
 ktorfit = { id = "de.jensklingenberg.ktorfit" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization" }
+skie = { id = "co.touchlab.skie", version.ref = "skie" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

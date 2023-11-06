@@ -11,28 +11,12 @@ struct RootNavigationView: View {
     
     var body: some View {
         if let navigationEntry = slot.child?.instance {
-            switch(RootNavigationEntryKs(navigationEntry)) {
+            switch onEnum(of: navigationEntry) {
             case .login(let entry):
                 LoginView(entry.screen)
             case .home(let entry):
                 HomeNavigationView(entry.navigation)
             }
-        }
-    }
-}
-
-private enum RootNavigationEntryKs {
-    
-    case login(RootNavigationEntry.Login)
-    case home(RootNavigationEntry.Home)
-    
-    public init(_ obj: RootNavigationEntry) {
-        if let obj = obj as? shared.RootNavigationEntry.Login {
-            self = .login(obj)
-        } else if let obj = obj as? shared.RootNavigationEntry.Home {
-            self = .home(obj)
-        } else {
-            fatalError("Invalid enum value. Replace with SKIE.")
         }
     }
 }
