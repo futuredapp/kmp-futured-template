@@ -6,9 +6,8 @@ import com.arkivanov.decompose.value.MutableValue
 internal class ThirdViewModel :
     SharedViewModel<ThirdViewState, ThirdEvent, Nothing>(),
     ThirdScreen.Actions {
+
     override val viewState: MutableValue<ThirdViewState> = MutableValue(ThirdViewState())
 
-    override fun onBack() {
-        // todo
-    }
+    override fun onBack() = sendOutput(ThirdEvent.NavigateBack)
 }

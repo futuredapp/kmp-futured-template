@@ -8,5 +8,6 @@ interface FirstScreen {
 
     interface Actions {
         fun onBack()
+        fun onNext()
     }
 }

@@ -6,5 +6,7 @@ interface LoginScreen {
     val viewState: MutableValue<LoginViewState>
     val actions: Actions
 
-    interface Actions
+    interface Actions {
+        fun onLoginClick()
+    }
 }
