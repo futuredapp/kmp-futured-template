@@ -73,6 +73,26 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
 4. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
 5. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
 
+## Navigation Structure
+
+The app utilizes [Decompose](https://arkivanov.github.io/Decompose/) to share presentation logic and navigation state in KMP.  
+The following meta-description provides an overview of Decompose navigation tree:
+
+```kotlin
+Navigation("RootNavigation") {
+    Slot {
+        Screen("LoginScreen")
+        Navigation("HomeNavigation") {
+            Stack {
+                Screen("FirstScreen")
+                Screen("SecondScreen")
+                Screen("ThirdScreen")
+            }
+        }
+    }
+}
+```
+
 ## Project Setup
 
 ### Product Flavors
