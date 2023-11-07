@@ -1,7 +1,7 @@
 # Record architecture decisions
 
 - Number: 1
-- Date: 2023-07-19
+- Date: 2023-11-07
 - Authors: [Futured Team](https://github.com/futured-bot)
 - Status: Accepted
 
