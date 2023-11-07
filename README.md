@@ -9,18 +9,69 @@
 ![android-targetsdk](https://img.shields.io/badge/targetsdk-34-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![ios-target](https://img.shields.io/badge/target-16.0-%23000000.svg?style=flat-square&logo=apple&logoColor=white)
 
-Project description.
+~~Short project description.~~
 
 ## Project info
 
-- ApplicationId: `app.futured.kmptemplate`
-- Design: Figma (add link)
-- Backend: (REST / GraphQL) (add specification)
+- Deadline: ~~**--. --. ----**~~
+- Design: ~~Figma (add link)~~
+- ~~Backend: GrahlQL / Apiary / OpenAPI (add link)~~
+  - ~~Prod: https://live.app.com~~
+  - ~~Dev: https://staging.app.com~~
+- ~~Localizations: Czech, English – POEditor / Google Sheets (add link)~~
+- [Architecture decision records](doc/adr/README.md)
+
+### KMP
+- Product Flavors: dev, prod
 - Use-Cases: Kotlin Coroutines [cr-usecases](https://github.com/futuredapp/arkitekt)
 
-### Team:
+### Android
+- ApplicationId: ~~`app.futured.project`~~
+- minSdk: ~~`28`~~
+- targetSdk: ~~`34`~~
+- Supports: ~~**Dark mode, landscape orientation**~~
+- Build Variants: debug, enterprise, release
 
-- TODO
+### iOS
+- Deployment target: ~~**16.0**~~
+- Bundle identifier: ~~`app.futured.project`~~
+- Supports: ~~**Dark mode, landscape orientation, iPadOS, watchOS**~~
+- Language: ~~**Swift 5.0**~~
+- IDE: ~~**Xcode 11.0**~~
+- Dependency management: ~~**[Swift package manager](https://swift.org/package-manager/)**~~
+- Command line tools: **[Fastlane](https://docs.fastlane.tools)**
+- Code style:
+  - **[SwiftLint](https://swift.org/package-manager/)**
+  - **[Danger](https://github.com/futuredapp/danger)**
+
+## Team:
+
+- ~~Jana Nováková, PM, <jana.novakova@futured.app>~~
+- ~~Jan Novák, iOS developer, <jan.novak@futured.app>~~
+- ~~John Newman, tester, <john.newman@futured.app>~~
+
+## Used Tools
+
+- Code style - **[ktlint](https://ktlint.github.io/)**, **[detekt](https://arturbosch.github.io/detekt/)**, **[Android lint](http://tools.android.com/tips/lint)**, **[Danger](https://github.com/futuredapp/danger)**
+- Kotlin -> Swift interop - **[SKIE]**(https://skie.touchlab.co/)
+
+### ~~Test accounts~~
+
+- ~~dev - login: `a@a.com`, password: `hesloheslo`~~
+
+### Security standard
+
+This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security standard.
+
+~~[Project specific standard](www.notion.so)~~
+
+## Gradle tasks
+
+1. `clean` - Remove all `build` folders
+2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
+3. `ktlintFormat` - Reformat source code according to ktlint rules
+4. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
+5. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
 
 ## Project Setup
 
@@ -86,20 +137,3 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 # Upload
 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp ${GSPFILE} -p ios ${DSYMFILE}
 ```
-
-## Used Tools
-
-- Code style - **[ktlint](https://ktlint.github.io/)**, **[detekt](https://arturbosch.github.io/detekt/)**, **[Android lint](http://tools.android.com/tips/lint)**, **[Danger](https://github.com/futuredapp/danger)**
-- Kotlin -> Swift interop - **[SKIE]**(https://skie.touchlab.co/)
-
-## Test accounts
-
-- TODO
-
-## Kotlin Gradle tasks
-
-1. `clean` - Remove all `build` folders
-2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
-3. `ktlintFormat` - Reformat source code according to ktlint rules
-5. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
-6. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
