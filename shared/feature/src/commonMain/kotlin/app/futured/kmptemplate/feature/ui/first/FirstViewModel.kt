@@ -11,6 +11,7 @@ import kotlin.time.Duration.Companion.milliseconds
 internal class FirstViewModel :
     SharedViewModel<FirstViewState, FirstEvent, FirstUiEvent>(),
     FirstScreen.Actions {
+
     override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
 
     override fun onBack() = sendOutput(FirstEvent.NavigateBack)
@@ -35,5 +36,12 @@ internal class FirstViewModel :
                 delay(200.milliseconds)
             }
         }
+    }
+
+    val bindings: FirstScreen.Bindings = object : FirstScreen.Bindings {
+        override val textField: KotlinStringBinding = KotlinStringBinding(
+            get = { viewState.value.textField },
+            set = { update(viewState) { copy(textField = it) } },
+        )
     }
 }
