@@ -1,31 +1,42 @@
 [versions]
-agp = "8.1.1"
+agp = "8.1.2"
 kotlin = "1.9.10"
+ksp = "1.9.10-1.0.13" # Must be compatible with: `kotlin`
+desugarLibs = "1.1.5"
 androidxComposeBom = "2023.09.02"
 androidxActivity = "1.7.2"
 composeCompiler = "1.5.3"
 decompose = "2.1.0"
 essenty = "1.2.0"
 koin = "3.5.0"
-coroutines = "1.7.3"
+kotlinx-coroutines = "1.7.3"
+kotlinx-immutableCollections = "0.3.5"
+ktlintGradlePlugin = "11.6.1"
+detektGradlePlugin = "1.23.1"
+composeLint = "1.2.0"
+apollo = "3.8.2"
+ktorfit = "1.9.1" # Must be compatible with: `ksp`
+ktor = "2.3.4" # Must be compatible with: `ktorfit`
+kotlinx-serialization = "1.6.0"
+timber = "5.0.1"
+kermit = "2.0.2"
+skie = "0.5.0"
+buildkonfig = "0.14.0"
 
-# Project Settings
-project-minSdk = "29"
-project-compileSdk = "34"
-project-appId = "app.futured.kmpfuturedtemplate.android"
+# Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
 project-shared-app-namespace = "app.futured.kmpfuturedtemplate.app.android"
 project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.android"
-project-shared-network-namespace = "app.futured.kmpfuturedtemplate.network.android"
+project-shared-network-graphql-namespace = "app.futured.kmpfuturedtemplate.network.graphql.android"
+project-shared-network-graphql-packageName = "app.futured.kmpfuturedtemplate.network.graphql"
+project-shared-network-rest-namespace = "app.futured.kmpfuturedtemplate.network.rest.android"
+project-shared-network-rest-packageName = "app.futured.kmpfuturedtemplate.network.rest"
 project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
-project-versionCode = "1"
-project-versionName = "1.0"
-project-jvmTarget = "11"
-project-baseName = "shared"
-project-bundleId = "app.futured.kmpfuturedtemplate.shared"
+project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
 
 [libraries]
+
 # Compose
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
@@ -33,6 +44,7 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -40,7 +52,9 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 
 # KotlinX
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-immutableCollections = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutableCollections" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 # AndroidX
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
@@ -50,20 +64,77 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 # Decompose
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-compose-ext = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack", version.ref = "decompose" }
-essenty = { group = "com.arkivanov.essenty", name = "lifecycle:", version.ref = "essenty" }
+essenty = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
+
+# Testing
+kotlin-testCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-common", version.ref = "kotlin" }
+kotlin-testAnnotationsCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-annotations-common", version.ref = "kotlin" }
+
+# Desugar
+androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarLibs" }
+
+# Lint
+lint-compose = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "composeLint" }
+
+# Logging
+logging-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+logging-kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+
+# SKIE
+skie-annotations = { group = "co.touchlab.skie", name = "configuration-annotations", version.ref = "skie" }
+
+# Network
+network-apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
+network-apollo-normalizedCache-core = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache", version.ref = "apollo" }
+network-apollo-normalizedCache-sqlite = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache-sqlite", version.ref = "apollo" }
+network-ktorfit-ksp = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-ksp", version.ref = "ktorfit" }
+network-ktorfit-lib = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib", version.ref = "ktorfit" }
+network-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
+network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+network-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+network-ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+# Gradle Plugins used in buildSrc
+gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+gradlePlugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+gradlePlugin-ktlint = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
+gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
-kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-multiplatform = {id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-parcelize = {id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
+skie = { id = "co.touchlab.skie", version.ref = "skie" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+
+# Precompiled script plugins
+conventions-lint = { id = "conventions-lint" }
 
 [bundles]
-compose-bundle = [
+compose = [
     "androidx-compose-foundation",
     "androidx-compose-ui",
     "androidx-compose-ui-tooling",
     "androidx-compose-ui-tooling-preview",
     "androidx-compose-material3"
+]
+
+apollo = [
+    "network-apollo-runtime",
+    "network-apollo-normalizedCache-core",
+    "network-apollo-normalizedCache-sqlite"
+]
+
+ktorfit = [
+    "network-ktorfit-lib",
+    "network-ktor-client-contentNegotiation",
+    "network-ktor-client-serialization",
+    "network-ktor-client-logging",
+    "network-ktor-serialization-kotlinx-json"
 ]

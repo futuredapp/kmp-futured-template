@@ -1,9 +1,10 @@
-package app.futured.preventivka.util.ext
+package app.futured.kmptemplate.util.ext
 
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -20,3 +21,11 @@ fun <T : Any> Flow<T>.collectAsValue(initial: T, coroutineScope: CoroutineScope)
             }
         }
     }
+
+
+/**
+ * Mutates this [MutableStateFlow] using provided [transform] function.
+ */
+fun <T : Any> update(mutableStateFlow: MutableStateFlow<T>, transform: T.() -> T) {
+    mutableStateFlow.value = transform(mutableStateFlow.value)
+}

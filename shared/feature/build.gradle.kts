@@ -1,10 +1,16 @@
+import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import app.futured.kmptemplate.gradle.ext.iosTargets
+
 plugins {
-    alias(libs.plugins.com.android.library)
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlin.parcelize)
+    id(libs.plugins.com.android.library.get().pluginId)
+    id(libs.plugins.kotlin.multiplatform.get().pluginId)
+    id(libs.plugins.kotlin.parcelize.get().pluginId)
+    id(libs.plugins.conventions.lint.get().pluginId)
 }
 
-private val projectSettings = libs.versions.project
+dependencies {
+    implementation(platform(libs.androidx.compose.bom))
+}
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -13,48 +19,60 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = projectSettings.jvmTarget.get()
+                jvmTarget = ProjectSettings.Kotlin.JvmTarget
             }
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = projectSettings.baseName.get()
-        }
-    }
+    iosTargets()
 
     sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.compose.runtime)
+            }
+        }
         val commonMain by getting {
             dependencies {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
+                implementation(libs.kotlinx.immutableCollections)
+                implementation(libs.kotlinx.coroutines.core)
 
-                implementation(projects.shared.network)
+                implementation(projects.shared.network.graphql)
+                implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistance)
                 implementation(projects.shared.util)
+                implementation(libs.logging.kermit)
+                implementation(libs.skie.annotations)
             }
         }
+
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.testCommon)
+                implementation(libs.kotlin.testAnnotationsCommon)
             }
         }
     }
 }
 
 android {
-    namespace = projectSettings.shared.feature.namespace.get()
-    compileSdk = projectSettings.compileSdk.get().toInt()
+    namespace = libs.versions.project.shared.feature.namespace.get()
+    compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
-        minSdk = projectSettings.minSdk.get().toInt()
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
+        targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }

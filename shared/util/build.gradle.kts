@@ -1,9 +1,11 @@
-plugins {
-    alias(libs.plugins.com.android.library)
-    alias(libs.plugins.kotlin.multiplatform)
-}
+import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import app.futured.kmptemplate.gradle.ext.iosTargets
 
-private val projectSettings = libs.versions.project
+plugins {
+    id(libs.plugins.com.android.library.get().pluginId)
+    id(libs.plugins.kotlin.multiplatform.get().pluginId)
+    id(libs.plugins.conventions.lint.get().pluginId)
+}
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -12,49 +14,40 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = projectSettings.jvmTarget.get()
+                jvmTarget = ProjectSettings.Kotlin.JvmTarget
             }
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = projectSettings.baseName.get()
-        }
-    }
+    iosTargets()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
                 implementation(libs.decompose)
-
-//                val koinBom = platform(libs.koin.bom)
-//                implementation(koinBom)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.logging.kermit)
             }
         }
+
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.testCommon)
+                implementation(libs.kotlin.testAnnotationsCommon)
             }
         }
     }
 }
 
 android {
-    namespace = projectSettings.shared.util.namespace.get()
-    compileSdk = projectSettings.compileSdk.get().toInt()
+    namespace = libs.versions.project.shared.util.namespace.get()
+    compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
-        minSdk = projectSettings.minSdk.get().toInt()
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
+        targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }

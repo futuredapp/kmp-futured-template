@@ -1,12 +1,20 @@
-plugins {
-    //trick: for the same plugin versions in all sub-modules
-    alias(libs.plugins.com.android.application) apply false
-    alias(libs.plugins.com.android.library) apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.multiplatform) apply false
-    alias(libs.plugins.kotlin.parcelize) apply false
+import app.futured.kmptemplate.gradle.task.CleanTask
+import app.futured.kmptemplate.gradle.task.LintCheckTask
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
+
+tasks.register<CleanTask>("clean")
+tasks.register<LintCheckTask>("lintCheck")
+tasks.register<ReportMergeTask>("detektReportMerge") {
+    output.set(rootProject.layout.buildDirectory.file("reports/detekt/merged.xml"))
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+subprojects.onEach {
+    if (it.tasks.findByName("testClasses") == null) {
+        it.tasks.register("testClasses") {
+            println(
+                "This is a dummy testClasses task to satisfy Android Studio `Make Project` action. " +
+                "See https://kotlinlang.slack.com/archives/C3PQML5NU/p1696987572655649 for more info."
+            )
+        }
+    }
 }

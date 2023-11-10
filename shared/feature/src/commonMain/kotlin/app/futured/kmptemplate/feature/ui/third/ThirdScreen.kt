@@ -2,9 +2,10 @@ package app.futured.kmptemplate.feature.ui.third
 
 import app.futured.kmptemplate.util.arch.Component
 import com.arkivanov.decompose.value.MutableValue
+import kotlinx.coroutines.flow.StateFlow
 
 interface ThirdScreen : Component {
-    val viewState: MutableValue<ThirdViewState>
+    val viewState: StateFlow<ThirdViewState>
     val actions: Actions
 
     interface Actions {

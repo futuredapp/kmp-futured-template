@@ -3,7 +3,7 @@ package app.futured.kmptemplate.feature.ui.second
 import app.futured.kmptemplate.util.arch.ViewModelComponent
 import app.futured.kmptemplate.util.ext.viewModel
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.value.MutableValue
+import kotlinx.coroutines.flow.StateFlow
 
 internal class SecondComponent(
     componentContext: ComponentContext,
@@ -12,6 +12,6 @@ internal class SecondComponent(
     override val viewModel: SecondViewModel by viewModel()
 
     override val output: (SecondEvent) -> Unit = {}
-    override val viewState: MutableValue<SecondViewState> = viewModel.viewState
+    override val viewState: StateFlow<SecondViewState> = viewModel.viewState
     override val actions: SecondScreen.Actions = viewModel
 }

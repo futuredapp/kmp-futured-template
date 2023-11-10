@@ -10,6 +10,7 @@ import app.futured.kmptemplate.util.arch.Component
 import app.futured.kmptemplate.util.arch.Destination
 import app.futured.kmptemplate.util.arch.Navigator
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
@@ -18,9 +19,16 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.coroutines.flow.StateFlow
 
 interface HomeNavigation {
     val stack: Value<ChildStack<HomeDestination<Component>, Component>>
+    val stack: StateFlow<ChildStack<HomeDestination, HomeNavigationEntry>>
+    val actions: Actions
+
+    interface Actions {
+        fun iosPopTo(newStack: List<Child<HomeDestination, HomeNavigationEntry>>)
+    }
 }
 
 sealed class HomeDestination<out C : Component> : Parcelable, Destination<C> {

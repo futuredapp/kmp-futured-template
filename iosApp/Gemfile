@@ -1,0 +1,13 @@
+# iOS CI Gemfile
+
+source "http://rubygems.org"
+
+gem "fastlane"
+gem "danger"
+gem "thefuntasty_danger"
+
+# Fastlane plugins
+gem "fastlane-plugin-versioning"
+gem "fastlane-plugin-appcenter"
+gem "fastlane-plugin-badge"
+gem "fastlane-plugin-brew"

@@ -2,4 +2,6 @@ package app.futured.kmptemplate.feature.ui.third
 
 import app.futured.kmptemplate.util.arch.OutputEvent
 
-sealed class ThirdEvent : OutputEvent<ThirdViewState>
+sealed class ThirdEvent : OutputEvent<ThirdViewState> {
+    data object NavigateBack : ThirdEvent()
+}

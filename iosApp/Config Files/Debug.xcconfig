@@ -1,0 +1,3 @@
+// Based on https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig#toc-anchor-003
+
+KMM_FLAVOR = dev
