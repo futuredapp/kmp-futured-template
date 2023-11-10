@@ -29,8 +29,11 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.ktorfit)
                 implementation(libs.kotlinx.serialization.json)
@@ -46,18 +49,26 @@ kotlin {
         }
     }
 }
-
+ksp {
+    // enable compile time check
+    arg("KOIN_CONFIG_CHECK","true")
+}
 dependencies {
     /* ref:
     https://foso.github.io/Ktorfit/installation/
     https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
     */
-    with(libs.network.ktorfit.ksp) {
-        add("kspCommonMainMetadata", this)
-        add("kspAndroid", this)
-        add("kspIosX64", this)
-        add("kspIosArm64", this)
-        add("kspIosSimulatorArm64", this)
+    add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+//    add("kspAndroid", this)
+//    add("kspIosX64", this)
+//    add("kspIosArm64", this)
+//    add("kspIosSimulatorArm64", this)
+}
+// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
 

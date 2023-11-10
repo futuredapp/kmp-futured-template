@@ -7,6 +7,7 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
 
+    alias(libs.plugins.ksp)
     alias(libs.plugins.apollo)
     alias(libs.plugins.buildkonfig)
 }
@@ -27,8 +28,12 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
+
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.apollo)
                 implementation(libs.logging.kermit)
@@ -53,6 +58,22 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    // DO NOT add bellow dependencies
+//    add("kspAndroid", Deps.Koin.kspCompiler)
+//    add("kspIosX64", Deps.Koin.kspCompiler)
+//    add("kspIosArm64", Deps.Koin.kspCompiler)
+//    add("kspIosSimulatorArm64", Deps.Koin.kspCompiler)
+}
+
+// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
 

@@ -1,9 +1,10 @@
 package app.futured.kmptemplate.feature.ui.second
 
 import app.futured.kmptemplate.util.arch.SharedViewModel
-import com.arkivanov.decompose.value.MutableValue
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.koin.core.annotation.Factory
 
+@Factory
 internal class SecondViewModel :
     SharedViewModel<SecondViewState, SecondEvent, Nothing>(),
     SecondScreen.Actions {

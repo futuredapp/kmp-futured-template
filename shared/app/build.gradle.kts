@@ -1,6 +1,5 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
-import co.touchlab.skie.configuration.AnalyticsTier
 import co.touchlab.skie.configuration.DefaultArgumentInterop
 import co.touchlab.skie.configuration.EnumInterop
 import co.touchlab.skie.configuration.FlowInterop
@@ -12,6 +11,7 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
     alias(libs.plugins.skie)
+    alias(libs.plugins.ksp)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -46,6 +46,8 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(projects.shared.platform)
                 implementation(projects.shared.feature)
@@ -54,6 +56,7 @@ kotlin {
 
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
                 implementation(libs.logging.kermit)
             }
         }
@@ -106,5 +109,29 @@ skie {
             EnumInterop.Enabled(true)
             SealedInterop.Enabled(true)
         }
+    }
+}
+
+ksp {
+    // enable compile time check
+//    arg("KOIN_CONFIG_CHECK","true")
+    // disable default module generation
+    arg("KOIN_DEFAULT_MODULE","false")
+}
+
+// Enable source generation by KSP to commonMain only
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    // DO NOT add bellow dependencies
+//    add("kspAndroid", Deps.Koin.kspCompiler)
+//    add("kspIosX64", Deps.Koin.kspCompiler)
+//    add("kspIosArm64", Deps.Koin.kspCompiler)
+//    add("kspIosSimulatorArm64", Deps.Koin.kspCompiler)
+}
+
+// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }

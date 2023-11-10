@@ -2,10 +2,12 @@ package app.futured.kmptemplate.network.graphql.client
 
 import app.futured.kmptemplate.network.graphql.result.CloudErrorCode
 import com.apollographql.apollo3.api.ApolloResponse
+import org.koin.core.annotation.Single
 
 /**
  * Class responsible for parsing of error properties from [ApolloResponse].
  */
+@Single
 internal class ErrorResponseParser {
 
     private companion object {

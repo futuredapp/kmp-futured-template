@@ -5,10 +5,12 @@ import io.ktor.http.isSuccess
 import io.ktor.util.network.UnresolvedAddressException
 import io.ktor.utils.io.errors.IOException
 import kotlinx.serialization.SerializationException
+import org.koin.core.annotation.Single
 
 /**
  * Class responsible for converting [Throwable]s into meaningful [NetworkError]s.
  */
+@Single
 internal class NetworkErrorParser {
 
     /**

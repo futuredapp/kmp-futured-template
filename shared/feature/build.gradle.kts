@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.kotlin.parcelize.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -33,9 +34,12 @@ kotlin {
             }
         }
         val commonMain by getting {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.immutableCollections)
                 implementation(libs.kotlinx.coroutines.core)
 
@@ -74,5 +78,27 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
+}
+
+ksp {
+    // enable compile time check
+//    arg("KOIN_CONFIG_CHECK","true")
+}
+
+// Enable source generation by KSP to commonMain only
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    // DO NOT add bellow dependencies
+//    add("kspAndroid", Deps.Koin.kspCompiler)
+//    add("kspIosX64", Deps.Koin.kspCompiler)
+//    add("kspIosArm64", Deps.Koin.kspCompiler)
+//    add("kspIosSimulatorArm64", Deps.Koin.kspCompiler)
+}
+
+// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
