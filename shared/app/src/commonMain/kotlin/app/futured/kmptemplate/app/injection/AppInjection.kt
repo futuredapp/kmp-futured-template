@@ -7,7 +7,7 @@ import app.futured.kmptemplate.platform.injection.NativePlatformModule
 import app.futured.kmptemplate.platform.injection.platformModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
-import org.koin.ksp.generated.*
+import org.koin.ksp.generated.module
 
 /**
  * Injection entry-point.

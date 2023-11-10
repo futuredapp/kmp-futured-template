@@ -38,7 +38,7 @@ kotlin {
 }
 
 android {
-    namespace = libs.versions.project.shared.util.namespace.get()
+    namespace = libs.versions.project.shared.platform.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion
