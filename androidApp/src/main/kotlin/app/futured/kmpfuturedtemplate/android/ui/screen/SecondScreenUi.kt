@@ -1,5 +1,7 @@
 package app.futured.kmpfuturedtemplate.android.ui.screen
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,5 +27,10 @@ private fun Content(
     actions: SecondScreen.Actions,
     modifier: Modifier = Modifier
 ) {
-    Text(text = "Hi from Second")
+    Column {
+        Text(text = "Hi from Second")
+        Button(onClick = actions::onNext) {
+            Text(text = "To Third")
+        }
+    }
 }

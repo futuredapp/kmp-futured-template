@@ -29,6 +29,7 @@ internal class RootNavigationComponent(
             when (destination) {
                 RootDestination.Login -> LoginComponent(childContext, ::handleLoginEvent)
                     .let { RootNavigationEntry.Login(it) }
+
                 RootDestination.Home -> HomeNavigationComponent(childContext).let {
                     RootNavigationEntry.Home(it)
                 }
@@ -38,7 +39,7 @@ internal class RootNavigationComponent(
 
     private fun handleLoginEvent(loginEvent: LoginEvent) = when (loginEvent) {
         LoginEvent.NavigateHomeEvent -> slotNavigator.activate(RootDestination.Home)
-        else -> {  }
+        else -> {}
     }
 
     private fun onViewModelEvent(event: RootNavigationEvent) = when (event) {

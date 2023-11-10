@@ -9,5 +9,6 @@ interface SecondScreen : Component {
 
     interface Actions {
         fun onBack()
+        fun onNext()
     }
 }

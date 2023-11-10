@@ -10,8 +10,8 @@ internal class FirstComponent(
     componentContext: ComponentContext,
     arg: String,
 ) : ViewModelComponent<FirstViewModel, FirstEvent>(componentContext), FirstScreen {
+    override val viewModel: FirstViewModel by viewModel { parametersOf(arg) }
     override val output: (FirstEvent) -> Unit = {}
-    override val viewModel: FirstViewModel by viewModel { parametersOf(arg)}
     override val viewState: MutableValue<FirstViewState> = viewModel.viewState
     override val actions: FirstScreen.Actions = viewModel
 }

@@ -13,11 +13,6 @@ abstract class ViewModelComponent<VM : SharedViewModel<*, OUT_EVENT, *>, OUT_EVE
     componentContext: ComponentContext,
 ) : ComponentContext by componentContext, KoinComponent {
 
-    val navigator: Navigator
-        get() {
-            TODO()
-        }
-
     abstract val viewModel: VM
     abstract val output: (OUT_EVENT) -> Unit
 
@@ -32,17 +27,13 @@ abstract class ViewModelComponent<VM : SharedViewModel<*, OUT_EVENT, *>, OUT_EVE
     }
 }
 
-interface NavigationComponentContext<C: Component, D: Destination<C>> : ComponentContext {
-    val navigator: Navigator<C,D>
-}
-
-interface Navigator<D: Destination<Component>> {
+interface Navigator<D : Destination<Component>> {
     fun push(destination: D)
     fun pop()
 }
 
 interface Component
 
-interface Destination<out Comp: Component> {
+interface Destination<out Comp : Component> {
     fun createComponent(componentContext: ComponentContext): Comp
 }
