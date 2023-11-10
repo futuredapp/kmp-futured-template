@@ -1,0 +1,7 @@
+ENV['APP_IDENTIFIER'] = 'app.futured.***'
+ENV['APP_NAME'] = '***'
+ENV['APP_SCHEME'] = '***'
+
+ENV['BADGE_DARK'] = 'true'
+
+import_from_git(url: 'git@github.com:futuredapp/fastlane.git')
