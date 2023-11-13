@@ -2,7 +2,7 @@ package app.futured.kmptemplate.util.arch
 
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.ComponentContext
-import kotlinx.coroutines.launch
+import com.arkivanov.essenty.parcelable.Parcelable
 import org.koin.core.component.KoinComponent
 
 /**
@@ -14,26 +14,16 @@ abstract class ViewModelComponent<VM : SharedViewModel<*, OUT_EVENT, *>, OUT_EVE
 ) : ComponentContext by componentContext, KoinComponent {
 
     abstract val viewModel: VM
-    abstract val output: (OUT_EVENT) -> Unit
 
     private val coroutineScope = componentCoroutineScope()
-
-    init {
-        coroutineScope.launch {
-            viewModel.outputEvents.collect {
-                output(it)
-            }
-        }
-    }
 }
 
-interface Navigator<D : Destination<Component>> {
-    fun push(destination: D)
-    fun pop()
-}
+interface StackNavigator<D : Destination<Component>>
+
+interface SlotNavigator<D> where D : Destination<Component>, D : Parcelable
 
 interface Component
 
-interface Destination<out Comp : Component> {
-    fun createComponent(componentContext: ComponentContext): Comp
+interface Destination<out C : Component> {
+    fun createComponent(componentContext: ComponentContext): C
 }

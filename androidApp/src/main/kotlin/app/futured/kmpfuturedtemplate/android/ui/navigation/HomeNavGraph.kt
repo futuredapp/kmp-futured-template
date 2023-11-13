@@ -1,41 +1,41 @@
 package app.futured.kmpfuturedtemplate.android.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import app.futured.kmpfuturedtemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmpfuturedtemplate.android.ui.screen.SecondScreenUi
 import app.futured.kmpfuturedtemplate.android.ui.screen.ThirdScreenUi
+import app.futured.kmptemplate.feature.navigation.home.HomeDestination
+import app.futured.kmptemplate.feature.navigation.home.HomeEntry
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
-import app.futured.kmptemplate.feature.ui.first.FirstScreen
-import app.futured.kmptemplate.feature.ui.second.SecondScreen
-import app.futured.kmptemplate.feature.ui.third.ThirdScreen
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
+import com.arkivanov.decompose.router.stack.ChildStack
 
 @Composable
 fun HomeNavGraph(
     homeNavigation: HomeNavigation,
     modifier: Modifier = Modifier,
 ) {
-    Children(
-        stack = homeNavigation.stack,
+    val stack: ChildStack<HomeDestination, HomeEntry> by homeNavigation.stack.collectAsState()
+
+    Surface(
         modifier = modifier,
-    ) { child ->
-        when (val childInstance = child.instance) {
-            is FirstScreen -> FirstScreenUi(
-                screen = childInstance,
-                modifier = Modifier.fillMaxSize(),
-            )
-
-            is SecondScreen -> SecondScreenUi(
-                screen = childInstance,
-                modifier = Modifier.fillMaxSize(),
-            )
-
-            is ThirdScreen -> ThirdScreenUi(
-                screen = childInstance,
-                modifier = Modifier.fillMaxSize(),
-            )
+        color = MaterialTheme.colorScheme.background,
+    ) {
+        Children(
+            stack = stack,
+            modifier = Modifier.fillMaxSize(),
+        ) { child ->
+            when (val childInstance = child.instance) {
+                is HomeEntry.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is HomeEntry.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is HomeEntry.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+            }
         }
     }
 }

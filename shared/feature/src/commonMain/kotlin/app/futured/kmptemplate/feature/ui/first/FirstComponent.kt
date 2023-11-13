@@ -8,11 +8,9 @@ import kotlinx.coroutines.flow.StateFlow
 
 internal class FirstComponent(
     componentContext: ComponentContext,
-    arg: String,
 ) : ViewModelComponent<FirstViewModel, FirstEvent>(componentContext), FirstScreen {
+    override val viewModel: FirstViewModel by viewModel()
     override val viewState: StateFlow<FirstViewState> = viewModel.viewState
-    override val viewModel: FirstViewModel by viewModel { parametersOf(arg) }
-    override val output: (FirstEvent) -> Unit = {}
     override val actions: FirstScreen.Actions = viewModel
     override val events: Flow<FirstUiEvent> = viewModel.uiEvents
 }

@@ -1,21 +1,22 @@
 package app.futured.kmptemplate.feature.ui.first
 
 import app.futured.kmptemplate.feature.navigation.home.HomeDestination
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigator
+import app.futured.kmptemplate.feature.navigation.home.HomeStackNavigator
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
 import co.touchlab.kermit.Logger
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.push
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
 import kotlin.time.Duration.Companion.milliseconds
 
 internal class FirstViewModel(
-    arg: String,
-    private val navigator: HomeNavigator
+    private val navigator: HomeStackNavigator
 ) : SharedViewModel<FirstViewState, FirstEvent, FirstUiEvent>(),
     FirstScreen.Actions {
-    override val viewState: MutableValue<FirstViewState> = MutableValue(FirstViewState())
+    override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
 
     init {
         launchWithHandler {

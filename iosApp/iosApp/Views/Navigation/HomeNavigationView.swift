@@ -11,7 +11,7 @@ import shared
 
 struct HomeNavigationView: View {
     
-    private let stack: SkieSwiftStateFlow<ChildStack<HomeDestination, HomeNavigationEntry>>
+    private let stack: SkieSwiftStateFlow<ChildStack<HomeDestination, HomeEntry>>
     private let actions: HomeNavigationActions
     
     init(_ component: HomeNavigation) {

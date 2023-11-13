@@ -10,8 +10,6 @@ internal class SecondComponent(
 ) : ViewModelComponent<SecondViewModel, SecondEvent>(componentContext), SecondScreen {
 
     override val viewModel: SecondViewModel by viewModel()
-
-    override val output: (SecondEvent) -> Unit = {}
     override val viewState: StateFlow<SecondViewState> = viewModel.viewState
     override val actions: SecondScreen.Actions = viewModel
 }
