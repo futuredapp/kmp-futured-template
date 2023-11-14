@@ -6,7 +6,6 @@ import de.jensklingenberg.ktorfit.converter.KtorfitResult
 import de.jensklingenberg.ktorfit.internal.TypeData
 import io.ktor.client.call.body
 import io.ktor.http.isSuccess
-import io.ktor.util.network.UnresolvedAddressException
 import io.ktor.util.reflect.TypeInfo
 import kotlin.reflect.cast
 import io.ktor.client.statement.HttpResponse as KtorHttpResponse

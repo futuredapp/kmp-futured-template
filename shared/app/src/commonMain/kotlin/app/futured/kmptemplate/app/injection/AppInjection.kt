@@ -27,7 +27,7 @@ internal object AppInjection {
                 platformModule(nativePlatformModule = nativePlatformModule),
                 featureModule(),
                 networkGraphqlModule(),
-                networkRestModule()
+                networkRestModule(),
             )
         }
     }

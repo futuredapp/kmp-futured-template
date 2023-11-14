@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature.ui.second
 
 import app.futured.kmptemplate.util.arch.SharedViewModel
-import com.arkivanov.decompose.value.MutableValue
 import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class SecondViewModel :

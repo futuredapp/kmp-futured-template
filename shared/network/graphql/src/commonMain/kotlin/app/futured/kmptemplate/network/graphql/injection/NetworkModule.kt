@@ -16,7 +16,6 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 fun networkGraphqlModule() = module {
-
     // region Internal API
 
     singleOf(::ErrorResponseParser)
