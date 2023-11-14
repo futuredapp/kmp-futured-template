@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.persistance
+package app.futured.kmptemplate.persistence
 
 class AndroidPlatform : Platform {
     override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"

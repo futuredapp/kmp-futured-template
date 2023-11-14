@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.persistance
+package app.futured.kmptemplate.persistence
 
 interface Platform {
     val name: String
