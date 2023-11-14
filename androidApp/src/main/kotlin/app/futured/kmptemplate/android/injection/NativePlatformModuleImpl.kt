@@ -1,4 +1,4 @@
-package app.futured.kmpfuturedtemplate.android.injection
+package app.futured.kmptemplate.android.injection
 
 import app.futured.kmptemplate.platform.injection.NativePlatformModule
 

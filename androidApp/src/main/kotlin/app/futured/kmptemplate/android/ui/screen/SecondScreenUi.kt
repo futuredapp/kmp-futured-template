@@ -1,14 +1,17 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package app.futured.kmpfuturedtemplate.android.ui.screen
+package app.futured.kmptemplate.android.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -20,12 +23,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import app.futured.kmptemplate.feature.ui.third.ThirdScreen
-import app.futured.kmptemplate.feature.ui.third.ThirdViewState
+import androidx.compose.ui.unit.dp
+import app.futured.kmptemplate.feature.ui.second.SecondScreen
+import app.futured.kmptemplate.feature.ui.second.SecondViewState
+import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
 @Composable
-fun ThirdScreenUi(
-    screen: ThirdScreen,
+fun SecondScreenUi(
+    screen: SecondScreen,
     modifier: Modifier = Modifier,
 ) {
     val actions = screen.actions
@@ -36,15 +41,15 @@ fun ThirdScreenUi(
 
 @Composable
 private fun Content(
-    viewState: ThirdViewState,
-    actions: ThirdScreen.Actions,
+    viewState: SecondViewState,
+    actions: SecondScreen.Actions,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Third screen") },
+                title = { Text("Second screen") },
                 modifier = Modifier.fillMaxWidth(),
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
@@ -62,6 +67,10 @@ private fun Content(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(text = viewState.text)
+            Spacer(modifier = Modifier.height(4.dp))
+            Button(onClick = { actions.onNext() }) {
+                Text(text = "Go to third screen")
+            }
         }
     }
 }

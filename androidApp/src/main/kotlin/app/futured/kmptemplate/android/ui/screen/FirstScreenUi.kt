@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package app.futured.kmpfuturedtemplate.android.ui.screen
+package app.futured.kmptemplate.android.ui.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -26,8 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import app.futured.kmpfuturedtemplate.android.tools.arch.EventsEffect
-import app.futured.kmpfuturedtemplate.android.tools.arch.onEvent
+import app.futured.kmptemplate.android.tools.arch.EventsEffect
+import app.futured.kmptemplate.android.tools.arch.onEvent
 import app.futured.kmptemplate.feature.ui.first.FirstEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.first.FirstUiEvent

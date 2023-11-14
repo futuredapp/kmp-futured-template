@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.network.graphql.api
 
-import app.futured.kmpfuturedtemplate.network.graphql.GetEpisodesQuery
-import app.futured.kmpfuturedtemplate.network.graphql.fragment.EpisodeFragment
+import app.futured.kmptemplate.network.graphql.GetEpisodesQuery
+import app.futured.kmptemplate.network.graphql.fragment.EpisodeFragment
 import app.futured.kmptemplate.network.graphql.client.ApiManager
 import app.futured.kmptemplate.network.graphql.client.ApolloApiAdapter
 import app.futured.kmptemplate.network.graphql.result.NetworkResult

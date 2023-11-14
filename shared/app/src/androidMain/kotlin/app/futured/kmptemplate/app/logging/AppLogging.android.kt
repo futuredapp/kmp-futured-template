@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.app.logging
 
-import app.futured.kmpfuturedtemplate.app.android.BuildConfig
+import app.futured.kmptemplate.app.android.BuildConfig
 import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.LogcatWriter
 

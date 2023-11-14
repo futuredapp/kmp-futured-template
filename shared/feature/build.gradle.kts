@@ -41,7 +41,7 @@ kotlin {
 
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
-                implementation(projects.shared.persistance)
+                implementation(projects.shared.persistence)
                 implementation(projects.shared.util)
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)

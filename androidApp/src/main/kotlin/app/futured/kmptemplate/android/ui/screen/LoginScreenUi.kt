@@ -1,4 +1,4 @@
-package app.futured.kmpfuturedtemplate.android.ui.screen
+package app.futured.kmptemplate.android.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

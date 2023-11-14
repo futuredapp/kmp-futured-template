@@ -1,7 +1,7 @@
-package app.futured.kmpfuturedtemplate.android
+package app.futured.kmptemplate.android
 
 import android.app.Application
-import app.futured.kmpfuturedtemplate.android.injection.NativePlatformModuleImpl
+import app.futured.kmptemplate.android.injection.NativePlatformModuleImpl
 import org.koin.android.ext.koin.androidContext
 import timber.log.Timber
 import app.futured.kmptemplate.app.KmpApplication as SharedApp

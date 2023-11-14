@@ -1,4 +1,4 @@
-package app.futured.kmpfuturedtemplate.android
+package app.futured.kmptemplate.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
