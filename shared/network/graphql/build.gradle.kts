@@ -12,10 +12,7 @@ plugins {
     alias(libs.plugins.buildkonfig)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -27,7 +24,7 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
             dependencies {
@@ -40,7 +37,7 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
                 implementation(libs.kotlin.testAnnotationsCommon)

@@ -15,9 +15,8 @@ plugins {
     alias(libs.plugins.skie)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 
     androidTarget {
         compilations.all {
@@ -46,7 +45,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
             dependencies {
@@ -62,14 +61,14 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
                 implementation(libs.kotlin.testAnnotationsCommon)
             }
         }
 
-        val iosMain by getting {
+        iosMain {
             dependencies {
                 api(projects.shared.platform)
                 api(projects.shared.util)
@@ -77,6 +76,8 @@ kotlin {
 
                 api(libs.decompose)
                 api(libs.kotlinx.immutableCollections)
+
+                implementation(libs.logging.nsExceptionKt.core)
             }
         }
     }

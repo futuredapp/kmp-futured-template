@@ -1,11 +1,11 @@
 [versions]
-agp = "8.1.2"
-kotlin = "1.9.10"
-ksp = "1.9.10-1.0.13" # Must be compatible with: `kotlin`
+agp = "8.1.3"
+kotlin = "1.9.20"
+ksp = "1.9.20-1.0.13" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
 androidxComposeBom = "2023.09.02"
 androidxActivity = "1.7.2"
-composeCompiler = "1.5.3"
+composeCompiler = "1.5.4"
 decompose = "2.1.0"
 essenty = "1.2.0"
 koin = "3.5.0"
@@ -23,6 +23,7 @@ timber = "5.0.1"
 kermit = "2.0.2"
 skie = "0.5.0"
 buildkonfig = "0.14.0"
+nsExceptionKt = "0.1.15"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmpfuturedtemplate.android"
@@ -82,6 +83,7 @@ lint-compose = { group = "com.slack.lint.compose", name = "compose-lint-checks",
 # Logging
 logging-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 logging-kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+logging-nsExceptionKt-core = { group = "com.rickclephas.kmp", name = "nsexception-kt-core", version.ref = "nsExceptionKt"}
 
 # SKIE
 skie-annotations = { group = "co.touchlab.skie", name = "configuration-annotations", version.ref = "skie" }

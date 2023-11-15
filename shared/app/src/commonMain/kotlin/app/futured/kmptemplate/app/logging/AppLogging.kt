@@ -1,8 +1,12 @@
 package app.futured.kmptemplate.app.logging
 
+import app.futured.kmptemplate.app.crashreporting.CrashlyticsReporter
 import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
+import kotlin.coroutines.cancellation.CancellationException
+import app.futured.kmptemplate.network.graphql.result.NetworkError as GraphqlNetworkError
+import app.futured.kmptemplate.network.rest.result.NetworkError as RestNetworkError
 
 /**
  * This object takes care of KMP logging setup.
@@ -11,12 +15,26 @@ import co.touchlab.kermit.Severity
  */
 internal object AppLogging {
 
-    fun initialize() {
+    fun initialize(crashlyticsReporter: CrashlyticsReporter) {
         with(Logger) {
             setMinSeverity(Severity.Debug)
             setTag("KmpTemplate")
-            setLogWriters(getPlatformLogWriters())
+            setLogWriters(getPlatformLogWriters() + getCrashlyticsLogWriter(crashlyticsReporter))
         }
+    }
+
+    private fun getCrashlyticsLogWriter(crashlytics: CrashlyticsReporter) = CrashlyticsKermitLogWriter(
+        crashlytics = crashlytics,
+        minSeverity = Severity.Info,
+        minCrashSeverity = Severity.Warn,
+        isLoggable = ::throwableFilter,
+    )
+
+    private fun throwableFilter(throwable: Throwable): Boolean = when (throwable) {
+        is GraphqlNetworkError.ConnectionError -> false
+        is RestNetworkError.ConnectionError -> false
+        is CancellationException -> false
+        else -> true
     }
 }
 
