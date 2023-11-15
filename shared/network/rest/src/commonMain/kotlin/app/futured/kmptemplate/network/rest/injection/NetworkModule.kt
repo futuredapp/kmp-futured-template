@@ -3,56 +3,58 @@ package app.futured.kmptemplate.network.rest.injection
 import app.futured.kmpfuturedtemplate.network.rest.BuildKonfig
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.logging.KtorKermitLogger
-import app.futured.kmptemplate.network.rest.result.NetworkErrorParser
 import app.futured.kmptemplate.network.rest.result.NetworkResultConverterFactory
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
-import io.ktor.util.logging.Logger
 import kotlinx.serialization.json.Json
-import org.koin.core.module.dsl.singleOf
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 
-fun networkRestModule() = module {
+@Module
+@ComponentScan("app.futured.kmptemplate.network.rest")
+class NetworkRestModule {
 
-    single(named("apiUrl")) { BuildKonfig.apiUrl }
+    @Single
+    @Named("apiUrl")
+    fun apiUrl(): String = BuildKonfig.apiUrl
 
-    single(named("restApiJson")) {
-        Json {
-            isLenient = true
-            prettyPrint = false
-            ignoreUnknownKeys = true
+    @Single
+    @Named("restApiJson")
+    fun restApiJson(): Json = Json {
+        isLenient = true
+        prettyPrint = false
+        ignoreUnknownKeys = true
+    }
+
+    @Single
+    fun httpClient(@Named("restApiJson") json: Json): HttpClient = HttpClient {
+        install(ContentNegotiation) {
+            json(json = json, contentType = ContentType.Application.Json)
+        }
+        install(Logging) {
+            this.level = LogLevel.INFO
+            this.logger = KtorKermitLogger()
         }
     }
 
-    singleOf(::NetworkErrorParser)
-    singleOf(::NetworkResultConverterFactory)
+    @Single
+    fun ktorFit(
+        @Named("apiUrl") apiUrl: String,
+        httpClient: HttpClient,
+        converterFactory: NetworkResultConverterFactory,
+    ): Ktorfit = Ktorfit.Builder()
+        .baseUrl(apiUrl)
+        .httpClient(httpClient)
+        .converterFactories(converterFactory)
+        .build()
 
-    single {
-        HttpClient {
-            install(ContentNegotiation) {
-                json(json = get(named("restApiJson")), contentType = ContentType.Application.Json)
-            }
-            install(Logging) {
-                this.level = LogLevel.INFO
-                this.logger = KtorKermitLogger()
-            }
-        }
-    }
-
-    single {
-        Ktorfit.Builder()
-            .baseUrl(get(named("apiUrl")))
-            .httpClient(get<HttpClient>())
-            .converterFactories(get<NetworkResultConverterFactory>())
-            .build()
-    }
-
-    single { get<Ktorfit>().create<StarWarsApi>() }
+    @Single
+    fun starWarsApi(ktorFit: Ktorfit): StarWarsApi = ktorFit.create<StarWarsApi>()
 }

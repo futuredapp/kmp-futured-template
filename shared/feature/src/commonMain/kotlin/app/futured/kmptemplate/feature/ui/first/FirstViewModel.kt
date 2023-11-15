@@ -12,8 +12,10 @@ import com.arkivanov.decompose.router.stack.push
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
+import org.koin.core.annotation.Factory
 import kotlin.time.Duration.Companion.milliseconds
 
+@Factory
 internal class FirstViewModel(
     private val homeNavigator: HomeStackNavigator,
     private val rootNavigator: RootSlotNavigator,

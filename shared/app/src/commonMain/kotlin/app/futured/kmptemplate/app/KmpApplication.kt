@@ -1,8 +1,10 @@
 package app.futured.kmptemplate.app
 
+import app.futured.kmptemplate.app.crashreporting.AppCrashReporting
+import app.futured.kmptemplate.app.crashreporting.CrashlyticsReporter
 import app.futured.kmptemplate.app.injection.AppInjection
 import app.futured.kmptemplate.app.logging.AppLogging
-import app.futured.kmptemplate.platform.injection.NativePlatformModule
+import app.futured.kmptemplate.platform.binding.PlatformBindings
 import org.koin.dsl.KoinAppDeclaration
 
 /**
@@ -13,14 +15,16 @@ import org.koin.dsl.KoinAppDeclaration
 object KmpApplication {
 
     fun initializeSharedApplication(
-        nativePlatformModule: NativePlatformModule,
+        platformBindings: PlatformBindings,
         appDeclaration: KoinAppDeclaration? = null,
     ) {
+        val crashlyticsReporter = CrashlyticsReporter(platformBindings.firebaseCrashlytics())
+
         AppInjection.initializeInjection(
-            nativePlatformModule = nativePlatformModule,
+            platformBindings = platformBindings,
             appDeclaration = appDeclaration,
         )
-
-        AppLogging.initialize()
+        AppCrashReporting.initialize(crashlyticsReporter)
+        AppLogging.initialize(crashlyticsReporter)
     }
 }

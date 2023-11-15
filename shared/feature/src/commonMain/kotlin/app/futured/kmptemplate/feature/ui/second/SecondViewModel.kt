@@ -6,7 +6,9 @@ import app.futured.kmptemplate.util.arch.SharedViewModel
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.koin.core.annotation.Factory
 
+@Factory
 internal class SecondViewModel(
     private val navigator: HomeStackNavigator,
 ) : SharedViewModel<SecondViewState, SecondEvent, Nothing>(),
