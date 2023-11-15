@@ -6,8 +6,10 @@ import co.touchlab.kermit.Logger
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
+import org.koin.core.annotation.Factory
 import kotlin.time.Duration.Companion.milliseconds
 
+@Factory
 internal class FirstViewModel :
     SharedViewModel<FirstViewState, FirstEvent, FirstUiEvent>(),
     FirstScreen.Actions {

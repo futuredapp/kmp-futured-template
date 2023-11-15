@@ -7,13 +7,15 @@ import de.jensklingenberg.ktorfit.internal.TypeData
 import io.ktor.client.call.body
 import io.ktor.http.isSuccess
 import io.ktor.util.reflect.TypeInfo
+import org.koin.core.annotation.Single
 import kotlin.reflect.cast
 import io.ktor.client.statement.HttpResponse as KtorHttpResponse
 
 /**
  * This converter allows usage of [NetworkResult] as API return type.
  */
-internal class NetworkResultConverterFactory(
+@Single
+class NetworkResultConverterFactory internal constructor(
     private val errorParser: NetworkErrorParser,
 ) : Converter.Factory {
 
