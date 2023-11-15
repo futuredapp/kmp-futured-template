@@ -6,10 +6,12 @@ import app.futured.kmptemplate.network.graphql.client.ApolloApiAdapter
 import app.futured.kmptemplate.network.graphql.fragment.EpisodeFragment
 import app.futured.kmptemplate.network.graphql.result.NetworkResult
 import app.futured.kmptemplate.network.graphql.result.map
+import org.koin.core.annotation.Single
 
+@Single
 internal class RickAndMortyApiImpl(
     override val apiAdapter: ApolloApiAdapter,
-) : RickAndMortyApi, ApiManager {
+) : RickAndMortyApi, ApiManager  {
 
     override suspend fun getEpisodes(): NetworkResult<List<EpisodeFragment>> = executeQuery(GetEpisodesQuery())
         .map { data ->

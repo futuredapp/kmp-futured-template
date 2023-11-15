@@ -2,7 +2,9 @@ package app.futured.kmptemplate.network.graphql.interceptor
 
 import co.touchlab.kermit.Logger
 import com.apollographql.apollo3.network.http.LoggingInterceptor
+import org.koin.core.annotation.Single
 
+@Single
 internal class LoggingInterceptorFactory {
 
     fun create(): LoggingInterceptor {

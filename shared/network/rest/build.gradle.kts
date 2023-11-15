@@ -6,17 +6,14 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
-    alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -28,9 +25,12 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.ktorfit)
                 implementation(libs.kotlinx.serialization.json)
@@ -38,7 +38,7 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
                 implementation(libs.kotlin.testAnnotationsCommon)
@@ -52,13 +52,7 @@ dependencies {
     https://foso.github.io/Ktorfit/installation/
     https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
     */
-    with(libs.network.ktorfit.ksp) {
-        add("kspCommonMainMetadata", this)
-        add("kspAndroid", this)
-        add("kspIosX64", this)
-        add("kspIosArm64", this)
-        add("kspIosSimulatorArm64", this)
-    }
+    add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
 }
 
 android {

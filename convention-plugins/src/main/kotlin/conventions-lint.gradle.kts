@@ -1,7 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.withType
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 /*
@@ -50,6 +48,16 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
     finalizedBy(rootProject.tasks.getByName("detektReportMerge"))
 }
 
+/**
+ * Configure task [runKtlintCheckOverCommonMainSourceSet] to run After KSP generation task
+ * Setup this only if project has configured ksp and has [kspCommonMainKotlinMetadata] in it's tasks
+ */
+tasks.matching { it.name == "runKtlintCheckOverCommonMainSourceSet" }.configureEach {
+    if (project.tasks.findByName("kspCommonMainKotlinMetadata") != null) {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+
 rootProject.tasks.named("detektReportMerge", ReportMergeTask::class.java) {
-    input.from(tasks.withType<Detekt>().map { it.xmlReportFile },)
+    input.from(tasks.withType<Detekt>().map { it.xmlReportFile })
 }
