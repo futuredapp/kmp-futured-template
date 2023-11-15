@@ -10,8 +10,9 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.koin.annotations.plugin.get().pluginId)
+
     alias(libs.plugins.skie)
-    alias(libs.plugins.ksp)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -109,29 +110,5 @@ skie {
             EnumInterop.Enabled(true)
             SealedInterop.Enabled(true)
         }
-    }
-}
-
-ksp {
-    // enable compile time check
-//    arg("KOIN_CONFIG_CHECK","true")
-    // disable default module generation
-    arg("KOIN_DEFAULT_MODULE","false")
-}
-
-// Enable source generation by KSP to commonMain only
-dependencies {
-    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-    // DO NOT add bellow dependencies
-//    add("kspAndroid", Deps.Koin.kspCompiler)
-//    add("kspIosX64", Deps.Koin.kspCompiler)
-//    add("kspIosArm64", Deps.Koin.kspCompiler)
-//    add("kspIosSimulatorArm64", Deps.Koin.kspCompiler)
-}
-
-// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
-tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
-    if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
     }
 }

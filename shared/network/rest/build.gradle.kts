@@ -6,8 +6,8 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
-    alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
@@ -49,27 +49,12 @@ kotlin {
         }
     }
 }
-ksp {
-    // enable compile time check
-    arg("KOIN_CONFIG_CHECK","true")
-}
 dependencies {
     /* ref:
     https://foso.github.io/Ktorfit/installation/
     https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
     */
     add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
-    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-//    add("kspAndroid", this)
-//    add("kspIosX64", this)
-//    add("kspIosArm64", this)
-//    add("kspIosSimulatorArm64", this)
-}
-// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
-tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
-    if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
 }
 
 android {

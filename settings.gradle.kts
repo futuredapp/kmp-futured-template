@@ -26,3 +26,5 @@ include(":shared:feature")
 include(":shared:persistance")
 include(":shared:platform")
 include(":shared:util")
+
+includeBuild("convention-plugins")
