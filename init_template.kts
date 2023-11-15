@@ -31,7 +31,15 @@ fun renamePackagesInAndroidApp(packageName: String) {
     renamePackageNameInDirectory(baseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
 
     // rename package and imports
-    renameTextInFilePath("androidApp/", templatePackageName, packageName)
+    renameTextInPath("androidApp/build.gradle.kts", templatePackageName, packageName)
+    renameTextInPath("androidApp/proguard-rules.pro", templatePackageName, packageName)
+
+    renameTextInFilePath(baseDir, templatePackageName, packageName)
+
+    // buildSrc
+    val buildSrcBaseDir = "buildSrc/src/main/kotlin"
+    renamePackageNameInDirectory(buildSrcBaseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
+    renameTextInFilePath(buildSrcBaseDir, templatePackageName, packageName)
 }
 
 fun renamePackageNameInDirectory(dir: String, oldPackageNamePath: String, newPackageNamePath: String) {
@@ -87,6 +95,8 @@ fun renamePackagesInShared(packageName: String) {
                 )
             }
         }
+
+        renameTextInPath("shared/$moduleName/build.gradle.kts", templatePackageName, packageName)
     }
 }
 
@@ -109,10 +119,10 @@ fun renameTextInPath(pathText: String, oldText: String, newText: String) {
 }
 
 fun getAppNameAndPackage(): Pair<String, String> {
-    println("Enter app name: ")
+    print("Project name: ")
     val appName: String = readlnOrNull() ?: error("You need to enter name")
 
-    println("Enter app package name (e.g. com.example.test):")
+    print("Package name (e.g. com.example.test): ")
     val packageName = readlnOrNull() ?: error("You need to enter package name")
     return appName to packageName
 }
