@@ -1,4 +1,4 @@
-package app.futured.kmpfuturedtemplate.android.tools.binding
+package app.futured.kmptemplate.android.tools.binding
 
 import app.futured.kmptemplate.platform.binding.PlatformFirebaseCrashlytics
 

@@ -11,7 +11,7 @@ import org.koin.core.annotation.Single
 @Single
 internal class RickAndMortyApiImpl(
     override val apiAdapter: ApolloApiAdapter,
-) : RickAndMortyApi, ApiManager  {
+) : RickAndMortyApi, ApiManager {
 
     override suspend fun getEpisodes(): NetworkResult<List<EpisodeFragment>> = executeQuery(GetEpisodesQuery())
         .map { data ->
