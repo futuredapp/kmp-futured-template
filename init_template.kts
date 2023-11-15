@@ -20,7 +20,8 @@ val (appName, packageName) = getAppNameAndPackage()
 renamePackagesInAndroidApp(packageName)
 renamePackagesInShared(packageName = packageName)
 renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePackageName, newText = packageName)
-renameTextInPath("settings.gradle.kts", "KMP_Futured_template", appName)
+renameTextInPath(pathText = "build.gradle.kts", oldText = templatePackageName, newText = packageName)
+renameTextInPath(pathText = "settings.gradle.kts", oldText = "KMP_Futured_template", newText = appName)
 
 //// END APP
 
