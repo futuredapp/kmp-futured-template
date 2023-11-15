@@ -71,6 +71,8 @@ kotlin {
 
                 api(libs.decompose)
                 api(libs.kotlinx.immutableCollections)
+
+                implementation(libs.logging.nsExceptionKt.core)
             }
         }
     }

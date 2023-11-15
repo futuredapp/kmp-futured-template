@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
-		1113BA3B2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift */; };
+		1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */; };
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
 		111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */; };
@@ -23,6 +23,7 @@
 		1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF92AEA98A800C6203F /* ThirdView.swift */; };
 		1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEFB2AEA9FA000C6203F /* LoginView.swift */; };
 		119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */; };
+		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +42,7 @@
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1113BA3A2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlatformModuleImpl.swift; sourceTree = "<group>"; };
+		1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformBindingsImpl.swift; sourceTree = "<group>"; };
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
 		111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EventsEffect.swift"; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		119C5F4A2AEBC40200CB58E3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinStateFlow.swift; sourceTree = "<group>"; };
+		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +85,8 @@
 		1113BA392AE6955200ABDE61 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				1113BA3A2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift */,
+				1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */,
+				11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -292,10 +295,11 @@
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
+				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
 				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
-				1113BA3B2AE6956A00ABDE61 /* NativePlatformModuleImpl.swift in Sources */,
+				1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */,
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,

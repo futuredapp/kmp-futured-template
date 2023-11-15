@@ -1,0 +1,70 @@
+name: Android Google Play Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  release:
+    name: Release build
+    runs-on: [ ubuntu-latest ]
+    env:
+      EXCLUDE_AAB_FILTER: .*intermediate
+      # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
+      SLACK_CHANNEL: project-slack-channel-name
+      # TODO verify product flavor configuration
+      # Specifies API environment for KMP build.
+      # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
+      KMP_FLAVOR: prod
+      VERSION_NAME: ${{ github.event.release.tag_name }}
+    steps:
+      - name: Set build number
+        run: echo "BUILD_NUMBER=$((GITHUB_RUN_NUMBER+50000))" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Generate app bundle
+        shell: bash
+        env:
+          # TODO Set up `ANDROID_RELEASE_KEYSTORE_PASSWORD` secret for this GitHub repository
+          # TODO Set up `ANDROID_RELEASE_KEY_PASSWORD` secret for this GitHub repository
+          # TODO Set up `ANDROID_RELEASE_KEY_ALIAS` secret for this GitHub repository
+          RELEASE_KEYSTORE_PASS: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_PASS: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+        run: ./gradlew bundleRelease -P buildkonfig.flavor=${{env.KMP_FLAVOR}} --no-daemon
+      - name: Find artifacts and mapping file
+        shell: bash
+        id: artifacts
+        run: |
+          echo ::set-output name=aab_file::$(find . -name "*.aab" | grep -v ${{env.EXCLUDE_AAB_FILTER}})
+          echo ::set-output name=mapping_file::$(find . -name mapping.txt)
+      - name: Upload Android Release to Play Store
+        uses: r0adkll/upload-google-play@v1.1.1
+        with:
+          # TODO Set up `GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT }}
+          # TODO This has to be applicationId
+          packageName: app.futured.kmpfuturedtemplate.android
+          releaseFiles: ${{ steps.artifacts.outputs.aab_file }}
+          track: internal
+          status: draft
+          whatsNewDirectory: androidApp/whatsnew
+          mappingFile: ${{ steps.artifacts.outputs.mapping_file }}
+      - name: Slack Notification
+        if: failure()
+        uses: homoluctus/slatify@master
+        with:
+          type: "failure"
+          job_name: '*Release build*'
+          username: GitHub
+          channel: ${{env.SLACK_CHANNEL}}
+          url: ${{secrets.SLACK_WEB_HOOK}}
+          commit: true
+          token: ${{secrets.GITHUB_TOKEN}}
