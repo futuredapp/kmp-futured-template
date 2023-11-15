@@ -12,9 +12,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     private func initializeSharedApplication() {
-        KmpApplication()
-            .initializeSharedApplication(
-                nativePlatformModule: NativePlatformModuleImpl()
-            )
+        KmpApplication().initializeSharedApplication(platformBindings: PlatformBindingsImpl())
     }
 }
