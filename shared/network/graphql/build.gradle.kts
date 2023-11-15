@@ -6,15 +6,13 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
     alias(libs.plugins.apollo)
     alias(libs.plugins.buildkonfig)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -26,16 +24,20 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
+
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.apollo)
                 implementation(libs.logging.kermit)
             }
         }
 
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
                 implementation(libs.kotlin.testAnnotationsCommon)

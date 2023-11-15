@@ -7,7 +7,9 @@ import co.touchlab.kermit.Logger
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.koin.core.annotation.Factory
 
+@Factory
 internal class LoginViewModel(
     private val starWarsApi: StarWarsApi,
     private val rickAndMortyApi: RickAndMortyApi,

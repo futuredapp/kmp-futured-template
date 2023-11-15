@@ -10,8 +10,10 @@ import com.apollographql.apollo3.cache.normalized.fetchPolicy
 import com.apollographql.apollo3.cache.normalized.normalizedCache
 import com.apollographql.apollo3.network.http.DefaultHttpEngine
 import com.apollographql.apollo3.network.http.HttpNetworkTransport
+import org.koin.core.annotation.Single
 
-internal class ApolloClientFactory(
+@Single
+class ApolloClientFactory internal constructor(
     private val loggingInterceptorFactory: LoggingInterceptorFactory,
     private val networkNormalizedCacheFactory: NetworkNormalizedCacheFactory,
     private val cacheKeyGenerator: NormalizedCacheKeyGenerator,
