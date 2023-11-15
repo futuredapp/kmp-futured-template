@@ -8,7 +8,7 @@ import com.arkivanov.decompose.router.stack.push
 import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class SecondViewModel(
-    private val navigator: HomeStackNavigator
+    private val navigator: HomeStackNavigator,
 ) : SharedViewModel<SecondViewState, SecondEvent, Nothing>(),
     SecondScreen.Actions {
     override val viewState: MutableStateFlow<SecondViewState> = MutableStateFlow(SecondViewState())

@@ -2,10 +2,12 @@ package app.futured.kmptemplate.feature.ui.first
 
 import app.futured.kmptemplate.feature.navigation.home.HomeDestination
 import app.futured.kmptemplate.feature.navigation.home.HomeStackNavigator
+import app.futured.kmptemplate.feature.navigation.root.RootDestination
+import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
 import co.touchlab.kermit.Logger
-import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.stack.push
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +15,8 @@ import kotlinx.coroutines.isActive
 import kotlin.time.Duration.Companion.milliseconds
 
 internal class FirstViewModel(
-    private val navigator: HomeStackNavigator
+    private val homeNavigator: HomeStackNavigator,
+    private val rootNavigator: RootSlotNavigator,
 ) : SharedViewModel<FirstViewState, FirstEvent, FirstUiEvent>(),
     FirstScreen.Actions {
     override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
@@ -39,10 +42,10 @@ internal class FirstViewModel(
     }
 
     override fun onBack() {
-        navigator.pop()
+        rootNavigator.activate(RootDestination.Login)
     }
 
     override fun onNext() {
-        navigator.push(HomeDestination.Second)
+        homeNavigator.push(HomeDestination.Second)
     }
 }

@@ -20,14 +20,6 @@ interface HomeNavigation : Component {
     }
 }
 
-//interface Sheet<ARG, Component> : Destination<ARG, Component> {
-//
-//}
-//
-//interface Dialog<ARG, Component>: Destination<ARG, Component> {
-//
-//}
-
 class HomeStackNavigator(
     private val stackNavigator: StackNavigation<HomeDestination>,
 ) : StackNavigator<HomeDestination>, StackNavigation<HomeDestination> by stackNavigator {
