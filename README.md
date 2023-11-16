@@ -99,6 +99,7 @@ Navigation("RootNavigation") {
 
 Use `init_template.kts` script to setup the template. 
 The script renames directories and package names in files to given package name.
+
 It is written in Kotlin. In order to run it you need to have [kscript](https://github.com/kscripting/kscript) installed.
 #### Usage
 ```shell
