@@ -21,7 +21,7 @@ ktor = "2.3.4" # Must be compatible with: `ktorfit`
 kotlinx-serialization = "1.6.0"
 timber = "5.0.1"
 kermit = "2.0.2"
-skie = "0.5.0"
+skie = "0.5.5"
 buildkonfig = "0.14.0"
 nsExceptionKt = "0.1.15"
 
