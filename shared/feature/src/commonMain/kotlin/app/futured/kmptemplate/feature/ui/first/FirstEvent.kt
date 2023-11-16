@@ -9,5 +9,5 @@ sealed class FirstEvent : OutputEvent<FirstViewState> {
 }
 
 sealed class FirstUiEvent : UiEvent<FirstViewState> {
-    data class ShowToast(val text: String): FirstUiEvent()
+    data class ShowToast(val text: String) : FirstUiEvent()
 }

@@ -1,9 +1,9 @@
 package app.futured.kmptemplate.network.graphql.client
 
-import app.futured.kmptemplate.network.graphql.interceptor.LoggingInterceptorFactory
-import app.futured.kmptemplate.network.graphql.tools.Constants
 import app.futured.kmptemplate.network.graphql.cache.NetworkNormalizedCacheFactory
 import app.futured.kmptemplate.network.graphql.cache.NormalizedCacheKeyGenerator
+import app.futured.kmptemplate.network.graphql.interceptor.LoggingInterceptorFactory
+import app.futured.kmptemplate.network.graphql.tools.Constants
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.cache.normalized.FetchPolicy
 import com.apollographql.apollo3.cache.normalized.fetchPolicy

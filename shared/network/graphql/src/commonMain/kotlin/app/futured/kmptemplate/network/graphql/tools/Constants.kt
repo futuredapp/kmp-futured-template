@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.graphql.tools
 
-import app.futured.kmpfuturedtemplate.network.graphql.BuildKonfig
+import app.futured.kmptemplate.network.graphql.BuildKonfig
 import kotlin.time.Duration.Companion.seconds
 
 internal object Constants {

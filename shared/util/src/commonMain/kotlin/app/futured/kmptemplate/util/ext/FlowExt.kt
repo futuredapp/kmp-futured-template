@@ -22,7 +22,6 @@ fun <T : Any> Flow<T>.collectAsValue(initial: T, coroutineScope: CoroutineScope)
         }
     }
 
-
 /**
  * Mutates this [MutableStateFlow] using provided [transform] function.
  */

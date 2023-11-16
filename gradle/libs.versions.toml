@@ -26,16 +26,16 @@ buildkonfig = "0.14.0"
 nsExceptionKt = "0.1.15"
 
 # Android Namespaces
-project-android-namespace = "app.futured.kmpfuturedtemplate.android"
-project-shared-app-namespace = "app.futured.kmpfuturedtemplate.app.android"
-project-shared-feature-namespace = "app.futured.kmpfuturedtemplate.feature.android"
-project-shared-network-graphql-namespace = "app.futured.kmpfuturedtemplate.network.graphql.android"
-project-shared-network-graphql-packageName = "app.futured.kmpfuturedtemplate.network.graphql"
-project-shared-network-rest-namespace = "app.futured.kmpfuturedtemplate.network.rest.android"
-project-shared-network-rest-packageName = "app.futured.kmpfuturedtemplate.network.rest"
-project-shared-persistence-namespace = "app.futured.kmpfuturedtemplate.persistence.android"
-project-shared-util-namespace = "app.futured.kmpfuturedtemplate.util.android"
-project-shared-platform-namespace = "app.futured.kmpfuturedtemplate.platform.android"
+project-android-namespace = "app.futured.kmptemplate.android"
+project-shared-app-namespace = "app.futured.kmptemplate.app.android"
+project-shared-feature-namespace = "app.futured.kmptemplate.feature.android"
+project-shared-network-graphql-namespace = "app.futured.kmptemplate.network.graphql.android"
+project-shared-network-graphql-packageName = "app.futured.kmptemplate.network.graphql"
+project-shared-network-rest-namespace = "app.futured.kmptemplate.network.rest.android"
+project-shared-network-rest-packageName = "app.futured.kmptemplate.network.rest"
+project-shared-persistence-namespace = "app.futured.kmptemplate.persistence.android"
+project-shared-util-namespace = "app.futured.kmptemplate.util.android"
+project-shared-platform-namespace = "app.futured.kmptemplate.platform.android"
 
 [libraries]
 

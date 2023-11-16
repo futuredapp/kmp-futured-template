@@ -18,4 +18,3 @@ internal class RootNavigationComponent(
     override val slot: StateFlow<ChildSlot<RootDestination, RootEntry>> =
         rootNavigator.createSlot(componentContext)
 }
-

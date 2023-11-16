@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.rest.injection
 
-import app.futured.kmpfuturedtemplate.network.rest.BuildKonfig
+import app.futured.kmptemplate.network.rest.BuildKonfig
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.logging.KtorKermitLogger
 import app.futured.kmptemplate.network.rest.result.NetworkResultConverterFactory
