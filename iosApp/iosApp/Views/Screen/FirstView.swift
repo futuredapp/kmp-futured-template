@@ -1,21 +1,21 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct FirstView: View {
-    
+
     @ObservedObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
     private let events: SkieSwiftFlow<FirstUiEvent>
-    
+
     @State private var alertVisible: Bool = false
     @State private var alertText: String = ""
-    
+
     init(_ screen: FirstScreen) {
         self._viewState = .init(screen.viewState)
         self.actions = screen.actions
         self.events = screen.events
     }
-    
+
     var body: some View {
         VStack(spacing: 10) {
             Text(viewState.text)
@@ -31,7 +31,7 @@ struct FirstView: View {
             }
         }
         .alert(alertText, isPresented: $alertVisible) {
-            Button("Close", action: {alertVisible = false})
+            Button("Close") { alertVisible = false }
         }
     }
 }

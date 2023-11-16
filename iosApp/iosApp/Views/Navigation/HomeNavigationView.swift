@@ -6,19 +6,19 @@
 //  Copyright © 2023 orgName. All rights reserved.
 //
 
-import SwiftUI
 import shared
+import SwiftUI
 
 struct HomeNavigationView: View {
-    
+
     private let stack: SkieSwiftStateFlow<ChildStack<HomeDestination, HomeEntry>>
     private let actions: HomeNavigationActions
-    
+
     init(_ component: HomeNavigation) {
         self.stack = component.stack
         self.actions = component.actions
     }
-    
+
     var body: some View {
         DecomposeNavigationStack(
             kotlinStack: stack,
