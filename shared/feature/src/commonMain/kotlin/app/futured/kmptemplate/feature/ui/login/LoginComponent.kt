@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 internal class LoginComponent(
     componentContext: ComponentContext,
-    override val output: (LoginEvent) -> Unit,
 ) : ViewModelComponent<LoginViewModel, LoginEvent>(componentContext), LoginScreen {
     override val viewModel: LoginViewModel by viewModel()
     override val viewState: StateFlow<LoginViewState> = viewModel.viewState

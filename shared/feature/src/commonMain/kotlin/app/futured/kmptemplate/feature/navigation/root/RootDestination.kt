@@ -1,0 +1,30 @@
+package app.futured.kmptemplate.feature.navigation.root
+
+import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
+import app.futured.kmptemplate.feature.navigation.home.HomeNavigationComponent
+import app.futured.kmptemplate.feature.ui.login.LoginComponent
+import app.futured.kmptemplate.feature.ui.login.LoginScreen
+import app.futured.kmptemplate.util.arch.Component
+import app.futured.kmptemplate.util.arch.Destination
+import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
+
+sealed class RootDestination : Parcelable, Destination<RootEntry> {
+    @Parcelize
+    data object Login : RootDestination() {
+        override fun createComponent(componentContext: ComponentContext): RootEntry =
+            RootEntry.Login(LoginComponent(componentContext))
+    }
+
+    @Parcelize
+    data object Home : RootDestination() {
+        override fun createComponent(componentContext: ComponentContext): RootEntry =
+            RootEntry.Home(HomeNavigationComponent(componentContext))
+    }
+}
+
+sealed class RootEntry : Component {
+    data class Login(val screen: LoginScreen) : RootEntry()
+    data class Home(val navigation: HomeNavigation) : RootEntry()
+}

@@ -3,7 +3,7 @@ import shared
 
 struct RootNavigationView: View {
     
-    @ObservedObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootNavigationEntry>
+    @ObservedObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
     
     init(_ component: RootNavigation) {
         self._slot = .init(component.slot)
