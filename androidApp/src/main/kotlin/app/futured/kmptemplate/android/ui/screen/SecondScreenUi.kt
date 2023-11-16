@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature.ui.second.SecondScreen
 import app.futured.kmptemplate.feature.ui.second.SecondViewState
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
 @Composable
 fun SecondScreenUi(

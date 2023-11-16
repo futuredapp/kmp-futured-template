@@ -42,15 +42,7 @@ abstract class SharedViewModel<VS : ViewState, OUTPUT_EVENT : OutputEvent<VS>, U
 
     // region Events
 
-    private val outputEventChannel = Channel<OUTPUT_EVENT>(Channel.BUFFERED)
     private val uiEventChannel = Channel<UI_EVENT>(Channel.BUFFERED)
-
-    /**
-     * Hot buffered flow that emits output events sent by [sendOutput].
-     */
-    val outputEvents: Flow<OUTPUT_EVENT> = outputEventChannel
-        .receiveAsFlow()
-        .shareIn(viewModelScope, SharingStarted.Lazily)
 
     /**
      * Hot buffered flow that emits UI events sent by [sendUiEvent].
@@ -58,15 +50,6 @@ abstract class SharedViewModel<VS : ViewState, OUTPUT_EVENT : OutputEvent<VS>, U
     val uiEvents: Flow<UI_EVENT> = uiEventChannel
         .receiveAsFlow()
         .shareIn(viewModelScope, SharingStarted.Lazily)
-
-    /**
-     * Sends an [OutputEvent] to event channel that can be consumed using [outputEvents] flow.
-     */
-    fun sendOutput(event: OUTPUT_EVENT) {
-        viewModelScope.launch {
-            outputEventChannel.send(event)
-        }
-    }
 
     /**
      * Sends an [UiEvent] to event channel that can be consumed using [uiEvents] flow.

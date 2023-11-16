@@ -28,7 +28,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.android.tools.arch.EventsEffect
 import app.futured.kmptemplate.android.tools.arch.onEvent
-import app.futured.kmptemplate.feature.ui.first.FirstEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.first.FirstViewState

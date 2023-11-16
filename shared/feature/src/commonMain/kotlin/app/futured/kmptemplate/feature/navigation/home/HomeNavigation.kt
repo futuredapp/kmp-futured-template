@@ -1,36 +1,35 @@
 package app.futured.kmptemplate.feature.navigation.home
 
-import app.futured.kmptemplate.feature.ui.first.FirstScreen
-import app.futured.kmptemplate.feature.ui.second.SecondScreen
-import app.futured.kmptemplate.feature.ui.third.ThirdScreen
+import app.futured.kmptemplate.util.arch.Component
+import app.futured.kmptemplate.util.arch.StackNavigator
+import app.futured.kmptemplate.util.ext.asStateFlow
+import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.Child
+import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.childStack
 import kotlinx.coroutines.flow.StateFlow
 
-interface HomeNavigation {
-    val stack: StateFlow<ChildStack<HomeDestination, HomeNavigationEntry>>
+interface HomeNavigation : Component {
+    val stack: StateFlow<ChildStack<HomeDestination, HomeEntry>>
     val actions: Actions
 
     interface Actions {
-        fun iosPopTo(newStack: List<Child<HomeDestination, HomeNavigationEntry>>)
+        fun iosPopTo(newStack: List<Child<HomeDestination, HomeEntry>>)
     }
 }
 
-sealed class HomeDestination : Parcelable {
-    @Parcelize
-    data object First : HomeDestination()
+class HomeStackNavigator(
+    private val stackNavigator: StackNavigation<HomeDestination>,
+) : StackNavigator<HomeDestination>, StackNavigation<HomeDestination> by stackNavigator {
 
-    @Parcelize
-    data object Second : HomeDestination()
-
-    @Parcelize
-    data object Third : HomeDestination()
-}
-
-sealed class HomeNavigationEntry {
-    data class First(val screen: FirstScreen) : HomeNavigationEntry()
-    data class Second(val screen: SecondScreen) : HomeNavigationEntry()
-    data class Third(val screen: ThirdScreen) : HomeNavigationEntry()
+    fun createStack(componentContext: ComponentContext) = componentContext.childStack(
+        source = stackNavigator,
+        key = this::class.simpleName.toString(),
+        initialStack = { listOf(HomeDestination.First("some")) },
+        handleBackButton = true,
+        childFactory = { config, childContext -> config.createComponent(childContext) },
+    )
+        .asStateFlow(componentContext.componentCoroutineScope())
 }
