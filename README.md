@@ -95,6 +95,17 @@ Navigation("RootNavigation") {
 
 ## Project Setup
 
+### Initial script
+
+Use `init_template.kts` script to setup the template. 
+The script renames directories and package names in files to given package name.
+
+It is written in Kotlin. In order to run it you need to have [kscript](https://github.com/kscripting/kscript) installed.
+#### Usage
+```shell
+kscript init_template.kts
+```
+
 ### Product Flavors
 
 The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin to achieve build flavors in network module.

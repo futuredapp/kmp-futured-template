@@ -125,5 +125,10 @@ fun getAppNameAndPackage(): Pair<String, String> {
 
     print("Package name (e.g. com.example.test): ")
     val packageName = readlnOrNull() ?: error("You need to enter package name")
+
+    if (packageName.count { it == '.' } != 2) {
+        error("You did not enter package name correctly")
+    }
+
     return appName to packageName
 }
