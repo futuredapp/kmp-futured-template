@@ -8,25 +8,27 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import app.futured.kmptemplate.android.ui.screen.LoginScreenUi
+import app.futured.kmptemplate.feature.navigation.root.RootDestination
+import app.futured.kmptemplate.feature.navigation.root.RootEntry
 import app.futured.kmptemplate.feature.navigation.root.RootNavigation
-import app.futured.kmptemplate.feature.navigation.root.RootNavigationEntry
+import com.arkivanov.decompose.router.slot.ChildSlot
 
 @Composable
 fun RootNavGraph(
     rootNavigation: RootNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val slot by rootNavigation.slot.collectAsState()
+    val slot: ChildSlot<RootDestination, RootEntry> by rootNavigation.slot.collectAsState()
 
     Surface(modifier, color = MaterialTheme.colorScheme.background) {
         when (val childInstance = slot.child?.instance) {
-            is RootNavigationEntry.Login -> LoginScreenUi(
-                screen = childInstance.screen,
+            is RootEntry.Home -> HomeNavGraph(
+                homeNavigation = childInstance.navigation,
                 modifier = Modifier.fillMaxSize(),
             )
 
-            is RootNavigationEntry.Home -> HomeNavGraph(
-                homeNavigation = childInstance.navigation,
+            is RootEntry.Login -> LoginScreenUi(
+                screen = childInstance.screen,
                 modifier = Modifier.fillMaxSize(),
             )
 

@@ -6,6 +6,7 @@ import com.apollographql.apollo3.cache.normalized.api.CacheKey
 import com.apollographql.apollo3.cache.normalized.api.CacheKeyGenerator
 import com.apollographql.apollo3.cache.normalized.api.CacheKeyGeneratorContext
 import com.apollographql.apollo3.cache.normalized.api.Record
+import org.koin.core.annotation.Single
 
 private typealias Typename = String
 private typealias IdField = String
@@ -17,6 +18,7 @@ private typealias IdField = String
  * When we want to normalize an entity in the cache and that entity must be uniquely identified
  * by other field other than `id`, we need to specify it's unique field in [KNOWN_TYPES] map.
  */
+@Single
 internal class NormalizedCacheKeyGenerator : CacheKeyGenerator {
 
     companion object {

@@ -10,27 +10,31 @@ import androidx.compose.ui.Modifier
 import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
 import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
+import app.futured.kmptemplate.feature.navigation.home.HomeDestination
+import app.futured.kmptemplate.feature.navigation.home.HomeEntry
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigationEntry
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.router.stack.ChildStack
 
 @Composable
 fun HomeNavGraph(
     homeNavigation: HomeNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val stack by homeNavigation.stack.collectAsState()
+    val stack: ChildStack<HomeDestination, HomeEntry> by homeNavigation.stack.collectAsState()
 
     Surface(
         modifier = modifier,
         color = MaterialTheme.colorScheme.background,
     ) {
-        Children(modifier = Modifier.fillMaxSize(), stack = stack) { child ->
+        Children(
+            stack = stack,
+            modifier = Modifier.fillMaxSize(),
+        ) { child ->
             when (val childInstance = child.instance) {
-                is HomeNavigationEntry.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-                is HomeNavigationEntry.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-                is HomeNavigationEntry.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is HomeEntry.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is HomeEntry.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is HomeEntry.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
             }
         }
     }

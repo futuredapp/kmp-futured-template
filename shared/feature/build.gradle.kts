@@ -6,16 +6,14 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.kotlin.parcelize.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.koin.annotations.plugin.get().pluginId)
 }
 
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -27,15 +25,18 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        val androidMain by getting {
+        androidMain {
             dependencies {
                 implementation(libs.androidx.compose.runtime)
             }
         }
-        val commonMain by getting {
+        commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.immutableCollections)
                 implementation(libs.kotlinx.coroutines.core)
 
@@ -48,7 +49,7 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
                 implementation(libs.kotlin.testAnnotationsCommon)

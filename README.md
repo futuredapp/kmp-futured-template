@@ -9,20 +9,104 @@
 ![android-targetsdk](https://img.shields.io/badge/targetsdk-34-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![ios-target](https://img.shields.io/badge/target-16.0-%23000000.svg?style=flat-square&logo=apple&logoColor=white)
 
-Project description.
+~~Short project description.~~
 
 ## Project info
 
-- ApplicationId: `app.futured.kmptemplate`
-- Design: Figma (add link)
-- Backend: (REST / GraphQL) (add specification)
+- Deadline: ~~**--. --. ----**~~
+- Design: ~~Figma (add link)~~
+- ~~Backend: GrahlQL / Apiary / OpenAPI (add link)~~
+  - ~~Prod: https://live.app.com~~
+  - ~~Dev: https://staging.app.com~~
+- ~~Localizations: Czech, English – POEditor / Google Sheets (add link)~~
+- [Architecture decision records](doc/adr/README.md)
+
+### KMP
+- Product Flavors: dev, prod
 - Use-Cases: Kotlin Coroutines [cr-usecases](https://github.com/futuredapp/arkitekt)
 
-### Team:
+### Android
+- ApplicationId: ~~`app.futured.project`~~
+- minSdk: ~~`28`~~
+- targetSdk: ~~`34`~~
+- Supports: ~~**Dark mode, landscape orientation**~~
+- Build Variants: debug, enterprise, release
 
-- TODO
+### iOS
+- Deployment target: ~~**16.0**~~
+- Bundle identifier: ~~`app.futured.project`~~
+- Supports: ~~**Dark mode, landscape orientation, iPadOS, watchOS**~~
+- Language: ~~**Swift 5.0**~~
+- IDE: ~~**Xcode 11.0**~~
+- Dependency management: ~~**[Swift package manager](https://swift.org/package-manager/)**~~
+- Command line tools: **[Fastlane](https://docs.fastlane.tools)**
+- Code style:
+  - **[SwiftLint](https://swift.org/package-manager/)**
+  - **[Danger](https://github.com/futuredapp/danger)**
 
-## Build Configuration
+## Team:
+
+- ~~Jana Nováková, PM, <jana.novakova@futured.app>~~
+- ~~Jan Novák, iOS developer, <jan.novak@futured.app>~~
+- ~~John Newman, tester, <john.newman@futured.app>~~
+
+## Used Tools
+
+- Code style - **[ktlint](https://ktlint.github.io/)**, **[detekt](https://arturbosch.github.io/detekt/)**, **[Android lint](http://tools.android.com/tips/lint)**, **[Danger](https://github.com/futuredapp/danger)**
+- Kotlin -> Swift interop - **[skie](https://skie.touchlab.co/)**
+
+### ~~Test accounts~~
+
+- ~~dev - login: `a@a.com`, password: `hesloheslo`~~
+
+### Security standard
+
+This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security standard.
+
+~~[Project specific standard](www.notion.so)~~
+
+## Gradle tasks
+
+1. `clean` - Remove all `build` folders
+2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
+3. `ktlintFormat` - Reformat source code according to ktlint rules
+4. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
+5. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
+
+## Navigation Structure
+
+The app utilizes [Decompose](https://arkivanov.github.io/Decompose/) to share presentation logic and navigation state in KMP.  
+The following meta-description provides an overview of Decompose navigation tree:
+
+```kotlin
+Navigation("RootNavigation") {
+    Slot {
+        Screen("LoginScreen")
+        Navigation("HomeNavigation") {
+            Stack {
+                Screen("FirstScreen")
+                Screen("SecondScreen")
+                Screen("ThirdScreen")
+            }
+        }
+    }
+}
+```
+
+## Project Setup
+
+### Initial script
+
+Use `init_template.kts` script to setup the template. 
+The script renames directories and package names in files to given package name.
+
+It is written in Kotlin. In order to run it you need to have [kscript](https://github.com/kscripting/kscript) installed.
+#### Usage
+```shell
+kscript init_template.kts
+```
+
+### Product Flavors
 
 The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin to achieve build flavors in network module.
 There are two product flavors: `dev` and `prod`, which select API url used in `:shared:network:rest` and `:shared:network:graphql` modules.
@@ -34,14 +118,14 @@ In general, the build flavor can be specified as a Gradle build flag
 
 Please, refer to `:shared:network:*` module Gradle config.
 
-### Android
+#### Android
 
 During local development, the build flavor can be specified in `gradle.properties` file like so:
 ```properties
 buildkonfig.flavor=dev
 ```
 
-### iOS
+#### iOS
 
 On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
 where each file per build configuration specifies a `KMM_FLAVOR` environment variable.
@@ -54,19 +138,33 @@ This variable is then used in shared framework build step to pass the flavor as 
 Currently, the `Debug` build configuration uses `staging` flavor and `Release` configuration uses `prod` flavor.
 When adding new build configurations, please make sure to also define the `KMM_FLAVOR` variable using the aforementioned method.
 
-## Used Tools
+### Crashlytics
 
-- Code style - **[ktlint](https://ktlint.github.io/)**, **[detekt](https://arturbosch.github.io/detekt/)**, **[Android lint](http://tools.android.com/tips/lint)**, **[Danger](https://github.com/futuredapp/danger)**
-- Kotlin -> Swift interop - **[SKIE]**(https://skie.touchlab.co/)
+We can have symbolicated Kotlin crash reports on iOS.
+We [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
+Everything is set up, but some finishing touches need to be made when you add Crashlytics to your project:
 
-## Test accounts
+1. Set up Firebase Crashlytics on both platforms as you would usually do.
+2. After dependencies are in place, on each platform uncomment the code in `PlatformFirebaseCrashlyticsImpl` classes (follow comments).
+3. On iOS, do not forget to also upload debug symbols from KMP framework. We have to do this manually. To do this, set up additional build phase in Xcode:
 
-- TODO
+```shell
+# https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=ios&authuser=1#manually-upload-dsyms
 
-## Kotlin Gradle tasks
+# Location of GoogleService-Info.plist file for Firebase project (this might depend on build configuration)
+GSPFILE="path_to_your_file.plist"
 
-1. `clean` - Remove all `build` folders
-2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
-3. `ktlintFormat` - Reformat source code according to ktlint rules
-5. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
-6. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
+# `KOTLIN_FRAMEWORK_NAME` env variable should be defined in `.xcconfig` file for current build configuration.
+# The other ones are implicitly provided by Xcode.
+DSYMFILE="${SRCROOT}/../shared/app/build/xcode-frameworks/${CONFIGURATION}/${SDK_NAME}/${KOTLIN_FRAMEWORK_NAME}.framework.dSYM"
+
+echo "Uploading Kotlin framework dSYM to Crashlytics"
+echo "Google Services file: ${GSPFILE}"
+echo "Shared framework dSYM file: ${DSYMFILE}"
+
+# Validate
+${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols --build-phase --validate -gsp ${GSPFILE} -p ios ${DSYMFILE}
+
+# Upload
+${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp ${GSPFILE} -p ios ${DSYMFILE}
+```

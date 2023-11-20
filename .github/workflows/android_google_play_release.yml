@@ -51,7 +51,7 @@ jobs:
           # TODO Set up `GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT }}
           # TODO This has to be applicationId
-          packageName: app.futured.kmpfuturedtemplate.android
+          packageName: app.futured.kmptemplate.android
           releaseFiles: ${{ steps.artifacts.outputs.aab_file }}
           track: internal
           status: draft

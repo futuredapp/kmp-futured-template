@@ -31,7 +31,7 @@ object ProjectSettings {
         const val TargetSdkVersion = 34
         const val CompileSdkVersion = 34
 
-        const val ApplicationId = "app.futured.kmpfuturedtemplate.android"
+        const val ApplicationId = "app.futured.kmptemplate.android"
 
         val VersionCode = System.getenv("BUILD_NUMBER")?.toInt() ?: 1
         val VersionName = System.getenv("VERSION_NAME") ?: "1.0.0"
@@ -61,6 +61,6 @@ object ProjectSettings {
 
     object IOS {
         const val FrameworkName = "shared"
-        const val FrameworkBundleId = "app.futured.kmpfuturedtemplate.shared"
+        const val FrameworkBundleId = "app.futured.kmptemplate.shared"
     }
 }
