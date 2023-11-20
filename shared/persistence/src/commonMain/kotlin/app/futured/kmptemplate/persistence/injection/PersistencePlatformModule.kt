@@ -1,5 +1,12 @@
 package app.futured.kmptemplate.persistence.injection
 
-import org.koin.core.module.Module
+import okio.Path
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Named
 
-internal expect fun persistencePlatformModule(): Module
+@Module
+expect class PersistencePlatformModule {
+
+    @Named("DataStoreFilePath")
+    fun dataStoreFilePath(): Path
+}

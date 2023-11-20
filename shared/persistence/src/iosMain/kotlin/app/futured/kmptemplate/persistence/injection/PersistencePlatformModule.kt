@@ -2,17 +2,19 @@ package app.futured.kmptemplate.persistence.injection
 
 import app.futured.kmptemplate.persistence.tools.SETTINGS_DATASTORE_FILENAME
 import kotlinx.cinterop.ExperimentalForeignApi
+import okio.Path
 import okio.Path.Companion.toPath
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import org.koin.core.annotation.Named
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 
 @OptIn(ExperimentalForeignApi::class)
-internal actual fun persistencePlatformModule() = module {
-    single(named("DataStoreFilePath")) {
+actual class PersistencePlatformModule {
+
+    @Named("DataStoreFilePath")
+    actual fun dataStoreFilePath(): Path {
         val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
             directory = NSDocumentDirectory,
             inDomain = NSUserDomainMask,
@@ -21,6 +23,6 @@ internal actual fun persistencePlatformModule() = module {
             error = null,
         )
 
-        (requireNotNull(documentDirectory).path + "/$SETTINGS_DATASTORE_FILENAME").toPath()
+        return (requireNotNull(documentDirectory).path + "/$SETTINGS_DATASTORE_FILENAME").toPath()
     }
 }
