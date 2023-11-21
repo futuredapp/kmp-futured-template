@@ -31,6 +31,7 @@ import app.futured.kmptemplate.android.tools.arch.onEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.first.FirstViewState
+import app.futured.kmptemplate.resources.translate
 
 @Composable
 fun FirstScreenUi(
@@ -77,7 +78,7 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text)
+            Text(text = viewState.text.translate())
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
                 Text(text = "Go to second screen")
