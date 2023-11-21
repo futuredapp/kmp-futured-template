@@ -4,6 +4,7 @@ import app.futured.kmptemplate.feature.navigation.home.HomeDestination
 import app.futured.kmptemplate.feature.navigation.home.HomeStackNavigator
 import app.futured.kmptemplate.feature.navigation.root.RootDestination
 import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
+import app.futured.kmptemplate.persistence.test.TestRepository
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
 import co.touchlab.kermit.Logger
@@ -19,13 +20,14 @@ import kotlin.time.Duration.Companion.milliseconds
 internal class FirstViewModel(
     private val homeNavigator: HomeStackNavigator,
     private val rootNavigator: RootSlotNavigator,
+    private val testRepository: TestRepository,
 ) : SharedViewModel<FirstViewState, FirstEvent, FirstUiEvent>(),
     FirstScreen.Actions {
     override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
 
     init {
         launchWithHandler {
-            var counter = 0
+            var counter = testRepository.test()
             while (isActive) {
                 update(viewState) {
                     copy(
@@ -39,6 +41,8 @@ internal class FirstViewModel(
                 }
 
                 delay(200.milliseconds)
+
+                testRepository.saveTest(counter)
             }
         }
     }
