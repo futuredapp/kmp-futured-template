@@ -23,9 +23,83 @@ renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePacka
 renameTextInPath(pathText = "build.gradle.kts", oldText = templatePackageName, newText = packageName)
 renameTextInPath(pathText = "settings.gradle.kts", oldText = "KMP_Futured_template", newText = appName)
 
+// IOS 
+updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_IDENTIFIER", newValue = packageName)
+updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_NAME", newValue = appName)
+updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_SCHEME", newValue = appName)
+updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp", newValue = packageName)
+updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppTests", newValue = "${packageName}.${appName}Test")
+updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppUITests", newValue = "${packageName}.${appName}UITest")
+replaceTextInAllFilesInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
+renameInDirectory(dirPath = "iosApp/iosAppTests", oldText = "iosApp", newText = appName)
+renameInDirectory(dirPath = "iosApp/iosAppUITests", oldText = "iosApp", newText = appName)
+renameInDirectory(dirPath = "iosApp/iosApp.xcodeproj/xcshareddata/xcschemes", oldText = "iosApp", newText = appName)
+renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
+
 //// END APP
 
 // region functions
+
+fun updatePbxprojValues(filePath: String, oldValue: String, newValue: String) {
+    val file = File(filePath)
+    if (!file.exists()) {
+       println("File does not exist: $filePath")
+       return
+    }
+    var content = file.readText()
+    content = content.replace(oldValue, newValue)
+    file.writeText(content)
+}
+
+fun updateFastfileEnvVariables(filePath: String, varName: String, newValue: String) {
+    val file = File(filePath)
+    if (!file.exists()) {
+        println("File does not exist: $filePath")
+        return
+    }
+    
+    var content = file.readText()
+
+    // Look for the pattern ENV['VAR_NAME'] = 'var_value' and change 'var_value'
+    val envVarPattern = "ENV\\['$varName'] = '(.*)'".toRegex()
+    if (envVarPattern.containsMatchIn(content)) {
+        // The variable is found in the file - replace the old value with the new value
+        content = content.replace(envVarPattern, "ENV['$varName'] = '$newValue'")
+        file.writeText(content)
+    } else {
+        println("Variable $varName was not found in Fastfile.")
+    }
+}
+
+
+fun renameInDirectory(dirPath: String, oldText: String, newText: String) {
+    val dir = File(dirPath)
+    if (!dir.exists()) {
+        error("Directory does not exist: $dirPath")
+        return
+    }
+
+    // exclude root directory from walk results
+    dir.walk().drop(1).forEach { file ->
+            if (file.name.contains(oldText)) {
+                val oldName = file.name
+                val newName = file.name.replace(oldText, newText)
+                renameDirectory(from = "$dirPath/$oldName", to = "$dirPath/$newName")
+            }
+        }
+}
+
+fun replaceTextInAllFilesInDirectory(dirPath: String, oldText: String, newText: String) {
+    val dir = File(dirPath)
+    if (dir.exists()) {
+        dir.walk().filter { it.isFile }.forEach { file ->
+            renameTextInPath(file.path, oldText, newText)
+        }
+    } else {
+        error("Directory does not exist: $dirPath")
+    }
+}
+
 fun renamePackagesInAndroidApp(packageName: String) {
     // move androidApp to new package
     val baseDir = "androidApp/src/main/kotlin"
