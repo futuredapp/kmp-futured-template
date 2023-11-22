@@ -18,7 +18,7 @@ struct FirstView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(viewState.text)
+            Text(viewState.text.localized())
             Button("Go to second screen", action: actions.onNext).buttonStyle(.borderedProminent)
             Button("Go back", action: actions.onBack)
         }
