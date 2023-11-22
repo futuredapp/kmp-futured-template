@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct RootView: View {
     @State private var componentHolder = ComponentHolder {
