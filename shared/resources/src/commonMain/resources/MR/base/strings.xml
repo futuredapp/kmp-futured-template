@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="first_screen_text">Obrazovka číslo %1$d x %2$d</string>
+    <string name="first_screen_text">Screen number %1$d x %2$d</string>
 </resources>
