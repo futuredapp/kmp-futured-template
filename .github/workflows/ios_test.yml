@@ -7,11 +7,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      shouldRunJobs: ${{ steps.file-changes.outputs.anythingExceptAndroid }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Detect Changes
+        uses: dorny/paths-filter@v2
+        id: file-changes
+        with:
+          filters: |
+            anythingExceptAndroid:
+              - "!(androidApp/**)"
   test:
     name: iOS Test
     runs-on: self-hosted
     timeout-minutes: 30
-
+    needs: detect-changes
+    if: needs.detect-changes.outputs.shouldRunJobs
     steps:
       - name: Checkout
         uses: actions/checkout@v3
