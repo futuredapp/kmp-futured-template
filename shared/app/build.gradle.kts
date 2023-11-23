@@ -53,6 +53,7 @@ kotlin {
                 implementation(projects.shared.feature)
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
+                implementation(projects.shared.persistence)
 
                 implementation(libs.decompose)
                 implementation(libs.koin.core)

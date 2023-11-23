@@ -24,6 +24,7 @@ kermit = "2.0.2"
 skie = "0.5.5"
 buildkonfig = "0.14.0"
 nsExceptionKt = "0.1.15"
+datastore = "1.1.0-alpha06"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -98,6 +99,9 @@ network-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-ser
 network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 network-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 network-ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+# Datastore
+androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 
 # Gradle Plugins used in buildSrc
 gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
