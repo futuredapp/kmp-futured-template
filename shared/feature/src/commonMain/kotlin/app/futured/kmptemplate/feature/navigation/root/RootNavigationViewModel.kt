@@ -6,6 +6,6 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class RootNavigationViewModel :
-    SharedViewModel<RootNavigationViewState, RootNavigationEvent, Nothing>() {
+    SharedViewModel<RootNavigationViewState, Nothing>() {
     override val viewState: MutableStateFlow<RootNavigationViewState> = MutableStateFlow(RootNavigationViewState())
 }

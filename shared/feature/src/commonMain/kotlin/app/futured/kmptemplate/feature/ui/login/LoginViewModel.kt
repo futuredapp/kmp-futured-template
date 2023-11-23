@@ -17,7 +17,7 @@ internal class LoginViewModel(
     private val starWarsApi: StarWarsApi,
     private val rickAndMortyApi: RickAndMortyApi,
     private val navigator: RootSlotNavigator,
-) : SharedViewModel<LoginViewState, LoginEvent, Nothing>(),
+) : SharedViewModel<LoginViewState, Nothing>(),
     LoginScreen.Actions,
     LoginScreen.SuspendActions {
 

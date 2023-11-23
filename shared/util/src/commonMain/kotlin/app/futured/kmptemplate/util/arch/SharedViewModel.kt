@@ -23,7 +23,7 @@ import org.koin.core.component.KoinComponent
  * It implements the [UseCaseExecutionScope] interface, so KMM UseCases
  * can be executed in it's [CoroutineScope] tied to retained instance lifecycle.
  */
-abstract class SharedViewModel<VS : ViewState, OUTPUT_EVENT : OutputEvent<VS>, UI_EVENT : UiEvent<VS>> :
+abstract class SharedViewModel<VS : ViewState, UI_EVENT : UiEvent<VS>> :
     InstanceKeeper.Instance,
     UseCaseExecutionScope,
     KoinComponent {
