@@ -5,3 +5,19 @@ ENV['APP_SCHEME'] = '***'
 ENV['BADGE_DARK'] = 'true'
 
 import_from_git(url: 'git@github.com:futuredapp/fastlane.git')
+
+desc "Increment build number and bump version (lane is called from git action where is set 'BUILD_NUMBER' and 'VERSION_NUMBER')"
+override_lane :bump do |options|
+  bump_type = options[:type] || "patch"
+  increment_build_number(build_number: ENV["BUILD_NUMBER"], skip_info_plist: true)
+  increment_version_number_in_xcodeproj(
+    bump_type: bump_type,
+    version_number: ENV["VERSION_NUMBER"],
+    scheme: ENV["APP_SCHEME"],
+    **(ENV["FL_BUILD_NUMBER_PROJECT"] ? {xcodeproj: ENV["FL_BUILD_NUMBER_PROJECT"]} : {})
+    # `FL_BUILD_NUMBER_PROJECT`: An optional environment variable specifying the path of the Xcode project.
+    # If not provided, the lane will not pass Xcode project path to the version increment action.
+    # You must specify the path to your main Xcode project if it is not in the project root directory
+    # or if you have multiple xcodeproj's in the root directory.
+  )
+end
