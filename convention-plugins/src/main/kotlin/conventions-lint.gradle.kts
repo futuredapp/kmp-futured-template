@@ -58,6 +58,12 @@ tasks.matching { it.name == "runKtlintCheckOverCommonMainSourceSet" }.configureE
     }
 }
 
+tasks.matching { it.name == "runKtlintCheckOverCommonMainSourceSet" }.configureEach {
+    if (project.tasks.findByName("generateMRcommonMain") != null) {
+        dependsOn("generateMRcommonMain")
+    }
+}
+
 rootProject.tasks.named("detektReportMerge", ReportMergeTask::class.java) {
     input.from(tasks.withType<Detekt>().map { it.xmlReportFile })
 }
