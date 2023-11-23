@@ -10,8 +10,6 @@ jobs:
   detect-changes:
     name: Detect Changes
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       shouldRunJobs: ${{ steps.file-changes.outputs.anythingExceptAndroid }}
     steps:
