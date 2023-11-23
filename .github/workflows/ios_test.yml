@@ -16,7 +16,7 @@ jobs:
       shouldRunJobs: ${{ steps.file-changes.outputs.anythingExceptAndroid }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Detect Changes
         uses: dorny/paths-filter@v2
         id: file-changes
@@ -32,7 +32,7 @@ jobs:
     if: needs.detect-changes.outputs.shouldRunJobs
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
