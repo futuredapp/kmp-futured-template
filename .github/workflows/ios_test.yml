@@ -27,7 +27,7 @@ jobs:
     runs-on: self-hosted
     timeout-minutes: 30
     needs: detect-changes
-    if: needs.detect-changes.outputs.shouldRunJobs
+    if: ${{ needs.detect-changes.outputs.shouldRunJobs == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
