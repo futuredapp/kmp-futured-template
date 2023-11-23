@@ -2,7 +2,8 @@ name: Android Enterprise Release
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.repository }}

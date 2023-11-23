@@ -3,7 +3,7 @@ name: Android PR Check
 on: [ pull_request ]
 
 concurrency:
-  group: ${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
 jobs:
