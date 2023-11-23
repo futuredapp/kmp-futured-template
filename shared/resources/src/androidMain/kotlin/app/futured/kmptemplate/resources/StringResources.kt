@@ -39,4 +39,4 @@ fun kmpStringResource(res: StringResource, vararg formatArgs: Any): String {
  * @return the string data associated with the resource.
  */
 @Composable
-fun StringDesc.translate() = toString(LocalContext.current)
+fun StringDesc.localized() = toString(LocalContext.current)

@@ -17,7 +17,7 @@ struct LoginView: View {
         ScrollView {
             VStack(spacing: 10) {
                 Spacer(minLength: 20.0)
-                Text("Hi from login. Try to refresh me.")
+                Text(Localizable.login_screen_text.localized)
                 Button("Login", action: actions.onLoginClick).buttonStyle(.borderedProminent)
             }.scaledToFill()
         }

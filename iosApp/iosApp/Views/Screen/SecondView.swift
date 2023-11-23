@@ -13,10 +13,10 @@ struct SecondView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(viewState.text)
+            Text(viewState.text.localized())
             Button("Go to third screen", action: actions.onNext).buttonStyle(.borderedProminent)
             Button("Go back", action: actions.onBack)
         }
-        .navigationTitle("Second screen")
+        .navigationTitle(Localizable.second_screen_title.localized)
     }
 }

@@ -37,6 +37,7 @@ kotlin {
             export(projects.shared.platform)
             export(projects.shared.util)
             export(projects.shared.feature)
+            export(projects.shared.resources)
 
             export(libs.decompose)
             export(libs.essenty)

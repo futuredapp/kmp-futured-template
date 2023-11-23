@@ -13,9 +13,9 @@ struct ThirdView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(viewState.text)
+            Text(viewState.text.localized())
             Button("Go back", action: actions.onBack)
         }
-        .navigationTitle("Third screen")
+        .navigationTitle(Localizable.third_screen_text.localized)
     }
 }

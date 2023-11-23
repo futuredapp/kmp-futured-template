@@ -22,6 +22,7 @@
 		1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF72AEA989F00C6203F /* SecondView.swift */; };
 		1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF92AEA98A800C6203F /* ThirdView.swift */; };
 		1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEFB2AEA9FA000C6203F /* LoginView.swift */; };
+		119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A92E72B0F37A300D93E98 /* MR+Extensions.swift */; };
 		119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */; };
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 		F4820AB72B0B51A100B13080 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4820AB62B0B51A100B13080 /* XCTest.framework */; };
@@ -75,6 +76,7 @@
 		1193BEF72AEA989F00C6203F /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		1193BEF92AEA98A800C6203F /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		1193BEFB2AEA9FA000C6203F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		119A92E72B0F37A300D93E98 /* MR+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MR+Extensions.swift"; sourceTree = "<group>"; };
 		119C5F4A2AEBC40200CB58E3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinStateFlow.swift; sourceTree = "<group>"; };
@@ -189,6 +191,14 @@
 			path = Interop;
 			sourceTree = "<group>";
 		};
+		119A92E62B0F379400D93E98 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				119A92E72B0F37A300D93E98 /* MR+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		119C5F492AEBC3EA00CB58E3 /* Config Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +233,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				119A92E62B0F379400D93E98 /* Extensions */,
 				1193BEED2AEA985200C6203F /* Views */,
 				1193BEE22AEA89D800C6203F /* Architecture */,
 				1113BA3C2AE6969700ABDE61 /* App */,
@@ -457,6 +468,7 @@
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
+				119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
 				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
 				1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */,
