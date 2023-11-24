@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       # Matches all files which can affect iOS build, when changed
-      iosFiles: ${{ steps.file-changes.outputs.notAndroid }}
+      iosFiles: ${{ steps.file-changes.outputs.iosFiles }}
       # Matches all files which can affect Android build, when changed
-      androidFiles: ${{ steps.file-changes.outputs.notIos }}
+      androidFiles: ${{ steps.file-changes.outputs.androidFiles }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,9 +23,9 @@ jobs:
         id: file-changes
         with:
           filters: |
-            notAndroid:
+            iosFiles:
               - "!(androidApp/**)"
-            notIos:
+            androidFiles:
               - "!(iosApp/**)"
   test:
     name: iOS Test
