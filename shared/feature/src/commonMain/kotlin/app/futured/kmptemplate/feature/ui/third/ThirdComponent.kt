@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 internal class ThirdComponent(
     componentContext: ComponentContext,
-) : ViewModelComponent<ThirdViewModel, ThirdEvent>(componentContext), ThirdScreen {
+) : ViewModelComponent<ThirdViewModel>(componentContext), ThirdScreen {
     override val viewModel: ThirdViewModel by viewModel()
     override val viewState: StateFlow<ThirdViewState> = viewModel.viewState
     override val actions: ThirdScreen.Actions = viewModel

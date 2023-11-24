@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 internal class SecondComponent(
     componentContext: ComponentContext,
-) : ViewModelComponent<SecondViewModel, SecondEvent>(componentContext), SecondScreen {
+) : ViewModelComponent<SecondViewModel>(componentContext), SecondScreen {
 
     override val viewModel: SecondViewModel by viewModel()
     override val viewState: StateFlow<SecondViewState> = viewModel.viewState

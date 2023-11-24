@@ -16,9 +16,8 @@ import org.koin.mp.KoinPlatformTools
  * The injection happens only once, when [ViewModelComponent] is created thanks to the lazy injector.
  * This makes sure that the same ViewModel is used across configuration changes.
  */
-inline fun <reified VM : SharedViewModel<*, *, *>> ViewModelComponent<VM, *>.viewModel(
+inline fun <reified VM : SharedViewModel<*, *>> ViewModelComponent<VM>.viewModel(
     qualifier: Qualifier? = null,
     mode: LazyThreadSafetyMode = KoinPlatformTools.defaultLazyMode(),
     noinline parameters: ParametersDefinition? = null,
-): Lazy<VM> =
-    lazy(mode) { instanceKeeper.getOrCreate { get(qualifier, parameters) } }
+): Lazy<VM> = lazy(mode) { instanceKeeper.getOrCreate { get(qualifier, parameters) } }

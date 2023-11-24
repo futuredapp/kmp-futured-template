@@ -9,7 +9,7 @@ import org.koin.core.component.inject
 
 internal class RootNavigationComponent(
     componentContext: ComponentContext,
-) : ViewModelComponent<RootNavigationViewModel, RootNavigationEvent>(componentContext),
+) : ViewModelComponent<RootNavigationViewModel>(componentContext),
     RootNavigation {
     private val rootNavigator: RootSlotNavigator by inject()
 
