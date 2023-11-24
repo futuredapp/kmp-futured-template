@@ -16,7 +16,7 @@ import java.nio.file.StandardCopyOption
 //// APP
 
 val templatePackageName = "app.futured.kmptemplate"
-val (appName, packageName) = getAppNameAndPackage()
+val (appName, packageName, frameworkName) = getNamesOfAppAndPackageAndFramework()
 renamePackagesInAndroidApp(packageName)
 renamePackagesInShared(packageName = packageName)
 renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePackageName, newText = packageName)
@@ -30,6 +30,10 @@ updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP
 updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp", newValue = packageName)
 updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppTests", newValue = "${packageName}.${appName}Test")
 updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppUITests", newValue = "${packageName}.${appName}UITest")
+renameTextInPath(pathText = "buildSrc/src/main/kotlin/${packageName.replace(".", "/")}/gradle/configuration/ProjectSettings.kt", oldText = "shared", newText = "${frameworkName}")
+replaceTextInSwiftFiles(dirPath = "iosApp", oldText = "import shared", newText = "import ${frameworkName}")
+replaceTextInSwiftFiles(dirPath = "iosApp", oldText = "extension shared", newText =  "extension ${frameworkName}")
+replaceTextInXConfigFiles(dirPath = "iosApp", oldText = "shared", newText = "${frameworkName}")
 replaceTextInAllFilesInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
 renameInDirectory(dirPath = "iosApp/iosAppTests", oldText = "iosApp", newText = appName)
 renameInDirectory(dirPath = "iosApp/iosAppUITests", oldText = "iosApp", newText = appName)
@@ -39,6 +43,18 @@ renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
 //// END APP
 
 // region functions
+
+fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) { 
+    File(dirPath).walk()
+        .filter { it.isFile && it.extension == "xcconfig" }
+        .forEach { file ->  renameTextInPath(file.path, oldText, newText) }
+}
+
+fun replaceTextInSwiftFiles(dirPath: String, oldText: String, newText: String) {
+    File(dirPath).walk()
+        .filter { it.isFile && it.extension == "swift" }
+        .forEach { file ->  renameTextInPath(file.path, oldText, newText) }
+}
 
 fun updatePbxprojValues(filePath: String, oldValue: String, newValue: String) {
     val file = File(filePath)
@@ -193,16 +209,19 @@ fun renameTextInPath(pathText: String, oldText: String, newText: String) {
     Files.write(path, content.toByteArray(charset))
 }
 
-fun getAppNameAndPackage(): Pair<String, String> {
+fun getNamesOfAppAndPackageAndFramework(): Triple<String, String, String> {
     print("Project name: ")
-    val appName: String = readlnOrNull() ?: error("You need to enter name")
+    val appName: String = readLine()?.takeIf { it.isNotEmpty() } ?: error("You need to enter name")
 
     print("Package name (e.g. com.example.test): ")
-    val packageName = readlnOrNull() ?: error("You need to enter package name")
+    val packageName = readLine()?.takeIf { it.isNotEmpty() } ?: error("You need to enter package name")
+
+    print("Framework name: (default 'shared'): ")
+    val frameworkName = readLine()?.takeIf { it.isNotEmpty() } ?: "shared"
 
     if (packageName.count { it == '.' } != 2) {
         error("You did not enter package name correctly")
     }
 
-    return appName to packageName
+    return Triple(appName, packageName, frameworkName)
 }
