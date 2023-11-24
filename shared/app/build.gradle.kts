@@ -5,6 +5,7 @@ import co.touchlab.skie.configuration.EnumInterop
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SealedInterop
 import co.touchlab.skie.configuration.SuspendInterop
+import dev.icerock.gradle.MRVisibility
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -13,6 +14,7 @@ plugins {
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
     alias(libs.plugins.skie)
+    alias(libs.plugins.moko.resources)
 }
 
 kotlin {
@@ -30,17 +32,17 @@ kotlin {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
-
-            // Enable if SQLite is used in project (such as Apollo cache, or SQLDelight)
-            linkerOpts += "-lsqlite3"
+            isStatic = true
 
             export(projects.shared.platform)
             export(projects.shared.util)
             export(projects.shared.feature)
+            export(projects.shared.resources)
 
             export(libs.decompose)
             export(libs.essenty)
             export(libs.kotlinx.immutableCollections)
+            export(libs.moko.resources)
         }
     }
 
@@ -54,6 +56,7 @@ kotlin {
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
+                implementation(projects.shared.resources)
 
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
@@ -74,12 +77,17 @@ kotlin {
                 api(projects.shared.platform)
                 api(projects.shared.util)
                 api(projects.shared.feature)
+                api(projects.shared.resources)
 
                 api(libs.decompose)
                 api(libs.kotlinx.immutableCollections)
 
                 implementation(libs.logging.nsExceptionKt.core)
             }
+        }
+
+        androidMain {
+            dependsOn(commonMain.get())
         }
     }
 }
@@ -113,4 +121,14 @@ skie {
             SealedInterop.Enabled(true)
         }
     }
+}
+
+multiplatformResources {
+    // This module uses the plugin just to export resources to iOS.
+    // Visibility is set to Internal in order to prevent :androidApp
+    // module to see duplicate resources from this module and :shared:resources module.
+    multiplatformResourcesVisibility = MRVisibility.Internal
+
+    multiplatformResourcesClassName = "MR"
+    iosBaseLocalizationRegion = ProjectSettings.IOS.MokoBaseLocalizationRegion
 }

@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature.ui.login.LoginScreen
 import app.futured.kmptemplate.feature.ui.login.LoginViewState
+import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.kmpStringResource
 
 @Composable
 fun LoginScreenUi(
@@ -33,7 +35,7 @@ private fun Content(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "Hi from login")
+        Text(text = kmpStringResource(MR.strings.login_screen_text))
         Spacer(modifier = Modifier.height(4.dp))
         Button(onClick = { actions.onLoginClick() }) {
             Text(text = "Login")

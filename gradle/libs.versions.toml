@@ -1,5 +1,5 @@
 [versions]
-agp = "8.1.3"
+agp = "8.1.4"
 kotlin = "1.9.20"
 ksp = "1.9.20-1.0.13" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
@@ -25,6 +25,7 @@ skie = "0.5.5"
 buildkonfig = "0.14.0"
 nsExceptionKt = "0.1.15"
 datastore = "1.1.0-alpha06"
+moko-resources = "0.23.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -37,6 +38,8 @@ project-shared-network-rest-packageName = "app.futured.kmptemplate.network.rest"
 project-shared-persistence-namespace = "app.futured.kmptemplate.persistence.android"
 project-shared-util-namespace = "app.futured.kmptemplate.util.android"
 project-shared-platform-namespace = "app.futured.kmptemplate.platform.android"
+project-shared-resources-namespace = "app.futured.kmptemplate.resources.android"
+project-shared-resources-packageName = "app.futured.kmptemplate.resources"
 
 [libraries]
 
@@ -89,6 +92,9 @@ logging-nsExceptionKt-core = { group = "com.rickclephas.kmp", name = "nsexceptio
 # SKIE
 skie-annotations = { group = "co.touchlab.skie", name = "configuration-annotations", version.ref = "skie" }
 
+# Moko
+moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }
+
 # Network
 network-apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
 network-apollo-normalizedCache-core = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache", version.ref = "apollo" }
@@ -121,6 +127,7 @@ apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

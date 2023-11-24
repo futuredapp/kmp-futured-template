@@ -99,6 +99,7 @@ dependencies {
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
     implementation(projects.shared.util)
+    implementation(projects.shared.resources)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)

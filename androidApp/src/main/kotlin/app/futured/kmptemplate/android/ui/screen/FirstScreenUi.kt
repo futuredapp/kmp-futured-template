@@ -31,6 +31,9 @@ import app.futured.kmptemplate.android.tools.arch.onEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.first.FirstViewState
+import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.kmpStringResource
+import app.futured.kmptemplate.resources.localized
 
 @Composable
 fun FirstScreenUi(
@@ -60,7 +63,7 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("First screen") },
+                title = { Text(kmpStringResource(res = MR.strings.first_screen_title)) },
                 modifier = Modifier.fillMaxWidth(),
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
@@ -77,7 +80,7 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text)
+            Text(text = viewState.text.localized())
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
                 Text(text = "Go to second screen")

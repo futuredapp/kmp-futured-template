@@ -26,6 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature.ui.second.SecondScreen
 import app.futured.kmptemplate.feature.ui.second.SecondViewState
+import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.kmpStringResource
+import app.futured.kmptemplate.resources.localized
 
 @Composable
 fun SecondScreenUi(
@@ -48,7 +51,7 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Second screen") },
+                title = { Text(kmpStringResource(res = MR.strings.second_screen_title)) },
                 modifier = Modifier.fillMaxWidth(),
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
@@ -65,7 +68,7 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text)
+            Text(text = viewState.text.localized())
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
                 Text(text = "Go to third screen")

@@ -22,6 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import app.futured.kmptemplate.feature.ui.third.ThirdScreen
 import app.futured.kmptemplate.feature.ui.third.ThirdViewState
+import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.kmpStringResource
+import app.futured.kmptemplate.resources.localized
 
 @Composable
 fun ThirdScreenUi(
@@ -44,7 +47,7 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Third screen") },
+                title = { Text(kmpStringResource(res = MR.strings.third_screen_title)) },
                 modifier = Modifier.fillMaxWidth(),
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
@@ -61,7 +64,7 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text)
+            Text(text = viewState.text.localized())
         }
     }
 }
