@@ -10,10 +10,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Matches all files which can affect iOS build, when changed
+      iosFiles: ${{ steps.file-changes.outputs.iosFiles }}
+      # Matches all files which can affect Android build, when changed
+      androidFiles: ${{ steps.file-changes.outputs.androidFiles }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Detect Changes
+        uses: dorny/paths-filter@v2
+        id: file-changes
+        with:
+          base: ${{ github.ref }}
+          filters: |
+            iosFiles:
+              - "!(androidApp/**)"
+            androidFiles:
+              - "!(iosApp/**)"
   beta:
     name: iOS Beta
     runs-on: self-hosted
-
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
