@@ -11,7 +11,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class SecondViewModel(
     private val navigator: HomeStackNavigator,
-) : SharedViewModel<SecondViewState, SecondEvent, Nothing>(),
+) : SharedViewModel<SecondViewState, Nothing>(),
     SecondScreen.Actions {
     override val viewState: MutableStateFlow<SecondViewState> = MutableStateFlow(SecondViewState())
 

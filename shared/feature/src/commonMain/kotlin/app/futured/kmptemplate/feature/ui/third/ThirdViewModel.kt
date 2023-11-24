@@ -9,7 +9,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class ThirdViewModel(
     private val navigator: HomeStackNavigator,
-) : SharedViewModel<ThirdViewState, ThirdEvent, Nothing>(),
+) : SharedViewModel<ThirdViewState, Nothing>(),
     ThirdScreen.Actions {
 
     override val viewState: MutableStateFlow<ThirdViewState> = MutableStateFlow(ThirdViewState())

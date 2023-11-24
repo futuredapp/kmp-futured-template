@@ -7,4 +7,3 @@ package app.futured.kmptemplate.util.arch
  * operation is in progress.
  */
 interface UiEvent<VS : ViewState>
-interface OutputEvent<VS : ViewState>
