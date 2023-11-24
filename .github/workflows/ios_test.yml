@@ -11,7 +11,10 @@ jobs:
     name: Detect Changes
     runs-on: ubuntu-latest
     outputs:
-      shouldRunJobs: ${{ steps.file-changes.outputs.anythingExceptAndroid }}
+      # Matches all files which can affect iOS build, when changed
+      iosFiles: ${{ steps.file-changes.outputs.notAndroid }}
+      # Matches all files which can affect Android build, when changed
+      androidFiles: ${{ steps.file-changes.outputs.notIos }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,14 +23,16 @@ jobs:
         id: file-changes
         with:
           filters: |
-            anythingExceptAndroid:
+            notAndroid:
               - "!(androidApp/**)"
+            notIos:
+              - "!(iosApp/**)"
   test:
     name: iOS Test
     runs-on: self-hosted
     timeout-minutes: 30
     needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.shouldRunJobs == 'true' }}
+    if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
