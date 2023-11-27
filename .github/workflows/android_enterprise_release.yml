@@ -2,16 +2,40 @@ name: Android Enterprise Release
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.repository }}
   cancel-in-progress: true
 
 jobs:
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Matches all files which can affect iOS build, when changed
+      iosFiles: ${{ steps.file-changes.outputs.iosFiles }}
+      # Matches all files which can affect Android build, when changed
+      androidFiles: ${{ steps.file-changes.outputs.androidFiles }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Detect Changes
+        uses: dorny/paths-filter@v2
+        id: file-changes
+        with:
+          base: ${{ github.ref }}
+          filters: |
+            iosFiles:
+              - "!(androidApp/**)"
+            androidFiles:
+              - "!(iosApp/**)"
   enterprise:
     name: Enterprise build
     runs-on: [ ubuntu-latest ]
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
     env:
       # TODO AppCenter application name, eg. "futured/Gastromapa"
       APPCENTER_APP_NAME: futured/ApplicationName
@@ -27,7 +51,7 @@ jobs:
     steps:
       - name: Set build number
         run: echo "BUILD_NUMBER=$((GITHUB_RUN_NUMBER))" >> $GITHUB_ENV
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'

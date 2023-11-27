@@ -3,46 +3,68 @@ name: iOS Beta
 on:
   push:
     branches:
-    - develop
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.repository }}
   cancel-in-progress: true
 
 jobs:
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Matches all files which can affect iOS build, when changed
+      iosFiles: ${{ steps.file-changes.outputs.iosFiles }}
+      # Matches all files which can affect Android build, when changed
+      androidFiles: ${{ steps.file-changes.outputs.androidFiles }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Detect Changes
+        uses: dorny/paths-filter@v2
+        id: file-changes
+        with:
+          base: ${{ github.ref }}
+          filters: |
+            iosFiles:
+              - "!(androidApp/**)"
+            androidFiles:
+              - "!(iosApp/**)"
   beta:
     name: iOS Beta
     runs-on: self-hosted
-
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'zulu'
-        java-version: '17'
-    - name: Fastlane Beta
-      working-directory: iosApp
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec fastlane run reset_simulator_contents
-        bundle exec fastlane beta
-      env:
-        # TODO Configure AppStore Connect secrets
-        APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_BETA }}
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-    - name: Upload IPA
-      uses: actions/upload-artifact@v2
-      with:
-        name: Build.ipa
-        path: build_output/*.ipa
-    - name: Upload dSYM
-      uses: actions/upload-artifact@v2
-      with:
-        name: Build.app.dSYM.zip
-        path: build_output/*.app.dSYM.zip
-    - name: Clear Archives
-      run: |
-        rm -rf ~/Library/Developer/Xcode/Archives
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Fastlane Beta
+        working-directory: iosApp
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec fastlane run reset_simulator_contents
+          bundle exec fastlane beta
+        env:
+          # TODO Configure AppStore Connect secrets
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_BETA }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      - name: Upload IPA
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build.ipa
+          path: build_output/*.ipa
+      - name: Upload dSYM
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build.app.dSYM.zip
+          path: build_output/*.app.dSYM.zip
+      - name: Clear Archives
+        run: |
+          rm -rf ~/Library/Developer/Xcode/Archives
