@@ -1,3 +1,24 @@
+# Futured KMP Template
+
+Hey there 👋
+
+This is our template from which we build Kotlin Multiplatform applications which target Android and iOS platforms.
+It is our opinionated way of building KMP apps and shines a light on how we structure our architecture and what tools and libraries we use.
+
+To give you a short overview of our stack:
+
+- Native UI on both platforms. Jetpack Compose on Android and SwiftUI on iOS. The rest of application is shared in KMP.
+- [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation state.
+- The app follows MVVM design pattern, ViewModels are built around Decompose InstanceKeeper feature.
+- [Koin](https://insert-koin.io/) for dependency injection.
+- [SKIE](https://skie.touchlab.co/) for better Kotlin->Swift interop (exhaustive enums, sealed classes, Coroutines support).
+- [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string, color and image resources.
+- [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps which call GraphQL APIs.
+- [ktorfit](https://github.com/Foso/Ktorfit) client for apps which call plain HTTP APIs.
+- [Jetpack DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) as a simple preferences storage (we have JSON-based and primitive implementations).
+
+--------------- CUT HERE AFTER CLONING ---------------
+
 # Project Name
 
 ![kmp](https://img.shields.io/badge/multiplatform-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
@@ -141,7 +162,7 @@ When adding new build configurations, please make sure to also define the `KMP_F
 ### Crashlytics
 
 We can have symbolicated Kotlin crash reports on iOS.
-We [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
+We use [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
 Everything is set up, but some finishing touches need to be made when you add Crashlytics to your project:
 
 1. Set up Firebase Crashlytics on both platforms as you would usually do.
