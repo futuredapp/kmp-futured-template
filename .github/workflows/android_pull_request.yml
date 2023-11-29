@@ -36,15 +36,19 @@ jobs:
       # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
       SLACK_CHANNEL: project-slack-channel-name
     steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-      - name: Set up JDK
-        uses: actions/setup-java@v2
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Run Lint check
         shell: bash
         # `lintRelease` covers androidApp module and all shared modules all at once. No need to call `lintEnterprise` and `lintRelease`.
