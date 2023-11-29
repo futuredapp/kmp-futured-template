@@ -90,9 +90,10 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
 
 1. `clean` - Remove all `build` folders
 2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
-3. `ktlintFormat` - Reformat source code according to ktlint rules
-4. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
-5. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
+3. `ktlintFormat` - Reformat source code according to ktlint rules.
+4. `generateMRcommonMain` - Regenerate shared resource IDs. 
+5. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
+6. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
 
 ## Navigation Structure
 
@@ -129,7 +130,7 @@ kscript init_template.kts
 
 ### Product Flavors
 
-The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin to achieve build flavors in network module.
+The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin for implementing build flavors in network module.
 There are two product flavors: `dev` and `prod`, which select API url used in `:shared:network:rest` and `:shared:network:graphql` modules.
 
 In general, the build flavor can be specified as a Gradle build flag
@@ -137,7 +138,7 @@ In general, the build flavor can be specified as a Gradle build flag
 ./gradlew whateverTask -P buildkonfig.flavor=dev
 ```
 
-Please, refer to `:shared:network:*` module Gradle config.
+Please, refer to `:shared:network:*` module Gradle configs for more info.
 
 #### Android
 
@@ -156,18 +157,17 @@ This variable is then used in shared framework build step to pass the flavor as 
 ./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMP_FLAVOR
 ```
 
-Currently, the `Debug` build configuration uses `staging` flavor and `Release` configuration uses `prod` flavor.
+Currently, the `Debug` build configuration uses `dev` flavor and `Release` configuration uses `prod` flavor.
 When adding new build configurations, please make sure to also define the `KMP_FLAVOR` variable using the aforementioned method.
 
 ### Crashlytics
 
-We can have symbolicated Kotlin crash reports on iOS.
-We use [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
+We can have symbolicated Kotlin crash reports on iOS.  We use [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
 Everything is set up, but some finishing touches need to be made when you add Crashlytics to your project:
 
 1. Set up Firebase Crashlytics on both platforms as you would usually do.
 2. After dependencies are in place, on each platform uncomment the code in `PlatformFirebaseCrashlyticsImpl` classes (follow comments).
-3. On iOS, do not forget to also upload debug symbols from KMP framework. We have to do this manually. To do this, set up additional build phase in Xcode:
+3. On iOS, do not forget to also upload debug symbols from KMP framework. This has to be done manually. To do this, set up additional build phase in Xcode:
 
 ```shell
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=ios&authuser=1#manually-upload-dsyms
