@@ -128,15 +128,15 @@ buildkonfig.flavor=dev
 #### iOS
 
 On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
-where each file per build configuration specifies a `KMM_FLAVOR` environment variable.
+where each file per build configuration specifies a `KMP_FLAVOR` environment variable.
 
 This variable is then used in shared framework build step to pass the flavor as Gradle build flag:
 ```shell
-./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMM_FLAVOR
+./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMP_FLAVOR
 ```
 
 Currently, the `Debug` build configuration uses `staging` flavor and `Release` configuration uses `prod` flavor.
-When adding new build configurations, please make sure to also define the `KMM_FLAVOR` variable using the aforementioned method.
+When adding new build configurations, please make sure to also define the `KMP_FLAVOR` variable using the aforementioned method.
 
 ### Crashlytics
 
