@@ -50,4 +50,5 @@ internal class LoginViewModel(
             rickAndMortyCall.await().let { logger.d { it.toString() } }
         }
     }
+
 }
