@@ -8,6 +8,10 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
 }
 
+kotlin {
+    jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
+}
+
 android {
     namespace = libs.versions.project.android.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
@@ -87,7 +91,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = ProjectSettings.Kotlin.JvmTarget
+        jvmTarget = ProjectSettings.Android.KotlinJvmTarget
     }
 }
 
