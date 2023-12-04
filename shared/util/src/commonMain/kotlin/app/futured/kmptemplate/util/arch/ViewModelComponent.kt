@@ -2,7 +2,6 @@ package app.futured.kmptemplate.util.arch
 
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.essenty.parcelable.Parcelable
 import org.koin.core.component.KoinComponent
 
 /**
@@ -20,7 +19,7 @@ abstract class ViewModelComponent<VM : SharedViewModel<*, *>>(
 
 interface StackNavigator<D : Destination<Component>>
 
-interface SlotNavigator<D> where D : Destination<Component>, D : Parcelable
+interface SlotNavigator<D> where D : Destination<Component>
 
 interface Component
 

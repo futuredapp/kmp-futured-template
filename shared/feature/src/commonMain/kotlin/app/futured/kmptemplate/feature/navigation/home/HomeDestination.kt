@@ -9,24 +9,24 @@ import app.futured.kmptemplate.feature.ui.third.ThirdScreen
 import app.futured.kmptemplate.util.arch.Component
 import app.futured.kmptemplate.util.arch.Destination
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
-sealed class HomeDestination : Parcelable, Destination<HomeEntry> {
-    @Parcelize
+@Serializable
+sealed class HomeDestination : Destination<HomeEntry> {
+    @Serializable
     data class First(private val arg: String) : HomeDestination() {
         override fun createComponent(componentContext: ComponentContext): HomeEntry =
             HomeEntry.First(FirstComponent(componentContext))
     }
 
-    @Parcelize
+    @Serializable
     data object Second : HomeDestination() {
         override fun createComponent(componentContext: ComponentContext): HomeEntry {
             return HomeEntry.Second(SecondComponent(componentContext))
         }
     }
 
-    @Parcelize
+    @Serializable
     data object Third : HomeDestination() {
         override fun createComponent(componentContext: ComponentContext): HomeEntry {
             return HomeEntry.Third(ThirdComponent(componentContext))

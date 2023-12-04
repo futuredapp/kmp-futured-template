@@ -7,6 +7,8 @@ plugins {
     id(libs.plugins.kotlin.parcelize.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
+
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {

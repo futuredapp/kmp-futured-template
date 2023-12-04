@@ -26,6 +26,7 @@ class HomeStackNavigator(
 
     fun createStack(componentContext: ComponentContext) = componentContext.childStack(
         source = stackNavigator,
+        serializer = HomeDestination.serializer(),
         key = this::class.simpleName.toString(),
         initialStack = { listOf(HomeDestination.First("some")) },
         handleBackButton = true,
