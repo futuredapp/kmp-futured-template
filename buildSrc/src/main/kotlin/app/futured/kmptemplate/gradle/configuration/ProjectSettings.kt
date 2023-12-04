@@ -9,7 +9,8 @@ object ProjectSettings {
     }
 
     object Kotlin {
-        const val JvmTarget = "11"
+
+        const val JvmToolchainVersion = 17
 
         object ProductFlavors {
             object Dev {
@@ -37,6 +38,7 @@ object ProjectSettings {
         val VersionName = System.getenv("VERSION_NAME") ?: "1.0.0"
 
         val JavaCompatibility = JavaVersion.VERSION_11
+        const val KotlinJvmTarget = "11"
 
         object BuildTypes {
             const val Debug = "debug"
