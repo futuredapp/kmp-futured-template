@@ -7,17 +7,17 @@ import app.futured.kmptemplate.feature.ui.login.LoginScreen
 import app.futured.kmptemplate.util.arch.Component
 import app.futured.kmptemplate.util.arch.Destination
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
-sealed class RootDestination : Parcelable, Destination<RootEntry> {
-    @Parcelize
+@Serializable
+sealed class RootDestination : Destination<RootEntry> {
+    @Serializable
     data object Login : RootDestination() {
         override fun createComponent(componentContext: ComponentContext): RootEntry =
             RootEntry.Login(LoginComponent(componentContext))
     }
 
-    @Parcelize
+    @Serializable
     data object Home : RootDestination() {
         override fun createComponent(componentContext: ComponentContext): RootEntry =
             RootEntry.Home(HomeNavigationComponent(componentContext))
