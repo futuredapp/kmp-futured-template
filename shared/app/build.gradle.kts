@@ -18,12 +18,13 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
     applyDefaultHierarchyTemplate()
 
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = ProjectSettings.Kotlin.JvmTarget
+                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
             }
         }
     }

@@ -8,10 +8,12 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
+
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = ProjectSettings.Kotlin.JvmTarget
+                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
             }
         }
     }

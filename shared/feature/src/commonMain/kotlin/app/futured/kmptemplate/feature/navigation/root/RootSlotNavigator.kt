@@ -14,6 +14,7 @@ class RootSlotNavigator(
     fun createSlot(componentContext: ComponentContext) =
         componentContext.childSlot(
             source = slotNavigator,
+            serializer = RootDestination.serializer(),
             initialConfiguration = { RootDestination.Login },
             handleBackButton = false,
             childFactory = { destination, childContext ->

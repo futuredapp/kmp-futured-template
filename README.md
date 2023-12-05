@@ -1,10 +1,31 @@
+# Futured KMP Template
+
+Hey there 👋
+
+This is our template from which we build Kotlin Multiplatform applications which target Android and iOS platforms.
+It is our opinionated way of building KMP apps and shines a light on how we structure our architecture and what tools and libraries we use.
+
+To give you a short overview of our stack:
+
+- Native UI on both platforms. Jetpack Compose on Android and SwiftUI on iOS. The rest of application is shared in KMP.
+- [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation state.
+- The app follows MVVM design pattern, ViewModels are built around Decompose InstanceKeeper feature.
+- [Koin](https://insert-koin.io/) for dependency injection.
+- [SKIE](https://skie.touchlab.co/) for better Kotlin->Swift interop (exhaustive enums, sealed classes, Coroutines support).
+- [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string, color and image resources.
+- [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps which call GraphQL APIs.
+- [ktorfit](https://github.com/Foso/Ktorfit) client for apps which call plain HTTP APIs.
+- [Jetpack DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) as a simple preferences storage (we have JSON-based and primitive implementations).
+
+--------------- CUT HERE AFTER CLONING ---------------
+
 # Project Name
 
 ![kmp](https://img.shields.io/badge/multiplatform-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
 ![compose](https://img.shields.io/badge/jetpack_compose-2bab6b.svg?style=for-the-badge&logo=android&logoColor=white)
 ![swiftui](https://img.shields.io/badge/swiftui-%23000000.svg?style=for-the-badge&logo=swift&logoColor=white)
 
-![kotlin-version](https://img.shields.io/badge/kotlin-1.9.10-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
+![kotlin-version](https://img.shields.io/badge/kotlin-1.9.20-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
 ![android-minsdk](https://img.shields.io/badge/minsdk-29-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![android-targetsdk](https://img.shields.io/badge/targetsdk-34-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![ios-target](https://img.shields.io/badge/target-16.0-%23000000.svg?style=flat-square&logo=apple&logoColor=white)
@@ -69,9 +90,10 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
 
 1. `clean` - Remove all `build` folders
 2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
-3. `ktlintFormat` - Reformat source code according to ktlint rules
-4. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
-5. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
+3. `ktlintFormat` - Reformat source code according to ktlint rules.
+4. `generateMRcommonMain` - Regenerate shared resource IDs. 
+5. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
+6. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
 
 ## Navigation Structure
 
@@ -108,7 +130,7 @@ kscript init_template.kts
 
 ### Product Flavors
 
-The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin to achieve build flavors in network module.
+The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin for implementing build flavors in network module.
 There are two product flavors: `dev` and `prod`, which select API url used in `:shared:network:rest` and `:shared:network:graphql` modules.
 
 In general, the build flavor can be specified as a Gradle build flag
@@ -116,7 +138,7 @@ In general, the build flavor can be specified as a Gradle build flag
 ./gradlew whateverTask -P buildkonfig.flavor=dev
 ```
 
-Please, refer to `:shared:network:*` module Gradle config.
+Please, refer to `:shared:network:*` module Gradle configs for more info.
 
 #### Android
 
@@ -128,25 +150,24 @@ buildkonfig.flavor=dev
 #### iOS
 
 On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
-where each file per build configuration specifies a `KMM_FLAVOR` environment variable.
+where each file per build configuration specifies a `KMP_FLAVOR` environment variable.
 
 This variable is then used in shared framework build step to pass the flavor as Gradle build flag:
 ```shell
-./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMM_FLAVOR
+./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMP_FLAVOR
 ```
 
-Currently, the `Debug` build configuration uses `staging` flavor and `Release` configuration uses `prod` flavor.
-When adding new build configurations, please make sure to also define the `KMM_FLAVOR` variable using the aforementioned method.
+Currently, the `Debug` build configuration uses `dev` flavor and `Release` configuration uses `prod` flavor.
+When adding new build configurations, please make sure to also define the `KMP_FLAVOR` variable using the aforementioned method.
 
 ### Crashlytics
 
-We can have symbolicated Kotlin crash reports on iOS.
-We [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
+We can have symbolicated Kotlin crash reports on iOS.  We use [NSExceptionKt](https://github.com/rickclephas/NSExceptionKt) to achieve that.
 Everything is set up, but some finishing touches need to be made when you add Crashlytics to your project:
 
 1. Set up Firebase Crashlytics on both platforms as you would usually do.
 2. After dependencies are in place, on each platform uncomment the code in `PlatformFirebaseCrashlyticsImpl` classes (follow comments).
-3. On iOS, do not forget to also upload debug symbols from KMP framework. We have to do this manually. To do this, set up additional build phase in Xcode:
+3. On iOS, do not forget to also upload debug symbols from KMP framework. This has to be done manually. To do this, set up additional build phase in Xcode:
 
 ```shell
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=ios&authuser=1#manually-upload-dsyms
