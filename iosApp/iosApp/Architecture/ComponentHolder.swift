@@ -13,10 +13,10 @@ final class ComponentHolder<T> {
         self.lifecycle = lifecycle
         self.component = component
 
-        lifecycle.onCreate()
+        LifecycleRegistryExtKt.create(lifecycle)
     }
 
     deinit {
-        lifecycle.onDestroy()
+        LifecycleRegistryExtKt.create(lifecycle)
     }
 }
