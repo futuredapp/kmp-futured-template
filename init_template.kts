@@ -145,10 +145,7 @@ fun renamePackageNameInDirectory(dir: String, oldPackageNamePath: String, newPac
 }
 
 fun renameDirectory(from: String, to: String) {
-    if (!File(from).renameTo(File(to))) {
-        println("Can't rename directory $from")
-        return
-    }
+    File(from).renameTo(File(to))
 }
 
 fun renamePackagesInShared(packageName: String) {
