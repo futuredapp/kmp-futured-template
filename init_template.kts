@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
 
 //// APP
 
@@ -23,7 +22,7 @@ renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePacka
 renameTextInPath(pathText = "build.gradle.kts", oldText = templatePackageName, newText = packageName)
 renameTextInPath(pathText = "settings.gradle.kts", oldText = "KMP_Futured_template", newText = appName)
 
-// IOS 
+// IOS
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_IDENTIFIER", newValue = packageName)
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_NAME", newValue = appName)
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_SCHEME", newValue = appName)
@@ -44,7 +43,7 @@ renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
 
 // region functions
 
-fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) { 
+fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) {
     File(dirPath).walk()
         .filter { it.isFile && it.extension == "xcconfig" }
         .forEach { file ->  renameTextInPath(file.path, oldText, newText) }
@@ -73,7 +72,7 @@ fun updateFastfileEnvVariables(filePath: String, varName: String, newValue: Stri
         println("File does not exist: $filePath")
         return
     }
-    
+
     var content = file.readText()
 
     // Look for the pattern ENV['VAR_NAME'] = 'var_value' and change 'var_value'
@@ -156,7 +155,7 @@ fun renamePackagesInShared(packageName: String) {
     val packagePath = packageName.replace('.', '/')
     val oldPackagePath = templatePackageName.replace('.', '/')
 
-    val targets = listOf(
+    val sourceSets = listOf(
         "androidMain",
         "commonMain",
         "iosMain",
@@ -168,10 +167,11 @@ fun renamePackagesInShared(packageName: String) {
         "network/rest",
         "persistence",
         "platform",
+        "resources",
         "util",
     )
     modules.forEach { moduleName ->
-        targets.forEach { targetName ->
+        sourceSets.forEach { targetName ->
             val baseDir = "shared/$moduleName/src/$targetName"
             if (File(baseDir).exists()) {
                 renamePackageNameInDirectory(
