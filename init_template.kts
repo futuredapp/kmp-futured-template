@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
 
 //// APP
 
@@ -23,7 +22,7 @@ renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePacka
 renameTextInPath(pathText = "build.gradle.kts", oldText = templatePackageName, newText = packageName)
 renameTextInPath(pathText = "settings.gradle.kts", oldText = "KMP_Futured_template", newText = appName)
 
-// IOS 
+// IOS
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_IDENTIFIER", newValue = packageName)
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_NAME", newValue = appName)
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_SCHEME", newValue = appName)
@@ -44,7 +43,7 @@ renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
 
 // region functions
 
-fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) { 
+fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) {
     File(dirPath).walk()
         .filter { it.isFile && it.extension == "xcconfig" }
         .forEach { file ->  renameTextInPath(file.path, oldText, newText) }
@@ -73,7 +72,7 @@ fun updateFastfileEnvVariables(filePath: String, varName: String, newValue: Stri
         println("File does not exist: $filePath")
         return
     }
-    
+
     var content = file.readText()
 
     // Look for the pattern ENV['VAR_NAME'] = 'var_value' and change 'var_value'
@@ -146,17 +145,14 @@ fun renamePackageNameInDirectory(dir: String, oldPackageNamePath: String, newPac
 }
 
 fun renameDirectory(from: String, to: String) {
-    if (!File(from).renameTo(File(to))) {
-        println("Can't rename directory $from")
-        return
-    }
+    File(from).renameTo(File(to))
 }
 
 fun renamePackagesInShared(packageName: String) {
     val packagePath = packageName.replace('.', '/')
     val oldPackagePath = templatePackageName.replace('.', '/')
 
-    val targets = listOf(
+    val sourceSets = listOf(
         "androidMain",
         "commonMain",
         "iosMain",
@@ -168,10 +164,11 @@ fun renamePackagesInShared(packageName: String) {
         "network/rest",
         "persistence",
         "platform",
+        "resources",
         "util",
     )
     modules.forEach { moduleName ->
-        targets.forEach { targetName ->
+        sourceSets.forEach { targetName ->
             val baseDir = "shared/$moduleName/src/$targetName"
             if (File(baseDir).exists()) {
                 renamePackageNameInDirectory(
@@ -211,13 +208,21 @@ fun renameTextInPath(pathText: String, oldText: String, newText: String) {
 
 fun getNamesOfAppAndPackageAndFramework(): Triple<String, String, String> {
     print("Project name: ")
-    val appName: String = readLine()?.takeIf { it.isNotEmpty() } ?: error("You need to enter name")
+    val appName: String = readLine()
+        ?.takeIf { it.isNotBlank() }
+        ?.replace(" ", "_")
+        ?: error("You need to enter name")
 
     print("Package name (e.g. com.example.test): ")
-    val packageName = readLine()?.takeIf { it.isNotEmpty() } ?: error("You need to enter package name")
+    val packageName = readLine()
+        ?.takeIf { it.isNotBlank() }
+        ?: error("You need to enter package name")
 
     print("Framework name: (default 'shared'): ")
-    val frameworkName = readLine()?.takeIf { it.isNotEmpty() } ?: "shared"
+    val frameworkName = readLine()
+        ?.takeIf { it.isNotBlank() }
+        ?.replace(" ", "_")
+        ?: "shared"
 
     if (packageName.count { it == '.' } != 2) {
         error("You did not enter package name correctly")
