@@ -208,13 +208,21 @@ fun renameTextInPath(pathText: String, oldText: String, newText: String) {
 
 fun getNamesOfAppAndPackageAndFramework(): Triple<String, String, String> {
     print("Project name: ")
-    val appName: String = readLine()?.takeIf { it.isNotEmpty() } ?: error("You need to enter name")
+    val appName: String = readLine()
+        ?.takeIf { it.isNotBlank() }
+        ?.replace(" ", "_")
+        ?: error("You need to enter name")
 
     print("Package name (e.g. com.example.test): ")
-    val packageName = readLine()?.takeIf { it.isNotEmpty() } ?: error("You need to enter package name")
+    val packageName = readLine()
+        ?.takeIf { it.isNotBlank() }
+        ?: error("You need to enter package name")
 
     print("Framework name: (default 'shared'): ")
-    val frameworkName = readLine()?.takeIf { it.isNotEmpty() } ?: "shared"
+    val frameworkName = readLine()
+        ?.takeIf { it.isNotBlank() }
+        ?.replace(" ", "_")
+        ?: "shared"
 
     if (packageName.count { it == '.' } != 2) {
         error("You did not enter package name correctly")
