@@ -2,10 +2,10 @@
 
 Hey there 👋
 
-This is our template from which we build Kotlin Multiplatform applications which target Android and iOS platforms.
+This is our template from which we build Kotlin Multiplatform applications that target Android and iOS platforms.
 It is our opinionated way of building KMP apps and shines a light on how we structure our architecture and what tools and libraries we use.
 
-To give you a short overview of our stack:
+To give you a short overview of our stack, we use:
 
 - Native UI on both platforms. Jetpack Compose on Android and SwiftUI on iOS. The rest of application is shared in KMP.
 - [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation state.
@@ -16,6 +16,8 @@ To give you a short overview of our stack:
 - [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps which call GraphQL APIs.
 - [ktorfit](https://github.com/Foso/Ktorfit) client for apps which call plain HTTP APIs.
 - [Jetpack DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) as a simple preferences storage (we have JSON-based and primitive implementations).
+
+The template itself is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
 
 --------------- CUT HERE AFTER CLONING ---------------
 
