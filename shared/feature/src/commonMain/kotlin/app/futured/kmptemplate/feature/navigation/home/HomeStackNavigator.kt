@@ -2,15 +2,33 @@ package app.futured.kmptemplate.feature.navigation.home
 
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
+import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.navigate
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.push
+import kotlinx.coroutines.flow.StateFlow
+import org.koin.core.annotation.Single
 
-class HomeStackNavigator(
-    private val stackNavigator: StackNavigation<HomeDestination>,
-) : StackNavigation<HomeDestination> by stackNavigator {
+internal interface HomeStackNavigator {
+    fun createStack(componentContext: ComponentContext): StateFlow<ChildStack<HomeDestination, HomeEntry>>
 
-    internal fun createStack(componentContext: ComponentContext) = componentContext.childStack(
+    fun pop()
+    fun iosPop(newStack: List<Child<HomeDestination, HomeEntry>>)
+
+    fun navigateToSecond()
+    fun navigateToThird()
+}
+
+@Single
+internal class HomeStackNavigatorImpl : HomeStackNavigator {
+
+    private val stackNavigator: StackNavigation<HomeDestination> = StackNavigation()
+
+    override fun createStack(componentContext: ComponentContext) = componentContext.childStack(
         source = stackNavigator,
         serializer = HomeDestination.serializer(),
         key = this::class.simpleName.toString(),
@@ -19,4 +37,13 @@ class HomeStackNavigator(
         childFactory = { config, childContext -> config.createComponent(childContext) },
     )
         .asStateFlow(componentContext.componentCoroutineScope())
+
+    override fun pop() = stackNavigator.pop()
+
+    override fun iosPop(newStack: List<Child<HomeDestination, HomeEntry>>) =
+        stackNavigator.navigate { newStack.map { it.configuration } }
+
+    override fun navigateToSecond() = stackNavigator.push(HomeDestination.Second)
+
+    override fun navigateToThird() = stackNavigator.push(HomeDestination.Third)
 }

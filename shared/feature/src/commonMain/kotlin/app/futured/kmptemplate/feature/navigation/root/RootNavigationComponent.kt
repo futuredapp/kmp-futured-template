@@ -11,6 +11,7 @@ internal class RootNavigationComponent(
     componentContext: ComponentContext,
 ) : ViewModelComponent<RootNavigationViewModel>(componentContext),
     RootNavigation {
+
     private val rootNavigator: RootSlotNavigator by inject()
 
     override val viewModel: RootNavigationViewModel by viewModel()

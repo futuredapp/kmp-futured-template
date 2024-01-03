@@ -1,15 +1,11 @@
 package app.futured.kmptemplate.feature.ui.first
 
-import app.futured.kmptemplate.feature.navigation.home.HomeDestination
 import app.futured.kmptemplate.feature.navigation.home.HomeStackNavigator
-import app.futured.kmptemplate.feature.navigation.root.RootDestination
 import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
 import co.touchlab.kermit.Logger
-import com.arkivanov.decompose.router.slot.activate
-import com.arkivanov.decompose.router.stack.push
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.delay
@@ -47,10 +43,8 @@ internal class FirstViewModel(
     }
 
     override fun onBack() {
-        rootNavigator.activate(RootDestination.Login)
+        rootNavigator.showLogin()
     }
 
-    override fun onNext() {
-        homeNavigator.push(HomeDestination.Second)
-    }
+    override fun onNext() = homeNavigator.navigateToSecond()
 }
