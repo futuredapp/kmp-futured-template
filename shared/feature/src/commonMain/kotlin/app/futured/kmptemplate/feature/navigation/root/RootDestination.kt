@@ -4,8 +4,8 @@ import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigationComponent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
 import app.futured.kmptemplate.feature.ui.login.LoginScreen
-import app.futured.kmptemplate.util.arch.Component
 import app.futured.kmptemplate.util.arch.Destination
+import app.futured.kmptemplate.util.arch.NavEntry
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.serialization.Serializable
 
@@ -24,7 +24,7 @@ sealed class RootDestination : Destination<RootEntry> {
     }
 }
 
-sealed class RootEntry : Component {
+sealed class RootEntry : NavEntry {
     data class Login(val screen: LoginScreen) : RootEntry()
     data class Home(val navigation: HomeNavigation) : RootEntry()
 }
