@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 
 /**
  * This interface is used to mark a class as a navigation entry.
- * This class usually wraps instance of a screen.
+ * The implementation of this interface wraps instance of a screen.
  */
 interface NavEntry
 
