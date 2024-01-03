@@ -1,9 +1,8 @@
 package app.futured.kmptemplate.feature.ui.login
 
-import app.futured.kmptemplate.util.arch.Component
 import kotlinx.coroutines.flow.StateFlow
 
-interface LoginScreen : Component {
+interface LoginScreen {
     val viewState: StateFlow<LoginViewState>
     val actions: Actions
     val suspendActions: SuspendActions
