@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.home
 
 import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkDestination
+import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.Child
@@ -28,7 +29,9 @@ internal interface HomeStackNavigator {
 }
 
 @Single
-internal class HomeStackNavigatorImpl : HomeStackNavigator {
+internal class HomeStackNavigatorImpl(
+    private val rootSlotNavigator: RootSlotNavigator,
+) : HomeStackNavigator {
 
     private val stackNavigator: StackNavigation<HomeDestination> = StackNavigation()
 
@@ -61,7 +64,14 @@ internal class HomeStackNavigatorImpl : HomeStackNavigator {
     )
         .asStateFlow(componentContext.componentCoroutineScope())
 
-    override fun pop() = stackNavigator.pop()
+    override fun pop() {
+        stackNavigator.pop { success ->
+            // Switch back to login slot if there were no more destinations to pop to
+            if (!success) {
+                rootSlotNavigator.showLogin()
+            }
+        }
+    }
 
     override fun iosPop(newStack: List<Child<HomeDestination, HomeEntry>>) =
         stackNavigator.navigate { newStack.map { it.configuration } }
