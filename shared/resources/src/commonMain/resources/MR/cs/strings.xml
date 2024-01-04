@@ -10,4 +10,7 @@
 
     <string name="third_screen_title">Tretia obrazovka</string>
     <string name="third_screen_text">Obrazovka číslo 3</string>
+
+    <string name="secret_screen_title">Skrytá obrazovka</string>
+    <string name="secret_screen_text">Deep link argument: %1$s</string>
 </resources>

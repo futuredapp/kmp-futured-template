@@ -31,6 +31,8 @@ struct HomeNavigationView: View {
                 SecondView(entry.screen)
             case .third(let entry):
                 ThirdView(entry.screen)
+            case .secret(let entry):
+                SecretView(entry.screen)
             }
         }
     }

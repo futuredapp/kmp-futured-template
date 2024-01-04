@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature.ui.first
 
 import app.futured.kmptemplate.feature.navigation.home.HomeStackNavigator
-import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
@@ -17,9 +16,10 @@ import kotlin.time.Duration.Companion.milliseconds
 @Factory
 internal class FirstViewModel(
     private val homeNavigator: HomeStackNavigator,
-    private val rootNavigator: RootSlotNavigator,
+    private val arg: String,
 ) : SharedViewModel<FirstViewState, FirstUiEvent>(),
     FirstScreen.Actions {
+
     override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
 
     init {
@@ -42,9 +42,7 @@ internal class FirstViewModel(
         }
     }
 
-    override fun onBack() {
-        rootNavigator.showLogin()
-    }
+    override fun onBack() = homeNavigator.pop()
 
     override fun onNext() = homeNavigator.navigateToSecond()
 }

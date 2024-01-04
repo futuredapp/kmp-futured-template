@@ -9,12 +9,13 @@ import org.koin.core.component.inject
 
 internal class HomeNavigationComponent(
     componentContext: ComponentContext,
+    args: HomeNavigationArgs
 ) : HomeNavigation, HomeNavigation.Actions, ComponentContext by componentContext, KoinComponent {
 
     private val homeNavigator: HomeStackNavigator by inject()
 
     override val stack: StateFlow<ChildStack<HomeDestination, HomeEntry>> =
-        homeNavigator.createStack(componentContext)
+        homeNavigator.createStack(componentContext, args.deepLinkDestination)
 
     override val actions: HomeNavigation.Actions = this
 

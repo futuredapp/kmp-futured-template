@@ -13,6 +13,7 @@
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
 		111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */; };
+		1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155AEDC2B46EE5B0093EF55 /* SecretView.swift */; };
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
 		1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEEB2AEA97C900C6203F /* RootView.swift */; };
@@ -67,6 +68,7 @@
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
 		111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EventsEffect.swift"; sourceTree = "<group>"; };
+		1155AEDC2B46EE5B0093EF55 /* SecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretView.swift; sourceTree = "<group>"; };
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
 		1193BEEB2AEA97C900C6203F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				1193BEF72AEA989F00C6203F /* SecondView.swift */,
 				1193BEF92AEA98A800C6203F /* ThirdView.swift */,
 				1193BEFB2AEA9FA000C6203F /* LoginView.swift */,
+				1155AEDC2B46EE5B0093EF55 /* SecretView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,
+				1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */,
 				1193BEF42AEA988D00C6203F /* HomeNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

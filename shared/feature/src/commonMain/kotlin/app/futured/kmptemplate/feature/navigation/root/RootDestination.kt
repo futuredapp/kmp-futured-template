@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
+import app.futured.kmptemplate.feature.navigation.home.HomeNavigationArgs
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigationComponent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
 import app.futured.kmptemplate.feature.ui.login.LoginScreen
@@ -18,9 +19,9 @@ sealed class RootDestination : Destination<RootEntry> {
     }
 
     @Serializable
-    data object Home : RootDestination() {
+    data class Home(val args: HomeNavigationArgs) : RootDestination() {
         override fun createComponent(componentContext: ComponentContext): RootEntry =
-            RootEntry.Home(HomeNavigationComponent(componentContext))
+            RootEntry.Home(HomeNavigationComponent(componentContext, args))
     }
 }
 
