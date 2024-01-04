@@ -18,8 +18,10 @@ import kotlin.time.Duration.Companion.milliseconds
 internal class FirstViewModel(
     private val homeNavigator: HomeStackNavigator,
     private val rootNavigator: RootSlotNavigator,
+    private val arg: String,
 ) : SharedViewModel<FirstViewState, FirstUiEvent>(),
     FirstScreen.Actions {
+
     override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
 
     init {
