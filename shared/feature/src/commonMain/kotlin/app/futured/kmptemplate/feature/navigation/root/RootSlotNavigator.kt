@@ -5,7 +5,6 @@ import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkNavigator
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigationArgs
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
-import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
@@ -40,7 +39,6 @@ internal class RootSlotNavigatorImpl : RootSlotNavigator, DeepLinkNavigator {
     override fun showHome() = slotNavigator.activate(RootDestination.Home(HomeNavigationArgs()))
 
     override fun openDeepLink(destination: DeepLinkDestination) {
-        Logger.withTag("RootNavigator").d { "Open deep link: $destination" }
         slotNavigator.activate(RootDestination.Home(args = HomeNavigationArgs(deepLinkDestination = destination)))
     }
 }

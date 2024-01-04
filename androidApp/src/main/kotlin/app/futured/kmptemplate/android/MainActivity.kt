@@ -14,7 +14,6 @@ import app.futured.kmptemplate.android.ui.navigation.RootNavGraph
 import app.futured.kmptemplate.feature.navigation.root.RootNavigation
 import app.futured.kmptemplate.feature.navigation.root.RootNavigationFactory
 import com.arkivanov.decompose.defaultComponentContext
-import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
 
@@ -22,7 +21,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("Activity created, data: ${intent.data}")
         rootNavigation = RootNavigationFactory.create(defaultComponentContext())
         rootNavigation.openDeepLinkIfNeeded(intent)
 
@@ -40,7 +38,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Timber.d("New intent, data: ${intent?.data}")
         rootNavigation.openDeepLinkIfNeeded(intent)
     }
 

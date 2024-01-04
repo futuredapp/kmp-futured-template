@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Sample Deep link in format -->
+            <!-- Sample Deep link -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
