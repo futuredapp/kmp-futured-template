@@ -191,3 +191,12 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 # Upload
 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp ${GSPFILE} -p ios ${DSYMFILE}
 ```
+
+## Deep Linking
+
+Deeps links are provided by each platform to common code and processed using `DeepLinkResolver` and `DeepLinkNavigator` classes.
+The (example) app currently supports following scheme: `kmptemplate` and following links:
+
+- `kmptemplate://third` -- Navigates to third example screen.
+- `kmptemplate://secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
+  link with optional argument `arg`.
