@@ -7,17 +7,17 @@ It is our opinionated way of building KMP apps and shines a light on how we stru
 
 To give you a short overview of our stack, we use:
 
-- Native UI on both platforms. Jetpack Compose on Android and SwiftUI on iOS. The rest of application is shared in KMP.
+- Native UI on both platforms. Jetpack Compose on Android and SwiftUI on iOS. The rest of the application is shared in KMP.
 - [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation state.
-- The app follows MVVM design pattern, ViewModels are built around Decompose InstanceKeeper feature.
+- The app follows the MVVM design pattern, ViewModels are built around the Decompose InstanceKeeper feature.
 - [Koin](https://insert-koin.io/) for dependency injection.
 - [SKIE](https://skie.touchlab.co/) for better Kotlin->Swift interop (exhaustive enums, sealed classes, Coroutines support).
 - [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string, color and image resources.
-- [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps which call GraphQL APIs.
-- [ktorfit](https://github.com/Foso/Ktorfit) client for apps which call plain HTTP APIs.
+- [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps that call GraphQL APIs.
+- [ktorfit](https://github.com/Foso/Ktorfit) client for apps that call plain HTTP APIs.
 - [Jetpack DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) as a simple preferences storage (we have JSON-based and primitive implementations).
 
-The template itself is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
+The template is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
 
 --------------- CUT HERE AFTER CLONING ---------------
 
@@ -82,7 +82,7 @@ The template itself is a sample app with several screens to let you kick off the
 
 - ~~dev - login: `a@a.com`, password: `hesloheslo`~~
 
-### Security standard
+### Security Standard
 
 This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security standard.
 
@@ -91,16 +91,16 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
 ## Gradle tasks
 
 1. `clean` - Remove all `build` folders
-2. `lintCheck` - Run `ktlint`, `detekt` checks. Same runs on CI.
+2. `lintCheck` - Run `ktlint`, `detekt` checks. The same runs on CI.
 3. `ktlintFormat` - Reformat source code according to ktlint rules.
 4. `generateMRcommonMain` - Regenerate shared resource IDs. 
-5. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download latest Apollo schema
+5. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download the latest Apollo schema
 6. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after adding modifying queries, mutations, etc.)
 
 ## Navigation Structure
 
 The app utilizes [Decompose](https://arkivanov.github.io/Decompose/) to share presentation logic and navigation state in KMP.  
-The following meta-description provides an overview of Decompose navigation tree:
+The following meta-description provides an overview of the Decompose navigation tree:
 
 ```kotlin
 Navigation("RootNavigation") {
@@ -121,10 +121,10 @@ Navigation("RootNavigation") {
 
 ### Initial script
 
-Use `init_template.kts` script to setup the template. 
-The script renames directories and package names in files to given package name.
+Use `init_template.kts` script to set up the template. 
+The script renames directories and package names in files to the given package name.
 
-It is written in Kotlin. In order to run it you need to have [kscript](https://github.com/kscripting/kscript) installed.
+It is written in Kotlin. To run it you need to have [kscript](https://github.com/kscripting/kscript) installed.
 #### Usage
 ```shell
 kscript init_template.kts
@@ -132,7 +132,7 @@ kscript init_template.kts
 
 ### Product Flavors
 
-The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin for implementing build flavors in network module.
+The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin for implementing build flavors in the network module.
 There are two product flavors: `dev` and `prod`, which select API url used in `:shared:network:rest` and `:shared:network:graphql` modules.
 
 In general, the build flavor can be specified as a Gradle build flag
@@ -154,12 +154,12 @@ buildkonfig.flavor=dev
 On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
 where each file per build configuration specifies a `KMP_FLAVOR` environment variable.
 
-This variable is then used in shared framework build step to pass the flavor as Gradle build flag:
+This variable is then used in the shared framework build step to pass the flavor as Gradle build flag:
 ```shell
 ./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMP_FLAVOR
 ```
 
-Currently, the `Debug` build configuration uses `dev` flavor and `Release` configuration uses `prod` flavor.
+Currently, the `Debug` build configuration uses the `dev` flavor, and the `Release` configuration uses the `prod` flavor.
 When adding new build configurations, please make sure to also define the `KMP_FLAVOR` variable using the aforementioned method.
 
 ### Crashlytics
@@ -169,7 +169,7 @@ Everything is set up, but some finishing touches need to be made when you add Cr
 
 1. Set up Firebase Crashlytics on both platforms as you would usually do.
 2. After dependencies are in place, on each platform uncomment the code in `PlatformFirebaseCrashlyticsImpl` classes (follow comments).
-3. On iOS, do not forget to also upload debug symbols from KMP framework. This has to be done manually. To do this, set up additional build phase in Xcode:
+3. On iOS, do not forget to also upload debug symbols from the KMP framework. This has to be done manually. To do this, set up an additional build phase in Xcode:
 
 ```shell
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=ios&authuser=1#manually-upload-dsyms
@@ -194,8 +194,8 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 
 ## Deep Linking
 
-Deeps links are provided by each platform to common code and processed using `DeepLinkResolver` and `DeepLinkNavigator` classes.
-The (example) app currently supports following scheme: `kmptemplate` and following links:
+Deep links are provided by each platform to common code and processed using `DeepLinkResolver` and `DeepLinkNavigator` classes.
+The (example) app currently supports the following scheme: `kmptemplate` and the following links:
 
 - `kmptemplate://third` -- Navigates to third example screen.
 - `kmptemplate://secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
