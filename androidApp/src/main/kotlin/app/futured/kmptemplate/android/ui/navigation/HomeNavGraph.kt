@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
+import app.futured.kmptemplate.android.ui.screen.SecretScreenUi
 import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
 import app.futured.kmptemplate.feature.navigation.home.HomeDestination
 import app.futured.kmptemplate.feature.navigation.home.HomeEntry
@@ -35,6 +36,7 @@ fun HomeNavGraph(
                 is HomeEntry.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
                 is HomeEntry.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
                 is HomeEntry.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is HomeEntry.Secret -> SecretScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
             }
         }
     }

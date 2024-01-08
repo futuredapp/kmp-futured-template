@@ -1,5 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
+import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkNavigator
+import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkResolver
 import app.futured.kmptemplate.util.arch.ViewModelComponent
 import app.futured.kmptemplate.util.ext.viewModel
 import com.arkivanov.decompose.ComponentContext
@@ -13,9 +15,16 @@ internal class RootNavigationComponent(
     RootNavigation {
 
     private val rootNavigator: RootSlotNavigator by inject()
+    private val deepLinkResolver: DeepLinkResolver by inject()
+    private val deepLinkNavigator: DeepLinkNavigator by inject()
 
     override val viewModel: RootNavigationViewModel by viewModel()
 
     override val slot: StateFlow<ChildSlot<RootDestination, RootEntry>> =
         rootNavigator.createSlot(componentContext)
+
+    override fun openDeepLink(uri: String) {
+        val deepLinkDestination = deepLinkResolver.resolve(uri) ?: return
+        deepLinkNavigator.openDeepLink(deepLinkDestination)
+    }
 }
