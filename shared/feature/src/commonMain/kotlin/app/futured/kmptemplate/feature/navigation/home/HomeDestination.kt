@@ -6,8 +6,8 @@ import app.futured.kmptemplate.feature.ui.second.SecondComponent
 import app.futured.kmptemplate.feature.ui.second.SecondScreen
 import app.futured.kmptemplate.feature.ui.third.ThirdComponent
 import app.futured.kmptemplate.feature.ui.third.ThirdScreen
-import app.futured.kmptemplate.util.arch.Component
 import app.futured.kmptemplate.util.arch.Destination
+import app.futured.kmptemplate.util.arch.NavEntry
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.serialization.Serializable
 
@@ -34,7 +34,7 @@ sealed class HomeDestination : Destination<HomeEntry> {
     }
 }
 
-sealed class HomeEntry : Component {
+sealed class HomeEntry : NavEntry {
     data class First(val screen: FirstScreen) : HomeEntry()
     data class Second(val screen: SecondScreen) : HomeEntry()
     data class Third(val screen: ThirdScreen) : HomeEntry()

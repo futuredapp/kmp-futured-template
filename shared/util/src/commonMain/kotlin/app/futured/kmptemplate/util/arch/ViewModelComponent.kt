@@ -16,13 +16,3 @@ abstract class ViewModelComponent<VM : SharedViewModel<*, *>>(
 
     private val coroutineScope = componentCoroutineScope()
 }
-
-interface StackNavigator<D : Destination<Component>>
-
-interface SlotNavigator<D> where D : Destination<Component>
-
-interface Component
-
-interface Destination<out C : Component> {
-    fun createComponent(componentContext: ComponentContext): C
-}
