@@ -2,40 +2,16 @@ name: iOS Release
 
 on:
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
   release:
-    name: iOS Release
-    runs-on: self-hosted
-    timeout-minutes: 30
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Fastlane Release
-        working-directory: iosApp
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-          bundle exec fastlane run reset_simulator_contents
-          bundle exec fastlane release
-        env:
-          # TODO Configure AppStore Connect secrets
-          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-      - name: Upload IPA
-        uses: actions/upload-artifact@v2
-        with:
-          name: Build.ipa
-          path: build_output/*.ipa
-      - name: Upload dSYM
-        uses: actions/upload-artifact@v2
-        with:
-          name: Build.app.dSYM.zip
-          path: build_output/*.app.dSYM.zip
-      - name: Clear Archives
-        run: |
-          rm -rf ~/Library/Developer/Xcode/Archives
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-release.yml@main
+    secrets:
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+      APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+      APP_STORE_CONNECT_API_KEY_KEY_CUSTOMER: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_CUSTOMER }}
+      APP_STORE_CONNECT_API_KEY_KEY_ID_CUSTOMER: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID_CUSTOMER }}
+      APP_STORE_CONNECT_API_KEY_ISSUER_ID_CUSTOMER: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID_CUSTOMER }}
