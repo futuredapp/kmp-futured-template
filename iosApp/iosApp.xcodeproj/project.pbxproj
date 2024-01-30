@@ -238,12 +238,12 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				119A92E62B0F379400D93E98 /* Extensions */,
-				1193BEED2AEA985200C6203F /* Views */,
 				1193BEE22AEA89D800C6203F /* Architecture */,
-				1113BA3C2AE6969700ABDE61 /* App */,
 				1113BA392AE6955200ABDE61 /* Platform */,
-				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+				119A92E62B0F379400D93E98 /* Extensions */,
+				DC7FFCC62B69251D00A70102 /* Resources */,
+				1113BA3C2AE6969700ABDE61 /* App */,
+				1193BEED2AEA985200C6203F /* Views */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
@@ -256,6 +256,14 @@
 				F4820AB62B0B51A100B13080 /* XCTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC7FFCC62B69251D00A70102 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F4820A9F2B0B4D3E00B13080 /* iosAppTests */ = {
