@@ -10,7 +10,7 @@ import org.koin.core.component.inject
 
 internal class HomeNavigationComponent(
     componentContext: ComponentContext,
-    args: HomeNavigationArgs
+    args: HomeNavigationArgs,
 ) : HomeNavigation, HomeNavigation.Actions, ComponentContext by componentContext, KoinComponent, BackHandlerOwner {
 
     private val homeNavigator: HomeStackNavigator by inject()

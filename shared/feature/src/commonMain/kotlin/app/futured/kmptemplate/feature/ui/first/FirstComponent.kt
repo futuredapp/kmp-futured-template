@@ -9,7 +9,7 @@ import org.koin.core.parameter.parametersOf
 
 internal class FirstComponent(
     componentContext: ComponentContext,
-    arg: String
+    arg: String,
 ) : ViewModelComponent<FirstViewModel>(componentContext), FirstScreen {
     override val viewModel: FirstViewModel by viewModel(parameters = { parametersOf(arg) })
     override val viewState: StateFlow<FirstViewState> = viewModel.viewState

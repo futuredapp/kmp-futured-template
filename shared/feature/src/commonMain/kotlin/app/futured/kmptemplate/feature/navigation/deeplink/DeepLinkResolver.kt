@@ -12,4 +12,3 @@ internal interface DeepLinkResolver {
      */
     fun resolve(uri: String): DeepLinkDestination?
 }
-
