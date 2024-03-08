@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import app.futured.kmptemplate.android.tools.Constants
 import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecretScreenUi
@@ -18,9 +17,13 @@ import app.futured.kmptemplate.feature.navigation.home.HomeDestination
 import app.futured.kmptemplate.feature.navigation.home.HomeEntry
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
 import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.predictiveback.predictiveBackAnimation
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
+import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.arkivanov.decompose.extensions.compose.stack.animation.fade
+import com.arkivanov.decompose.extensions.compose.stack.animation.plus
+import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
+import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
+import com.arkivanov.decompose.extensions.compose.stack.animation.scale
+import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.router.stack.ChildStack
 
 @Composable
@@ -44,8 +47,9 @@ fun HomeNavGraph(
              */
             animation = predictiveBackAnimation(
                 backHandler = homeNavigation.backHandler,
-                animation = stackAnimation(Constants.Navigation.STACK_ANIMATION_CROSS_FADE_SPEC),
                 onBack = actions::onBack,
+                fallbackAnimation = stackAnimation(fade() + scale()),
+                selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
             ),
         ) { child ->
             when (val childInstance = child.instance) {
