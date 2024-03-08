@@ -1,48 +1,7 @@
 name: iOS Test
 
-on: [ pull_request ]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
-  cancel-in-progress: true
+on: [pull_request]
 
 jobs:
-  detect-changes:
-    name: Detect Changes
-    runs-on: ubuntu-latest
-    outputs:
-      # Matches all files which can affect iOS build, when changed
-      iosFiles: ${{ steps.file-changes.outputs.iosFiles }}
-      # Matches all files which can affect Android build, when changed
-      androidFiles: ${{ steps.file-changes.outputs.androidFiles }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Detect Changes
-        uses: dorny/paths-filter@v2
-        id: file-changes
-        with:
-          filters: |
-            iosFiles:
-              - "!(androidApp/**)"
-            androidFiles:
-              - "!(iosApp/**)"
   test:
-    name: iOS Test
-    runs-on: self-hosted
-    timeout-minutes: 30
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Fastlane Test
-        working-directory: iosApp
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-          bundle exec fastlane test
-        env:
-          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@main

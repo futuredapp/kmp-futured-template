@@ -1,3 +1,4 @@
+// swiftlint:disable:this file_name
 import shared
 import SwiftUI
 
@@ -5,7 +6,6 @@ import SwiftUI
 let Localizable = MR.strings()
 
 extension shared.StringResource {
-
     /**
      Localizes shared KMP String resource when accessed directly by `Localizable` object.
      */
