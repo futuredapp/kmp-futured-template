@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
  * Converts this Decompose [Value] to Kotlin [Flow].
  */
 fun <T : Any> Value<T>.asFlow(): Flow<T> = callbackFlow {
-    val cancellation = observe { value ->
+    val cancellation = subscribe { value ->
         trySendBlocking(value)
     }
 
