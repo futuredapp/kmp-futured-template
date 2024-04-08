@@ -25,7 +25,7 @@ include(":shared:network:rest")
 include(":shared:feature")
 include(":shared:persistence")
 include(":shared:platform")
-include(":shared:util")
+include(":shared:util:tools")
 include(":shared:resources")
 
 includeBuild("convention-plugins")
