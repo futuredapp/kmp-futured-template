@@ -165,7 +165,9 @@ fun renamePackagesInShared(packageName: String) {
         "persistence",
         "platform",
         "resources",
-        "util",
+        "util/tools",
+        "util/component-annotation",
+        "util/component-processor",
     )
     modules.forEach { moduleName ->
         sourceSets.forEach { targetName ->
