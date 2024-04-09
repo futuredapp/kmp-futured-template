@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.gradle.ext
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinTargetContainerWithNativeShortcuts
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 /**

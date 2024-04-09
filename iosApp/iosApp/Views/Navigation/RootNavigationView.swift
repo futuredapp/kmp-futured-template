@@ -2,15 +2,15 @@ import shared
 import SwiftUI
 
 struct RootNavigationView: View {
-    
+
     @ObservedObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
     private let openDeepLink: (String) -> Void
-    
+
     init(_ component: RootNavigation) {
         self._slot = .init(component.slot)
         self.openDeepLink = component.openDeepLink
     }
-    
+
     var body: some View {
         ZStack {
             if let navigationEntry = slot.child?.instance {

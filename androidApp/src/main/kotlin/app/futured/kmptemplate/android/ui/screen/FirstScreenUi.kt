@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.android.tools.arch.EventsEffect
 import app.futured.kmptemplate.android.tools.arch.onEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
-import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
+import app.futured.kmptemplate.feature.ui.first.FirstEvent
 import app.futured.kmptemplate.feature.ui.first.FirstViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
@@ -47,7 +47,7 @@ fun FirstScreenUi(
     Content(viewState = viewState, actions = actions, modifier = modifier)
 
     EventsEffect(eventsFlow = screen.events) {
-        onEvent<FirstUiEvent.ShowToast> { event ->
+        onEvent<FirstEvent.ShowToast> { event ->
             Toast.makeText(context, event.text, Toast.LENGTH_SHORT).show()
         }
     }

@@ -26,6 +26,8 @@ include(":shared:feature")
 include(":shared:persistence")
 include(":shared:platform")
 include(":shared:util:tools")
+include(":shared:util:component-annotation")
+include(":shared:util:component-processor")
 include(":shared:resources")
 
 includeBuild("convention-plugins")

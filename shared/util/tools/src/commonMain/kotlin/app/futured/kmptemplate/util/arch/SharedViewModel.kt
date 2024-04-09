@@ -23,7 +23,7 @@ import org.koin.core.component.KoinComponent
  * It implements the [UseCaseExecutionScope] interface, so KMM UseCases
  * can be executed in it's [CoroutineScope] tied to retained instance lifecycle.
  */
-abstract class SharedViewModel<VS : ViewState, UI_EVENT : UiEvent<VS>> :
+abstract class SharedViewModel<VS : ViewState, UI_EVENT : Event<VS>> :
     InstanceKeeper.Instance,
     UseCaseExecutionScope,
     KoinComponent {
@@ -52,7 +52,7 @@ abstract class SharedViewModel<VS : ViewState, UI_EVENT : UiEvent<VS>> :
         .shareIn(viewModelScope, SharingStarted.Lazily)
 
     /**
-     * Sends an [UiEvent] to event channel that can be consumed using [uiEvents] flow.
+     * Sends an [Event] to event channel that can be consumed using [uiEvents] flow.
      */
     fun sendUiEvent(event: UI_EVENT) {
         viewModelScope.launch {

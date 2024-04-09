@@ -2,7 +2,7 @@ package app.futured.kmptemplate.android.tools.arch
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import app.futured.kmptemplate.util.arch.UiEvent
+import app.futured.kmptemplate.util.arch.Event
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
  * @param observer Event receiver lambda.
  */
 @Composable
-inline fun <reified E : UiEvent<*>> EventsEffect(
+inline fun <reified E : Event<*>> EventsEffect(
     eventsFlow: Flow<E>,
     crossinline observer: suspend E.() -> Unit,
 ) {
@@ -35,7 +35,7 @@ inline fun <reified E : UiEvent<*>> EventsEffect(
     }
 }
 
-inline fun <reified E : UiEvent<*>> UiEvent<*>.onEvent(action: (E) -> Unit) {
+inline fun <reified E : Event<*>> Event<*>.onEvent(action: (E) -> Unit) {
     if (this is E) {
         action(this)
     }

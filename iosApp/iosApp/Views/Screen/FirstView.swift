@@ -5,7 +5,7 @@ struct FirstView: View {
 
     @ObservedObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
-    private let events: SkieSwiftFlow<FirstUiEvent>
+    private let events: SkieSwiftFlow<FirstEvent>
 
     @State private var alertVisible: Bool = false
     @State private var alertText: String = ""

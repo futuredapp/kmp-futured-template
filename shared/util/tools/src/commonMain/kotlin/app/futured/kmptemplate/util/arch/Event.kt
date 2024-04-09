@@ -6,4 +6,4 @@ package app.futured.kmptemplate.util.arch
  * Event is guaranteed to be delivered just once even if screen rotation or a similar
  * operation is in progress.
  */
-interface UiEvent<VS : ViewState>
+interface Event<VS : ViewState>
