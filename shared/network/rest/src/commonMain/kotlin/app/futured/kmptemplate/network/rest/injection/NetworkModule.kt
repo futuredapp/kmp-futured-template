@@ -34,7 +34,9 @@ class NetworkRestModule {
     }
 
     @Single
-    fun httpClient(@Named("restApiJson") json: Json): HttpClient = HttpClient {
+    fun httpClient(
+        @Named("restApiJson") json: Json,
+    ): HttpClient = HttpClient {
         install(ContentNegotiation) {
             json(json = json, contentType = ContentType.Application.Json)
         }
