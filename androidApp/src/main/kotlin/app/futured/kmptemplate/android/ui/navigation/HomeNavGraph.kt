@@ -18,12 +18,8 @@ import app.futured.kmptemplate.feature.navigation.home.HomeEntry
 import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.fade
-import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
-import com.arkivanov.decompose.extensions.compose.stack.animation.scale
-import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.router.stack.ChildStack
 
 @Composable
@@ -48,7 +44,6 @@ fun HomeNavGraph(
             animation = predictiveBackAnimation(
                 backHandler = homeNavigation.backHandler,
                 onBack = actions::onBack,
-                fallbackAnimation = stackAnimation(fade() + scale()),
                 selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
             ),
         ) { child ->
