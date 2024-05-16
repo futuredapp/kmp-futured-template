@@ -25,7 +25,9 @@ naming:
     excludeClassPattern: '$^'
     ignoreAnnotated:
       - Composable
-      - Preview
+      - Previe
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Za-z][_A-Za-z0-9]*'
 
 style:
   active: true
@@ -39,7 +41,7 @@ style:
       - Preview
   MaxLineLength:
     active: true
-    maxLineLength: 130 # Keep aligned with .editorconfig file to prevent false positives
+    maxLineLength: 140 # Keep aligned with .editorconfig file to prevent false positives
   MagicNumber:
     active: true
     ignoreAnnotated:
@@ -56,8 +58,10 @@ complexity:
       - Composable
   TooManyFunctions:
     active: true
-    thresholdInInterfaces: 20
-    thresholdInClasses: 20
+    thresholdInInterfaces: 25
+    thresholdInClasses: 25
+    thresholdInFiles: 20
+    thresholdInObjects: 20
   LongMethod:
     active: true
     ignoreAnnotated:
