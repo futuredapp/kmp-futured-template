@@ -6,8 +6,8 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
+    alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
@@ -86,5 +86,23 @@ buildkonfig {
         defaultConfigs(flavor = NAME) {
             buildConfigField(STRING, "apiUrl", RestApiUrl)
         }
+    }
+}
+
+ksp {
+    // enable compile time check
+    arg("KOIN_CONFIG_CHECK","false")
+    // disable default module generation
+    arg("KOIN_DEFAULT_MODULE","false")
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+}
+
+// WORKAROUND: This somehow makes ksp generate stuff. I have no fucking idea why.
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
