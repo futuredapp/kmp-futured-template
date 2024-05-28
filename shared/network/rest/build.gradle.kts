@@ -53,7 +53,7 @@ dependencies {
     /* ref:
     https://foso.github.io/Ktorfit/installation/
     https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
-    */
+     */
     add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
 }
 
@@ -100,7 +100,7 @@ dependencies {
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
 }
 
-// WORKAROUND: This somehow makes ksp generate stuff. I have no fucking idea why.
+// WORKAROUND: This somehow makes ksp generate stuff. I have no idea why.
 tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
         dependsOn("kspCommonMainKotlinMetadata")

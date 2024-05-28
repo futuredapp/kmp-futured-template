@@ -1,6 +1,6 @@
 [*.{kt,kts}]
 
-max_line_length = 130
+max_line_length = 140
 indent_style = space
 indent_size = 4
 
@@ -12,4 +12,10 @@ ij_kotlin_allow_trailing_comma_on_call_site = true
 
 continuation_indent_size = 4
 ktlint_standard_import-ordering = disabled
-ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
+ktlint_standard_function-signature = disabled
+ktlint_standard_context-receiver-wrapping = disabled
+ktlint_standard_multiline-expression-wrapping = disabled
+ktlint_standard_no-empty-first-line-in-class-body = disabled
+ktlint_standard_no-blank-line-in-list = disabled
+ktlint_standard_blank-line-before-declaration = disabled
+ktlint_standard_annotation = disabled

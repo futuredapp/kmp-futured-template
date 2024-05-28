@@ -22,10 +22,8 @@ struct RootNavigationView: View {
                 }
             }
         }
-        .onOpenURL(
-            perform: { url in
-                openDeepLink(url.absoluteString)
-            }
-        )
+        .onOpenURL { url in
+            openDeepLink(url.absoluteString)
+        }
     }
 }

@@ -145,7 +145,7 @@ dependencies {
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
 }
 
-// WORKAROUND: This somehow makes ksp generate stuff. I have no fucking idea why.
+// WORKAROUND: This somehow makes ksp generate stuff. I have no idea why.
 tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
         dependsOn("kspCommonMainKotlinMetadata")
