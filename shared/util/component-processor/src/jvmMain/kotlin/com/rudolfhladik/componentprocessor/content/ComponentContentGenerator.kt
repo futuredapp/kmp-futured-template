@@ -117,7 +117,6 @@ internal class ComponentContentGenerator {
             viewModelExtImport,
             parametersOfImport,
             "\n",
-            "\n",
         )
     }
 
