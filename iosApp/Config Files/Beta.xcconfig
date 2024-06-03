@@ -1,0 +1,5 @@
+// Based on https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig#toc-anchor-003
+
+KMP_FLAVOR = dev
+KOTLIN_FRAMEWORK_BUILD_TYPE = release
+KOTLIN_FRAMEWORK_NAME = shared

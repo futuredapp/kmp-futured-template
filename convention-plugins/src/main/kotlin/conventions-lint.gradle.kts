@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 /*
@@ -15,8 +16,11 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
 }
 
+val libs = the<LibrariesForLibs>()
+
 // Ktlint
 project.configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    version.set(libs.versions.ktlint)
     ignoreFailures.set(true)
     android.set(true)
     outputToConsole.set(true)

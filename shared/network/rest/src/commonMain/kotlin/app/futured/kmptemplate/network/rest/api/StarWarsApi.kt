@@ -8,5 +8,7 @@ import de.jensklingenberg.ktorfit.http.Path
 interface StarWarsApi {
 
     @GET("people/{id}")
-    suspend fun getPerson(@Path("id") personId: Int): NetworkResult<Person>
+    suspend fun getPerson(
+        @Path("id") personId: Int,
+    ): NetworkResult<Person>
 }

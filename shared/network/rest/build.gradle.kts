@@ -53,7 +53,7 @@ dependencies {
     /* ref:
     https://foso.github.io/Ktorfit/installation/
     https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
-    */
+     */
     add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
 }
 

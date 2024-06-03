@@ -4,7 +4,6 @@ excluded:
   - Pods
   - vendor
 opt_in_rules:
-  - anyobject_protocol
   - array_init
   - attributes
   - closure_body_length
@@ -76,11 +75,12 @@ opt_in_rules:
   - trailing_closure
   - unneeded_parentheses_in_closure_argument
   - untyped_error_in_catch
-  - unused_declaration
-  - unused_import
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
   - yoda_condition
+analyzer_rules:
+  - unused_declaration
+  - unused_import
 
 # Rule configurations
 identifier_name:
