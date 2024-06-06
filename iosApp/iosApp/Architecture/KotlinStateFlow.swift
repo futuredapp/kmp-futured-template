@@ -14,9 +14,11 @@ final class KotlinStateFlow<T: AnyObject>: ObservableObject {
         self.stateFlow = value
         self.wrappedValue = value.value
 
-        self.publisher = Task { @MainActor in
-            for await item in stateFlow {
-                self.wrappedValue = item
+        self.publisher = Task { @MainActor [weak self] in
+            if let stateFlow = self?.stateFlow {
+                for await item in stateFlow {
+                    self?.wrappedValue = item
+                }
             }
         }
     }
@@ -29,6 +31,12 @@ final class KotlinStateFlow<T: AnyObject>: ObservableObject {
 }
 
 extension ObservedObject {
+    init<F>(_ stateFlow: SkieSwiftStateFlow<F>) where ObjectType == KotlinStateFlow<F> {
+        self.init(wrappedValue: KotlinStateFlow(stateFlow))
+    }
+}
+
+extension StateObject {
     init<F>(_ stateFlow: SkieSwiftStateFlow<F>) where ObjectType == KotlinStateFlow<F> {
         self.init(wrappedValue: KotlinStateFlow(stateFlow))
     }
