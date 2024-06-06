@@ -3,7 +3,7 @@ import SwiftUI
 
 struct RootNavigationView: View {
 
-    @ObservedObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
+    @StateObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
     private let openDeepLink: (String) -> Void
 
     init(_ component: RootNavigation) {

@@ -14,7 +14,7 @@ protocol FirstViewModelProtocol: DynamicProperty {
 }
 
 struct FirstViewModel {
-    @ObservedObject @KotlinStateFlow private var viewState: FirstViewState
+    @StateObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
     let events: SkieSwiftFlow<FirstUiEvent>
 

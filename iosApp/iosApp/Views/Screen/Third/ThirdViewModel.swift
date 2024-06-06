@@ -8,7 +8,7 @@ protocol ThirdViewModelProtocol: DynamicProperty {
 }
 
 struct ThirdViewModel {
-    @ObservedObject @KotlinStateFlow private var viewState: ThirdViewState
+    @StateObject @KotlinStateFlow private var viewState: ThirdViewState
     private let actions: ThirdScreenActions
 
     init(_ screen: ThirdScreen) {

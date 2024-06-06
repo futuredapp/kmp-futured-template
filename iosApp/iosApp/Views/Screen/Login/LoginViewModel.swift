@@ -7,7 +7,7 @@ protocol LoginViewModelProtocol: DynamicProperty {
 }
 
 struct LoginViewModel {
-    @ObservedObject @KotlinStateFlow private var viewState: LoginViewState
+    @StateObject @KotlinStateFlow private var viewState: LoginViewState
     private let actions: LoginScreenActions
     private let suspendActions: LoginScreenSuspendActions
 
