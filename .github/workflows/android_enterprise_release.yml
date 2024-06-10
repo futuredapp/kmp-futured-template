@@ -1,9 +1,11 @@
 name: Android Enterprise Release
 
-on:
-  push:
-    branches:
-      - develop
+# TODO uncomment trigger on client project
+
+#on:
+#  push:
+#    branches:
+#      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.repository }}
