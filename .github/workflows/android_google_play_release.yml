@@ -1,8 +1,10 @@
 name: Android Google Play Release
 
-on:
-  release:
-    types: [ published ]
+# TODO uncomment trigger on client project
+
+#on:
+#  release:
+#    types: [ published ]
 
 jobs:
   release:

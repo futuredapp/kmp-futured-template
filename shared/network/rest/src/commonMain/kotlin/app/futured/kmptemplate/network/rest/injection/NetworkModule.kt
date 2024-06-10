@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.rest.injection
 
-import app.futured.kmptemplate.network.rest.BuildKonfig
+import app.futured.kmptemplate.network.rest.FlavorConstants
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.logging.KtorKermitLogger
 import app.futured.kmptemplate.network.rest.result.NetworkResultConverterFactory
@@ -23,7 +23,7 @@ class NetworkRestModule {
 
     @Single
     @Named("apiUrl")
-    fun apiUrl(): String = BuildKonfig.apiUrl
+    fun apiUrl(): String = FlavorConstants.apiUrl
 
     @Single
     @Named("restApiJson")
