@@ -26,13 +26,13 @@ struct HomeNavigationView: View {
         ) { entry in
             switch onEnum(of: entry) {
             case .first(let entry):
-                FirstView(entry.screen)
+                FirstView(FirstViewModel(entry.screen))
             case .second(let entry):
-                SecondView(entry.screen)
+                SecondView(SecondViewModel(entry.screen))
             case .third(let entry):
-                ThirdView(entry.screen)
+                ThirdView(ThirdViewModel(entry.screen))
             case .secret(let entry):
-                SecretView(entry.screen)
+                SecretView(SecretViewModel(entry.screen))
             }
         }
     }
