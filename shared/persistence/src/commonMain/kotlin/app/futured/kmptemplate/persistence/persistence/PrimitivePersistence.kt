@@ -6,10 +6,12 @@ import androidx.datastore.preferences.core.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.mapNotNull
+import org.koin.core.annotation.Single
 
 /**
  * [DataStore]-backed Persistence which allows storage and observing of persisted entities.
  */
+@Single
 internal class PrimitivePersistence(
     private val dataStore: DataStore<Preferences>,
 ) {

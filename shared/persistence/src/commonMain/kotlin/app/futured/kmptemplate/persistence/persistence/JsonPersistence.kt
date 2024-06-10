@@ -10,14 +10,17 @@ import kotlinx.coroutines.flow.map
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 
 /**
  * [DataStore]-backed Persistence which allows storage and observing of complex JSON objects.
  * Uses [kotlinx.serialization] to serialize and deserialize objects into Strings.
  */
+@Single
 internal class JsonPersistence(
     private val dataStore: DataStore<Preferences>,
-    private val json: Json,
+    @Named("PersistenceJson") private val json: Json,
 ) {
 
     private val logger = Logger.withTag("JsonPersistence")

@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.login
 
+import app.futured.kmptemplate.feature.domain.SaveDummyPersistenceValueUseCase
 import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
 import app.futured.kmptemplate.network.graphql.api.RickAndMortyApi
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
@@ -15,6 +16,7 @@ internal class LoginViewModel(
     private val starWarsApi: StarWarsApi,
     private val rickAndMortyApi: RickAndMortyApi,
     private val navigator: RootSlotNavigator,
+    private val saveDummyPersistenceValueUseCase: SaveDummyPersistenceValueUseCase,
 ) : SharedViewModel<LoginViewState, Nothing>(),
     LoginScreen.Actions,
     LoginScreen.SuspendActions {
@@ -25,6 +27,11 @@ internal class LoginViewModel(
     init {
         testRestApiClient()
         testGraphqlApiClient()
+
+        // Just to verify [ApplicationSettingsPersistence] gets properly injected
+        launchWithHandler {
+            saveDummyPersistenceValueUseCase.execute(false).getOrThrow()
+        }
     }
 
     private fun testRestApiClient() = launchWithHandler {

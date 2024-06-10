@@ -1,31 +1,32 @@
 package app.futured.kmptemplate.persistence.injection
 
+import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import app.futured.kmptemplate.persistence.persistence.JsonPersistence
-import app.futured.kmptemplate.persistence.persistence.PrimitivePersistence
+import androidx.datastore.preferences.core.Preferences
 import kotlinx.serialization.json.Json
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
+import okio.Path
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 
-fun persistenceModule() = module {
-    // expect/actual Koin module
-    includes(persistencePlatformModule())
+@Module
+@ComponentScan("app.futured.kmptemplate.persistence")
+class PersistenceModule {
 
-    single {
-        PreferenceDataStoreFactory.createWithPath(
-            produceFile = { get(Qualifiers.DataStorePath) },
-        )
-    }
+    @Single
+    internal fun dataStore(
+        @Named("DataStoreFilePath") path: Path,
+    ): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
+        produceFile = { path },
+    )
 
-    singleOf(::PrimitivePersistence)
-    single { JsonPersistence(get(), get(Qualifiers.PersistenceJson)) }
-
-    single(Qualifiers.PersistenceJson) {
-        Json {
-            encodeDefaults = true
-            isLenient = false
-            ignoreUnknownKeys = true
-            prettyPrint = false
-        }
+    @Single
+    @Named("PersistenceJson")
+    internal fun json() = Json {
+        encodeDefaults = true
+        isLenient = false
+        ignoreUnknownKeys = true
+        prettyPrint = false
     }
 }
