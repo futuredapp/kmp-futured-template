@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 kotlin {
@@ -120,4 +121,7 @@ dependencies {
 
     implementation(libs.koin.android)
     implementation(libs.logging.timber)
+
+    implementation(libs.androidx.profileinstaller)
+    baselineProfile(projects.baselineprofile)
 }

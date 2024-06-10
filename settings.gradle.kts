@@ -29,3 +29,4 @@ include(":shared:util")
 include(":shared:resources")
 
 includeBuild("convention-plugins")
+include(":baselineprofile")

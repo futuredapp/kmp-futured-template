@@ -16,7 +16,7 @@ import java.nio.file.Paths
 
 val templatePackageName = "app.futured.kmptemplate"
 val (appName, packageName, frameworkName) = getNamesOfAppAndPackageAndFramework()
-renamePackagesInAndroidApp(packageName)
+renameAndroidRelatedPackages(packageName)
 renamePackagesInShared(packageName = packageName)
 renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePackageName, newText = packageName)
 renameTextInPath(pathText = "build.gradle.kts", oldText = templatePackageName, newText = packageName)
@@ -115,7 +115,7 @@ fun replaceTextInAllFilesInDirectory(dirPath: String, oldText: String, newText: 
     }
 }
 
-fun renamePackagesInAndroidApp(packageName: String) {
+fun renameAndroidRelatedPackages(packageName: String) {
     // move androidApp to new package
     val baseDir = "androidApp/src/main/kotlin"
     renamePackageNameInDirectory(baseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
@@ -130,6 +130,11 @@ fun renamePackagesInAndroidApp(packageName: String) {
     val buildSrcBaseDir = "buildSrc/src/main/kotlin"
     renamePackageNameInDirectory(buildSrcBaseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
     renameTextInFilePath(buildSrcBaseDir, templatePackageName, packageName)
+
+    // baseline profiles
+    val baselineProfilesBaseDir = "baselineprofile/src/main/kotlin"
+    renamePackageNameInDirectory(baselineProfilesBaseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
+    renameTextInFilePath(baselineProfilesBaseDir, templatePackageName, packageName)
 }
 
 fun renamePackageNameInDirectory(dir: String, oldPackageNamePath: String, newPackageNamePath: String) {
