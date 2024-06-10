@@ -4,8 +4,10 @@ import app.futured.kmptemplate.network.rest.BuildKonfig
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.logging.KtorKermitLogger
 import app.futured.kmptemplate.network.rest.result.NetworkResultConverterFactory
+import app.futured.kmptemplate.network.rest.tools.Constants
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -36,9 +38,14 @@ class NetworkRestModule {
     @Single
     fun httpClient(
         @Named("restApiJson") json: Json,
-    ): HttpClient = HttpClient {
+    ): HttpClient = getNativeHttpClient {
         install(ContentNegotiation) {
             json(json = json, contentType = ContentType.Application.Json)
+        }
+        install(HttpTimeout) {
+            connectTimeoutMillis = Constants.Timeouts.CONNECT_TIMEOUT.inWholeMilliseconds
+            requestTimeoutMillis = Constants.Timeouts.REQUEST_TIMEOUT.inWholeMilliseconds
+            socketTimeoutMillis = Constants.Timeouts.SOCKET_TIMEOUT.inWholeMilliseconds
         }
         install(Logging) {
             this.level = LogLevel.INFO

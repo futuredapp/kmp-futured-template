@@ -40,6 +40,18 @@ kotlin {
             }
         }
 
+        androidMain {
+            dependencies {
+                implementation(libs.network.ktor.client.engine.okhttp)
+            }
+        }
+
+        iosMain {
+            dependencies {
+                implementation(libs.network.ktor.client.engine.darwin)
+            }
+        }
+
         commonTest {
             dependencies {
                 implementation(libs.kotlin.testCommon)
