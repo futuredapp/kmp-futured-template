@@ -3,7 +3,7 @@ import SwiftUI
 
 struct FirstView: View {
 
-    @ObservedObject @KotlinStateFlow private var viewState: FirstViewState
+    @StateObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
     private let events: SkieSwiftFlow<FirstUiEvent>
 

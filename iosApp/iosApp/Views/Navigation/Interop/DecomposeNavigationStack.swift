@@ -13,7 +13,7 @@ struct DecomposeNavigationStack<
     Entry: AnyObject,
     Content: View
 >: View {
-    @ObservedObject @KotlinStateFlow private var kotlinStack: ChildStack<Destination, Entry>
+    @StateObject @KotlinStateFlow private var kotlinStack: ChildStack<Destination, Entry>
     private let setPath: ([Child]) -> Void
     @ViewBuilder private let content: (Entry) -> Content
 
