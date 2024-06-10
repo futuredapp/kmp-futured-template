@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.baselineprofile.tools
+package app.futured.kmptemplate.benchmark.tools
 
 object Constants {
 

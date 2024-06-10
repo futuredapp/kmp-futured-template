@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.baselineprofile.tools
+package app.futured.kmptemplate.benchmark.tools
 
 import android.util.Log
 import androidx.test.uiautomator.BySelector
@@ -6,7 +6,7 @@ import androidx.test.uiautomator.SearchCondition
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
-import app.futured.kmptemplate.baselineprofile.tools.Constants.DEFAULT_TIMEOUT
+import app.futured.kmptemplate.benchmark.tools.Constants.DEFAULT_TIMEOUT
 import java.io.ByteArrayOutputStream
 
 /**

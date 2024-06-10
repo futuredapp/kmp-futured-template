@@ -96,10 +96,6 @@ android {
     }
 }
 
-baselineProfile {
-    automaticGenerationDuringBuild = true
-}
-
 dependencies {
     coreLibraryDesugaring(libs.androidTools.desugarLibs)
     lintChecks(libs.lint.compose)

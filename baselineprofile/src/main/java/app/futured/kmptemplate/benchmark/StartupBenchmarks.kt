@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.baselineprofile
+package app.futured.kmptemplate.benchmark
 
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
@@ -8,8 +8,8 @@ import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
-import app.futured.kmptemplate.baselineprofile.tools.Constants
-import app.futured.kmptemplate.baselineprofile.tools.Constants.ITERATION_COUNT
+import app.futured.kmptemplate.benchmark.flows.startup
+import app.futured.kmptemplate.benchmark.tools.Constants.ITERATION_COUNT
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -62,17 +62,8 @@ class StartupBenchmarks {
                 pressHome()
             },
             measureBlock = {
-                startActivityAndWait()
-
-                // TODO Add interactions to wait for when your app is fully drawn.
-                // The app is fully drawn when Activity.reportFullyDrawn is called.
-                // For Jetpack Compose, you can use ReportDrawn, ReportDrawnWhen and ReportDrawnAfter
-                // from the AndroidX Activity library.
-
-                // Check the UiAutomator documentation for more information on how to
-                // interact with the app.
-                // https://d.android.com/training/testing/other-components/ui-automator
-            }
+                startup()
+            },
         )
     }
 }
