@@ -7,6 +7,11 @@ package app.futured.kmptemplate.platform.binding
 interface PlatformBindings {
 
     /**
+     * Provides information about platform and application.
+     */
+    fun platform(): Platform
+
+    /**
      * Provides a native binding to Firebase Crashlytics SDK.
      */
     fun firebaseCrashlytics(): PlatformFirebaseCrashlytics

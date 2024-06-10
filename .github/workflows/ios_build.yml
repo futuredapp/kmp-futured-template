@@ -1,11 +1,9 @@
 name: iOS Build
 
-# TODO uncomment trigger on client project
-
-#on:
-#  push:
-#    branches:
-#    - develop
+on:
+  push:
+    branches:
+    - develop
 
 jobs:
   build:
