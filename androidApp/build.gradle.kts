@@ -123,5 +123,5 @@ dependencies {
     implementation(libs.logging.timber)
 
     implementation(libs.androidx.profileinstaller)
-    baselineProfile(project(":baselineprofile"))
+    baselineProfile(projects.baselineprofile)
 }
