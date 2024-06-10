@@ -6,6 +6,7 @@ import io.ktor.util.network.UnresolvedAddressException
 import io.ktor.utils.io.errors.IOException
 import kotlinx.serialization.SerializationException
 import org.koin.core.annotation.Single
+import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Class responsible for converting [Throwable]s into meaningful [NetworkError]s.
@@ -17,6 +18,7 @@ internal class NetworkErrorParser {
      * Parses provided [throwable] into [NetworkError].
      */
     fun parse(throwable: Throwable): NetworkError = when (throwable) {
+        is CancellationException -> throw throwable // CancellationExceptions are standard way of cancelling coroutine, should be rethrown
         is SerializationException -> NetworkError.SerializationError(throwable)
         is IOException, is UnresolvedAddressException -> NetworkError.ConnectionError(throwable)
         else -> NetworkError.UnknownError(throwable)
