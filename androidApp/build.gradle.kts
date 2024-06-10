@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 kotlin {
@@ -95,6 +96,10 @@ android {
     }
 }
 
+baselineProfile {
+    automaticGenerationDuringBuild = true
+}
+
 dependencies {
     coreLibraryDesugaring(libs.androidTools.desugarLibs)
     lintChecks(libs.lint.compose)
@@ -120,4 +125,7 @@ dependencies {
 
     implementation(libs.koin.android)
     implementation(libs.logging.timber)
+
+    implementation(libs.androidx.profileinstaller)
+    baselineProfile(project(":baselineprofile"))
 }

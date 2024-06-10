@@ -1,6 +1,11 @@
 import app.futured.kmptemplate.gradle.task.LintCheckTask
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 
+/*buildscript {
+    dependencies {
+        classpath(libs.gradlePlugin.baselineprofile)
+    }
+}*/
 tasks.register<LintCheckTask>("lintCheck")
 tasks.register<ReportMergeTask>("detektReportMerge") {
     output.set(rootProject.layout.buildDirectory.file("reports/detekt/merged.xml"))

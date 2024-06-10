@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.android.ui.screen
 
+import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +35,7 @@ private fun Content(
     actions: LoginScreen.Actions,
     modifier: Modifier = Modifier,
 ) {
+    ReportDrawn()
     Column(modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = kmpStringResource(MR.strings.login_screen_text))
         Spacer(modifier = Modifier.height(4.dp))
