@@ -16,6 +16,7 @@ To give you a short overview of our stack, we use:
 - [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps that call GraphQL APIs.
 - [ktorfit](https://github.com/Foso/Ktorfit) client for apps that call plain HTTP APIs.
 - [Jetpack DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) as a simple preferences storage (we have JSON-based and primitive implementations).
+- [iOS-templates](https://github.com/futuredapp/iOS-templates) as template which generates a new iOS scene using MVVM-C architecture.
 
 The template is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
 
