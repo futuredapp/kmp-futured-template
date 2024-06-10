@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.rest.plugin
 
-import app.futured.kmptemplate.network.rest.BuildKonfig
+import app.futured.kmptemplate.network.rest.FlavorConstants
 import app.futured.kmptemplate.platform.binding.Platform
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.UserAgent
@@ -13,7 +13,7 @@ internal class UserAgentPlugin(platform: Platform) : HttpClientPlugin {
         listOf(
             "$appName/$appVersionName",
             "($applicationId; build:$appBuildNumber; $osNameWithVersion; Model:$deviceModel)",
-            "ktor-client/${BuildKonfig.ktorUserAgentVersion}",
+            "ktor-client/${FlavorConstants.ktorUserAgentVersion}",
         )
     }.joinToString(separator = " ")
 
