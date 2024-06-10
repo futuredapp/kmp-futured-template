@@ -1,3 +1,4 @@
+import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
@@ -85,22 +86,19 @@ android {
 
 buildkonfig {
     packageName = libs.versions.project.shared.network.rest.packageName.get()
+    objectName = "FlavorConstants"
 
-    with(ProjectSettings.Kotlin.ProductFlavors.Dev) {
-        defaultConfigs {
-            buildConfigField(STRING, "apiUrl", RestApiUrl)
-            buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
-        }
-
-        defaultConfigs(flavor = NAME) {
-            buildConfigField(STRING, "apiUrl", RestApiUrl)
-            buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
-        }
+    defaultConfigs {
+        buildConfigField(STRING, "apiUrl", ProductFlavors.DEFAULT.restApiUrl)
+        buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
     }
 
-    with(ProjectSettings.Kotlin.ProductFlavors.Prod) {
-        defaultConfigs(flavor = NAME) {
-            buildConfigField(STRING, "apiUrl", RestApiUrl)
+    listOf(
+        ProductFlavors.Dev,
+        ProductFlavors.Prod,
+    ).forEach {
+        defaultConfigs(flavor = it.name) {
+            buildConfigField(STRING, "apiUrl", it.restApiUrl)
             buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
         }
     }

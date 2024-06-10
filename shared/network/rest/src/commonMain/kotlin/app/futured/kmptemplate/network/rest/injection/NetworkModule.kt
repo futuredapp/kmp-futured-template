@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.rest.injection
 
-import app.futured.kmptemplate.network.rest.BuildKonfig
+import app.futured.kmptemplate.network.rest.FlavorConstants
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.plugin.ContentNegotiationPlugin
 import app.futured.kmptemplate.network.rest.plugin.HttpTimeoutPlugin
@@ -21,7 +21,7 @@ class NetworkRestModule {
 
     @Single
     @Named("apiUrl")
-    internal fun apiUrl(): String = BuildKonfig.apiUrl
+    internal fun apiUrl(): String = FlavorConstants.apiUrl
 
     @Single
     @Named("restApiJson")

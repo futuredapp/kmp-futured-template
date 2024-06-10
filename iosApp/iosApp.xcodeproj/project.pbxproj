@@ -26,6 +26,11 @@
 		119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A92E72B0F37A300D93E98 /* MR+Extensions.swift */; };
 		119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */; };
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
+		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
+		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
+		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
+		5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */; };
+		5B21BD412C11D05B005B6191 /* SecretViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD402C11D05B005B6191 /* SecretViewModel.swift */; };
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		F4820AB72B0B51A100B13080 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4820AB62B0B51A100B13080 /* XCTest.framework */; };
 		F4820AB82B0B523E00B13080 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AA02B0B4D3E00B13080 /* iosAppTests.swift */; };
@@ -84,6 +89,11 @@
 		119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinStateFlow.swift; sourceTree = "<group>"; };
 		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
+		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
+		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
+		5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
+		5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		5B21BD402C11D05B005B6191 /* SecretViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretViewModel.swift; sourceTree = "<group>"; };
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7FFCC52B691F0400A70102 /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
@@ -181,11 +191,11 @@
 		1193BEEF2AEA986000C6203F /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				1193BEF52AEA989600C6203F /* FirstView.swift */,
-				1193BEF72AEA989F00C6203F /* SecondView.swift */,
-				1193BEF92AEA98A800C6203F /* ThirdView.swift */,
-				1193BEFB2AEA9FA000C6203F /* LoginView.swift */,
-				1155AEDC2B46EE5B0093EF55 /* SecretView.swift */,
+				5B21BD332C11C505005B6191 /* First */,
+				5B21BD342C11C50E005B6191 /* Second */,
+				5B21BD352C11C513005B6191 /* Third */,
+				5B21BD362C11C51F005B6191 /* Login */,
+				5B21BD372C11C526005B6191 /* Secret */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -214,6 +224,51 @@
 				119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */,
 			);
 			path = "Config Files";
+			sourceTree = "<group>";
+		};
+		5B21BD332C11C505005B6191 /* First */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEF52AEA989600C6203F /* FirstView.swift */,
+				5B21BD382C11C55F005B6191 /* FirstViewModel.swift */,
+			);
+			path = First;
+			sourceTree = "<group>";
+		};
+		5B21BD342C11C50E005B6191 /* Second */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEF72AEA989F00C6203F /* SecondView.swift */,
+				5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */,
+			);
+			path = Second;
+			sourceTree = "<group>";
+		};
+		5B21BD352C11C513005B6191 /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEF92AEA98A800C6203F /* ThirdView.swift */,
+				5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */,
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		5B21BD362C11C51F005B6191 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1193BEFB2AEA9FA000C6203F /* LoginView.swift */,
+				5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5B21BD372C11C526005B6191 /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				1155AEDC2B46EE5B0093EF55 /* SecretView.swift */,
+				5B21BD402C11D05B005B6191 /* SecretViewModel.swift */,
+			);
+			path = Secret;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -483,10 +538,14 @@
 				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
+				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
+				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
+				5B21BD412C11D05B005B6191 /* SecretViewModel.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
+				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
 				119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
@@ -498,6 +557,7 @@
 				1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */,
 				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
 				1193BEF42AEA988D00C6203F /* HomeNavigationView.swift in Sources */,
+				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
