@@ -5,6 +5,7 @@ import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.network.rest.plugin.ContentNegotiationPlugin
 import app.futured.kmptemplate.network.rest.plugin.HttpTimeoutPlugin
 import app.futured.kmptemplate.network.rest.plugin.LoggingPlugin
+import app.futured.kmptemplate.network.rest.plugin.UserAgentPlugin
 import app.futured.kmptemplate.network.rest.result.NetworkResultConverterFactory
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
@@ -35,10 +36,12 @@ class NetworkRestModule {
     internal fun httpClient(
         contentNegotiationPlugin: ContentNegotiationPlugin,
         httpTimeoutPlugin: HttpTimeoutPlugin,
+        userAgentPlugin: UserAgentPlugin,
         loggingPlugin: LoggingPlugin,
     ): HttpClient = getNativeHttpClient {
         contentNegotiationPlugin.install(this)
         httpTimeoutPlugin.install(this)
+        userAgentPlugin.install(this)
         loggingPlugin.install(this)
     }
 

@@ -37,6 +37,8 @@ kotlin {
                 implementation(libs.bundles.ktorfit)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.logging.kermit)
+
+                implementation(projects.shared.platform)
             }
         }
 
@@ -87,16 +89,19 @@ buildkonfig {
     with(ProjectSettings.Kotlin.ProductFlavors.Dev) {
         defaultConfigs {
             buildConfigField(STRING, "apiUrl", RestApiUrl)
+            buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
         }
 
         defaultConfigs(flavor = NAME) {
             buildConfigField(STRING, "apiUrl", RestApiUrl)
+            buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
         }
     }
 
     with(ProjectSettings.Kotlin.ProductFlavors.Prod) {
         defaultConfigs(flavor = NAME) {
             buildConfigField(STRING, "apiUrl", RestApiUrl)
+            buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
         }
     }
 }

@@ -10,7 +10,7 @@ import org.koin.core.annotation.Single
 internal class LoggingPlugin : HttpClientPlugin {
 
     companion object {
-        private val LOG_LEVEL = LogLevel.INFO
+        private val LOG_LEVEL = LogLevel.ALL
     }
 
     override fun install(config: HttpClientConfig<*>) {
