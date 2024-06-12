@@ -3,20 +3,20 @@ import SwiftUI
 
 protocol FirstViewModelProtocol: DynamicProperty {
     var text: String { get }
-    var events: SkieSwiftFlow<FirstUiEvent> { get }
+    var events: SkieSwiftFlow<FirstEvent> { get }
     var isAlertVisible: Binding<Bool> { get }
     var alertText: String { get }
 
     func onNext()
     func onBack()
-    func showToast(event: FirstUiEvent.ShowToast)
+    func showToast(event: FirstEvent.ShowToast)
     func hideToast()
 }
 
 struct FirstViewModel {
     @StateObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
-    let events: SkieSwiftFlow<FirstUiEvent>
+    let events: SkieSwiftFlow<FirstEvent>
 
     @State private var alertVisible: Bool = false
     @State private(set) var alertText: String = ""
@@ -48,7 +48,7 @@ extension FirstViewModel: FirstViewModelProtocol {
         actions.onBack()
     }
 
-    func showToast(event: FirstUiEvent.ShowToast) {
+    func showToast(event: FirstEvent.ShowToast) {
         alertText = event.text
         alertVisible = true
     }
