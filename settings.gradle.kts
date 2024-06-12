@@ -31,3 +31,4 @@ include(":shared:util:component-processor")
 include(":shared:resources")
 
 includeBuild("convention-plugins")
+include(":baselineprofile")

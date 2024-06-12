@@ -9,22 +9,7 @@ object ProjectSettings {
     }
 
     object Kotlin {
-
         const val JvmToolchainVersion = 17
-
-        object ProductFlavors {
-            object Dev {
-                const val NAME = "dev"
-                const val ApolloApiUrl = "https://rickandmortyapi.com/graphql"
-                const val RestApiUrl = "https://swapi.dev/api/"
-            }
-
-            object Prod {
-                const val NAME = "prod"
-                const val ApolloApiUrl = "https://rickandmortyapi.com/graphql"
-                const val RestApiUrl = "https://swapi.dev/api/"
-            }
-        }
     }
 
     object Android {
