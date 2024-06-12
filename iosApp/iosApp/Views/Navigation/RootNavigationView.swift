@@ -3,7 +3,7 @@ import SwiftUI
 
 struct RootNavigationView: View {
 
-    @ObservedObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
+    @StateObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
     private let openDeepLink: (String) -> Void
 
     init(_ component: RootNavigation) {
@@ -16,7 +16,7 @@ struct RootNavigationView: View {
             if let navigationEntry = slot.child?.instance {
                 switch onEnum(of: navigationEntry) {
                 case .login(let entry):
-                    LoginView(entry.screen)
+                    LoginView(LoginViewModel(entry.screen))
                 case .home(let entry):
                     HomeNavigationView(entry.navigation)
                 }
