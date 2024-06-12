@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -19,10 +22,8 @@ kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
@@ -73,13 +74,5 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
