@@ -1,11 +1,15 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
 import co.touchlab.skie.configuration.DefaultArgumentInterop
 import co.touchlab.skie.configuration.EnumInterop
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SealedInterop
+import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -22,10 +26,8 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
@@ -116,6 +118,7 @@ skie {
             FlowInterop.Enabled(true)
             EnumInterop.Enabled(true)
             SealedInterop.Enabled(true)
+            SuppressSkieWarning.NameCollision(true)
         }
     }
 }

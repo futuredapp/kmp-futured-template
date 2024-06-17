@@ -1,11 +1,15 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.moko.resources)
 }
 
@@ -16,11 +20,11 @@ dependencies {
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
+    applyDefaultHierarchyTemplate()
+
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
@@ -30,11 +34,11 @@ kotlin {
         commonMain {
             dependencies {
                 api(libs.moko.resources)
+                implementation(libs.jetbrains.compose.runtime)
             }
         }
         androidMain {
             dependencies {
-                implementation(libs.androidx.compose.runtime)
                 implementation(libs.androidx.compose.foundation)
             }
         }
@@ -53,9 +57,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
 
