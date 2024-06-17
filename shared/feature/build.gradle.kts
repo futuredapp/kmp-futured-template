@@ -11,6 +11,7 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -32,7 +33,7 @@ kotlin {
     sourceSets {
         androidMain {
             dependencies {
-                implementation(libs.androidx.compose.runtime)
+                implementation(libs.jetbrains.compose.runtime)
             }
         }
         commonMain {
@@ -74,5 +75,9 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+
+    buildFeatures {
+        compose = true
     }
 }
