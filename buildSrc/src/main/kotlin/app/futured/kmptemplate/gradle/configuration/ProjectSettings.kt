@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.gradle.configuration
 
 import org.gradle.api.JavaVersion
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 object ProjectSettings {
 
@@ -23,7 +24,8 @@ object ProjectSettings {
         val VersionName = System.getenv("VERSION_NAME") ?: "1.0.0"
 
         val JavaCompatibility = JavaVersion.VERSION_11
-        const val KotlinJvmTarget = "11"
+        val KotlinJvmTarget = JvmTarget.JVM_11
+        const val KotlinJvmTargetNum = "11"
 
         object BuildTypes {
             const val Debug = "debug"

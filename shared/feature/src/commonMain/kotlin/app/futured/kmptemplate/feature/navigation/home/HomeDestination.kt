@@ -18,7 +18,7 @@ sealed class HomeDestination : Destination<HomeEntry> {
     @Serializable
     data class First(private val arg: String) : HomeDestination() {
         override fun createComponent(componentContext: ComponentContext): HomeEntry =
-            HomeEntry.First(FirstComponent(componentContext, arg))
+            HomeEntry.First(FirstComponent(arg, componentContext))
     }
 
     @Serializable

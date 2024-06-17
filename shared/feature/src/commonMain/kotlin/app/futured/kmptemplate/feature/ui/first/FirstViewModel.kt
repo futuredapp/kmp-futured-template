@@ -17,7 +17,7 @@ import kotlin.time.Duration.Companion.milliseconds
 internal class FirstViewModel(
     private val homeNavigator: HomeStackNavigator,
     private val arg: String,
-) : SharedViewModel<FirstViewState, FirstUiEvent>(),
+) : SharedViewModel<FirstViewState, FirstEvent>(),
     FirstScreen.Actions {
 
     override val viewState: MutableStateFlow<FirstViewState> = MutableStateFlow(FirstViewState())
@@ -34,7 +34,7 @@ internal class FirstViewModel(
 
                 if (counter == 10) {
                     Logger.withTag("FirstViewmodel").d { "Counter reached 10" }
-                    sendUiEvent(FirstUiEvent.ShowToast("Counter reached 10 🎉"))
+                    sendUiEvent(FirstEvent.ShowToast("Counter reached 10 🎉"))
                 }
 
                 delay(200.milliseconds)

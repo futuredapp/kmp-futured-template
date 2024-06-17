@@ -2,6 +2,7 @@ package app.futured.kmptemplate.network.rest.injection
 
 import app.futured.kmptemplate.network.rest.FlavorConstants
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
+import app.futured.kmptemplate.network.rest.api.createStarWarsApi
 import app.futured.kmptemplate.network.rest.plugin.ContentNegotiationPlugin
 import app.futured.kmptemplate.network.rest.plugin.HttpTimeoutPlugin
 import app.futured.kmptemplate.network.rest.plugin.LoggingPlugin
@@ -57,5 +58,5 @@ class NetworkRestModule {
         .build()
 
     @Single
-    internal fun starWarsApi(ktorFit: Ktorfit): StarWarsApi = ktorFit.create<StarWarsApi>()
+    internal fun starWarsApi(ktorFit: Ktorfit): StarWarsApi = ktorFit.createStarWarsApi()
 }

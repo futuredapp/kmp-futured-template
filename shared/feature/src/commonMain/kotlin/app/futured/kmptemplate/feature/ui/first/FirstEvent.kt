@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.ui.first
 
-import app.futured.kmptemplate.util.arch.UiEvent
+import app.futured.kmptemplate.util.arch.Event
 
-sealed class FirstUiEvent : UiEvent<FirstViewState> {
-    data class ShowToast(val text: String) : FirstUiEvent()
+sealed class FirstEvent : Event<FirstViewState> {
+    data class ShowToast(val text: String) : FirstEvent()
 }

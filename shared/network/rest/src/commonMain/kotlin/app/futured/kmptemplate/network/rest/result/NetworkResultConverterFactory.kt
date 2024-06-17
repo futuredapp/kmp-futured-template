@@ -3,7 +3,7 @@ package app.futured.kmptemplate.network.rest.result
 import de.jensklingenberg.ktorfit.Ktorfit
 import de.jensklingenberg.ktorfit.converter.Converter
 import de.jensklingenberg.ktorfit.converter.KtorfitResult
-import de.jensklingenberg.ktorfit.internal.TypeData
+import de.jensklingenberg.ktorfit.converter.TypeData
 import io.ktor.client.call.body
 import io.ktor.http.isSuccess
 import io.ktor.util.reflect.TypeInfo
@@ -25,8 +25,6 @@ class NetworkResultConverterFactory internal constructor(
     ): Converter.SuspendResponseConverter<KtorHttpResponse, *>? {
         if (typeData.typeInfo.type == NetworkResult::class) {
             return object : Converter.SuspendResponseConverter<KtorHttpResponse, Any> {
-
-                override suspend fun convert(response: KtorHttpResponse): Any = convert(KtorfitResult.Success(response))
 
                 override suspend fun convert(result: KtorfitResult): Any {
                     val wrappedTypeInfo = typeData.typeArgs.first().typeInfo // NetworkResult<wrappedTypeInfo>
