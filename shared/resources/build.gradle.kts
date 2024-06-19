@@ -33,8 +33,6 @@ kotlin {
             }
         }
         androidMain {
-            // Workaround for: https://github.com/icerockdev/moko-resources/issues/531
-            dependsOn(commonMain.get())
             dependencies {
                 implementation(libs.androidx.compose.runtime)
                 implementation(libs.androidx.compose.foundation)
@@ -62,7 +60,7 @@ android {
 }
 
 multiplatformResources {
-    multiplatformResourcesPackage = libs.versions.project.shared.resources.packageName.get()
-    multiplatformResourcesClassName = "MR"
-    iosBaseLocalizationRegion = ProjectSettings.IOS.MokoBaseLocalizationRegion
+    resourcesPackage.set(libs.versions.project.shared.resources.packageName.get())
+    resourcesClassName.set("MR")
+    iosBaseLocalizationRegion.set(ProjectSettings.IOS.MokoBaseLocalizationRegion)
 }

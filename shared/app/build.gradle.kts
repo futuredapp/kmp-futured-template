@@ -86,10 +86,6 @@ kotlin {
                 implementation(libs.logging.nsExceptionKt.core)
             }
         }
-
-        androidMain {
-            dependsOn(commonMain.get())
-        }
     }
 }
 
@@ -128,8 +124,7 @@ multiplatformResources {
     // This module uses the plugin just to export resources to iOS.
     // Visibility is set to Internal in order to prevent :androidApp
     // module to see duplicate resources from this module and :shared:resources module.
-    multiplatformResourcesVisibility = MRVisibility.Internal
-
-    multiplatformResourcesClassName = "MR"
-    iosBaseLocalizationRegion = ProjectSettings.IOS.MokoBaseLocalizationRegion
+    resourcesVisibility.set(MRVisibility.Internal)
+    resourcesClassName.set("MR")
+    iosBaseLocalizationRegion.set(ProjectSettings.IOS.MokoBaseLocalizationRegion)
 }

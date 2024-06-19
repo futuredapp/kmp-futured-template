@@ -26,6 +26,7 @@
 		119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A92E72B0F37A300D93E98 /* MR+Extensions.swift */; };
 		119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */; };
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
+		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
 		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
@@ -88,6 +89,7 @@
 		119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinStateFlow.swift; sourceTree = "<group>"; };
 		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
+		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */,
 				11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */,
+				11D407532C17232F0055C0F2 /* PlatformImpl.swift */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,
 				1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */,
+				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
 				1193BEF42AEA988D00C6203F /* HomeNavigationView.swift in Sources */,
 				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,
 			);

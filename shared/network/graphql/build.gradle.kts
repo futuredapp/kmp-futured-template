@@ -1,3 +1,4 @@
+import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
@@ -74,20 +75,18 @@ apollo {
 
 buildkonfig {
     packageName = libs.versions.project.shared.network.graphql.packageName.get()
+    objectName = "FlavorConstants"
 
-    with(ProjectSettings.Kotlin.ProductFlavors.Dev) {
-        defaultConfigs {
-            buildConfigField(STRING, "apiUrl", ApolloApiUrl)
-        }
-
-        defaultConfigs(flavor = NAME) {
-            buildConfigField(STRING, "apiUrl", ApolloApiUrl)
-        }
+    defaultConfigs {
+        buildConfigField(STRING, "apiUrl", ProductFlavors.DEFAULT.apolloApiUrl)
     }
 
-    with(ProjectSettings.Kotlin.ProductFlavors.Prod) {
-        defaultConfigs(flavor = NAME) {
-            buildConfigField(STRING, "apiUrl", ApolloApiUrl)
+    listOf(
+        ProductFlavors.Dev,
+        ProductFlavors.Prod,
+    ).forEach {
+        defaultConfigs(flavor = it.name) {
+            buildConfigField(STRING, "apiUrl", it.apolloApiUrl)
         }
     }
 }

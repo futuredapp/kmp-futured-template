@@ -18,6 +18,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,7 +26,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.futured.kmptemplate.android.MyApplicationTheme
 import app.futured.kmptemplate.android.tools.arch.EventsEffect
 import app.futured.kmptemplate.android.tools.arch.onEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
@@ -34,6 +37,7 @@ import app.futured.kmptemplate.feature.ui.first.FirstViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
+import dev.icerock.moko.resources.desc.desc
 
 @Composable
 fun FirstScreenUi(
@@ -85,6 +89,24 @@ private fun Content(
             Button(onClick = { actions.onNext() }) {
                 Text(text = "Go to second screen")
             }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun FirstScreenPreview() {
+    val actions = object : FirstScreen.Actions {
+        override fun onBack() = Unit
+        override fun onNext() = Unit
+    }
+    MyApplicationTheme {
+        Surface {
+            Content(
+                viewState = FirstViewState(text = "Hey there".desc()),
+                actions = actions,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="template_app_name">KMP Template</string>
+
     <string name="login_screen_text">Vitaj!</string>
 
     <string name="first_screen_title">Prvá obrazovka</string>
