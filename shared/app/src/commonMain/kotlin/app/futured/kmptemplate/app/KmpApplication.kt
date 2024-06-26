@@ -13,6 +13,7 @@ import org.koin.dsl.KoinAppDeclaration
  * Initializes injection framework,
  */
 object KmpApplication {
+    val data: TestKdocExportHolder = TestKdocExportHolder("some", 1)
 
     fun initializeSharedApplication(
         platformBindings: PlatformBindings,
@@ -28,3 +29,17 @@ object KmpApplication {
         AppLogging.initialize(crashlyticsReporter)
     }
 }
+
+/**
+ * This is test data class to test the output of exported Kdocs to iOS side
+ */
+data class TestKdocExportHolder(
+    /**
+     * Basic text field
+     */
+    val text: String,
+    /**
+     * Basic integer field
+     */
+    val number: Int,
+)
