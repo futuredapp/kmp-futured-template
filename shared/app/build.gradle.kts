@@ -87,6 +87,10 @@ kotlin {
             }
         }
     }
+
+    compilerOptions {
+        this.freeCompilerArgs.add("-Xexport-kdoc")
+    }
 }
 
 android {
