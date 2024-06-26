@@ -13,6 +13,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
 
     private func initializeSharedApplication() {
+        let testData: TestKdocExportHolder = KmpApplication().data
         KmpApplication().initializeSharedApplication(platformBindings: PlatformBindingsImpl())
     }
 }
