@@ -14,7 +14,7 @@ internal class RootNavigationComponent(
 ) : ViewModelComponent<RootNavigationViewModel>(componentContext),
     RootNavigation {
 
-    private val rootNavigator: RootSlotNavigator by inject()
+    private val rootNavigator: RootNavigator by inject()
     private val deepLinkResolver: DeepLinkResolver by inject()
     private val deepLinkNavigator: DeepLinkNavigator by inject()
 

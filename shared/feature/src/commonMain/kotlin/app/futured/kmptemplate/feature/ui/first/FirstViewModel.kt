@@ -1,22 +1,21 @@
 package app.futured.kmptemplate.feature.ui.first
 
-import app.futured.kmptemplate.feature.navigation.home.HomeStackNavigator
+import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigator
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
 import co.touchlab.kermit.Logger
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
 import org.koin.core.annotation.Factory
-import kotlin.time.Duration.Companion.milliseconds
 
 @Factory
 internal class FirstViewModel(
-    private val homeNavigator: HomeStackNavigator,
-    private val arg: String,
+    private val tabBNavigator: TabBNavigator,
 ) : SharedViewModel<FirstViewState, FirstUiEvent>(),
     FirstScreen.Actions {
 
@@ -42,7 +41,7 @@ internal class FirstViewModel(
         }
     }
 
-    override fun onBack() = homeNavigator.pop()
+    override fun onBack() = tabBNavigator.pop()
 
-    override fun onNext() = homeNavigator.navigateToSecond()
+    override fun onNext() = tabBNavigator.navigateToSecond()
 }

@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigationArgs
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigationComponent
+import app.futured.kmptemplate.feature.navigation.signedin.SignedInDestination
+import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigation
+import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigationComponent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
 import app.futured.kmptemplate.feature.ui.login.LoginScreen
 import app.futured.kmptemplate.util.arch.Destination
@@ -12,6 +12,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class RootDestination : Destination<RootEntry> {
+
     @Serializable
     data object Login : RootDestination() {
         override fun createComponent(componentContext: ComponentContext): RootEntry =
@@ -19,13 +20,28 @@ sealed class RootDestination : Destination<RootEntry> {
     }
 
     @Serializable
-    data class Home(val args: HomeNavigationArgs) : RootDestination() {
+    data class SignedIn(
+        val initialStack: List<SignedInDestination> = RootDestinationDefaults.getInitialSignedInStack(),
+    ) : RootDestination() {
         override fun createComponent(componentContext: ComponentContext): RootEntry =
-            RootEntry.Home(HomeNavigationComponent(componentContext, args))
+            RootEntry.SignedIn(SignedInNavigationComponent(componentContext, initialStack))
     }
 }
 
 sealed class RootEntry : NavEntry {
-    data class Login(val screen: LoginScreen) : RootEntry()
-    data class Home(val navigation: HomeNavigation) : RootEntry()
+    data class Login(val instance: LoginScreen) : RootEntry()
+    data class SignedIn(val instance: SignedInNavigation) : RootEntry()
+}
+
+expect object RootDestinationDefaults {
+
+    /**
+     * Returns initial stack for [RootDestination.SignedIn] destination.
+     *
+     * On Android this can be a single destination, others will be created lazily as user taps on bottom navigation items.
+     *
+     * On iOS, this must be a complete list of all possible bottom navigation tabs,
+     * last being the one on top of the stack = default selected.
+     */
+    fun getInitialSignedInStack(): List<SignedInDestination>
 }
