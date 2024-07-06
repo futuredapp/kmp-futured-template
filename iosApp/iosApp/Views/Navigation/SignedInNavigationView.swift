@@ -30,51 +30,16 @@ struct SignedInNavigationView: View {
                 set: { actions.onTabSelected(tab: $0 ) }
             )
         ) {
-            ZStack {
-                if let tabANavEntry = tabA {
-                    // The .id() modifier is very important, tells view to render again whenever underlying navEntry is updated.
-                    // I literally spent entire weekend figuring this one out 🔫.
-                    TabANavigationView(tabANavEntry.instance).id(tabANavEntry.iosViewId)
-                }
-            }
-            .tag(NavigationTab.a)
-            .tabItem {
-                Label {
-                    Text(NavigationTab.a.title.localized())
-                } icon: {
-                    Image(systemName: "house.fill")
-                        .renderingMode(.template)
-                }
+            TabContentView(ofNavigationEntry: tabA, forNavigationTab: NavigationTab.a) { entry in
+                TabANavigationView(entry.instance)
             }
 
-            ZStack {
-                if let tabBNavEntry = tabB {
-                    TabBNavigationView(tabBNavEntry.instance).id(tabBNavEntry.iosViewId)
-                }
-            }
-            .tag(NavigationTab.b)
-            .tabItem {
-                Label {
-                    Text(NavigationTab.b.title.localized())
-                } icon: {
-                    Image(systemName: "plus")
-                        .renderingMode(.template)
-                }
+            TabContentView(ofNavigationEntry: tabB, forNavigationTab: NavigationTab.b) { entry in
+                TabBNavigationView(entry.instance)
             }
 
-            ZStack {
-                if let tabCNavEntry = tabC {
-                    TabCNavigationView(tabCNavEntry.instance).id(tabCNavEntry.iosViewId)
-                }
-            }
-            .tag(NavigationTab.c)
-            .tabItem {
-                Label {
-                    Text(NavigationTab.c.title.localized())
-                } icon: {
-                    Image(systemName: "person.crop.circle")
-                        .renderingMode(.template)
-                }
+            TabContentView(ofNavigationEntry: tabC, forNavigationTab: NavigationTab.c) { entry in
+                TabCNavigationView(entry.instance)
             }
         }
     }

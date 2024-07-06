@@ -14,6 +14,7 @@
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
 		111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */; };
 		112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112B170D2C35459100ADCCBF /* KotlinOptionalStateFlow.swift */; };
+		114970172C399DC9005C6924 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114970162C399DC9005C6924 /* TabContentView.swift */; };
 		1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155AEDC2B46EE5B0093EF55 /* SecretView.swift */; };
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
@@ -79,6 +80,7 @@
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
 		111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EventsEffect.swift"; sourceTree = "<group>"; };
 		112B170D2C35459100ADCCBF /* KotlinOptionalStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinOptionalStateFlow.swift; sourceTree = "<group>"; };
+		114970162C399DC9005C6924 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
 		1155AEDC2B46EE5B0093EF55 /* SecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretView.swift; sourceTree = "<group>"; };
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */,
+				114970162C399DC9005C6924 /* TabContentView.swift */,
 			);
 			path = Interop;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
 				11B16AC72C32B86800ECA63A /* TabCNavigationView.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
+				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
 				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
