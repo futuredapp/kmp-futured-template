@@ -17,7 +17,6 @@ final class KotlinOptionalStateFlow<T: AnyObject>: ObservableObject {
         self.publisher = Task { @MainActor [weak self] in
             if let stateFlow = self?.stateFlow {
                 for await item in stateFlow {
-                    print("update: \(item)")
                     self?.wrappedValue = item
                 }
             }
