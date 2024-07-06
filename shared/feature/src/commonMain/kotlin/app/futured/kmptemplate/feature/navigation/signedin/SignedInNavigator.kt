@@ -18,8 +18,16 @@ internal interface SignedInNavigator {
         componentContext: ComponentContext,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>>
 
-    fun switchTab(dest: SignedInDestination, onComplete: () -> Unit = {}) // TODO KClass
-    fun setTab(dest: SignedInDestination, onComplete: () -> Unit = {})
+    /**
+     * Brings component with [dest] class to front of the stack, but **does not** recreate component if there's a component of the same class
+     * and classes are not equal.
+     */
+    fun switchTab(dest: SignedInDestination, onComplete: () -> Unit = {})
+
+    /**
+     * Removes all components with configurations of [dest]'s class, and adds the provided [dest] to the top of the stack.
+     */
+    fun bringTabToFront(dest: SignedInDestination, onComplete: () -> Unit = {})
 
     fun pop()
 }
@@ -45,7 +53,7 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
         stackNavigator.switchTab(dest, onComplete)
     }
 
-    override fun setTab(dest: SignedInDestination, onComplete: () -> Unit) {
+    override fun bringTabToFront(dest: SignedInDestination, onComplete: () -> Unit) {
         stackNavigator.bringToFront(dest, onComplete)
     }
 
@@ -62,7 +70,7 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
                 if (existing != null) {
                     stack.filterNot { it::class == configuration::class } + existing
                 } else {
-                    stack.filterNot { it::class == configuration::class } + configuration
+                    stack + configuration
                 }
             },
             onComplete = { _, _ -> onComplete() },

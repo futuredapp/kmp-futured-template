@@ -36,23 +36,23 @@ internal class RootNavigationViewModel(
             DeepLinkDestination.Login -> rootNavigator.setLogin()
 
             DeepLinkDestination.TabA -> rootNavigator.setSignedIn {
-                signedInNavigator.setTab(SignedInDestination.A)
+                signedInNavigator.bringTabToFront(SignedInDestination.A)
             }
 
             DeepLinkDestination.TabB -> rootNavigator.setSignedIn {
-                signedInNavigator.setTab(SignedInDestination.B())
+                signedInNavigator.bringTabToFront(SignedInDestination.B())
             }
 
             DeepLinkDestination.TabC -> rootNavigator.setSignedIn {
-                signedInNavigator.setTab(SignedInDestination.C)
+                signedInNavigator.bringTabToFront(SignedInDestination.C)
             }
 
             DeepLinkDestination.ThirdScreen -> rootNavigator.setSignedIn {
-                signedInNavigator.setTab(SignedInDestination.B.deepLinkThirdScreen())
+                signedInNavigator.bringTabToFront(SignedInDestination.B.deepLinkThirdScreen())
             }
 
             is DeepLinkDestination.SecretScreen -> rootNavigator.setSignedIn {
-                signedInNavigator.setTab(SignedInDestination.B.deepLinkSecretScreen(deepLink.argument))
+                signedInNavigator.bringTabToFront(SignedInDestination.B.deepLinkSecretScreen(deepLink.argument))
             }
         }
 
