@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
+import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import app.futured.kmptemplate.util.arch.ViewModelComponent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
@@ -37,9 +38,9 @@ internal class SignedInNavigationComponent(
     override val viewState: StateFlow<SignedInNavigationViewState> = viewModel.viewState.combine(stack) { vs, stack ->
         vs.copy(
             selectedTab = when (stack.active.instance) {
-                is SignedInNavEntry.A -> SignedInNavigationViewState.Tab.A
-                is SignedInNavEntry.B -> SignedInNavigationViewState.Tab.B
-                is SignedInNavEntry.C -> SignedInNavigationViewState.Tab.C
+                is SignedInNavEntry.A -> NavigationTab.A
+                is SignedInNavEntry.B -> NavigationTab.B
+                is SignedInNavEntry.C -> NavigationTab.C
             },
         )
     }.stateIn(coroutineScope, SharingStarted.Lazily, SignedInNavigationViewState())

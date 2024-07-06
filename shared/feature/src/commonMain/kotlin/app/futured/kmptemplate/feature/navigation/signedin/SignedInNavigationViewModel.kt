@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
+import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.annotation.Factory
@@ -11,8 +12,14 @@ internal class SignedInNavigationViewModel(
 
     override val viewState: MutableStateFlow<SignedInNavigationViewState> = MutableStateFlow(SignedInNavigationViewState())
 
-    override fun onTabSelected(tab: SignedInNavigationViewState.Tab) {
-        signedInNavigator.switchTab(tab)
+    override fun onTabSelected(tab: NavigationTab) {
+        signedInNavigator.switchTab(
+            when (tab) {
+                NavigationTab.A -> SignedInDestination.A
+                NavigationTab.B -> SignedInDestination.B()
+                NavigationTab.C -> SignedInDestination.C
+            },
+        )
     }
 
     override fun onBack() {

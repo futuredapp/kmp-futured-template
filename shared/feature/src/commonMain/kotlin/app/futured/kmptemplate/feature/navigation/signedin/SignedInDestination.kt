@@ -72,10 +72,12 @@ sealed class SignedInNavEntry : NavEntry {
         val instance: TabANavigation,
         override val iosViewId: String = Clock.System.now().toEpochMilliseconds().toString(),
     ) : SignedInNavEntry()
+
     data class B(
         val instance: TabBNavigation,
         override val iosViewId: String = Clock.System.now().toEpochMilliseconds().toString(),
     ) : SignedInNavEntry()
+
     data class C(
         val instance: TabCNavigation,
         override val iosViewId: String = Clock.System.now().toEpochMilliseconds().toString(),

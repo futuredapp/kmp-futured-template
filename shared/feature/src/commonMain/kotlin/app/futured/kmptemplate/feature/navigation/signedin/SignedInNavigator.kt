@@ -18,7 +18,7 @@ internal interface SignedInNavigator {
         componentContext: ComponentContext,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>>
 
-    fun switchTab(tab: SignedInNavigationViewState.Tab, onComplete: () -> Unit = {})
+    fun switchTab(dest: SignedInDestination, onComplete: () -> Unit = {}) // TODO KClass
     fun setTab(dest: SignedInDestination, onComplete: () -> Unit = {})
 
     fun pop()
@@ -41,12 +41,8 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
         },
     ).asStateFlow(componentContext.componentCoroutineScope())
 
-    override fun switchTab(tab: SignedInNavigationViewState.Tab, onComplete: () -> Unit) {
-        when (tab) {
-            SignedInNavigationViewState.Tab.A -> stackNavigator.switchTab(SignedInDestination.A, onComplete)
-            SignedInNavigationViewState.Tab.B -> stackNavigator.switchTab(SignedInDestination.B(), onComplete)
-            SignedInNavigationViewState.Tab.C -> stackNavigator.switchTab(SignedInDestination.C, onComplete)
-        }
+    override fun switchTab(dest: SignedInDestination, onComplete: () -> Unit) {
+        stackNavigator.switchTab(dest, onComplete)
     }
 
     override fun setTab(dest: SignedInDestination, onComplete: () -> Unit) {

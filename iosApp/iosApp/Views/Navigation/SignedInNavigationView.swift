@@ -37,10 +37,10 @@ struct SignedInNavigationView: View {
                     TabANavigationView(tabANavEntry.instance).id(tabANavEntry.iosViewId)
                 }
             }
-            .tag(SignedInNavigationViewState.Tab.a)
+            .tag(NavigationTab.a)
             .tabItem {
                 Label {
-                    Text("Tab A")
+                    Text(NavigationTab.a.title.localized())
                 } icon: {
                     Image(systemName: "house.fill")
                         .renderingMode(.template)
@@ -52,10 +52,10 @@ struct SignedInNavigationView: View {
                     TabBNavigationView(tabBNavEntry.instance).id(tabBNavEntry.iosViewId)
                 }
             }
-            .tag(SignedInNavigationViewState.Tab.b)
+            .tag(NavigationTab.b)
             .tabItem {
                 Label {
-                    Text("Tab B")
+                    Text(NavigationTab.b.title.localized())
                 } icon: {
                     Image(systemName: "plus")
                         .renderingMode(.template)
@@ -67,10 +67,10 @@ struct SignedInNavigationView: View {
                     TabCNavigationView(tabCNavEntry.instance).id(tabCNavEntry.iosViewId)
                 }
             }
-            .tag(SignedInNavigationViewState.Tab.c)
+            .tag(NavigationTab.c)
             .tabItem {
                 Label {
-                    Text("Tab C")
+                    Text(NavigationTab.c.title.localized())
                 } icon: {
                     Image(systemName: "person.crop.circle")
                         .renderingMode(.template)

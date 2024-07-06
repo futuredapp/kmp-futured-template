@@ -20,10 +20,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInDestination
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavEntry
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigationViewState
+import app.futured.kmptemplate.resources.localized
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
@@ -44,26 +47,14 @@ fun SignedInNavGraph(
         modifier = modifier,
         bottomBar = {
             NavigationBar(modifier = Modifier.fillMaxWidth()) {
-                NavigationBarItem(
-                    selected = viewState.selectedTab == SignedInNavigationViewState.Tab.A,
-                    onClick = { actions.onTabSelected(SignedInNavigationViewState.Tab.A) },
-                    icon = { Icon(Icons.Filled.Home, contentDescription = "Tab A") },
-                    label = { Text(text = "Tab A") },
-                )
-
-                NavigationBarItem(
-                    selected = viewState.selectedTab == SignedInNavigationViewState.Tab.B,
-                    onClick = { actions.onTabSelected(SignedInNavigationViewState.Tab.B) },
-                    icon = { Icon(Icons.Filled.Add, contentDescription = "Tab B") },
-                    label = { Text(text = "Tab B") },
-                )
-
-                NavigationBarItem(
-                    selected = viewState.selectedTab == SignedInNavigationViewState.Tab.C,
-                    onClick = { actions.onTabSelected(SignedInNavigationViewState.Tab.C) },
-                    icon = { Icon(Icons.Filled.AccountCircle, contentDescription = "Tab C") },
-                    label = { Text(text = "Tab C") },
-                )
+                for (tab in viewState.navigationTabs) {
+                    NavigationBarItem(
+                        selected = tab == viewState.selectedTab,
+                        onClick = { actions.onTabSelected(tab) },
+                        icon = { Icon(tab.icon, contentDescription = null) },
+                        label = { Text(text = tab.title.localized()) },
+                    )
+                }
             }
         },
     ) { paddingValues ->
@@ -77,6 +68,13 @@ fun SignedInNavGraph(
         )
     }
 }
+
+private val NavigationTab.icon: ImageVector
+    get() = when (this) {
+        NavigationTab.A -> Icons.Filled.Home
+        NavigationTab.B -> Icons.Filled.Add
+        NavigationTab.C -> Icons.Filled.AccountCircle
+    }
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
