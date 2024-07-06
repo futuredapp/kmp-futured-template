@@ -30,43 +30,51 @@ struct SignedInNavigationView: View {
                 set: { actions.onTabSelected(tab: $0 ) }
             )
         ) {
-            if let tabANavEntry = tabA {
-                TabANavigationView(tabANavEntry.instance)
-                    .tag(SignedInNavigationViewState.Tab.a)
-                    .tabItem {
-                        Label {
-                            Text("Tab A")
-                        } icon: {
-                            Image(systemName: "house.fill")
-                                .renderingMode(.template)
-                        }
-                    }
+            ZStack {
+                if let tabANavEntry = tabA {
+                    // The .id() modifier is very important, tells view to render again whenever underlying navEntry is updated.
+                    // I literally spent entire weekend figuring this one out 🔫.
+                    TabANavigationView(tabANavEntry.instance).id(tabANavEntry.iosViewId)
+                }
+            }
+            .tag(SignedInNavigationViewState.Tab.a)
+            .tabItem {
+                Label {
+                    Text("Tab A")
+                } icon: {
+                    Image(systemName: "house.fill")
+                        .renderingMode(.template)
+                }
             }
 
-            if let tabBNavEntry = tabB {
-                TabBNavigationView(tabBNavEntry.instance)
-                    .tag(SignedInNavigationViewState.Tab.b)
-                    .tabItem {
-                        Label {
-                            Text("Tab B")
-                        } icon: {
-                            Image(systemName: "plus")
-                                .renderingMode(.template)
-                        }
-                    }
+            ZStack {
+                if let tabBNavEntry = tabB {
+                    TabBNavigationView(tabBNavEntry.instance).id(tabBNavEntry.iosViewId)
+                }
+            }
+            .tag(SignedInNavigationViewState.Tab.b)
+            .tabItem {
+                Label {
+                    Text("Tab B")
+                } icon: {
+                    Image(systemName: "plus")
+                        .renderingMode(.template)
+                }
             }
 
-            if let tabCNavEntry = tabC {
-                TabCNavigationView(tabCNavEntry.instance)
-                    .tag(SignedInNavigationViewState.Tab.c)
-                    .tabItem {
-                        Label {
-                            Text("Tab C")
-                        } icon: {
-                            Image(systemName: "person.crop.circle")
-                                .renderingMode(.template)
-                        }
-                    }
+            ZStack {
+                if let tabCNavEntry = tabC {
+                    TabCNavigationView(tabCNavEntry.instance).id(tabCNavEntry.iosViewId)
+                }
+            }
+            .tag(SignedInNavigationViewState.Tab.c)
+            .tabItem {
+                Label {
+                    Text("Tab C")
+                } icon: {
+                    Image(systemName: "person.crop.circle")
+                        .renderingMode(.template)
+                }
             }
         }
     }
