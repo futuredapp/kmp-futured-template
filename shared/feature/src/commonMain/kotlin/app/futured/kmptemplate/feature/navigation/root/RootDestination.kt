@@ -1,6 +1,5 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import app.futured.kmptemplate.feature.navigation.signedin.SignedInDestination
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigationComponent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
@@ -20,28 +19,13 @@ sealed class RootDestination : Destination<RootEntry> {
     }
 
     @Serializable
-    data class SignedIn(
-        val initialStack: List<SignedInDestination> = RootDestinationDefaults.getInitialSignedInStack(),
-    ) : RootDestination() {
+    data object SignedIn : RootDestination() {
         override fun createComponent(componentContext: ComponentContext): RootEntry =
-            RootEntry.SignedIn(SignedInNavigationComponent(componentContext, initialStack))
+            RootEntry.SignedIn(SignedInNavigationComponent(componentContext))
     }
 }
 
 sealed class RootEntry : NavEntry {
     data class Login(val instance: LoginScreen) : RootEntry()
     data class SignedIn(val instance: SignedInNavigation) : RootEntry()
-}
-
-expect object RootDestinationDefaults {
-
-    /**
-     * Returns initial stack for [RootDestination.SignedIn] destination.
-     *
-     * On Android this can be a single destination, others will be created lazily as user taps on bottom navigation items.
-     *
-     * On iOS, this must be a complete list of all possible bottom navigation tabs,
-     * last being the one on top of the stack = default selected.
-     */
-    fun getInitialSignedInStack(): List<SignedInDestination>
 }

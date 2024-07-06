@@ -1,7 +1,5 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkDestination
-import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkNavigator
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.ComponentContext
@@ -14,12 +12,12 @@ import org.koin.core.annotation.Single
 
 internal interface RootNavigator {
     fun createSlot(componentContext: ComponentContext): StateFlow<ChildSlot<RootDestination, RootEntry>>
-    fun setLogin()
-    fun setSignedIn()
+    fun setLogin(onComplete: () -> Unit = {})
+    fun setSignedIn(onComplete: () -> Unit = {})
 }
 
 @Single
-internal class RootNavigatorImpl : RootNavigator, DeepLinkNavigator {
+internal class RootNavigatorImpl : RootNavigator {
 
     private val slotNavigator: SlotNavigation<RootDestination> = SlotNavigation()
 
@@ -33,12 +31,7 @@ internal class RootNavigatorImpl : RootNavigator, DeepLinkNavigator {
         },
     ).asStateFlow(componentContext.componentCoroutineScope())
 
-    override fun setLogin() = slotNavigator.activate(RootDestination.Login)
+    override fun setLogin(onComplete: () -> Unit) = slotNavigator.activate(RootDestination.Login, onComplete)
 
-    override fun setSignedIn() = slotNavigator.activate(RootDestination.SignedIn())
-
-    override fun openDeepLink(destination: DeepLinkDestination) {
-        // TODO deep links
-//        slotNavigator.activate(RootDestination.Home(args = HomeNavigationArgs(deepLinkDestination = destination)))
-    }
+    override fun setSignedIn(onComplete: () -> Unit) = slotNavigator.activate(RootDestination.SignedIn, onComplete)
 }

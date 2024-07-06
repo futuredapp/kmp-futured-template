@@ -12,7 +12,7 @@ internal class SignedInNavigationViewModel(
     override val viewState: MutableStateFlow<SignedInNavigationViewState> = MutableStateFlow(SignedInNavigationViewState())
 
     override fun onTabSelected(tab: SignedInNavigationViewState.Tab) {
-        signedInNavigator.selectTab(tab)
+        signedInNavigator.switchTab(tab)
     }
 
     override fun onBack() {

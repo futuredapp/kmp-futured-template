@@ -12,7 +12,6 @@ import org.koin.core.component.inject
 
 internal class SignedInNavigationComponent(
     componentContext: ComponentContext,
-    initialStack: List<SignedInDestination>,
 ) : ViewModelComponent<SignedInNavigationViewModel>(componentContext), SignedInNavigation {
 
     private val navigator: SignedInNavigator by inject()
@@ -21,7 +20,6 @@ internal class SignedInNavigationComponent(
 
     override val stack: StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>> = navigator.createStack(
         componentContext = this,
-        initialStack = initialStack,
     )
 
     override val tabA: StateFlow<SignedInNavEntry.A?> = stack.map { childStack ->

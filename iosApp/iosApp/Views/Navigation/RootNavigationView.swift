@@ -8,7 +8,7 @@ struct RootNavigationView: View {
 
     init(_ component: RootNavigation) {
         self._slot = .init(component.slot)
-        self.openDeepLink = component.openDeepLink
+        self.openDeepLink = component.actions.openDeepLink
     }
 
     var body: some View {

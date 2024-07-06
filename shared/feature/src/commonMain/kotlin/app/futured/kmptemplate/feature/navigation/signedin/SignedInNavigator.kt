@@ -3,7 +3,6 @@ package app.futured.kmptemplate.feature.navigation.signedin
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.StackNavigator
@@ -17,14 +16,14 @@ internal interface SignedInNavigator {
 
     fun createStack(
         componentContext: ComponentContext,
-        initialStack: List<SignedInDestination>,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>>
 
-    fun selectTab(tab: SignedInNavigationViewState.Tab)
+    fun switchTab(tab: SignedInNavigationViewState.Tab, onComplete: () -> Unit = {})
+    fun setTab(dest: SignedInDestination, onComplete: () -> Unit = {})
+
     fun pop()
 }
 
-@OptIn(ExperimentalDecomposeApi::class)
 @Single
 internal class SignedInNavigatorImpl : SignedInNavigator {
 
@@ -32,32 +31,33 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
 
     override fun createStack(
         componentContext: ComponentContext,
-        initialStack: List<SignedInDestination>,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>> = componentContext.childStack(
         source = stackNavigator,
         serializer = SignedInDestination.serializer(),
-        initialStack = {
-            initialStack
-        },
+        initialStack = { SignedInNavigationDefaults.getInitialStack() },
         handleBackButton = true,
         childFactory = { dest, childContext ->
             dest.createComponent(childContext)
         },
     ).asStateFlow(componentContext.componentCoroutineScope())
 
-    override fun selectTab(tab: SignedInNavigationViewState.Tab) {
+    override fun switchTab(tab: SignedInNavigationViewState.Tab, onComplete: () -> Unit) {
         when (tab) {
-            SignedInNavigationViewState.Tab.A -> stackNavigator.switchTab(SignedInDestination.A)
-            SignedInNavigationViewState.Tab.B -> stackNavigator.switchTab(SignedInDestination.B())
-            SignedInNavigationViewState.Tab.C -> stackNavigator.switchTab(SignedInDestination.C)
+            SignedInNavigationViewState.Tab.A -> stackNavigator.switchTab(SignedInDestination.A, onComplete)
+            SignedInNavigationViewState.Tab.B -> stackNavigator.switchTab(SignedInDestination.B(), onComplete)
+            SignedInNavigationViewState.Tab.C -> stackNavigator.switchTab(SignedInDestination.C, onComplete)
         }
+    }
+
+    override fun setTab(dest: SignedInDestination, onComplete: () -> Unit) {
+        stackNavigator.bringToFront(dest, onComplete)
     }
 
     override fun pop() = stackNavigator.pop()
 
     /**
      * The same as [StackNavigation.bringToFront] but does not recreate [configuration] if it's class is already on stack and
-     * the classes do not equal.
+     * the classes are not equal.
      */
     private inline fun <C : Any> StackNavigator<C>.switchTab(configuration: C, crossinline onComplete: () -> Unit = {}) {
         navigate(

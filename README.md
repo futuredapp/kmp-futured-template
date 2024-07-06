@@ -198,6 +198,10 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 Deep links are provided by each platform to common code and processed using `DeepLinkResolver` and `DeepLinkNavigator` classes.
 The (example) app currently supports the following scheme: `kmptemplate` and the following links:
 
-- `kmptemplate://third` -- Navigates to third example screen.
-- `kmptemplate://secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
-  link with optional argument `arg`.
+- `kmptemplate://login` -- Navigates to login screen
+- `kmptemplate://a` -- Navigates to bottom navigation tab A
+- `kmptemplate://b` -- Navigates to bottom navigation tab B
+- `kmptemplate://c` -- Navigates to bottom navigation tab C
+- `kmptemplate://b/third` -- Navigates to third example screen on tab B.
+- `kmptemplate://b/secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
+  link with optional argument `arg` on tab B
