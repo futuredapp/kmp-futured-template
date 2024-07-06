@@ -28,7 +28,7 @@ struct TabContentView<
         ZStack {
             if let entry = navEntry {
                 // The .id() modifier is very important, tells TabView to render again whenever underlying navEntry is updated.
-                // I literally spent entire weekend figuring this out 🔫.
+                // I literally spent hours figuring this out 🔫.
                 content(entry).id(entry.iosViewId)
             }
         }
