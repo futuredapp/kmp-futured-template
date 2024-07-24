@@ -14,5 +14,5 @@ abstract class ViewModelComponent<VM : SharedViewModel<*, *>>(
 
     abstract val viewModel: VM
 
-    private val coroutineScope = componentCoroutineScope()
+    protected val coroutineScope = componentCoroutineScope()
 }

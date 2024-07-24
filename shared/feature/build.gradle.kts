@@ -43,6 +43,7 @@ kotlin {
                 implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.immutableCollections)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.dateTime)
 
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
@@ -51,6 +52,7 @@ kotlin {
                 implementation(projects.shared.resources)
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
+                implementation(libs.network.ktor.http)
             }
         }
 

@@ -8,6 +8,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class DeepLinkDestination {
 
+    data object Login : DeepLinkDestination()
+
+    data object TabA : DeepLinkDestination()
+
+    data object TabB : DeepLinkDestination()
+
+    data object TabC : DeepLinkDestination()
+
     @Serializable
     data class SecretScreen(val argument: String?) : DeepLinkDestination()
 

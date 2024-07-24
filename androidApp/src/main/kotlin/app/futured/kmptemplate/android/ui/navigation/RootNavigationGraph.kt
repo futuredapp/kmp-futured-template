@@ -31,17 +31,17 @@ fun RootNavGraph(
         color = MaterialTheme.colorScheme.background,
     ) {
         when (val childInstance = slot.child?.instance) {
-            is RootEntry.Home -> HomeNavGraph(
-                homeNavigation = childInstance.navigation,
-                modifier = Modifier.fillMaxSize(),
-            )
-
             is RootEntry.Login -> LoginScreenUi(
-                screen = childInstance.screen,
+                screen = childInstance.instance,
                 modifier = Modifier.fillMaxSize(),
             )
 
-            else -> Unit
+            is RootEntry.SignedIn -> SignedInNavGraph(
+                navigation = childInstance.instance,
+                modifier = Modifier.fillMaxSize(),
+            )
+
+            null -> Unit
         }
     }
 }

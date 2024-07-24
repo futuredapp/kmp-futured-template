@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.ui.login
 
-import app.futured.kmptemplate.feature.navigation.root.RootSlotNavigator
+import app.futured.kmptemplate.feature.navigation.root.RootNavigator
 import app.futured.kmptemplate.network.graphql.api.RickAndMortyApi
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
 import app.futured.kmptemplate.util.arch.SharedViewModel
@@ -14,7 +14,7 @@ import org.koin.core.annotation.Factory
 internal class LoginViewModel(
     private val starWarsApi: StarWarsApi,
     private val rickAndMortyApi: RickAndMortyApi,
-    private val navigator: RootSlotNavigator,
+    private val navigator: RootNavigator,
 ) : SharedViewModel<LoginViewState, Nothing>(),
     LoginScreen.Actions,
     LoginScreen.SuspendActions {
@@ -37,7 +37,7 @@ internal class LoginViewModel(
         logger.d { networkResult.toString() }
     }
 
-    override fun onLoginClick() = navigator.showHome()
+    override fun onLoginClick() = navigator.setSignedIn()
 
     override suspend fun refresh() {
         // Lets SwiftUI display refresh indicator for as long as data is being refreshed

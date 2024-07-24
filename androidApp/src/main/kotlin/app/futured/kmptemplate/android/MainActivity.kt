@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
         }
 
         val uri = intent.dataString ?: return
-        openDeepLink(uri)
+        actions.openDeepLink(uri)
     }
 }
 
