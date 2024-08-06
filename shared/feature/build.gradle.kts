@@ -1,5 +1,6 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -9,6 +10,7 @@ plugins {
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.dokka)
 }
 
 dependencies {
@@ -82,5 +84,24 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets.configureEach {
+        outputDirectory.set(layout.projectDirectory.dir("../../doc/documentation/html"))
+
+        val dokkaBaseConfiguration = """
+    {
+      "customStyleSheets": ["${file("../../assets/docs-style.css")}"],
+      "footerMessage": "(c) 2024 Futured - KMP Template"
+    }
+    """
+        pluginsMapConfiguration.set(
+            mapOf(
+                // fully qualified plugin name to json configuration
+                "org.jetbrains.dokka.base.DokkaBase" to dokkaBaseConfiguration,
+            ),
+        )
     }
 }

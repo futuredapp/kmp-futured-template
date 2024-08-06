@@ -4,6 +4,7 @@ import co.touchlab.skie.configuration.DefaultArgumentInterop
 import co.touchlab.skie.configuration.EnumInterop
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SealedInterop
+import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
 
@@ -116,6 +117,7 @@ skie {
             FlowInterop.Enabled(true)
             EnumInterop.Enabled(true)
             SealedInterop.Enabled(true)
+            SuppressSkieWarning.NameCollision(true)
         }
     }
 }
