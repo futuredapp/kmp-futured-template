@@ -71,6 +71,7 @@ koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", vers
 
 # KotlinX
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-immutableCollections = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutableCollections" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime" }
@@ -86,6 +87,7 @@ decompose-compose-ext = { group = "com.arkivanov.decompose", name = "extensions-
 essenty = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
 
 # Testing
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 kotlin-testCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-common", version.ref = "kotlin" }
 kotlin-testAnnotationsCommon = { group = "org.jetbrains.kotlin", name = "kotlin-test-annotations-common", version.ref = "kotlin" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
