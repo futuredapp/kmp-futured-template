@@ -3,11 +3,10 @@ package app.futured.kmptemplate.util.domain.scope
 import app.futured.kmptemplate.util.domain.UseCase
 import app.futured.kmptemplate.util.domain.error.UseCaseErrorHandler
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
 
@@ -47,13 +46,20 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
         }
 
         useCaseConfig.onStart()
-        deferred = viewModelScope.async(start = CoroutineStart.LAZY) {
-            buildOnBg(args, getWorkerDispatcher())
-        }
+        deferred = viewModelScope
+            .async(context = getWorkerDispatcher(), start = CoroutineStart.LAZY) {
+                build(args)
+            }
             .also {
-                viewModelScope.launch {
-                    kotlin.runCatching { it.await() }
-                        .fold(useCaseConfig.onSuccess, useCaseConfig.onError)
+                viewModelScope.launch(Dispatchers.Main) {
+                    try {
+                        useCaseConfig.onSuccess(it.await())
+                    } catch (cancellation: CancellationException) {
+                        // do nothing - this is normal way of suspend function interruption
+                    } catch (error: Throwable) {
+                        UseCaseErrorHandler.globalOnErrorLogger(error)
+                        useCaseConfig.onError.invoke(error)
+                    }
                 }
             }
     }
@@ -79,12 +85,12 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
         if (cancelPrevious) {
             deferred?.cancel()
         }
+
         return try {
-            val newDeferred = viewModelScope.async(start = CoroutineStart.LAZY) {
-                buildOnBg(args, getWorkerDispatcher())
-            }.also {
-                deferred = it
-            }
+            val newDeferred = viewModelScope.async(getWorkerDispatcher(), CoroutineStart.LAZY) {
+                build(args)
+            }.also { deferred = it }
+
             Result.success(newDeferred.await())
         } catch (exception: CancellationException) {
             throw exception
@@ -92,11 +98,6 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
             Result.failure(exception)
         }
     }
-
-    private suspend fun <ARGS, T : Any?> UseCase<ARGS, T>.buildOnBg(
-        args: ARGS,
-        workerDispatcher: CoroutineDispatcher,
-    ) = withContext(workerDispatcher) { build(args) }
 
     /**
      * Holds references to lambdas and some basic configuration
