@@ -58,7 +58,7 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
                         // do nothing - this is normal way of suspend function interruption
                     } catch (error: Throwable) {
                         UseCaseErrorHandler.globalOnErrorLogger(error)
-                        useCaseConfig.onError.invoke(error)
+                        useCaseConfig.onError(error)
                     }
                 }
             }
