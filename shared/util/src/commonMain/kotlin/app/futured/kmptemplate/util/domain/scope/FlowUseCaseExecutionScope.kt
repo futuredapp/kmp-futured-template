@@ -55,10 +55,12 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
                     error is CancellationException -> {
                         // ignore this exception
                     }
+
                     error != null -> {
-                        // UseCaseErrorHandler.globalOnErrorLogger(error) todo
+                        UseCaseErrorHandler.globalOnErrorLogger(error)
                         flowUseCaseConfig.onError(error)
                     }
+
                     else -> flowUseCaseConfig.onComplete()
                 }
             }
@@ -101,10 +103,12 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
                     error is CancellationException -> {
                         // ignore this exception
                     }
+
                     error != null -> {
-                        // UseCaseErrorHandler.globalOnErrorLogger(error) todo
+                        UseCaseErrorHandler.globalOnErrorLogger(error)
                         flowUseCaseConfig.onError(error)
                     }
+
                     else -> flowUseCaseConfig.onComplete()
                 }
             }
