@@ -20,4 +20,5 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Generate baseline profiles
-        run: ./gradlew clean && ./gradlew generateReleaseBaselineProfile
+        run: ./gradlew clean && ./gradlew generateReleaseBaselineProfile 
+             -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
