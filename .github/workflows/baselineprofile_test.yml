@@ -1,15 +1,5 @@
 name: Generate Baseline Profiles
 on:
-  workflow_dispatch:
-    inputs:
-      kmp_flavor:
-        description: 'KMP Flavor (dev or prod)'
-        required: true
-        default: 'prod'
-        type: choice
-        options:
-          - dev
-          - prod
   push:
 
 jobs:
@@ -30,7 +20,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Generate baseline profiles
-        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=${{ github.event.inputs.kmp_flavor }}
+        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=prod --stacktrace --info
 
       - name: Upload baseline profiles artifact
         uses: actions/upload-artifact@v3
