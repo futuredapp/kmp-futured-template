@@ -19,8 +19,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
+      - name: List Installed SDK Components
+        run: sdkmanager --list
+
       - name: Generate baseline profiles
-        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=prod --stacktrace --info
+        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=prod
 
       - name: Upload baseline profiles artifact
         uses: actions/upload-artifact@v3
