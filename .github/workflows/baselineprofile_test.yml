@@ -20,13 +20,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Generate baseline profiles
-        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=prod --warning-mode all --stacktrace --info
-        env:
-          JAVA_OPTS: -Xmx4g
-          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dkotlin.compiler.execution.strategy=in-process"
-
-      - name: Upload baseline profiles artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: baseline-profiles
-          path: '**/build/outputs/baseline-prof/*.txt'
+        run: ./gradlew clean && ./gradlew generateReleaseBaselineProfile
