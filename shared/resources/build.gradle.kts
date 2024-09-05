@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.moko.resources)
 }
 
@@ -53,9 +54,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
 

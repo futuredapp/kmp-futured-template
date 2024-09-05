@@ -9,6 +9,7 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.dokka)
 }
@@ -79,10 +80,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
 

@@ -23,7 +23,7 @@ jobs:
         run: sdkmanager --list
 
       - name: Generate baseline profiles
-        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=prod
+        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=prod --warning-mode all
 
       - name: Upload baseline profiles artifact
         uses: actions/upload-artifact@v3
