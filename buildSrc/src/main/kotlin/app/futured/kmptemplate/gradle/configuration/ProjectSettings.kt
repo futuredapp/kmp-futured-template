@@ -39,9 +39,9 @@ object ProjectSettings {
             }
 
             object Release {
-                val StorePassword = System.getenv("RELEASE_KEYSTORE_PASS") ?: ""
-                val KeyAlias = System.getenv("RELEASE_KEY_ALIAS") ?: ""
-                val KeyPassword = System.getenv("RELEASE_KEY_PASS") ?: ""
+                val StorePassword = "android"
+                val KeyAlias = "androiddebugkey"
+                val KeyPassword = "android"
             }
         }
     }

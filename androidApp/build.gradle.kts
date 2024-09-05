@@ -46,7 +46,7 @@ android {
             keyPassword = ProjectSettings.Android.Signing.Debug.KeyPassword
         }
         create(ProjectSettings.Android.BuildTypes.Release) {
-            storeFile = file("keystore/todo_your_release_keystore.keystore")
+            storeFile = file("keystore/debug.keystore")
             storePassword = ProjectSettings.Android.Signing.Release.StorePassword
             keyAlias = ProjectSettings.Android.Signing.Release.KeyAlias
             keyPassword = ProjectSettings.Android.Signing.Release.KeyPassword
