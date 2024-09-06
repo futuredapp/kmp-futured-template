@@ -4,8 +4,8 @@ import app.futured.kmptemplate.network.graphql.ext.isUnauthorizedCloudError
 import app.futured.kmptemplate.network.graphql.result.CloudErrorCode
 import app.futured.kmptemplate.network.graphql.result.NetworkError
 import app.futured.kmptemplate.network.graphql.result.NetworkResult
-import com.apollographql.apollo3.api.Mutation
-import com.apollographql.apollo3.api.Query
+import com.apollographql.apollo.api.Mutation
+import com.apollographql.apollo.api.Query
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

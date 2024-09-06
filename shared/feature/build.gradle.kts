@@ -9,6 +9,7 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.dokka)
 }
@@ -21,10 +22,8 @@ kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
@@ -79,10 +78,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
 

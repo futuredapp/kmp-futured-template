@@ -1,17 +1,19 @@
 package app.futured.kmptemplate.network.graphql.client
 
 import app.futured.kmptemplate.network.graphql.result.NetworkError
-import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.api.ApolloResponse
-import com.apollographql.apollo3.api.Mutation
-import com.apollographql.apollo3.api.Operation
-import com.apollographql.apollo3.api.Query
-import com.apollographql.apollo3.cache.normalized.fetchPolicy
-import com.apollographql.apollo3.cache.normalized.watch
-import com.apollographql.apollo3.exception.ApolloException
-import com.apollographql.apollo3.exception.ApolloHttpException
-import com.apollographql.apollo3.exception.ApolloNetworkException
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.ApolloResponse
+import com.apollographql.apollo.api.Mutation
+import com.apollographql.apollo.api.Operation
+import com.apollographql.apollo.api.Query
+import com.apollographql.apollo.cache.normalized.cacheInfo
+import com.apollographql.apollo.cache.normalized.fetchPolicy
+import com.apollographql.apollo.cache.normalized.watch
+import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.exception.ApolloHttpException
+import com.apollographql.apollo.exception.ApolloNetworkException
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Single
 
@@ -52,8 +54,13 @@ internal class ApolloApiAdapter(
         apolloClient
             .query(query)
             .fetchPolicy(fetchPolicy.asApolloFetchPolicy())
-            .watch(fetchThrows = fetchThrows, refetchThrows = refetchThrows)
+            .watch()
+            .filter {
+                // Filter out according to [fetchThrows] and [refetchThrows]
+                true
+            }
             .map { apolloResponse -> runCatching { executeOperation { apolloResponse } } }
+
 
     /**
      * Executes the [Mutation] and returns the [DATA].
@@ -94,16 +101,18 @@ internal class ApolloApiAdapter(
     }
 
     /**
-     * Unwraps successful [ApolloResponse] either into [DATA], or throws [NetworkError.CloudError]
-     * in case errors are present in the response.
+     * Unwraps successful [ApolloResponse] either into [DATA], or throws [NetworkError].
+     * If the response contains data, it returns the data.
+     * If the response contains an exception, it throws [NetworkError.UnknownError].
+     * If the response contains errors, it throws [NetworkError.CloudError].
      */
     private fun <DATA : Operation.Data> unfoldResult(response: ApolloResponse<DATA>): DATA =
-        if (response.hasErrors().not()) {
-            response.data ?: error("Response without errors and with no data")
-        } else {
-            throw NetworkError.CloudError(
+        response.data ?: run {
+            response.exception?.let { exception ->
+                throw NetworkError.UnknownError(exception)
+            } ?: throw NetworkError.CloudError(
                 code = errorResponseParser.getErrorResponseCode(response),
-                message = errorResponseParser.getErrorMessage(response) ?: "",
+                message = errorResponseParser.getErrorMessage(response) ?: ""
             )
         }
 }
