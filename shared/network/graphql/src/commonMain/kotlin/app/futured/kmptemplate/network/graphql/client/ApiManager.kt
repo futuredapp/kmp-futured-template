@@ -39,17 +39,15 @@ internal interface ApiManager {
      *
      * @param query to be executed and watched.
      * @param fetchPolicy fetch policy to apply to initial fetch.
-     * @param fetchThrows whether to emit [NetworkResult.Failure]s during the initial fetch.
-     * @param refetchThrows whether to emit [NetworkResult.Failure]s during a refetch.
+     * @param filterOutExceptions whether to filter out error responses (like cache misses) from the flow.
      * @return Flow of [DATA] wrapped in [NetworkResult]
      */
     fun <DATA : Query.Data> executeQueryWatcher(
         query: Query<DATA>,
         fetchPolicy: FetchPolicy,
-        fetchThrows: Boolean = true,
-        refetchThrows: Boolean = false,
+        filterOutExceptions: Boolean = false,
     ): Flow<NetworkResult<DATA>> = apiAdapter
-        .watchQueryWatcher(query, fetchPolicy, fetchThrows, refetchThrows)
+        .watchQueryWatcher(query, fetchPolicy, filterOutExceptions)
         .map { result -> runWrapping { errorInterceptor { result.getOrThrow() } } }
 
     /**

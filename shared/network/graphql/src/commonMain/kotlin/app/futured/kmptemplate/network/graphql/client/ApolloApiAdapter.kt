@@ -6,10 +6,8 @@ import com.apollographql.apollo.api.ApolloResponse
 import com.apollographql.apollo.api.Mutation
 import com.apollographql.apollo.api.Operation
 import com.apollographql.apollo.api.Query
-import com.apollographql.apollo.cache.normalized.cacheInfo
 import com.apollographql.apollo.cache.normalized.fetchPolicy
 import com.apollographql.apollo.cache.normalized.watch
-import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.exception.ApolloHttpException
 import com.apollographql.apollo.exception.ApolloNetworkException
 import kotlinx.coroutines.flow.Flow
@@ -41,23 +39,24 @@ internal class ApolloApiAdapter(
      *
      * @param query to be executed and watched.
      * @param fetchPolicy fetch policy to apply to initial fetch.
-     * @param fetchThrows whether to throw if an [ApolloException] happens during the initial fetch.
-     * @param refetchThrows whether to throw if an [ApolloException] happens during a refetch.
+     * @param filterOutExceptions whether to filter out error responses (like cache misses) from the flow.
      * @return Flow of [DATA] wrapped in Kotlin result
      */
     fun <DATA : Query.Data> watchQueryWatcher(
         query: Query<DATA>,
         fetchPolicy: FetchPolicy,
-        fetchThrows: Boolean = true,
-        refetchThrows: Boolean = false,
+        filterOutExceptions: Boolean,
     ): Flow<Result<DATA>> =
         apolloClient
             .query(query)
             .fetchPolicy(fetchPolicy.asApolloFetchPolicy())
             .watch()
             .filter {
-                // Filter out according to [fetchThrows] and [refetchThrows]
-                true
+                if (filterOutExceptions) {
+                    it.exception == null
+                } else {
+                    true
+                }
             }
             .map { apolloResponse -> runCatching { executeOperation { apolloResponse } } }
 
