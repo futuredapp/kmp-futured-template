@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.network.graphql.cache
 
-import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.cache.normalized.apolloStore
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.cache.normalized.apolloStore
 import org.koin.core.annotation.Single
 
 @Single
