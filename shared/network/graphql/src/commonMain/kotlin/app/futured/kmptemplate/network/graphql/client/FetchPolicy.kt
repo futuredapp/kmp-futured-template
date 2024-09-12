@@ -1,9 +1,9 @@
 package app.futured.kmptemplate.network.graphql.client
 
-import com.apollographql.apollo.exception.ApolloCompositeException
-import com.apollographql.apollo.exception.ApolloException
-import com.apollographql.apollo.exception.CacheMissException
-import com.apollographql.apollo.cache.normalized.FetchPolicy as ApolloFetchPolicy
+import com.apollographql.apollo3.exception.ApolloCompositeException
+import com.apollographql.apollo3.exception.ApolloException
+import com.apollographql.apollo3.exception.CacheMissException
+import com.apollographql.apollo3.cache.normalized.FetchPolicy as ApolloFetchPolicy
 
 enum class FetchPolicy {
     /**

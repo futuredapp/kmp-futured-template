@@ -4,8 +4,8 @@ import app.futured.kmptemplate.network.graphql.ext.isUnauthorizedCloudError
 import app.futured.kmptemplate.network.graphql.result.CloudErrorCode
 import app.futured.kmptemplate.network.graphql.result.NetworkError
 import app.futured.kmptemplate.network.graphql.result.NetworkResult
-import com.apollographql.apollo.api.Mutation
-import com.apollographql.apollo.api.Query
+import com.apollographql.apollo3.api.Mutation
+import com.apollographql.apollo3.api.Query
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -39,15 +39,17 @@ internal interface ApiManager {
      *
      * @param query to be executed and watched.
      * @param fetchPolicy fetch policy to apply to initial fetch.
-     * @param filterOutExceptions whether to filter out error responses (like cache misses) from the flow.
+     * @param fetchThrows whether to emit [NetworkResult.Failure]s during the initial fetch.
+     * @param refetchThrows whether to emit [NetworkResult.Failure]s during a refetch.
      * @return Flow of [DATA] wrapped in [NetworkResult]
      */
     fun <DATA : Query.Data> executeQueryWatcher(
         query: Query<DATA>,
         fetchPolicy: FetchPolicy,
-        filterOutExceptions: Boolean = false,
+        fetchThrows: Boolean = true,
+        refetchThrows: Boolean = false,
     ): Flow<NetworkResult<DATA>> = apiAdapter
-        .watchQueryWatcher(query, fetchPolicy, filterOutExceptions)
+        .watchQueryWatcher(query, fetchPolicy, fetchThrows, refetchThrows)
         .map { result -> runWrapping { errorInterceptor { result.getOrThrow() } } }
 
     /**

@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.network.graphql.cache
 
-import com.apollographql.apollo.cache.normalized.api.MemoryCacheFactory
-import com.apollographql.apollo.cache.normalized.api.NormalizedCacheFactory
-import com.apollographql.apollo.cache.normalized.sql.SqlNormalizedCacheFactory
+import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
+import com.apollographql.apollo3.cache.normalized.api.NormalizedCacheFactory
+import com.apollographql.apollo3.cache.normalized.sql.SqlNormalizedCacheFactory
 import org.koin.core.annotation.Single
 
 @Single

@@ -4,12 +4,12 @@ import app.futured.kmptemplate.network.graphql.cache.NetworkNormalizedCacheFacto
 import app.futured.kmptemplate.network.graphql.cache.NormalizedCacheKeyGenerator
 import app.futured.kmptemplate.network.graphql.interceptor.LoggingInterceptorFactory
 import app.futured.kmptemplate.network.graphql.tools.Constants
-import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.cache.normalized.FetchPolicy
-import com.apollographql.apollo.cache.normalized.fetchPolicy
-import com.apollographql.apollo.cache.normalized.normalizedCache
-import com.apollographql.apollo.network.http.DefaultHttpEngine
-import com.apollographql.apollo.network.http.HttpNetworkTransport
+import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.cache.normalized.FetchPolicy
+import com.apollographql.apollo3.cache.normalized.fetchPolicy
+import com.apollographql.apollo3.cache.normalized.normalizedCache
+import com.apollographql.apollo3.network.http.DefaultHttpEngine
+import com.apollographql.apollo3.network.http.HttpNetworkTransport
 import org.koin.core.annotation.Single
 
 @Single
