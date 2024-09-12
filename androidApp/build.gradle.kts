@@ -7,6 +7,7 @@ plugins {
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
     alias(libs.plugins.androidx.baselineprofile)
+    alias(libs.plugins.firebase.distribution)
 }
 
 kotlin {
