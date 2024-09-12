@@ -37,11 +37,10 @@ jobs:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
     env:
-      # TODO AppCenter application name, eg. "futured/Gastromapa"
-      APPCENTER_APP_NAME: futured/ApplicationName
-      # Add additional AppCenter user groups separated by semicolon, if applicable, eg. "Collaborators;Partners"
-      APPCENTER_GROUPS: Collaborators
-      EXCLUDE_APK_FILTER: .*unaligned.apk\|.*Test.*.apk
+      # TODO Verify app distribution groups
+      APP_DISTRIBUTION_GROUPS: futured-qa, devs
+      APP_DISTRIBUTION_ARTIFACT_TYPE: APK
+      FIREBASE_CREDENTIALS_FILE: firebase_credentials.json
       # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
       SLACK_CHANNEL: project-slack-channel-name
       # TODO verify product flavor configuration
@@ -64,33 +63,23 @@ jobs:
           java-version: '17'
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Run Lint check
-        shell: bash
-        # `lintRelease` covers androidApp module and all shared modules all at once. No need to call `lintEnterprise` and `lintRelease`.
-        run: ./gradlew --continue lintCheck lintRelease
+      - name: Prepare environment
+        run: |
+          echo "BUILD_NUMBER=$((GITHUB_RUN_NUMBER))" >> $GITHUB_ENV
+          echo '${{ secrets.APP_DISTRIBUTION_SERVICE_ACCOUNT }}' > $FIREBASE_CREDENTIALS_FILE
       - name: Run unit tests
         shell: bash
         # `testReleaseUnitTest` covers androidApp module and all shared modules all at once. No need to call `testEnterpriseUnitTest` and `testReleaseUnitTest`.
         run: ./gradlew --continue testReleaseUnitTest
-      - name: Assemble APK
-        shell: bash
-        run: ./gradlew assembleEnterprise -P buildkonfig.flavor=${{env.KMP_FLAVOR}}
-      - name: Find artifacts and mapping file
+      - name: Assemble and upload to Firebase App Distribution
         shell: bash
         run: |
-          echo ::set-output name=apk_file::$(find . -name "*.apk" | grep -v ${{env.EXCLUDE_APK_FILTER}})
-          echo ::set-output name=aab_file::$(find . -name "*.aab")
-          echo ::set-output name=mapping_file::$(find . -name mapping.txt)
-        id: artifacts
-      - name: Publish to App Center
-        uses: wzieba/AppCenter-Github-Action@v1.3.2
-        with:
-          appName: ${{env.APPCENTER_APP_NAME}}
-          token: ${{secrets.APPCENTER_API_TOKEN}}
-          group: ${{env.APPCENTER_GROUPS}}
-          file: ${{steps.artifacts.outputs.apk_file}}
-          releaseNotes: ${{ github.event.head_commit.message }}
-          notifyTesters: false
+          ./gradlew \
+            assembleEnterprise -P buildkonfig.flavor=$KMP_FLAVOR \
+            appDistributionUploadEnterprise \
+            --serviceCredentialsFile="$FIREBASE_CREDENTIALS_FILE" \
+            --artifactType="$APP_DISTRIBUTION_ARTIFACT_TYPE" \
+            --groups="$APP_DISTRIBUTION_GROUPS"
       - name: Slack Notification
         if: failure()
         uses: homoluctus/slatify@master
