@@ -5,6 +5,7 @@ ksp = "1.9.24-1.0.20" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
 androidxComposeBom = "2024.01.00"
 androidxActivity = "1.7.2"
+androidxLifecycle = "2.8.6"
 composeCompiler = "1.5.14" # Must be compatible with: `kotlin`
 decompose = "3.0.0"
 essenty = "2.0.0"
@@ -82,6 +83,7 @@ kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 
 # Decompose
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
