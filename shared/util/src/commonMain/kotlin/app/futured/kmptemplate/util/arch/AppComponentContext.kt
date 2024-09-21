@@ -15,11 +15,17 @@ import org.koin.core.qualifier.Qualifier
 import org.koin.mp.KoinPlatformTools
 
 /**
- * Default application-specific [ComponentContext].
- * Adds [KoinComponent] functionality to [ComponentContext].
+ * Application-specific [ComponentContext].
+ *
+ * Decorates [KoinComponent] with [KoinComponent], allowing injection in components by default.
  */
 interface AppComponentContext : GenericComponentContext<AppComponentContext>, KoinComponent
 
+/**
+ * Default implementation of [AppComponentContext].
+ *
+ * @param componentContext [ComponentContext] to wrap.
+ */
 class DefaultAppComponentContext(
     componentContext: ComponentContext,
 ) : AppComponentContext,
