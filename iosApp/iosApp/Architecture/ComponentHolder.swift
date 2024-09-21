@@ -19,6 +19,7 @@ final class ComponentHolder<T> {
     }
 
     deinit {
-        LifecycleRegistryExtKt.create(lifecycle)
+        // Destroy the root component before it is deallocated
+        LifecycleRegistryExtKt.destroy(lifecycle)
     }
 }
