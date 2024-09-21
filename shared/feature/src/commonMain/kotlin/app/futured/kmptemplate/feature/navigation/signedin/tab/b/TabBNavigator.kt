@@ -1,10 +1,10 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
 import app.futured.kmptemplate.feature.navigation.root.RootNavigator
+import app.futured.kmptemplate.util.arch.AppComponentContext
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.Child
-import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
@@ -16,7 +16,7 @@ import org.koin.core.annotation.Single
 
 internal interface TabBNavigator {
     fun createStack(
-        componentContext: ComponentContext,
+        componentContext: AppComponentContext,
         initialStack: List<TabBDestination>,
     ): StateFlow<ChildStack<TabBDestination, TabBNavEntry>>
 
@@ -35,7 +35,7 @@ internal class TabBNavigatorImpl(
     private val stackNavigator: StackNavigation<TabBDestination> = StackNavigation()
 
     override fun createStack(
-        componentContext: ComponentContext,
+        componentContext: AppComponentContext,
         initialStack: List<TabBDestination>,
     ): StateFlow<ChildStack<TabBDestination, TabBNavEntry>> = componentContext.childStack(
         source = stackNavigator,

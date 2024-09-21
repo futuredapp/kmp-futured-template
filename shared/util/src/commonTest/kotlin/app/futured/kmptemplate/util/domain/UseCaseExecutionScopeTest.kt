@@ -300,6 +300,9 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.advanceTimeByCompat(delayTimeMillis: Long) {
-        this.testScheduler.apply { advanceTimeBy(delayTimeMillis); runCurrent() }
+        this.testScheduler.apply {
+            advanceTimeBy(delayTimeMillis)
+            runCurrent()
+        }
     }
 }

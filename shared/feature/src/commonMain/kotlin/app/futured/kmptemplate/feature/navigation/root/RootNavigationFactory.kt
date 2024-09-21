@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import com.arkivanov.decompose.ComponentContext
+import app.futured.kmptemplate.util.arch.AppComponentContext
 
 object RootNavigationFactory {
-    fun create(componentContext: ComponentContext): RootNavigation = RootNavigationComponent(componentContext)
+    fun create(componentContext: AppComponentContext): RootNavigation = RootNavigationComponent(componentContext)
 }
