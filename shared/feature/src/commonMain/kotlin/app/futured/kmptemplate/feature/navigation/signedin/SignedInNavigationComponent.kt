@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
-import app.futured.kmptemplate.util.arch.ViewModelComponent
-import com.arkivanov.decompose.ComponentContext
+import app.futured.kmptemplate.util.arch.AppComponentContext
+import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -12,12 +12,13 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.inject
 
 internal class SignedInNavigationComponent(
-    componentContext: ComponentContext,
-) : ViewModelComponent<SignedInNavigationViewModel>(componentContext), SignedInNavigation {
+    componentContext: AppComponentContext,
+) : AppComponentContext by componentContext, SignedInNavigation {
 
     private val navigator: SignedInNavigator by inject()
 
-    override val viewModel: SignedInNavigationViewModel by inject()
+    private val coroutineScope = componentCoroutineScope()
+    private val viewModel: SignedInNavigationViewModel by inject()
 
     override val stack: StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>> = navigator.createStack(
         componentContext = this,
