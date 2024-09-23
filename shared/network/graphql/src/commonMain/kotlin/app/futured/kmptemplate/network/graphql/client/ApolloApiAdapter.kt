@@ -129,17 +129,11 @@ internal class ApolloApiAdapter(
             return data
         }
 
-        if (response.hasErrors()) {
-            throw NetworkError.CloudError(
-                code = errorResponseParser.getErrorResponseCode(response),
-                message = errorResponseParser.getErrorMessage(response),
-            )
-        }
-
-        // Non-compliant server, if data is null, there should be at least one error
+        // Non-compliant server, if data is null, there should be at least one error, or
+        // A GraphQL request error happened or a Graph field error bubbled up.
         throw NetworkError.CloudError(
             code = errorResponseParser.getErrorResponseCode(response),
-            message = errorResponseParser.getErrorMessage(response),
+            message = errorResponseParser.getErrorMessage(response)
         )
     }
 }
