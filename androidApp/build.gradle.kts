@@ -6,6 +6,8 @@ plugins {
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
     // TODO enable after providing google-services.json
     //alias(libs.plugins.google.services)
@@ -31,11 +33,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     packaging {
@@ -95,7 +92,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTarget
+        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
 }
 

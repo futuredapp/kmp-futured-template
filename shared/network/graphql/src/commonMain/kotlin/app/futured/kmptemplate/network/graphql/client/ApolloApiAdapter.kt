@@ -55,6 +55,7 @@ internal class ApolloApiAdapter(
             .watch(fetchThrows = fetchThrows, refetchThrows = refetchThrows)
             .map { apolloResponse -> runCatching { executeOperation { apolloResponse } } }
 
+
     /**
      * Executes the [Mutation] and returns the [DATA].
      *

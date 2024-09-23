@@ -1,39 +1,40 @@
 [versions]
-agp = "8.4.1"
-kotlin = "1.9.24"
-ksp = "1.9.24-1.0.20" # Must be compatible with: `kotlin`
+agp = "8.5.2"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.24" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
-androidxComposeBom = "2024.01.00"
-androidxActivity = "1.7.2"
-composeCompiler = "1.5.14" # Must be compatible with: `kotlin`
-decompose = "3.0.0"
-essenty = "2.0.0"
+androidxComposeBom = "2024.09.00"
+androidxActivity = "1.9.2"
+decompose = "3.1.0"
+essenty = "2.1.0"
 koin = "3.5.6"
 koinAnnotations = "1.3.1" # Must be compatible with: `ksp`
 kotlinx-coroutines = "1.8.1"
-kotlinx-immutableCollections = "0.3.7"
-kotlinx-dateTime = "0.6.0"
+kotlinx-immutableCollections = "0.3.8"
+kotlinx-dateTime = "0.6.1"
 ktlintGradlePlugin = "12.1.1"
 ktlint = "1.2.1"
 detektGradlePlugin = "1.23.6"
 composeLint = "1.3.1"
-apollo = "3.8.2"
-ktorfit = "1.14.0" # Must be compatible with: `ksp`
-ktor = "2.3.11" # Must be compatible with: `ktorfit`
-kotlinx-serialization = "1.6.2"
+apollo = "3.8.4"
+ktorfit = "2.1.0" # Must be compatible with: `ksp`
+ktorfitConverter = "2.1.0"
+ktor = "2.3.12" # Must be compatible with: `ktorfit`
+kotlinx-serialization = "1.7.1" # Must be compatible with: `kotlin`
 timber = "5.0.1"
 kermit = "2.0.2"
-skie = "0.8.2" # Must be compatible with: `kotlin`
-buildkonfig = "0.15.1"
-nsExceptionKt = "0.1.15"
+skie = "0.8.4" # Must be compatible with: `kotlin`
+buildkonfig = "0.15.2"
+nsExceptionKt = "1.0.0-BETA-7"
 datastore = "1.1.1"
 moko-resources = "0.24.0"
-baselineProfile = "1.2.4"
-junit = "1.1.5"
-espressoCore = "3.5.1"
+baselineProfile = "1.3.0"
+junit = "1.2.1"
+espressoCore = "3.6.1"
 uiautomator = "2.3.0"
 benchmarkMacroJunit4 = "1.2.4"
 profileinstaller = "1.3.1"
+composeRuntime = "1.6.11"
 dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
@@ -63,6 +64,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime" , version.ref = "composeRuntime"}
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -119,6 +121,7 @@ network-apollo-normalizedCache-core = { group = "com.apollographql.apollo3", nam
 network-apollo-normalizedCache-sqlite = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache-sqlite", version.ref = "apollo" }
 network-ktorfit-ksp = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-ksp", version.ref = "ktorfit" }
 network-ktorfit-lib = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib", version.ref = "ktorfit" }
+network-ktorfit-converters = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-response", version.ref = "ktorfitConverter" }
 network-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
 network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 network-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
@@ -140,6 +143,7 @@ gradlePlugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devto
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
@@ -176,8 +180,9 @@ apollo = [
 
 ktorfit = [
     "network-ktorfit-lib",
+    "network-ktorfit-converters",
     "network-ktor-client-contentNegotiation",
     "network-ktor-client-serialization",
     "network-ktor-client-logging",
-    "network-ktor-serialization-kotlinx-json"
+    "network-ktor-serialization-kotlinx-json",
 ]
