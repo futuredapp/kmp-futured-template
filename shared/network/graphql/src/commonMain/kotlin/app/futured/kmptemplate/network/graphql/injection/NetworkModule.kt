@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.network.graphql.injection
 
 import app.futured.kmptemplate.network.graphql.client.ApolloClientFactory
-import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo.ApolloClient
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

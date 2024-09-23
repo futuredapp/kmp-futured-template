@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.network.graphql.client
 
 import app.futured.kmptemplate.network.graphql.result.CloudErrorCode
-import com.apollographql.apollo3.api.ApolloResponse
+import com.apollographql.apollo.api.ApolloResponse
 import org.koin.core.annotation.Single
 
 /**
