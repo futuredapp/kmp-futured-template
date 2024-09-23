@@ -41,6 +41,7 @@ internal class ApolloApiAdapter(
      * @param query to be executed and watched.
      * @param filterOutExceptions whether to filter out exceptions from the flow.
      * @param throwOnPartialData whether to throw an exception on partial data
+     * @param fetchPolicy fetch policy to apply to initial fetch.
      * @return Flow of [DATA] wrapped in Kotlin result
      */
     fun <DATA : Query.Data> watchQueryWatcher(
