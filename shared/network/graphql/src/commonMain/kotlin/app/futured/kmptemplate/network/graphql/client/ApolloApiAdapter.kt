@@ -38,6 +38,7 @@ internal class ApolloApiAdapter(
      * Executes the [Query] and then watches it from normalized cache.
      *
      * @param query to be executed and watched.
+     * @param fetchPolicy fetch policy to apply to initial fetch.
      * @param fetchThrows whether to throw if an [ApolloException] happens during the initial fetch.
      * @param refetchThrows whether to throw if an [ApolloException] happens during a refetch.
      * @return Flow of [DATA] wrapped in Kotlin result
