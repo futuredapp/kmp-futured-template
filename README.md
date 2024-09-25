@@ -20,7 +20,7 @@ To give you a short overview of our stack, we use:
 
 The template is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
 
---------------- CUT HERE AFTER CLONING ---------------
+-------8<------- CUT HERE AFTER CLONING -------8<-------
 
 # Project Name
 
