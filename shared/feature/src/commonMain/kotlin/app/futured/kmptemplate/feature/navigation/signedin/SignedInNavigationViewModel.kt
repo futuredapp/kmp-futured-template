@@ -25,4 +25,8 @@ internal class SignedInNavigationViewModel(
     override fun onBack() {
         signedInNavigator.pop()
     }
+
+    override fun onSlotDismissed() {
+        signedInNavigator.dismissSlot()
+    }
 }

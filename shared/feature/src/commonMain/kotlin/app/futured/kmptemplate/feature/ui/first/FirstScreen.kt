@@ -11,5 +11,6 @@ interface FirstScreen {
     interface Actions {
         fun onBack()
         fun onNext()
+        fun onPicker()
     }
 }

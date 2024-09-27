@@ -1,8 +1,11 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
+import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotDestination
+import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotNavEntry
 import app.futured.kmptemplate.util.arch.AppComponentContext
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
+import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +24,9 @@ internal class SignedInNavigationComponent(
     private val viewModel: SignedInNavigationViewModel by inject()
 
     override val stack: StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>> = navigator.createStack(
+        componentContext = this,
+    )
+    override val slot: StateFlow<ChildSlot<SignedInSlotDestination, SignedInSlotNavEntry>> = navigator.createSlot(
         componentContext = this,
     )
 

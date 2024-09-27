@@ -9,30 +9,39 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import app.futured.kmptemplate.android.ui.screen.PickerScreenUi
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInDestination
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavEntry
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigationViewState
+import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotDestination
+import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotNavEntry
 import app.futured.kmptemplate.resources.localized
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
+import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandler
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignedInNavGraph(
@@ -40,6 +49,7 @@ fun SignedInNavGraph(
     modifier: Modifier = Modifier,
 ) {
     val stack: ChildStack<SignedInDestination, SignedInNavEntry> by navigation.stack.collectAsState()
+    val slot: ChildSlot<SignedInSlotDestination, SignedInSlotNavEntry> by navigation.slot.collectAsState()
     val viewState: SignedInNavigationViewState by navigation.viewState.collectAsState()
     val actions = navigation.actions
 
@@ -60,8 +70,10 @@ fun SignedInNavGraph(
     ) { paddingValues ->
         TabsContent(
             stack = stack,
+            slot = slot,
             backHandler = navigation.backHandler,
             onBack = navigation.actions::onBack,
+            onSlotDismissed = navigation.actions::onSlotDismissed,
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
@@ -76,12 +88,14 @@ private val NavigationTab.icon: ImageVector
         NavigationTab.C -> Icons.Filled.AccountCircle
     }
 
-@OptIn(ExperimentalDecomposeApi::class)
+@OptIn(ExperimentalDecomposeApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun TabsContent(
     stack: ChildStack<SignedInDestination, SignedInNavEntry>,
+    slot: ChildSlot<SignedInSlotDestination, SignedInSlotNavEntry>,
     backHandler: BackHandler,
     onBack: () -> Unit,
+    onSlotDismissed: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Children(
@@ -120,5 +134,27 @@ private fun TabsContent(
 
             null -> Unit
         }
+    }
+
+    when (val childInstance = slot.child?.instance) {
+        is SignedInSlotNavEntry.Picker -> {
+            val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+            val coroutineScope = rememberCoroutineScope()
+            ModalBottomSheet(
+                onDismissRequest = onSlotDismissed,
+                sheetState = sheetState,
+            ) {
+                PickerScreenUi(
+                    screen = childInstance.screen,
+                    dismiss = {
+                        coroutineScope
+                            .launch { sheetState.hide() }
+                            .invokeOnCompletion { onSlotDismissed() }
+                    },
+                )
+            }
+        }
+
+        null -> Unit
     }
 }

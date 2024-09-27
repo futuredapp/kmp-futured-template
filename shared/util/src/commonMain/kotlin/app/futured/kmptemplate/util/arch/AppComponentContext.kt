@@ -36,7 +36,12 @@ class DefaultAppComponentContext(
 
     override val componentContextFactory: ComponentContextFactory<AppComponentContext> =
         ComponentContextFactory { lifecycle, stateKeeper, instanceKeeper, backHandler ->
-            val ctx = componentContext.componentContextFactory(lifecycle, stateKeeper, instanceKeeper, backHandler)
+            val ctx = componentContext.componentContextFactory(
+                lifecycle = lifecycle,
+                stateKeeper = stateKeeper,
+                instanceKeeper = instanceKeeper,
+                backHandler = backHandler,
+            )
             DefaultAppComponentContext(ctx)
         }
 }

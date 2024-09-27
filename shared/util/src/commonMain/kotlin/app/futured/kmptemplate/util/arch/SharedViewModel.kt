@@ -30,11 +30,23 @@ abstract class SharedViewModel<VS : ViewState, UI_EVENT : UiEvent<VS>> :
 
     abstract val viewState: MutableStateFlow<VS>
 
+    // region Navigation results
+
+    open val navigationResults: NavigationResultFlow<Any>
+        get() = emptyNavigationResults()
+
+    protected inline fun <reified T : Any> setNavigationResult(result: T) {
+        navigationResults.value = NavigationResult.Data(result)
+    }
+
+    // endregion
+
     // region Lifecycle
 
     override val viewModelScope: CoroutineScope = MainScope()
 
     override fun onDestroy() {
+        navigationResults.value = NavigationResult.ScopeDestroyed
         viewModelScope.cancel()
     }
 

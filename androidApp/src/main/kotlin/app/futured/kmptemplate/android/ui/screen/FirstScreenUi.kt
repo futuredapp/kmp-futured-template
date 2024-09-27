@@ -19,6 +19,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -88,9 +89,15 @@ private fun Content(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(text = viewState.text.localized())
-            Spacer(modifier = Modifier.height(4.dp))
-            Button(onClick = { actions.onNext() }) {
+            Text(text = viewState.pickerResultText.localized())
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(onClick = actions::onNext) {
                 Text(text = "Go to second screen")
+            }
+            OutlinedButton(onClick = actions::onPicker) {
+                Text("Show picker")
             }
         }
     }
@@ -102,6 +109,7 @@ private fun FirstScreenPreview() {
     val actions = object : FirstScreen.Actions {
         override fun onBack() = Unit
         override fun onNext() = Unit
+        override fun onPicker() = Unit
     }
     MyApplicationTheme {
         Surface {

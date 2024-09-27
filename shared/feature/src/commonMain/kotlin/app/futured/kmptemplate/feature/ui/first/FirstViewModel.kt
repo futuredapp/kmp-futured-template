@@ -3,7 +3,9 @@ package app.futured.kmptemplate.feature.ui.first
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
 import app.futured.kmptemplate.feature.domain.SyncDataUseCase
+import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigator
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigator
+import app.futured.kmptemplate.feature.ui.picker.PickerResult
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.util.arch.SharedViewModel
 import app.futured.kmptemplate.util.ext.update
@@ -16,6 +18,7 @@ import kotlin.time.Duration.Companion.milliseconds
 
 @Factory
 internal class FirstViewModel(
+    private val signedInNavigator: SignedInNavigator,
     private val tabBNavigator: TabBNavigator,
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
@@ -59,7 +62,23 @@ internal class FirstViewModel(
         }
     }
 
+    // region Actions
+
     override fun onBack() = tabBNavigator.pop()
 
     override fun onNext() = tabBNavigator.navigateToSecond()
+
+    override fun onPicker() = launchWithHandler {
+        when (val result = signedInNavigator.showPicker()) {
+            is PickerResult.Pick -> update(viewState) {
+                copy(pickerResult = result.id)
+            }
+
+            PickerResult.Dismissed -> update(viewState) {
+                copy(pickerResult = "dismissed")
+            }
+        }
+    }
+
+    // endregion
 }

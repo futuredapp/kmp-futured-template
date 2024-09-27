@@ -42,7 +42,7 @@ internal class TabBNavigatorImpl(
         serializer = TabBDestination.serializer(),
         key = this::class.simpleName.toString(),
         initialStack = { initialStack },
-        handleBackButton = true,
+        handleBackButton = false,
         childFactory = { config, childContext -> config.createComponent(childContext) },
     )
         .asStateFlow(componentContext.componentCoroutineScope())

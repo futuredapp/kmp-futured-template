@@ -1,8 +1,18 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
+import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotDestination
+import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotNavEntry
+import app.futured.kmptemplate.feature.ui.picker.PickerResult
 import app.futured.kmptemplate.util.arch.AppComponentContext
+import app.futured.kmptemplate.util.arch.awaitResult
+import app.futured.kmptemplate.util.arch.emptyNavigationResults
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
+import com.arkivanov.decompose.router.slot.ChildSlot
+import com.arkivanov.decompose.router.slot.SlotNavigation
+import com.arkivanov.decompose.router.slot.activate
+import com.arkivanov.decompose.router.slot.childSlot
+import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.StackNavigator
@@ -18,6 +28,10 @@ internal interface SignedInNavigator {
         componentContext: AppComponentContext,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>>
 
+    fun createSlot(
+        componentContext: AppComponentContext,
+    ): StateFlow<ChildSlot<SignedInSlotDestination, SignedInSlotNavEntry>>
+
     /**
      * Brings component with [dest] class to front of the stack, but **does not** recreate component if there's a component of the same class
      * and classes are not equal.
@@ -30,12 +44,17 @@ internal interface SignedInNavigator {
     fun bringTabToFront(dest: SignedInDestination, onComplete: () -> Unit = {})
 
     fun pop()
+
+    suspend fun showPicker(): PickerResult
+
+    fun dismissSlot()
 }
 
 @Single
 internal class SignedInNavigatorImpl : SignedInNavigator {
 
     private val stackNavigator = StackNavigation<SignedInDestination>()
+    private val slotNavigator = SlotNavigation<SignedInSlotDestination>()
 
     override fun createStack(
         componentContext: AppComponentContext,
@@ -43,10 +62,24 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
         source = stackNavigator,
         serializer = SignedInDestination.serializer(),
         initialStack = { SignedInNavigationDefaults.getInitialStack() },
-        handleBackButton = true,
+        handleBackButton = false,
         childFactory = { dest, childContext ->
             dest.createComponent(childContext)
         },
+        key = "Stack",
+    ).asStateFlow(componentContext.componentCoroutineScope())
+
+    override fun createSlot(
+        componentContext: AppComponentContext,
+    ): StateFlow<ChildSlot<SignedInSlotDestination, SignedInSlotNavEntry>> = componentContext.childSlot(
+        source = slotNavigator,
+        serializer = SignedInSlotDestination.serializer(),
+        initialConfiguration = { null },
+        handleBackButton = false,
+        childFactory = { dest, childContext ->
+            dest.createComponent(childContext)
+        },
+        key = "Slot",
     ).asStateFlow(componentContext.componentCoroutineScope())
 
     override fun switchTab(dest: SignedInDestination, onComplete: () -> Unit) {
@@ -58,6 +91,14 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
     }
 
     override fun pop() = stackNavigator.pop()
+
+    override suspend fun showPicker(): PickerResult {
+        val results = emptyNavigationResults<PickerResult>()
+        slotNavigator.activate(SignedInSlotDestination.Picker(results))
+        return results.awaitResult()
+    }
+
+    override fun dismissSlot() = slotNavigator.dismiss()
 
     /**
      * The same as [StackNavigation.bringToFront] but does not recreate [configuration] if it's class is already on stack and
