@@ -7,6 +7,7 @@ import app.futured.kmptemplate.persistence.injection.persistenceModule
 import app.futured.kmptemplate.platform.binding.PlatformBindings
 import app.futured.kmptemplate.platform.injection.platformModule
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.ksp.generated.module
 
@@ -21,6 +22,8 @@ internal object AppInjection {
         appDeclaration: KoinAppDeclaration?,
     ) {
         startKoin {
+            printLogger(Level.ERROR)
+
             if (appDeclaration != null) {
                 appDeclaration()
             }

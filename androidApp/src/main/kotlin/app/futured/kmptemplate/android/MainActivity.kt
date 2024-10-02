@@ -15,7 +15,7 @@ import app.futured.kmptemplate.android.ui.navigation.RootNavGraph
 import app.futured.kmptemplate.feature.navigation.root.RootNavigation
 import app.futured.kmptemplate.feature.navigation.root.RootNavigationFactory
 import app.futured.kmptemplate.util.arch.DefaultAppComponentContext
-import com.arkivanov.decompose.defaultComponentContext
+import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {
 
@@ -23,7 +23,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rootNavigation = RootNavigationFactory.create(DefaultAppComponentContext(defaultComponentContext()))
+        rootNavigation = retainedComponent { componentContext ->
+            RootNavigationFactory.create(DefaultAppComponentContext(componentContext))
+        }
         rootNavigation.openDeepLinkIfNeeded(intent)
 
         enableEdgeToEdge()

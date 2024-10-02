@@ -2,10 +2,11 @@ package app.futured.kmptemplate.feature.navigation.signedin
 
 import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotDestination
 import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotNavEntry
+import app.futured.kmptemplate.feature.ui.first.KoinAppComponentFactory
+import app.futured.kmptemplate.feature.ui.picker.PickerComponent
+import app.futured.kmptemplate.feature.ui.picker.PickerNavigationActions
 import app.futured.kmptemplate.feature.ui.picker.PickerResult
 import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.arch.awaitResult
-import app.futured.kmptemplate.util.arch.emptyNavigationResults
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.router.slot.ChildSlot
@@ -45,7 +46,7 @@ internal interface SignedInNavigator {
 
     fun pop()
 
-    suspend fun showPicker(): PickerResult
+    fun showPicker(onResult: (PickerResult) -> Unit)
 
     fun dismissSlot()
 }
@@ -55,6 +56,7 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
 
     private val stackNavigator = StackNavigation<SignedInDestination>()
     private val slotNavigator = SlotNavigation<SignedInSlotDestination>()
+    private var pickerResult: (PickerResult) -> Unit = {}
 
     override fun createStack(
         componentContext: AppComponentContext,
@@ -77,7 +79,16 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
         initialConfiguration = { null },
         handleBackButton = false,
         childFactory = { dest, childContext ->
-            dest.createComponent(childContext)
+            val factory = KoinAppComponentFactory(childContext)
+            when (dest) {
+                SignedInSlotDestination.Picker -> SignedInSlotNavEntry.Picker(
+                    factory.createComponent<PickerComponent>(
+                        object : PickerNavigationActions {
+                            override fun onResult(result: PickerResult) = pickerResult(result)
+                        },
+                    ),
+                )
+            }
         },
         key = "Slot",
     ).asStateFlow(componentContext.componentCoroutineScope())
@@ -92,10 +103,9 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
 
     override fun pop() = stackNavigator.pop()
 
-    override suspend fun showPicker(): PickerResult {
-        val results = emptyNavigationResults<PickerResult>()
-        slotNavigator.activate(SignedInSlotDestination.Picker(results))
-        return results.awaitResult()
+    override fun showPicker(onResult: (PickerResult) -> Unit) {
+        pickerResult = onResult
+        slotNavigator.activate(SignedInSlotDestination.Picker)
     }
 
     override fun dismissSlot() = slotNavigator.dismiss()

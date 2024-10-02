@@ -1,28 +1,14 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab
 
-import app.futured.kmptemplate.feature.ui.picker.PickerComponent
-import app.futured.kmptemplate.feature.ui.picker.PickerResult
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen
-import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.arch.Destination
 import app.futured.kmptemplate.util.arch.NavEntry
-import app.futured.kmptemplate.util.arch.NavigationResultFlow
-import app.futured.kmptemplate.util.arch.NavigationResultFlowSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class SignedInSlotDestination : Destination<SignedInSlotNavEntry> {
+sealed class SignedInSlotDestination {
 
     @Serializable
-    data class Picker(
-        @Serializable(with = NavigationResultFlowSerializer::class)
-        val results: NavigationResultFlow<PickerResult>
-    ) : SignedInSlotDestination() {
-        override fun createComponent(componentContext: AppComponentContext): SignedInSlotNavEntry =
-            SignedInSlotNavEntry.Picker(
-                PickerComponent(componentContext, results)
-            )
-    }
+    data object Picker : SignedInSlotDestination()
 }
 
 sealed class SignedInSlotNavEntry : NavEntry {

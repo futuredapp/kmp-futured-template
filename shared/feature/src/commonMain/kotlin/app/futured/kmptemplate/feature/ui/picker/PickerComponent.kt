@@ -1,22 +1,25 @@
 package app.futured.kmptemplate.feature.ui.picker
 
+import app.futured.kmptemplate.feature.ui.first.AppComponent
 import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.arch.NavigationResultFlow
-import app.futured.kmptemplate.util.arch.viewModel
-import kotlinx.coroutines.flow.StateFlow
-import org.koin.core.parameter.parametersOf
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.InjectedParam
 
+interface PickerNavigationActions {
+    fun onResult(result: PickerResult)
+}
+
+@Factory
 internal class PickerComponent(
-    componentContext: AppComponentContext,
-    navigationResults: NavigationResultFlow<PickerResult>,
-) : AppComponentContext by componentContext,
+    @InjectedParam componentContext: AppComponentContext,
+    @InjectedParam private val navigation: PickerNavigationActions,
+) : AppComponent<PickerViewState, Nothing>(componentContext, PickerViewState()),
     PickerScreen {
 
-    private val viewModel: PickerViewModel by viewModel(parameters = {
-        parametersOf(
-            navigationResults
-        )
-    })
-    override val viewState: StateFlow<PickerViewState> = viewModel.viewState
-    override val actions: PickerScreen.Actions = viewModel
+    override fun onStart() = Unit
+
+    override val actions: PickerScreen.Actions = object : PickerScreen.Actions {
+        override fun onItemResult(item: PickerViewState.Item) = navigation.onResult(PickerResult.Pick(item.id))
+        override fun onDismissResult() = navigation.onResult(PickerResult.Dismissed)
+    }
 }
