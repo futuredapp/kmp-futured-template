@@ -7,9 +7,9 @@ import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigationComponent
 import app.futured.kmptemplate.feature.navigation.signedin.tab.c.TabCNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.tab.c.TabCNavigationComponent
+import app.futured.kmptemplate.util.arch.AppComponentContext
 import app.futured.kmptemplate.util.arch.Destination
 import app.futured.kmptemplate.util.arch.NavEntry
-import com.arkivanov.decompose.ComponentContext
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 
@@ -18,7 +18,7 @@ sealed class SignedInDestination : Destination<SignedInNavEntry> {
 
     @Serializable
     data object A : SignedInDestination() {
-        override fun createComponent(componentContext: ComponentContext): SignedInNavEntry =
+        override fun createComponent(componentContext: AppComponentContext): SignedInNavEntry =
             SignedInNavEntry.A(TabANavigationComponent(componentContext))
     }
 
@@ -27,7 +27,7 @@ sealed class SignedInDestination : Destination<SignedInNavEntry> {
         private val initialStack: List<TabBDestination> = listOf(TabBDestination.First),
         private val seed: Long = 0L, // Changing the seed ensures that entire navigation stack is regenerated, useful for when deep link is opened
     ) : SignedInDestination() {
-        override fun createComponent(componentContext: ComponentContext): SignedInNavEntry =
+        override fun createComponent(componentContext: AppComponentContext): SignedInNavEntry =
             SignedInNavEntry.B(TabBNavigationComponent(componentContext, initialStack))
 
         companion object {
@@ -52,7 +52,7 @@ sealed class SignedInDestination : Destination<SignedInNavEntry> {
 
     @Serializable
     data object C : SignedInDestination() {
-        override fun createComponent(componentContext: ComponentContext): SignedInNavEntry =
+        override fun createComponent(componentContext: AppComponentContext): SignedInNavEntry =
             SignedInNavEntry.C(TabCNavigationComponent(componentContext))
     }
 }

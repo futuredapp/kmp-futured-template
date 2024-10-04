@@ -1,15 +1,14 @@
 package app.futured.kmptemplate.feature.ui.second
 
-import app.futured.kmptemplate.util.arch.ViewModelComponent
-import app.futured.kmptemplate.util.ext.viewModel
-import com.arkivanov.decompose.ComponentContext
+import app.futured.kmptemplate.util.arch.AppComponentContext
+import app.futured.kmptemplate.util.arch.viewModel
 import kotlinx.coroutines.flow.StateFlow
 
 internal class SecondComponent(
-    componentContext: ComponentContext,
-) : ViewModelComponent<SecondViewModel>(componentContext), SecondScreen {
+    componentContext: AppComponentContext,
+) : AppComponentContext by componentContext, SecondScreen {
 
-    override val viewModel: SecondViewModel by viewModel()
+    private val viewModel: SecondViewModel by viewModel()
     override val viewState: StateFlow<SecondViewState> = viewModel.viewState
     override val actions: SecondScreen.Actions = viewModel
 }

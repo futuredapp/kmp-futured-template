@@ -4,7 +4,6 @@ import app.futured.kmptemplate.feature.navigation.root.RootDestination
 
 actual object SignedInNavigationDefaults {
 
-
     /**
      * Returns initial stack for [RootDestination.SignedIn] destination.
      *
