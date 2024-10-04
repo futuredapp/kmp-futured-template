@@ -1,16 +1,13 @@
 package com.rudolfhladik.componentprocessor
 
 import com.google.devtools.ksp.processing.CodeGenerator
-import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.rudolfhladik.annotation.Component
-import com.rudolfhladik.componentprocessor.content.ComponentContentGenerator
 import com.rudolfhladik.componentprocessor.content.ComponentPoetGenerator
-import java.io.OutputStream
 import kotlin.reflect.KClass
 
 class ComponentProcessor(
@@ -30,32 +27,16 @@ class ComponentProcessor(
     }
 
     private fun generateComponent(component: KSClassDeclaration) {
-        val componentContentGenerator = ComponentContentGenerator()
-        val fileName = componentContentGenerator.getFileName(component)
-
-        val file = codeGenerator.createNewFile(
-            dependencies = Dependencies(false),
-            packageName = component.packageName.asString(),
-            fileName = fileName,
-        )
-
-        val contents = componentContentGenerator.generateContents(component, fileName, args)
-
-        val viewModelComponentPackage = args.get("viewModel") ?: error("specify ViewModelComponent path")
+        val appComponentContextPackage = args.get("appComponentContext") ?: error("specify ViewModelComponent path")
         val viewModelExtPackage = args.get("viewModelExt") ?: error("specify viewModel extension path")
 
+        // don't use old hard coded generation
+//        val componentContentGenerator = ComponentContentGenerator()
+//        componentContentGenerator.generateContents(component, args, codeGenerator)
+
+        // use poet generation
         val poet = ComponentPoetGenerator(logger)
-        poet.tryPoet(viewModelExtPackage, component, codeGenerator)
-
-        file.use {
-            it.writeAll(contents)
-        }
-    }
-
-    private fun OutputStream.writeAll(contents: List<String>) {
-        contents.forEach { content ->
-            this.write(content.toByteArray())
-        }
+        poet.tryPoet(appComponentContextPackage, viewModelExtPackage, component, codeGenerator)
     }
 
     private fun Resolver.findAnnotationsForClass(kClass: KClass<*>): Sequence<KSClassDeclaration> =

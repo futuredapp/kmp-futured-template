@@ -1,8 +1,11 @@
 package com.rudolfhladik.componentprocessor.content
 
+import com.google.devtools.ksp.processing.CodeGenerator
+import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.rudolfhladik.annotation.Component
+import java.io.OutputStream
 
 internal class ComponentContentGenerator {
     internal companion object {
@@ -12,7 +15,18 @@ internal class ComponentContentGenerator {
         private const val eventsName = "events"
     }
 
-    fun generateContents(component: KSClassDeclaration, fileName: String, args: Map<String, String>): List<String> {
+    fun generateContents(
+        component: KSClassDeclaration,
+        args: Map<String, String>,
+        codeGenerator: CodeGenerator,
+    ) {
+        val fileName = getFileName(component)
+
+        val file = codeGenerator.createNewFile(
+            dependencies = Dependencies(false),
+            packageName = component.packageName.asString(),
+            fileName = fileName,
+        )
         val annotation: KSAnnotation = component.annotations.first {
             it.shortName.asString() == Component::class.simpleName
         }
@@ -20,7 +34,6 @@ internal class ComponentContentGenerator {
         val nameArgument: String? = annotation.arguments
             .firstOrNull { arg -> arg.name?.asString() == "argType" }
             ?.value?.toString()
-
 
         val contents = mutableListOf<String>()
 
@@ -35,10 +48,12 @@ internal class ComponentContentGenerator {
             contents.add(it)
         }
 
-        return contents
+        file.use {
+            it.writeAll(contents)
+        }
     }
 
-    fun getFileName(component: KSClassDeclaration): String =
+    private fun getFileName(component: KSClassDeclaration): String =
         getComponentName(component).plus("Component")
 
     private fun getClassAndBody(component: KSClassDeclaration, fileName: String, nameArgument: String?): List<String> {
@@ -95,9 +110,8 @@ internal class ComponentContentGenerator {
         val declarations = component.declarations
             .map { it.simpleName.asString() }
 
-        val viewModelComponentPackage = args.get("viewModel") ?: error("specify ViewModelComponent path")
+//        val viewModelComponentPackage = args.get("viewModel") ?: error("specify ViewModelComponent path")
         val viewModelExtPackage = args.get("viewModelExt") ?: error("specify viewModel extension path")
-        val viewModelComponentImport = "import $viewModelComponentPackage\n"
         val viewModelExtImport = "import $viewModelExtPackage\n"
 
         val componentContextImport = "import com.arkivanov.decompose.ComponentContext\n"
@@ -113,7 +127,6 @@ internal class ComponentContentGenerator {
             componentContextImport,
             flowImport,
             stateFlowImport,
-            viewModelComponentImport,
             viewModelExtImport,
             parametersOfImport,
             "\n",
@@ -128,4 +141,10 @@ internal class ComponentContentGenerator {
         .qualifiedName
         ?.asString()
         ?.substringAfterLast(".") ?: "Error"
+
+    private fun OutputStream.writeAll(contents: List<String>) {
+        contents.forEach { content ->
+            this.write(content.toByteArray())
+        }
+    }
 }

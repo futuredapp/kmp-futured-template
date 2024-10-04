@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
+import app.futured.kmptemplate.feature.data.model.ui.args.SecondScreenArgs
 import app.futured.kmptemplate.feature.ui.first.FirstComponent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.second.SecondComponent
@@ -24,7 +25,7 @@ sealed class TabBDestination : Destination<TabBNavEntry> {
     @Serializable
     data object Second : TabBDestination() {
         override fun createComponent(componentContext: AppComponentContext): TabBNavEntry {
-            return TabBNavEntry.Second(SecondComponent(componentContext))
+            return TabBNavEntry.Second(SecondComponent(SecondScreenArgs(), componentContext))
         }
     }
 

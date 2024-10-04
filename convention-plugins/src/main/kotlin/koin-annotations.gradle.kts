@@ -14,8 +14,8 @@ ksp {
     arg("KOIN_DEFAULT_MODULE","false")
 
     // setup for component processor
-    arg("viewModel", "app.futured.kmptemplate.util.arch.ViewModelComponent")
-    arg("viewModelExt", "app.futured.kmptemplate.util.ext.viewModel")
+    arg("appComponentContext", "app.futured.kmptemplate.util.arch.AppComponentContext")
+    arg("viewModelExt", "app.futured.kmptemplate.util.arch.viewModel")
 }
 
 // https://github.com/gradle/gradle/issues/15383
