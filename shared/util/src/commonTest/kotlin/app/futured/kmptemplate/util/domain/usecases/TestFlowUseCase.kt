@@ -10,7 +10,7 @@ class TestFlowUseCase : FlowUseCase<TestFlowUseCase.Data, Int>() {
 
     data class Data(
         val listToEmit: List<Int>,
-        val delayBetweenEmits: Long
+        val delayBetweenEmits: Long,
     )
 
     override fun build(args: Data): Flow<Int> =

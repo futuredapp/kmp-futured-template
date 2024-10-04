@@ -4,8 +4,8 @@ import app.futured.kmptemplate.network.graphql.ext.isUnauthorizedCloudError
 import app.futured.kmptemplate.network.graphql.result.CloudErrorCode
 import app.futured.kmptemplate.network.graphql.result.NetworkError
 import app.futured.kmptemplate.network.graphql.result.NetworkResult
-import com.apollographql.apollo3.api.Mutation
-import com.apollographql.apollo3.api.Query
+import com.apollographql.apollo.api.Mutation
+import com.apollographql.apollo.api.Query
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -25,13 +25,15 @@ internal interface ApiManager {
      *
      * @param query to be executed
      * @param fetchPolicy fetch policy to apply to this query
+     * @param throwOnPartialData whether to throw an exception on partial data
      * @return the result of the [query] wrapped with [NetworkResult]
      */
     suspend fun <DATA : Query.Data> executeQuery(
         query: Query<DATA>,
         fetchPolicy: FetchPolicy = FetchPolicy.NetworkOnly,
+        throwOnPartialData: Boolean = false,
     ): NetworkResult<DATA> =
-        runWrapping { errorInterceptor { apiAdapter.executeQuery(query, fetchPolicy) } }
+        runWrapping { errorInterceptor { apiAdapter.executeQuery(query, fetchPolicy, throwOnPartialData) } }
 
     /**
      * Executes the [Query] and then watches it from normalized cache.
@@ -39,27 +41,28 @@ internal interface ApiManager {
      *
      * @param query to be executed and watched.
      * @param fetchPolicy fetch policy to apply to initial fetch.
-     * @param fetchThrows whether to emit [NetworkResult.Failure]s during the initial fetch.
-     * @param refetchThrows whether to emit [NetworkResult.Failure]s during a refetch.
+     * @param filterOutExceptions whether to filter out exceptions from the flow.
+     * @param throwOnPartialData whether to throw an exception on partial data
      * @return Flow of [DATA] wrapped in [NetworkResult]
      */
     fun <DATA : Query.Data> executeQueryWatcher(
         query: Query<DATA>,
         fetchPolicy: FetchPolicy,
-        fetchThrows: Boolean = true,
-        refetchThrows: Boolean = false,
+        filterOutExceptions: Boolean = false,
+        throwOnPartialData: Boolean = false,
     ): Flow<NetworkResult<DATA>> = apiAdapter
-        .watchQueryWatcher(query, fetchPolicy, fetchThrows, refetchThrows)
+        .watchQueryWatcher(query, fetchPolicy, filterOutExceptions, throwOnPartialData)
         .map { result -> runWrapping { errorInterceptor { result.getOrThrow() } } }
 
     /**
      * Executes the [Mutation] and returns the [DATA] response wrapped with [NetworkResult].
      *
      * @param mutation to be executed
+     * @param throwOnPartialData whether to throw an exception on partial data
      * @return the result of the [mutation] wrapped with [NetworkResult]
      */
-    suspend fun <DATA : Mutation.Data> executeMutation(mutation: Mutation<DATA>): NetworkResult<DATA> =
-        runWrapping { errorInterceptor { apiAdapter.executeMutation(mutation) } }
+    suspend fun <DATA : Mutation.Data> executeMutation(mutation: Mutation<DATA>, throwOnPartialData: Boolean = false): NetworkResult<DATA> =
+        runWrapping { errorInterceptor { apiAdapter.executeMutation(mutation, throwOnPartialData) } }
 
     /**
      * Executes [operation], wrapping result in [NetworkResult].

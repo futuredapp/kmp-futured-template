@@ -1,18 +1,18 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
+import app.futured.kmptemplate.util.arch.AppComponentContext
 import com.arkivanov.decompose.Child
-import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 internal class TabBNavigationComponent(
-    componentContext: ComponentContext,
+    componentContext: AppComponentContext,
     initialStack: List<TabBDestination>,
 ) : TabBNavigation,
     TabBNavigation.Actions,
-    ComponentContext by componentContext,
+    AppComponentContext by componentContext,
     KoinComponent {
 
     private val navigator: TabBNavigator by inject()

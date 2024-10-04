@@ -17,7 +17,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTarget
+        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
 
     defaultConfig {

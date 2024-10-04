@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
+import app.futured.kmptemplate.util.arch.AppComponentContext
 import app.futured.kmptemplate.util.ext.asStateFlow
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
-import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.StackNavigator
@@ -15,7 +15,7 @@ import org.koin.core.annotation.Single
 internal interface SignedInNavigator {
 
     fun createStack(
-        componentContext: ComponentContext,
+        componentContext: AppComponentContext,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>>
 
     /**
@@ -38,7 +38,7 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
     private val stackNavigator = StackNavigation<SignedInDestination>()
 
     override fun createStack(
-        componentContext: ComponentContext,
+        componentContext: AppComponentContext,
     ): StateFlow<ChildStack<SignedInDestination, SignedInNavEntry>> = componentContext.childStack(
         source = stackNavigator,
         serializer = SignedInDestination.serializer(),

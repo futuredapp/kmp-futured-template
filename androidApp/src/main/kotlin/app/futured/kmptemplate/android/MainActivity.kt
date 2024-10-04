@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import app.futured.kmptemplate.android.ui.navigation.RootNavGraph
 import app.futured.kmptemplate.feature.navigation.root.RootNavigation
 import app.futured.kmptemplate.feature.navigation.root.RootNavigationFactory
+import app.futured.kmptemplate.util.arch.DefaultAppComponentContext
 import com.arkivanov.decompose.defaultComponentContext
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rootNavigation = RootNavigationFactory.create(defaultComponentContext())
+        rootNavigation = RootNavigationFactory.create(DefaultAppComponentContext(defaultComponentContext()))
         rootNavigation.openDeepLinkIfNeeded(intent)
 
         enableEdgeToEdge()
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         rootNavigation.openDeepLinkIfNeeded(intent)
     }
@@ -56,6 +57,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
-    }
+    MyApplicationTheme {}
 }

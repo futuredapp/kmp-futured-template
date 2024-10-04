@@ -20,7 +20,7 @@ To give you a short overview of our stack, we use:
 
 The template is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
 
---------------- CUT HERE AFTER CLONING ---------------
+-------8<------- CUT HERE AFTER CLONING -------8<-------
 
 # Project Name
 
@@ -28,7 +28,7 @@ The template is a sample app with several screens to let you kick off the projec
 ![compose](https://img.shields.io/badge/jetpack_compose-2bab6b.svg?style=for-the-badge&logo=android&logoColor=white)
 ![swiftui](https://img.shields.io/badge/swiftui-%23000000.svg?style=for-the-badge&logo=swift&logoColor=white)
 
-![kotlin-version](https://img.shields.io/badge/kotlin-1.9.20-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.0.0-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
 ![android-minsdk](https://img.shields.io/badge/minsdk-29-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![android-targetsdk](https://img.shields.io/badge/targetsdk-34-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![ios-target](https://img.shields.io/badge/target-16.0-%23000000.svg?style=flat-square&logo=apple&logoColor=white)

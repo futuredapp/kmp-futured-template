@@ -1,16 +1,15 @@
 package app.futured.kmptemplate.network.graphql.client
 
-import com.apollographql.apollo3.exception.ApolloCompositeException
-import com.apollographql.apollo3.exception.ApolloException
-import com.apollographql.apollo3.exception.CacheMissException
-import com.apollographql.apollo3.cache.normalized.FetchPolicy as ApolloFetchPolicy
+import com.apollographql.apollo.api.ApolloResponse
+import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.cache.normalized.FetchPolicy as ApolloFetchPolicy
 
 enum class FetchPolicy {
     /**
      * Try the cache, if that failed, try the network.
      *
-     * An [ApolloCompositeException] is thrown if the data is not in the cache and the network call failed.
-     * If coming from the cache 1 value is emitted, otherwise 1 or multiple values can be emitted from the network.
+     * This [FetchPolicy] emits one or more [ApolloResponse].
+     * Cache misses and network errors have [ApolloResponse.exception] set to a non-null [ApolloException].
      *
      * This is the default behaviour.
      */
@@ -19,31 +18,33 @@ enum class FetchPolicy {
     /**
      * Only try the cache.
      *
-     * A [CacheMissException] is thrown if the data is not in the cache, otherwise 1 value is emitted.
+     * This [FetchPolicy] emits one [ApolloResponse].
+     * Cache misses have [ApolloResponse.exception] set to a non-null [ApolloException].
      */
     CacheOnly,
 
     /**
      * Try the network, if that failed, try the cache.
      *
-     * An [ApolloCompositeException] is thrown if the network call failed and the data is not in the cache.
-     * If coming from the network 1 or multiple values can be emitted, otherwise 1 value is emitted from the cache.
+     * This [FetchPolicy] emits one or more [ApolloResponse].
+     * Cache misses and network errors have [ApolloResponse.exception] set to a non-null [ApolloException].
      */
     NetworkFirst,
 
     /**
      * Only try the network.
      *
-     * An [ApolloException] is thrown if the network call failed, otherwise 1 or multiple values can be emitted.
+     * This FetchPolicy emits one or more [ApolloResponse].
+     * Several [ApolloResponse] may be emitted if your NetworkTransport supports it, for example with @defer.
+     * Network errors have [ApolloResponse.exception] set to a non-null[ApolloException].
      */
     NetworkOnly,
 
     /**
      * Try the cache, then also try the network.
      *
-     * If the data is in the cache, it is emitted, if not, no exception is thrown at that point. Then the network call is made, and if
-     * successful the value(s) are emitted, otherwise either an [ApolloCompositeException] (both cache miss and network failed) or an
-     * [ApolloException] (only network failed) is thrown.
+     * This FetchPolicy emits two or more [ApolloResponse].
+     * Cache misses and network errors have [ApolloResponse.exception] set to a non-null [ApolloException].
      */
     CacheAndNetwork,
 }
