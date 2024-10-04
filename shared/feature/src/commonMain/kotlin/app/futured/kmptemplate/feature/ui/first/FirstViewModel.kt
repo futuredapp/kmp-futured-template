@@ -19,7 +19,7 @@ internal class FirstViewModel(
     private val tabBNavigator: TabBNavigator,
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
-) : SharedViewModel<FirstViewState, FirstUiEvent>(),
+) : SharedViewModel<FirstViewState, FirstEvent>(),
     FirstScreen.Actions {
 
     private val logger: Logger = Logger.withTag("FirstViewModel")
@@ -43,7 +43,7 @@ internal class FirstViewModel(
 
             if (count == 10L) {
                 logger.d { "Conter reached 10" }
-                sendUiEvent(FirstUiEvent.ShowToast("Counter reached 10 🎉"))
+                sendUiEvent(FirstEvent.ShowToast("Counter reached 10 🎉"))
             }
         }
         onError { error ->

@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -32,7 +35,7 @@ kotlin {
     sourceSets {
         androidMain {
             dependencies {
-                implementation(libs.androidx.compose.runtime)
+                implementation(libs.jetbrains.compose.runtime)
             }
         }
         commonMain {
@@ -49,7 +52,8 @@ kotlin {
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.util)
+                implementation(projects.shared.util.tools)
+                implementation(projects.shared.util.componentAnnotation)
                 implementation(projects.shared.resources)
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)

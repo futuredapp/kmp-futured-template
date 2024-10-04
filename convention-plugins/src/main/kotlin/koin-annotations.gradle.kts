@@ -12,6 +12,10 @@ ksp {
     arg("KOIN_CONFIG_CHECK","false")
     // disable default module generation
     arg("KOIN_DEFAULT_MODULE","false")
+
+    // setup for component processor
+    arg("appComponentContext", "app.futured.kmptemplate.util.arch.AppComponentContext")
+    arg("viewModelExt", "app.futured.kmptemplate.util.arch.viewModel")
 }
 
 // https://github.com/gradle/gradle/issues/15383
@@ -19,6 +23,7 @@ val libs = the<LibrariesForLibs>()
 // Enable source generation by KSP to commonMain only
 dependencies {
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    add("kspCommonMainMetadata", project(":shared:util:component-processor"))
     // DO NOT add bellow dependencies
 //    add("kspAndroid", Deps.Koin.kspCompiler)
 //    add("kspIosX64", Deps.Koin.kspCompiler)

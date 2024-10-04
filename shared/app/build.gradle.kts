@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
 import co.touchlab.skie.configuration.DefaultArgumentInterop
@@ -7,6 +9,7 @@ import co.touchlab.skie.configuration.SealedInterop
 import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -35,7 +38,7 @@ kotlin {
             isStatic = true
 
             export(projects.shared.platform)
-            export(projects.shared.util)
+            export(projects.shared.util.tools)
             export(projects.shared.feature)
             export(projects.shared.resources)
 
@@ -74,7 +77,7 @@ kotlin {
         iosMain {
             dependencies {
                 api(projects.shared.platform)
-                api(projects.shared.util)
+                api(projects.shared.util.tools)
                 api(projects.shared.feature)
                 api(projects.shared.resources)
 

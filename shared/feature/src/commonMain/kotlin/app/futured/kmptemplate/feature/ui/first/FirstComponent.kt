@@ -13,5 +13,5 @@ internal class FirstComponent(
 
     override val viewState: StateFlow<FirstViewState> = viewModel.viewState
     override val actions: FirstScreen.Actions = viewModel
-    override val events: Flow<FirstUiEvent> = viewModel.uiEvents
+    override val events: Flow<FirstEvent> = viewModel.uiEvents
 }

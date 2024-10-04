@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 interface FirstScreen {
     val viewState: StateFlow<FirstViewState>
     val actions: Actions
-    val events: Flow<FirstUiEvent>
+    val events: Flow<FirstEvent>
 
     interface Actions {
         fun onBack()
