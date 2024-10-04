@@ -1,5 +1,5 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.a
 
-import com.arkivanov.decompose.ComponentContext
+import app.futured.kmptemplate.util.arch.AppComponentContext
 
-internal class TabANavigationComponent(componentContext: ComponentContext) : TabANavigation, ComponentContext by componentContext
+internal class TabANavigationComponent(componentContext: AppComponentContext) : TabANavigation, AppComponentContext by componentContext

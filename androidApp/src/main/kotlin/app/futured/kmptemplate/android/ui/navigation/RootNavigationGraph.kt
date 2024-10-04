@@ -4,12 +4,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.ui.screen.LoginScreenUi
 import app.futured.kmptemplate.feature.navigation.root.RootDestination
 import app.futured.kmptemplate.feature.navigation.root.RootEntry
@@ -22,7 +22,7 @@ fun RootNavGraph(
     rootNavigation: RootNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val slot: ChildSlot<RootDestination, RootEntry> by rootNavigation.slot.collectAsState()
+    val slot: ChildSlot<RootDestination, RootEntry> by rootNavigation.slot.collectAsStateWithLifecycle()
 
     Surface(
         modifier.semantics {

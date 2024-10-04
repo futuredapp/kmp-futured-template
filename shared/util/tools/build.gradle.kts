@@ -8,6 +8,7 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {

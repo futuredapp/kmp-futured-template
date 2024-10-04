@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.compose.compiler)
     // TODO enable after providing google-services.json
-    //alias(libs.plugins.google.services)
+    // alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.distribution)
 }
 
@@ -112,6 +112,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.compose)
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.ext)
