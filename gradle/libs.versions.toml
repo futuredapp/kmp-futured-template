@@ -38,6 +38,7 @@ composeRuntime = "1.6.11"
 dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
+poet = "1.18.1"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
