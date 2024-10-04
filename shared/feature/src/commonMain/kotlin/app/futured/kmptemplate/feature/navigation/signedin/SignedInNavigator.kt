@@ -46,7 +46,7 @@ internal interface SignedInNavigator {
 
     fun pop()
 
-    fun showPicker(onResult: (PickerResult) -> Unit)
+    fun showPicker()
 
     fun dismissSlot()
 }
@@ -56,7 +56,6 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
 
     private val stackNavigator = StackNavigation<SignedInDestination>()
     private val slotNavigator = SlotNavigation<SignedInSlotDestination>()
-    private var pickerResult: (PickerResult) -> Unit = {}
 
     override fun createStack(
         componentContext: AppComponentContext,
@@ -84,7 +83,9 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
                 SignedInSlotDestination.Picker -> SignedInSlotNavEntry.Picker(
                     factory.createComponent<PickerComponent>(
                         object : PickerNavigationActions {
-                            override fun onResult(result: PickerResult) = pickerResult(result)
+                            override fun onResult(result: PickerResult) {
+                                // TODO https://arkivanov.github.io/Decompose/navigation/stack/overview/#delivering-a-result-when-navigating-back
+                            }
                         },
                     ),
                 )
@@ -103,8 +104,7 @@ internal class SignedInNavigatorImpl : SignedInNavigator {
 
     override fun pop() = stackNavigator.pop()
 
-    override fun showPicker(onResult: (PickerResult) -> Unit) {
-        pickerResult = onResult
+    override fun showPicker() {
         slotNavigator.activate(SignedInSlotDestination.Picker)
     }
 

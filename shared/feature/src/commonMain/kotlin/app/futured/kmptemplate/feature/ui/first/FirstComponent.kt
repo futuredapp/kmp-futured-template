@@ -34,12 +34,6 @@ import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 import kotlin.time.Duration.Companion.milliseconds
 
-interface FirstNavigationActions {
-    fun pop()
-    fun navigateToSecond()
-    fun showPicker(onResult: (PickerResult) -> Unit)
-}
-
 @Factory
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
@@ -57,9 +51,10 @@ internal class FirstComponent(
     }
 
     override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
-        override fun onBack() = navigation.pop()
-        override fun onNext() = navigation.navigateToSecond()
-        override fun onPicker() = navigation.showPicker(::updatePickerResult)
+        override fun onBackClick() = navigation.pop()
+        override fun onNextClick() = navigation.navigateToSecond()
+        override fun onPickerClick() = navigation.showPicker()
+        override fun onPickerResult(result: PickerResult) = updatePickerResult(result)
     }
 
     private fun syncData() = syncDataUseCase.execute {

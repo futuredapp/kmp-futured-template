@@ -5,7 +5,6 @@ import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigator
 import app.futured.kmptemplate.feature.ui.first.FirstComponent
 import app.futured.kmptemplate.feature.ui.first.FirstNavigationActions
 import app.futured.kmptemplate.feature.ui.first.KoinAppComponentFactory
-import app.futured.kmptemplate.feature.ui.picker.PickerResult
 import app.futured.kmptemplate.feature.ui.second.SecondComponent
 import app.futured.kmptemplate.feature.ui.secret.SecretComponent
 import app.futured.kmptemplate.feature.ui.third.ThirdComponent
@@ -60,7 +59,7 @@ internal class TabBNavigatorImpl(
                         object : FirstNavigationActions {
                             override fun pop() = this@TabBNavigatorImpl.pop()
                             override fun navigateToSecond() = this@TabBNavigatorImpl.navigateToSecond()
-                            override fun showPicker(onResult: (PickerResult) -> Unit) = signedInNavigator.showPicker(onResult)
+                            override fun showPicker() = signedInNavigator.showPicker()
                         },
                     ),
                 )

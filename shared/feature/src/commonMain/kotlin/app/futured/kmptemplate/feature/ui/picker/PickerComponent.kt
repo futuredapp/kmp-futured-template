@@ -5,10 +5,6 @@ import app.futured.kmptemplate.util.arch.AppComponentContext
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
-interface PickerNavigationActions {
-    fun onResult(result: PickerResult)
-}
-
 @Factory
 internal class PickerComponent(
     @InjectedParam componentContext: AppComponentContext,

@@ -74,7 +74,7 @@ private fun Content(
                 modifier = Modifier.fillMaxWidth(),
                 windowInsets = WindowInsets.navigationBars,
                 navigationIcon = {
-                    IconButton(onClick = { actions.onBack() }) {
+                    IconButton(onClick = { actions.onBackClick() }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = null)
                     }
                 },
@@ -93,10 +93,10 @@ private fun Content(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Button(onClick = actions::onNext) {
+            Button(onClick = actions::onNextClick) {
                 Text(text = "Go to second screen")
             }
-            OutlinedButton(onClick = actions::onPicker) {
+            OutlinedButton(onClick = actions::onPickerClick) {
                 Text("Show picker")
             }
         }
@@ -107,9 +107,9 @@ private fun Content(
 @Composable
 private fun FirstScreenPreview() {
     val actions = object : FirstScreen.Actions {
-        override fun onBack() = Unit
-        override fun onNext() = Unit
-        override fun onPicker() = Unit
+        override fun onBackClick() = Unit
+        override fun onNextClick() = Unit
+        override fun onPickerClick() = Unit
     }
     MyApplicationTheme {
         Surface {
