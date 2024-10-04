@@ -9,6 +9,7 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.rudolfhladik.annotation.Component
 import com.rudolfhladik.componentprocessor.content.ComponentContentGenerator
+import com.rudolfhladik.componentprocessor.content.ComponentPoetGenerator
 import java.io.OutputStream
 import kotlin.reflect.KClass
 
@@ -39,6 +40,12 @@ class ComponentProcessor(
         )
 
         val contents = componentContentGenerator.generateContents(component, fileName, args)
+
+        val viewModelComponentPackage = args.get("viewModel") ?: error("specify ViewModelComponent path")
+        val viewModelExtPackage = args.get("viewModelExt") ?: error("specify viewModel extension path")
+
+        val poet = ComponentPoetGenerator(logger)
+        poet.tryPoet(viewModelExtPackage, component, codeGenerator)
 
         file.use {
             it.writeAll(contents)
