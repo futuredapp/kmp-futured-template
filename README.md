@@ -20,7 +20,7 @@ To give you a short overview of our stack, we use:
 
 The template is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
 
---------------- CUT HERE AFTER CLONING ---------------
+-------8<------- CUT HERE AFTER CLONING -------8<-------
 
 # Project Name
 
@@ -28,7 +28,7 @@ The template is a sample app with several screens to let you kick off the projec
 ![compose](https://img.shields.io/badge/jetpack_compose-2bab6b.svg?style=for-the-badge&logo=android&logoColor=white)
 ![swiftui](https://img.shields.io/badge/swiftui-%23000000.svg?style=for-the-badge&logo=swift&logoColor=white)
 
-![kotlin-version](https://img.shields.io/badge/kotlin-1.9.20-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.0.0-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
 ![android-minsdk](https://img.shields.io/badge/minsdk-29-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![android-targetsdk](https://img.shields.io/badge/targetsdk-34-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![ios-target](https://img.shields.io/badge/target-16.0-%23000000.svg?style=flat-square&logo=apple&logoColor=white)
@@ -198,6 +198,10 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 Deep links are provided by each platform to common code and processed using `DeepLinkResolver` and `DeepLinkNavigator` classes.
 The (example) app currently supports the following scheme: `kmptemplate` and the following links:
 
-- `kmptemplate://third` -- Navigates to third example screen.
-- `kmptemplate://secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
-  link with optional argument `arg`.
+- `kmptemplate://login` -- Navigates to login screen
+- `kmptemplate://a` -- Navigates to bottom navigation tab A
+- `kmptemplate://b` -- Navigates to bottom navigation tab B
+- `kmptemplate://c` -- Navigates to bottom navigation tab C
+- `kmptemplate://b/third` -- Navigates to third example screen on tab B.
+- `kmptemplate://b/secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
+  link with optional argument `arg` on tab B

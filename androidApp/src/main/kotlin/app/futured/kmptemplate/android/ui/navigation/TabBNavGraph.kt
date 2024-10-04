@@ -13,9 +13,9 @@ import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecretScreenUi
 import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
-import app.futured.kmptemplate.feature.navigation.home.HomeDestination
-import app.futured.kmptemplate.feature.navigation.home.HomeEntry
-import app.futured.kmptemplate.feature.navigation.home.HomeNavigation
+import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBDestination
+import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavEntry
+import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigation
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
@@ -23,12 +23,12 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback
 import com.arkivanov.decompose.router.stack.ChildStack
 
 @Composable
-fun HomeNavGraph(
-    homeNavigation: HomeNavigation,
+fun TabBNavGraph(
+    navigation: TabBNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val stack: ChildStack<HomeDestination, HomeEntry> by homeNavigation.stack.collectAsState()
-    val actions = homeNavigation.actions
+    val stack: ChildStack<TabBDestination, TabBNavEntry> by navigation.stack.collectAsState()
+    val actions = navigation.actions
 
     Surface(
         modifier = modifier,
@@ -37,21 +37,17 @@ fun HomeNavGraph(
         Children(
             stack = stack,
             modifier = Modifier.fillMaxSize(),
-            /**
-             * Predictive back animation support predictive gesture back navigation.
-             * Is it necessary implement BackHandlerOwner in Components where you want to use predictive gesture animation.
-             */
             animation = predictiveBackAnimation(
-                backHandler = homeNavigation.backHandler,
+                backHandler = navigation.backHandler,
                 onBack = actions::onBack,
                 selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
             ),
         ) { child ->
             when (val childInstance = child.instance) {
-                is HomeEntry.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-                is HomeEntry.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-                is HomeEntry.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-                is HomeEntry.Secret -> SecretScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                is TabBNavEntry.First -> FirstScreenUi(screen = childInstance.instance, modifier = Modifier.fillMaxSize())
+                is TabBNavEntry.Second -> SecondScreenUi(screen = childInstance.instance, modifier = Modifier.fillMaxSize())
+                is TabBNavEntry.Third -> ThirdScreenUi(screen = childInstance.instance, modifier = Modifier.fillMaxSize())
+                is TabBNavEntry.Secret -> SecretScreenUi(screen = childInstance.instance, modifier = Modifier.fillMaxSize())
             }
         }
     }

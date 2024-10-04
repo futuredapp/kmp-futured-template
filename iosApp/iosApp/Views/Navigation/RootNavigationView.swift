@@ -8,7 +8,7 @@ struct RootNavigationView: View {
 
     init(_ component: RootNavigation) {
         self._slot = .init(component.slot)
-        self.openDeepLink = component.openDeepLink
+        self.openDeepLink = component.actions.openDeepLink
     }
 
     var body: some View {
@@ -16,9 +16,9 @@ struct RootNavigationView: View {
             if let navigationEntry = slot.child?.instance {
                 switch onEnum(of: navigationEntry) {
                 case .login(let entry):
-                    LoginView(LoginViewModel(entry.screen))
-                case .home(let entry):
-                    HomeNavigationView(entry.navigation)
+                    LoginView(LoginViewModel(entry.instance))
+                case .signedIn(let entry):
+                    SignedInNavigationView(entry.instance)
                 }
             }
         }

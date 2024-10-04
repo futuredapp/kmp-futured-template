@@ -35,6 +35,9 @@ kotlin {
             dependencies {
                 api(libs.moko.resources)
                 implementation(libs.jetbrains.compose.runtime)
+                implementation(libs.kotlinx.dateTime)
+
+                implementation(projects.shared.platform)
             }
         }
         androidMain {

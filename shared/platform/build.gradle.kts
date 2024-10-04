@@ -30,8 +30,7 @@ kotlin {
 
         commonTest {
             dependencies {
-                implementation(libs.kotlin.testCommon)
-                implementation(libs.kotlin.testAnnotationsCommon)
+                implementation(libs.kotlin.test)
             }
         }
     }

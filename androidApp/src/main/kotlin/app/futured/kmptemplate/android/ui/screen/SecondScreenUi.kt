@@ -5,9 +5,11 @@ package app.futured.kmptemplate.android.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -53,6 +55,7 @@ private fun Content(
             CenterAlignedTopAppBar(
                 title = { Text(kmpStringResource(res = MR.strings.second_screen_title)) },
                 modifier = Modifier.fillMaxWidth(),
+                windowInsets = WindowInsets.navigationBars,
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = null)

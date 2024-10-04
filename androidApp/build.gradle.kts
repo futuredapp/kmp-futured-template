@@ -9,6 +9,9 @@ plugins {
 
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.compose.compiler)
+    // TODO enable after providing google-services.json
+    //alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.distribution)
 }
 
 kotlin {

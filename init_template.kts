@@ -135,6 +135,7 @@ fun renameAndroidRelatedPackages(packageName: String) {
     val baselineProfilesBaseDir = "baselineprofile/src/main/kotlin"
     renamePackageNameInDirectory(baselineProfilesBaseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
     renameTextInFilePath(baselineProfilesBaseDir, templatePackageName, packageName)
+    renameTextInPath("baselineprofile/build.gradle.kts", templatePackageName, packageName)
 }
 
 fun renamePackageNameInDirectory(dir: String, oldPackageNamePath: String, newPackageNamePath: String) {

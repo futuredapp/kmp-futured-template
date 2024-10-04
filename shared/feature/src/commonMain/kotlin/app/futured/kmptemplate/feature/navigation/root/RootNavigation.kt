@@ -5,5 +5,9 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface RootNavigation {
     val slot: StateFlow<ChildSlot<RootDestination, RootEntry>>
-    fun openDeepLink(uri: String)
+    val actions: Actions
+
+    interface Actions {
+        fun openDeepLink(uri: String)
+    }
 }
