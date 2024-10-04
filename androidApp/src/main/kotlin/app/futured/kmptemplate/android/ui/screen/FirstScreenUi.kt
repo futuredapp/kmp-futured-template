@@ -23,13 +23,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.MyApplicationTheme
 import app.futured.kmptemplate.android.tools.arch.EventsEffect
 import app.futured.kmptemplate.android.tools.arch.onEvent
@@ -47,7 +47,7 @@ fun FirstScreenUi(
     modifier: Modifier = Modifier,
 ) {
     val actions = screen.actions
-    val viewState by screen.viewState.collectAsState()
+    val viewState by screen.viewState.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     Content(viewState = viewState, actions = actions, modifier = modifier)

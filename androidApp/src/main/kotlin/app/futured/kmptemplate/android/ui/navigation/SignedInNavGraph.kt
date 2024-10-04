@@ -16,11 +16,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInDestination
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavEntry
@@ -39,8 +39,8 @@ fun SignedInNavGraph(
     navigation: SignedInNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val stack: ChildStack<SignedInDestination, SignedInNavEntry> by navigation.stack.collectAsState()
-    val viewState: SignedInNavigationViewState by navigation.viewState.collectAsState()
+    val stack: ChildStack<SignedInDestination, SignedInNavEntry> by navigation.stack.collectAsStateWithLifecycle()
+    val viewState: SignedInNavigationViewState by navigation.viewState.collectAsStateWithLifecycle()
     val actions = navigation.actions
 
     Scaffold(

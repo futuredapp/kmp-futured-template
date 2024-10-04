@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecretScreenUi
@@ -27,7 +27,7 @@ fun TabBNavGraph(
     navigation: TabBNavigation,
     modifier: Modifier = Modifier,
 ) {
-    val stack: ChildStack<TabBDestination, TabBNavEntry> by navigation.stack.collectAsState()
+    val stack: ChildStack<TabBDestination, TabBNavEntry> by navigation.stack.collectAsStateWithLifecycle()
     val actions = navigation.actions
 
     Surface(

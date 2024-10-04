@@ -112,6 +112,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.compose)
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.ext)
