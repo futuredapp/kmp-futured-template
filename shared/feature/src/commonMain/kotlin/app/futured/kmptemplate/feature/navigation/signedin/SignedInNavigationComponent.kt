@@ -3,12 +3,11 @@ package app.futured.kmptemplate.feature.navigation.signedin
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotDestination
 import app.futured.kmptemplate.feature.navigation.signedin.tab.SignedInSlotNavEntry
+import app.futured.kmptemplate.feature.tool.DebugLifecycleCallbacks
 import app.futured.kmptemplate.util.arch.AppComponentContext
 import app.futured.kmptemplate.util.ext.componentCoroutineScope
-import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.essenty.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -61,31 +60,3 @@ internal class SignedInNavigationComponent(
     }
 }
 
-class DebugLifecycleCallbacks(tag: String): Lifecycle.Callbacks {
-
-    private val logger = Logger.withTag(tag)
-
-    override fun onCreate() {
-        logger.d { "onCreate" }
-    }
-
-    override fun onStart() {
-        logger.d { "onStart" }
-    }
-
-    override fun onResume() {
-        logger.d { "onResume" }
-    }
-
-    override fun onPause() {
-        logger.d { "onPause" }
-    }
-
-    override fun onStop() {
-        logger.d { "onStop" }
-    }
-
-    override fun onDestroy() {
-        logger.d { "onDestroy" }
-    }
-}
