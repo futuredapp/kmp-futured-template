@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.ui.second
 
-import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.arch.viewModel
+import app.futured.arkitekt.decompose.AppComponentContext
+import app.futured.arkitekt.decompose.viewModel
 import kotlinx.coroutines.flow.StateFlow
 
 internal class SecondComponent(

@@ -2,7 +2,7 @@ package app.futured.kmptemplate.android.tools.arch
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import app.futured.kmptemplate.util.arch.UiEvent
+import app.futured.arkitekt.decompose.presentation.UiEvent
 import kotlinx.coroutines.flow.Flow
 
 /**

@@ -1,5 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
+import app.futured.arkitekt.decompose.AppComponentContext
+import app.futured.arkitekt.decompose.navigation.Destination
+import app.futured.arkitekt.decompose.navigation.NavEntry
 import app.futured.kmptemplate.feature.ui.first.FirstComponent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.second.SecondComponent
@@ -8,9 +11,6 @@ import app.futured.kmptemplate.feature.ui.secret.SecretComponent
 import app.futured.kmptemplate.feature.ui.secret.SecretScreen
 import app.futured.kmptemplate.feature.ui.third.ThirdComponent
 import app.futured.kmptemplate.feature.ui.third.ThirdScreen
-import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.arch.Destination
-import app.futured.kmptemplate.util.arch.NavEntry
 import kotlinx.serialization.Serializable
 
 @Serializable

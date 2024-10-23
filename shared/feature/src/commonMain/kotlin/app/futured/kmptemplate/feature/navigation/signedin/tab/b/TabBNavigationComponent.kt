@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
-import app.futured.kmptemplate.util.arch.AppComponentContext
+import app.futured.arkitekt.decompose.AppComponentContext
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow

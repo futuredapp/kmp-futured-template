@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.domain
 
-import app.futured.kmptemplate.util.domain.FlowUseCase
+import app.futured.arkitekt.crusecases.FlowUseCase
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

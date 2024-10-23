@@ -1,5 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
+import app.futured.arkitekt.decompose.AppComponentContext
+import app.futured.arkitekt.decompose.navigation.Destination
+import app.futured.arkitekt.decompose.navigation.NavEntry
 import app.futured.kmptemplate.feature.navigation.signedin.tab.a.TabANavigation
 import app.futured.kmptemplate.feature.navigation.signedin.tab.a.TabANavigationComponent
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBDestination
@@ -7,9 +10,6 @@ import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigationComponent
 import app.futured.kmptemplate.feature.navigation.signedin.tab.c.TabCNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.tab.c.TabCNavigationComponent
-import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.arch.Destination
-import app.futured.kmptemplate.util.arch.NavEntry
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 
