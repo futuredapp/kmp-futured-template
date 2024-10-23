@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.domain
 
-import app.futured.kmptemplate.util.domain.UseCase
+import app.futured.arkitekt.crusecases.UseCase
 import kotlinx.coroutines.delay
 import org.koin.core.annotation.Factory
 import kotlin.time.Duration.Companion.seconds

@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.first
 
+import app.futured.arkitekt.crusecases.scope.UseCaseExecutionScope
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
 import app.futured.kmptemplate.feature.domain.SyncDataUseCase
@@ -8,7 +9,6 @@ import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.util.arch.AppComponentContext
 import app.futured.kmptemplate.util.arch.UiEvent
 import app.futured.kmptemplate.util.arch.ViewState
-import app.futured.kmptemplate.util.domain.scope.UseCaseExecutionScope
 import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.GenericComponentContext
 import com.arkivanov.essenty.lifecycle.doOnDestroy

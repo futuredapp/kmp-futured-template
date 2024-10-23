@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.util.arch
 
-import app.futured.kmptemplate.util.domain.scope.UseCaseExecutionScope
+import app.futured.arkitekt.crusecases.scope.UseCaseExecutionScope
 import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope

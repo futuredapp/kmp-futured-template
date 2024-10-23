@@ -37,6 +37,7 @@ import app.futured.kmptemplate.android.tools.arch.onEvent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.first.FirstViewState
+import app.futured.kmptemplate.feature.ui.picker.PickerResult
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
@@ -110,6 +111,7 @@ private fun FirstScreenPreview() {
         override fun onBackClick() = Unit
         override fun onNextClick() = Unit
         override fun onPickerClick() = Unit
+        override fun onPickerResult(result: PickerResult) = Unit
     }
     MyApplicationTheme {
         Surface {

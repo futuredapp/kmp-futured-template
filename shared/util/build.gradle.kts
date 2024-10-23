@@ -26,6 +26,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.logging.kermit)
+                api(projects.shared.arkitektCrUsecases)
             }
         }
 
