@@ -1,11 +1,13 @@
-import Foundation
-import shared
+// Example of service
+protocol CrashlyticsService {
+    func reset()
+}
 
-final class PlatformFirebaseCrashlyticsImpl: PlatformFirebaseCrashlytics {
+final class ProductionCrashlyticsService: CrashlyticsService {
+    func reset() {}
+}
 
-    // TODO uncomment when FirebaseCrashlytics is added as dependency
-    // private final let crashlytics: Crashlytics = Crashlytics.crashlytics()
-
+extension CrashlyticsService: PlatformFirebaseCrashlytics {
     func logMessage(message: String) {
         // TODO uncomment when FirebaseCrashlytics is added as dependency
         // crashlytics.log(message)

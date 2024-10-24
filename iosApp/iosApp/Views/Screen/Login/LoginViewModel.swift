@@ -10,11 +10,13 @@ struct LoginViewModel {
     @StateObject @KotlinStateFlow private var viewState: LoginViewState
     private let actions: LoginScreenActions
     private let suspendActions: LoginScreenSuspendActions
+    private let crashlyticsService: TemplateService
 
-    init(_ screen: LoginScreen) {
-        _viewState = .init(screen.viewState)
-        actions = screen.actions
-        suspendActions = screen.suspendActions
+    init(_ screen: LoginScreen, templateService: TemplateService) {
+        self._viewState = .init(screen.viewState)
+        self.actions = screen.actions
+        self.suspendActions = screen.suspendActions
+        self.templateService = templateService
     }
 }
 

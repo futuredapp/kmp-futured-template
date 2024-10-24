@@ -4,6 +4,7 @@ import SwiftUI
 struct SignedInNavigationView: View {
 
     private let actions: SignedInNavigationActions
+    private let container: Container
 
     @StateObject @KotlinOptionalStateFlow private var tabA: SignedInNavEntry.A?
     @StateObject @KotlinOptionalStateFlow private var tabB: SignedInNavEntry.B?
@@ -11,12 +12,13 @@ struct SignedInNavigationView: View {
 
     @StateObject @KotlinStateFlow private var viewState: SignedInNavigationViewState
 
-    init(_ component: SignedInNavigation) {
+    init(_ component: SignedInNavigation, container: Container) {
         self._tabA = .init(component.tabA)
         self._tabB = .init(component.tabB)
         self._tabC = .init(component.tabC)
         self._viewState = .init(component.viewState)
         self.actions = component.actions
+        self.container = container
     }
 
     var body: some View {

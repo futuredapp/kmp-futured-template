@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
-		1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */; };
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
 		111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */; };
@@ -18,7 +17,6 @@
 		1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155AEDC2B46EE5B0093EF55 /* SecretView.swift */; };
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
-		1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEEB2AEA97C900C6203F /* RootView.swift */; };
 		1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF12AEA987D00C6203F /* RootNavigationView.swift */; };
 		1193BEF62AEA989600C6203F /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF52AEA989600C6203F /* FirstView.swift */; };
 		1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEF72AEA989F00C6203F /* SecondView.swift */; };
@@ -30,7 +28,6 @@
 		11B16AC32C32B81200ECA63A /* TabANavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC22C32B81200ECA63A /* TabANavigationView.swift */; };
 		11B16AC52C32B84D00ECA63A /* TabBNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC42C32B84D00ECA63A /* TabBNavigationView.swift */; };
 		11B16AC72C32B86800ECA63A /* TabCNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC62C32B86800ECA63A /* TabCNavigationView.swift */; };
-		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
@@ -40,6 +37,9 @@
 		F4820AB72B0B51A100B13080 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4820AB62B0B51A100B13080 /* XCTest.framework */; };
 		F4820AB82B0B523E00B13080 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AA02B0B4D3E00B13080 /* iosAppTests.swift */; };
 		F4820AC22B0B528100B13080 /* iosAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AC12B0B528100B13080 /* iosAppUITestsLaunchTests.swift */; };
+		FCE2CCA02CCA2070005622D4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE2CC9F2CCA2070005622D4 /* AppCoordinator.swift */; };
+		FCE2CCD12CCA28E7005622D4 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE2CCD02CCA28E7005622D4 /* Container.swift */; };
+		FCE2CCD42CCA2E2C005622D4 /* CrashlyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE2CCD32CCA2E2C005622D4 /* CrashlyticsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,6 @@
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformBindingsImpl.swift; sourceTree = "<group>"; };
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
 		111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EventsEffect.swift"; sourceTree = "<group>"; };
@@ -84,7 +83,6 @@
 		1155AEDC2B46EE5B0093EF55 /* SecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretView.swift; sourceTree = "<group>"; };
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
-		1193BEEB2AEA97C900C6203F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1193BEF12AEA987D00C6203F /* RootNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationView.swift; sourceTree = "<group>"; };
 		1193BEF52AEA989600C6203F /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		1193BEF72AEA989F00C6203F /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		11B16AC22C32B81200ECA63A /* TabANavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabANavigationView.swift; sourceTree = "<group>"; };
 		11B16AC42C32B84D00ECA63A /* TabBNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBNavigationView.swift; sourceTree = "<group>"; };
 		11B16AC62C32B86800ECA63A /* TabCNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCNavigationView.swift; sourceTree = "<group>"; };
-		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
@@ -113,6 +110,9 @@
 		F4820AB62B0B51A100B13080 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F4820ABD2B0B528100B13080 /* iosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4820AC12B0B528100B13080 /* iosAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FCE2CC9F2CCA2070005622D4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FCE2CCD02CCA28E7005622D4 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		FCE2CCD32CCA2E2C005622D4 /* CrashlyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,6 @@
 		1113BA392AE6955200ABDE61 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */,
-				11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */,
 				11D407532C17232F0055C0F2 /* PlatformImpl.swift */,
 			);
 			path = Platform;
@@ -162,9 +160,10 @@
 		1113BA3C2AE6969700ABDE61 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				FCE2CC9F2CCA2070005622D4 /* AppCoordinator.swift */,
 				1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */,
+				FCE2CCD02CCA28E7005622D4 /* Container.swift */,
 				1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */,
-				1193BEEB2AEA97C900C6203F /* RootView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -316,6 +315,7 @@
 				1113BA392AE6955200ABDE61 /* Platform */,
 				119A92E62B0F379400D93E98 /* Extensions */,
 				DC7FFCC62B69251D00A70102 /* Resources */,
+				FCE2CCD22CCA2E1B005622D4 /* Services */,
 				1113BA3C2AE6969700ABDE61 /* App */,
 				1193BEED2AEA985200C6203F /* Views */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
@@ -353,6 +353,14 @@
 				F4820AC12B0B528100B13080 /* iosAppUITestsLaunchTests.swift */,
 			);
 			path = iosAppUITests;
+			sourceTree = "<group>";
+		};
+		FCE2CCD22CCA2E1B005622D4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FCE2CCD32CCA2E2C005622D4 /* CrashlyticsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -550,18 +558,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
 				11B16AC72C32B86800ECA63A /* TabCNavigationView.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
+				FCE2CCD12CCA28E7005622D4 /* Container.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
+				FCE2CCA02CCA2070005622D4 /* AppCoordinator.swift in Sources */,
+				FCE2CCD42CCA2E2C005622D4 /* CrashlyticsService.swift in Sources */,
 				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				5B21BD412C11D05B005B6191 /* SecretViewModel.swift in Sources */,
-				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
 				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
 				11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
@@ -569,7 +578,6 @@
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
 				11B16AC52C32B84D00ECA63A /* TabBNavigationView.swift in Sources */,
 				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
-				1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */,
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,

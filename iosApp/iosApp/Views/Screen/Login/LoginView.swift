@@ -19,5 +19,8 @@ struct LoginView<ViewModel: LoginViewModelProtocol>: View {
         .refreshable {
             await viewModel.onRefresh()
         }
+        .task {
+            await model.onAppear()
+        }
     }
 }

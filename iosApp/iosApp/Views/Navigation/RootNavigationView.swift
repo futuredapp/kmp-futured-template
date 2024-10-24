@@ -2,13 +2,13 @@ import shared
 import SwiftUI
 
 struct RootNavigationView: View {
-
     @StateObject @KotlinStateFlow private var slot: ChildSlot<RootDestination, RootEntry>
-    private let openDeepLink: (String) -> Void
 
-    init(_ component: RootNavigation) {
+    private let container: Container
+
+    init(_ component: RootNavigation, container: Container) {
         self._slot = .init(component.slot)
-        self.openDeepLink = component.actions.openDeepLink
+        self.container = container
     }
 
     var body: some View {
@@ -16,14 +16,11 @@ struct RootNavigationView: View {
             if let navigationEntry = slot.child?.instance {
                 switch onEnum(of: navigationEntry) {
                 case .login(let entry):
-                    LoginView(LoginViewModel(entry.instance))
+                    LoginView(LoginViewModel(entry.instance, templateService: container.templateService))
                 case .signedIn(let entry):
-                    SignedInNavigationView(entry.instance)
+                    SignedInNavigationView(entry.instance, container: container)
                 }
             }
-        }
-        .onOpenURL { url in
-            openDeepLink(url.absoluteString)
         }
     }
 }
