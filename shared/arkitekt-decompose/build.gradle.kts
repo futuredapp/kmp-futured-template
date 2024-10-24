@@ -5,6 +5,7 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+
     alias(libs.plugins.compose.compiler)
 }
 
@@ -24,17 +25,13 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        androidMain {
-            dependencies {
-                implementation(libs.androidx.compose.runtime)
-            }
-        }
         commonMain {
             dependencies {
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.logging.kermit)
+                implementation(libs.jetbrains.compose.runtime)
                 api(projects.shared.arkitektCrUsecases)
             }
         }
