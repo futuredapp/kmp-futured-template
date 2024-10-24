@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.ui.third
 
+import app.futured.arkitekt.decompose.presentation.ViewState
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.util.arch.ViewState
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 

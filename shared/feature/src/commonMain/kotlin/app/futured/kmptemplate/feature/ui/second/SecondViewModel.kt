@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.ui.second
 
+import app.futured.arkitekt.decompose.presentation.SharedViewModel
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigator
-import app.futured.kmptemplate.util.arch.SharedViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.annotation.Factory
 

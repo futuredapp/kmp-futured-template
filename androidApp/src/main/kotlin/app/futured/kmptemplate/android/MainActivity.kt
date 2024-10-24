@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import app.futured.kmptemplate.android.ui.navigation.RootNavGraph
+import app.futured.kmptemplate.feature.DefaultAppComponentContext
 import app.futured.kmptemplate.feature.navigation.root.RootNavigation
 import app.futured.kmptemplate.feature.navigation.root.RootNavigationFactory
-import app.futured.kmptemplate.util.arch.DefaultAppComponentContext
 import com.arkivanov.decompose.defaultComponentContext
 
 class MainActivity : ComponentActivity() {
