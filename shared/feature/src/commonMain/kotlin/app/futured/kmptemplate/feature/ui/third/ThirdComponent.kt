@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.ui.third
 
-import app.futured.arkitekt.decompose.AppComponentContext
-import app.futured.arkitekt.decompose.viewModel
+import app.futured.arkitekt.decompose.injection.viewModel
+import app.futured.kmptemplate.feature.AppComponentContext
 import kotlinx.coroutines.flow.StateFlow
 
 internal class ThirdComponent(

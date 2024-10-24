@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
-import app.futured.arkitekt.decompose.AppComponentContext
 import app.futured.arkitekt.decompose.navigation.Destination
 import app.futured.arkitekt.decompose.navigation.NavEntry
+import app.futured.kmptemplate.feature.AppComponentContext
 import app.futured.kmptemplate.feature.navigation.signedin.tab.a.TabANavigation
 import app.futured.kmptemplate.feature.navigation.signedin.tab.a.TabANavigationComponent
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBDestination
@@ -14,7 +14,7 @@ import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class SignedInDestination : Destination<SignedInNavEntry> {
+sealed class SignedInDestination : Destination<SignedInNavEntry, AppComponentContext> {
 
     @Serializable
     data object A : SignedInDestination() {

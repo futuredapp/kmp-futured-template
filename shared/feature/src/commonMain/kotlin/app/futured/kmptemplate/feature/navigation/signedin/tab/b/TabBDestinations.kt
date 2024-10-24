@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
-import app.futured.arkitekt.decompose.AppComponentContext
 import app.futured.arkitekt.decompose.navigation.Destination
 import app.futured.arkitekt.decompose.navigation.NavEntry
+import app.futured.kmptemplate.feature.AppComponentContext
 import app.futured.kmptemplate.feature.ui.first.FirstComponent
 import app.futured.kmptemplate.feature.ui.first.FirstScreen
 import app.futured.kmptemplate.feature.ui.second.SecondComponent
@@ -14,7 +14,7 @@ import app.futured.kmptemplate.feature.ui.third.ThirdScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class TabBDestination : Destination<TabBNavEntry> {
+sealed class TabBDestination : Destination<TabBNavEntry, AppComponentContext> {
     @Serializable
     data object First : TabBDestination() {
         override fun createComponent(componentContext: AppComponentContext): TabBNavEntry =

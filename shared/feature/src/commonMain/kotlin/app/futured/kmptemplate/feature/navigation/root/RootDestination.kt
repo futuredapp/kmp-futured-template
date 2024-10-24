@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import app.futured.arkitekt.decompose.AppComponentContext
 import app.futured.arkitekt.decompose.navigation.Destination
 import app.futured.arkitekt.decompose.navigation.NavEntry
+import app.futured.kmptemplate.feature.AppComponentContext
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigation
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigationComponent
 import app.futured.kmptemplate.feature.ui.login.LoginComponent
@@ -10,7 +10,7 @@ import app.futured.kmptemplate.feature.ui.login.LoginScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class RootDestination : Destination<RootEntry> {
+sealed class RootDestination : Destination<RootEntry, AppComponentContext> {
 
     @Serializable
     data object Login : RootDestination() {

@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import app.futured.arkitekt.decompose.AppComponentContext
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.componentCoroutineScope
+import app.futured.kmptemplate.feature.AppComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate

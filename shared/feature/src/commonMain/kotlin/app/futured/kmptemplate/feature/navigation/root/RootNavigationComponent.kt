@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
-import app.futured.arkitekt.decompose.AppComponentContext
-import app.futured.arkitekt.decompose.viewModel
+import app.futured.arkitekt.decompose.injection.viewModel
+import app.futured.kmptemplate.feature.AppComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.component.inject

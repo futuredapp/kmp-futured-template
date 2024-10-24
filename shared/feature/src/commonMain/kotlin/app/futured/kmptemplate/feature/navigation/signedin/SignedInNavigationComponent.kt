@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
-import app.futured.arkitekt.decompose.AppComponentContext
 import app.futured.arkitekt.decompose.ext.componentCoroutineScope
+import app.futured.kmptemplate.feature.AppComponentContext
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.SharingStarted

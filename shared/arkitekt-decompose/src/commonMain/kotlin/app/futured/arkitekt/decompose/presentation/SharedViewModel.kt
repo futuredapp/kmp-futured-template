@@ -32,10 +32,12 @@ abstract class SharedViewModel<VS : ViewState, UI_EVENT : UiEvent<VS>> :
 
     // region Lifecycle
 
-    override val viewModelScope: CoroutineScope = MainScope()
+    private val coroutineScope = MainScope()
+
+    override val viewModelScope: CoroutineScope = coroutineScope
 
     override fun onDestroy() {
-        viewModelScope.cancel()
+        coroutineScope.cancel()
     }
 
     // endregion
@@ -49,13 +51,13 @@ abstract class SharedViewModel<VS : ViewState, UI_EVENT : UiEvent<VS>> :
      */
     val uiEvents: Flow<UI_EVENT> = uiEventChannel
         .receiveAsFlow()
-        .shareIn(viewModelScope, SharingStarted.Lazily)
+        .shareIn(coroutineScope, SharingStarted.Lazily)
 
     /**
      * Sends an [UiEvent] to event channel that can be consumed using [uiEvents] flow.
      */
     fun sendUiEvent(event: UI_EVENT) {
-        viewModelScope.launch {
+        coroutineScope.launch {
             uiEventChannel.send(event)
         }
     }
