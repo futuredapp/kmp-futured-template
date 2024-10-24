@@ -5,8 +5,7 @@ import app.futured.arkitekt.decompose.ext.componentCoroutineScope
 import app.futured.arkitekt.decompose.presentation.Stateless
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstComponentFactory
-import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondScreen
+import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponentFactory
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.childStack
 import kotlinx.coroutines.flow.StateFlow
@@ -29,12 +28,8 @@ internal class HomeNavHostComponent(
         handleBackButton = true,
         childFactory = { config, childCtx ->
             when (config) {
-                HomeConfig.First -> FirstComponentFactory.create(
-                    componentContext = childCtx,
-                    navigation = homeNavigator, // What about results?
-                ).let { HomeChild.First(it) }
-
-                HomeConfig.Second -> (object : SecondScreen {}).let { HomeChild.Second(it) }
+                HomeConfig.First -> HomeChild.First(ScreenComponentFactory.createComponent(childCtx, homeNavigator))
+                HomeConfig.Second -> HomeChild.Second(ScreenComponentFactory.createComponent(childCtx, homeNavigator))
             }
         },
     ).asStateFlow(componentCoroutineScope())

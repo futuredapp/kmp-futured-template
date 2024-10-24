@@ -1,13 +1,14 @@
 package app.futured.kmptemplate.feature_v3.navigation.home
 
 import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstScreenNavigationActions
+import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondScreenNavigationActions
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 
-internal interface HomeNavigator : HomeNavHost.Actions, FirstScreenNavigationActions
+internal interface HomeNavigator : HomeNavHost.Actions, FirstScreenNavigationActions, SecondScreenNavigationActions
 
 internal class HomeNavigatorImpl(
     private val stackNavigation: StackNavigation<HomeConfig> = StackNavigation(),
