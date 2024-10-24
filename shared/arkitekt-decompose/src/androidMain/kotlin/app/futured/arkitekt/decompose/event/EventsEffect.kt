@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.android.tools.arch
+package app.futured.arkitekt.decompose.event
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
