@@ -16,10 +16,10 @@ import kotlin.time.Duration.Companion.milliseconds
 @Factory
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
-    @InjectedParam override val navigation: FirstScreenNavigationActions,
+    @InjectedParam override val navigation: FirstScreenNavigation,
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
-) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigationActions>(componentContext, FirstViewState()),
+) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(componentContext, FirstViewState()),
     FirstScreen {
 
     private val logger = Logger.withTag("FirstComponent")
@@ -31,7 +31,7 @@ internal class FirstComponent(
 
     override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
         override fun onBack() = navigation.pop()
-        override fun onNext() = navigation.navigateToSecond()
+        override fun onNext() = navigation.toSecond()
     }
 
     private fun syncData() = syncDataUseCase.execute {

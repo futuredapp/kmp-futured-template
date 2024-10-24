@@ -13,4 +13,3 @@ interface FirstScreen {
         fun onNext()
     }
 }
-

@@ -101,7 +101,7 @@ dependencies {
     lintChecks(libs.lint.compose)
 
     implementation(projects.shared.app)
-    implementation(projects.shared.feature)
+    implementation(projects.shared.featureV3)
     implementation(projects.shared.platform)
     implementation(projects.shared.arkitektDecompose)
     implementation(projects.shared.resources)

@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.app.injection
 
-import app.futured.kmptemplate.feature.injection.FeatureModule
+import app.futured.kmptemplate.feature_v3.injection.FeatureModuleV3
 import app.futured.kmptemplate.network.graphql.injection.NetworkGraphqlModule
 import app.futured.kmptemplate.network.rest.injection.NetworkRestModule
 import app.futured.kmptemplate.persistence.injection.persistenceModule
@@ -27,7 +27,7 @@ internal object AppInjection {
 
             modules(
                 platformModule(platformBindings = platformBindings),
-                FeatureModule().module,
+                FeatureModuleV3().module,
                 NetworkGraphqlModule().module,
                 NetworkRestModule().module,
                 persistenceModule(),

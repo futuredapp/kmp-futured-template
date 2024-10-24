@@ -33,9 +33,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.arkitekt.decompose.event.onEvent
 import app.futured.kmptemplate.android.MyApplicationTheme
-import app.futured.kmptemplate.feature.ui.first.FirstScreen
-import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
-import app.futured.kmptemplate.feature.ui.first.FirstViewState
+import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstScreen
+import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstUiEvent
+import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
