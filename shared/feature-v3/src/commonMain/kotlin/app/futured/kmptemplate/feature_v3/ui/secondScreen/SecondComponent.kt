@@ -9,12 +9,15 @@ import org.koin.core.annotation.InjectedParam
 internal class SecondComponent(
     componentContext: AppComponentContext,
     @InjectedParam override val navigation: SecondScreenNavigation,
-) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(componentContext, SecondViewState()), SecondScreen {
+) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
+    componentContext = componentContext,
+    defaultState = SecondViewState(),
+), SecondScreen {
 
     override fun onStart() = Unit
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
         override fun onBack() = navigation.pop()
-        override fun onNext() = Unit
+        override fun onNext() = navigation.toThird("This ID should have been selected from picker component.")
     }
 }

@@ -19,8 +19,10 @@ internal class FirstComponent(
     @InjectedParam override val navigation: FirstScreenNavigation,
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
-) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(componentContext, FirstViewState()),
-    FirstScreen {
+) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
+    componentContext = componentContext,
+    defaultState = FirstViewState(),
+), FirstScreen {
 
     private val logger = Logger.withTag("FirstComponent")
 

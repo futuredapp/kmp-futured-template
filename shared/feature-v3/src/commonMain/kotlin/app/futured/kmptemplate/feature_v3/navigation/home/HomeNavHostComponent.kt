@@ -10,6 +10,9 @@ import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstComponent
 import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstScreenNavigation
 import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondComponent
 import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondScreenNavigation
+import app.futured.kmptemplate.feature_v3.ui.thirdScreen.ThirdComponent
+import app.futured.kmptemplate.feature_v3.ui.thirdScreen.ThirdScreenArgs
+import app.futured.kmptemplate.feature_v3.ui.thirdScreen.ThirdScreenNavigation
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
@@ -55,7 +58,18 @@ internal class HomeNavHostComponent(
                         childContext = childCtx,
                         navigation = SecondScreenNavigation(
                             pop = { homeNavigator.pop() },
+                            toThird = { id -> homeNavigator.pushNew(HomeConfig.Third(ThirdScreenArgs(id))) },
                         ),
+                    ),
+                )
+
+                is HomeConfig.Third -> HomeChild.Third(
+                    AppComponentFactory.createComponent<ThirdComponent>(
+                        childContext = childCtx,
+                        navigation = ThirdScreenNavigation(
+                            pop = { homeNavigator.pop() },
+                        ),
+                        config.args,
                     ),
                 )
             }

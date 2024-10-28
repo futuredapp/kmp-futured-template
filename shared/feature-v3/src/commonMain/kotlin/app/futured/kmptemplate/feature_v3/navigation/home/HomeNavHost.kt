@@ -2,6 +2,8 @@ package app.futured.kmptemplate.feature_v3.navigation.home
 
 import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstScreen
 import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondScreen
+import app.futured.kmptemplate.feature_v3.ui.thirdScreen.ThirdScreen
+import app.futured.kmptemplate.feature_v3.ui.thirdScreen.ThirdScreenArgs
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
@@ -27,11 +29,14 @@ sealed interface HomeConfig {
 
     @Serializable
     data object Second : HomeConfig
+
+    @Serializable
+    data class Third(val args: ThirdScreenArgs) : HomeConfig
 }
 
 sealed interface HomeChild {
 
     data class First(val screen: FirstScreen) : HomeChild
-
     data class Second(val screen: SecondScreen) : HomeChild
+    data class Third(val screen: ThirdScreen) : HomeChild
 }
