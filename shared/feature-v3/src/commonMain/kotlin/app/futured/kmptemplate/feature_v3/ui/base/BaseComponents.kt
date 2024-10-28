@@ -6,11 +6,17 @@ import app.futured.arkitekt.decompose.presentation.BaseComponent
 import app.futured.arkitekt.decompose.presentation.UiEvent
 import app.futured.arkitekt.decompose.presentation.ViewState
 
+/**
+ * TODO KDoc
+ */
 abstract class AppComponent<VS : ViewState, E : UiEvent<VS>>(
     componentContext: AppComponentContext,
     defaultState: VS,
 ) : BaseComponent<VS, E>(componentContext, defaultState), AppComponentContext by componentContext
 
+/**
+ * TODO KDoc
+ */
 abstract class ScreenComponent<VS : ViewState, E : UiEvent<VS>, NAV : NavigationActions>(
     componentContext: AppComponentContext,
     defaultState: VS,

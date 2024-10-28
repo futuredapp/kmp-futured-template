@@ -5,8 +5,14 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
+/**
+ * TODO KDoc
+ */
 internal object AppComponentFactory : KoinComponent {
 
+    /**
+     * TODO KDoc
+     */
     inline fun <reified C : ScreenComponent<*, *, *>> createComponent(
         childContext: AppComponentContext,
         navigation: NavigationActions,
@@ -18,6 +24,9 @@ internal object AppComponentFactory : KoinComponent {
         },
     )
 
+    /**
+     * TODO KDoc
+     */
     inline fun <reified C : AppComponent<*, *>> createComponent(
         childContext: AppComponentContext,
         vararg parameters: Any?,

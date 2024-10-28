@@ -17,6 +17,9 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+/**
+ * TODO KDoc
+ */
 abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
     componentContext: GenericComponentContext<*>,
     defaultState: VS,
