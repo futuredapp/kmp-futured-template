@@ -1,4 +1,4 @@
-package app.futured.arkitekt.decompose.injection
+package app.futured.arkitekt.decompose
 
 import app.futured.arkitekt.decompose.presentation.SharedViewModel
 import com.arkivanov.decompose.ComponentContext
@@ -12,15 +12,15 @@ import org.koin.core.qualifier.Qualifier
 import org.koin.mp.KoinPlatformTools
 
 /**
- * Base [GenericComponentContext] decorated with [KoinComponent] that allows Components to inject ViewModels.
+ * An Arkitekt-specific [GenericComponentContext] decorated with [KoinComponent] that adds injection capabilities inside Components.
  * Any custom application-specific [ComponentContext] should implement this interface.
  */
-interface KoinComponentContext<T : Any> : GenericComponentContext<T>, KoinComponent
+interface ArkitektComponentContext<T : Any> : GenericComponentContext<T>, KoinComponent
 
 /**
- * Injects and retains instance of [SharedViewModel] inside [KoinComponentContext]'s [InstanceKeeperOwner].
+ * Injects and retains instance of [SharedViewModel] inside [ArkitektComponentContext]'s [InstanceKeeperOwner].
  */
-inline fun <reified T : SharedViewModel<*, *>> KoinComponentContext<*>.viewModel(
+inline fun <reified T : SharedViewModel<*, *>> ArkitektComponentContext<*>.viewModel(
     qualifier: Qualifier? = null,
     mode: LazyThreadSafetyMode = KoinPlatformTools.defaultLazyMode(),
     noinline parameters: ParametersDefinition? = null,

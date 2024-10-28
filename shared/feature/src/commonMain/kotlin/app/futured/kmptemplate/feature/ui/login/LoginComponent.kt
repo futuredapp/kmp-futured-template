@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.ui.login
 
-import app.futured.arkitekt.decompose.injection.viewModel
+import app.futured.arkitekt.decompose.viewModel
 import app.futured.kmptemplate.feature.AppComponentContext
 import kotlinx.coroutines.flow.StateFlow
 
