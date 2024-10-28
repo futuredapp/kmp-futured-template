@@ -5,7 +5,7 @@ import app.futured.arkitekt.decompose.ext.componentCoroutineScope
 import app.futured.arkitekt.decompose.presentation.Stateless
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponentFactory
+import app.futured.kmptemplate.feature_v3.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstComponent
 import app.futured.kmptemplate.feature_v3.ui.firstScreen.FirstScreenNavigation
 import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondComponent
@@ -41,7 +41,7 @@ internal class HomeNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 HomeConfig.First -> HomeChild.First(
-                    ScreenComponentFactory.createComponent<FirstComponent>(
+                    AppComponentFactory.createComponent<FirstComponent>(
                         childContext = childCtx,
                         navigation = FirstScreenNavigation(
                             pop = { homeNavigator.pop() },
@@ -51,7 +51,7 @@ internal class HomeNavHostComponent(
                 )
 
                 HomeConfig.Second -> HomeChild.Second(
-                    ScreenComponentFactory.createComponent<SecondComponent>(
+                    AppComponentFactory.createComponent<SecondComponent>(
                         childContext = childCtx,
                         navigation = SecondScreenNavigation(
                             pop = { homeNavigator.pop() },
