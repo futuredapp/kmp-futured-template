@@ -8,6 +8,5 @@ gem "thefuntasty_danger"
 
 # Fastlane plugins
 gem "fastlane-plugin-versioning"
-gem "fastlane-plugin-appcenter"
 gem "fastlane-plugin-badge"
 gem "fastlane-plugin-brew"
