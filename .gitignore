@@ -1,6 +1,8 @@
 *.iml
 .gradle
 .idea
+.kotlin
+.fleet
 .DS_Store
 build
 captures

@@ -40,6 +40,7 @@ composeRuntime = "1.6.11"
 dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
+poet = "1.18.1"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -132,6 +133,10 @@ network-ktor-client-engine-okhttp = { module = "io.ktor:ktor-client-okhttp", ver
 network-ktor-client-engine-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 network-ktor-http = { module = "io.ktor:ktor-http", version.ref = "ktor" }
 network-ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+# KSP api
+ksp-lib = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp"}
+poet-interop = { module = "com.squareup:kotlinpoet-ksp", version.ref = "poet"}
 
 # Datastore
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }

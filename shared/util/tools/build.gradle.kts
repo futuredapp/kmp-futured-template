@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)

@@ -7,8 +7,8 @@ plugins {
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
 
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
+    alias(libs.plugins.compose.compiler)
     // TODO enable after providing google-services.json
     // alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.distribution)
@@ -103,7 +103,7 @@ dependencies {
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
-    implementation(projects.shared.util)
+    implementation(projects.shared.util.tools)
     implementation(projects.shared.resources)
 
     implementation(platform(libs.androidx.compose.bom))
