@@ -9,6 +9,7 @@ import kotlinx.coroutines.cancel
 
 /**
  * Creates a Main [CoroutineScope] instance tied to the lifecycle of this [ComponentContext].
+ * TODO delete
  */
 fun LifecycleOwner.componentCoroutineScope(): CoroutineScope =
     MainScope().also { coroutineScope ->

@@ -27,10 +27,11 @@ abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
 
     // region Lifecycle
 
-    private val componentCoroutineScope = MainScope().also { scope ->
+    protected val componentCoroutineScope = MainScope().also { scope ->
         componentContext.lifecycle.doOnDestroy { scope.cancel() }
     }
 
+    // TODO how to let component intercept the StateFlow? for example to set selected tab
     private val state: MutableStateFlow<VS> = MutableStateFlow(defaultState)
     val viewState: StateFlow<VS> = state
         .onStart { onStart() }

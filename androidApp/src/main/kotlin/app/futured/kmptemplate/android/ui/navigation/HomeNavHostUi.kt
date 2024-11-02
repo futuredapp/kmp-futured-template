@@ -1,6 +1,8 @@
 package app.futured.kmptemplate.android.ui.navigation
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -21,7 +23,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
-fun HomeNavGraph(
+fun HomeNavHostUi(
     navHost: HomeNavHost,
     modifier: Modifier = Modifier,
 ) {
@@ -30,6 +32,7 @@ fun HomeNavGraph(
 
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets.navigationBars,
         content = { paddings ->
             Children(
                 stack = stack,

@@ -21,9 +21,13 @@ import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import kotlinx.coroutines.flow.StateFlow
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.InjectedParam
 
+@Factory
 internal class HomeNavHostComponent(
-    componentContext: AppComponentContext,
+    @InjectedParam componentContext: AppComponentContext,
+    @InjectedParam private val initialStack: List<HomeConfig>
 ) : AppComponent<Stateless, Nothing>(componentContext, Stateless), HomeNavHost {
 
     override fun onStart() = Unit
@@ -38,7 +42,7 @@ internal class HomeNavHostComponent(
     override val stack: StateFlow<ChildStack<HomeConfig, HomeChild>> = childStack(
         source = homeNavigator,
         serializer = HomeConfig.serializer(),
-        initialStack = { listOf(HomeConfig.First) },
+        initialStack = { initialStack },
         key = "HomeStack",
         handleBackButton = true,
         childFactory = { config, childCtx ->

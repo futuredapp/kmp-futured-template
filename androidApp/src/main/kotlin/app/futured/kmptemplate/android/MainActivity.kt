@@ -10,20 +10,20 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import app.futured.kmptemplate.android.ui.navigation.HomeNavGraph
-import app.futured.kmptemplate.feature_v3.navigation.home.HomeNavHost
-import app.futured.kmptemplate.feature_v3.navigation.home.HomeNavHostFactory
+import app.futured.kmptemplate.android.ui.navigation.RootNavHostUi
+import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHost
+import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHostFactory
 import app.futured.kmptemplate.feature_v3.ui.base.DefaultAppComponentContext
 import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var rootNavHost: HomeNavHost
+    private lateinit var rootNavHost: RootNavHost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rootNavHost = retainedComponent { retainedContext ->
-            HomeNavHostFactory.create(DefaultAppComponentContext(retainedContext))
+            RootNavHostFactory.create(DefaultAppComponentContext(retainedContext))
         }
 //        rootNavigation.openDeepLinkIfNeeded(intent) // TODO v3
 
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    HomeNavGraph(navHost = rootNavHost)
+                    RootNavHostUi(navHost = rootNavHost)
                 }
             }
         }
