@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
-import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.ext.asStateFlow
-import app.futured.kmptemplate.util.ext.componentCoroutineScope
+import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.arkitekt.decompose.ext.componentCoroutineScope
+import app.futured.kmptemplate.feature.AppComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.StackNavigator

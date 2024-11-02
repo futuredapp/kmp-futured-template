@@ -1,10 +1,10 @@
 package app.futured.kmptemplate.feature.navigation.root
 
+import app.futured.arkitekt.decompose.presentation.SharedViewModel
 import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkDestination
 import app.futured.kmptemplate.feature.navigation.deeplink.DeepLinkResolver
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInDestination
 import app.futured.kmptemplate.feature.navigation.signedin.SignedInNavigator
-import app.futured.kmptemplate.util.arch.SharedViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.annotation.Factory
 

@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.signedin
 
+import app.futured.arkitekt.decompose.presentation.ViewState
 import app.futured.kmptemplate.feature.data.model.ui.navigation.NavigationTab
-import app.futured.kmptemplate.util.arch.ViewState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

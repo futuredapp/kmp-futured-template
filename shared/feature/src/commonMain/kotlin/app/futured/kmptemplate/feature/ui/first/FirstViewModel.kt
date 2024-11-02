@@ -1,12 +1,12 @@
 package app.futured.kmptemplate.feature.ui.first
 
+import app.futured.arkitekt.decompose.ext.update
+import app.futured.arkitekt.decompose.presentation.SharedViewModel
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
 import app.futured.kmptemplate.feature.domain.SyncDataUseCase
 import app.futured.kmptemplate.feature.navigation.signedin.tab.b.TabBNavigator
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.util.arch.SharedViewModel
-import app.futured.kmptemplate.util.ext.update
 import co.touchlab.kermit.Logger
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc

@@ -1,9 +1,9 @@
 package app.futured.kmptemplate.feature.navigation.signedin.tab.b
 
+import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.arkitekt.decompose.ext.componentCoroutineScope
+import app.futured.kmptemplate.feature.AppComponentContext
 import app.futured.kmptemplate.feature.navigation.root.RootNavigator
-import app.futured.kmptemplate.util.arch.AppComponentContext
-import app.futured.kmptemplate.util.ext.asStateFlow
-import app.futured.kmptemplate.util.ext.componentCoroutineScope
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation

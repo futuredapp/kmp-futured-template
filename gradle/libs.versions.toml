@@ -4,8 +4,8 @@ kotlin = "2.0.0"
 ksp = "2.0.0-1.0.24" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
 androidxLifecycle = "2.8.6"
-composeCompiler = "1.5.14" # Must be compatible with: `kotlin`
-androidxComposeBom = "2024.09.00"
+androidxComposeBom = "2024.10.00"
+jetbrainsComposeRuntime = "1.7.0" # Needs to align with version in Compose BOM as closely as possible
 androidxActivity = "1.9.2"
 decompose = "3.1.0"
 essenty = "2.1.0"
@@ -36,7 +36,6 @@ espressoCore = "3.6.1"
 uiautomator = "2.3.0"
 benchmarkMacroJunit4 = "1.2.4"
 profileinstaller = "1.3.1"
-composeRuntime = "1.6.11"
 dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
@@ -50,7 +49,8 @@ project-shared-network-graphql-packageName = "app.futured.kmptemplate.network.gr
 project-shared-network-rest-namespace = "app.futured.kmptemplate.network.rest.android"
 project-shared-network-rest-packageName = "app.futured.kmptemplate.network.rest"
 project-shared-persistence-namespace = "app.futured.kmptemplate.persistence.android"
-project-shared-util-namespace = "app.futured.kmptemplate.util.android"
+project-shared-arkitekt-crUsecases-namespace = "app.futured.arkitekt.cr_usecases.android"
+project-shared-arkitekt-decompose-namespace = "app.futured.arkitekt.decompose.android"
 project-shared-platform-namespace = "app.futured.kmptemplate.platform.android"
 project-shared-resources-namespace = "app.futured.kmptemplate.resources.android"
 project-shared-resources-packageName = "app.futured.kmptemplate.resources"
@@ -66,7 +66,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime" , version.ref = "composeRuntime"}
+jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime" , version.ref = "jetbrainsComposeRuntime"}
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -168,6 +168,7 @@ koin-annotations-plugin = { id = "koin-annotations" }
 
 [bundles]
 compose = [
+    "androidx-compose-runtime",
     "androidx-compose-foundation",
     "androidx-compose-ui",
     "androidx-compose-ui-tooling",

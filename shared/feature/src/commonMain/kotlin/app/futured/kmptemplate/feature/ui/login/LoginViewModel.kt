@@ -1,9 +1,9 @@
 package app.futured.kmptemplate.feature.ui.login
 
+import app.futured.arkitekt.decompose.presentation.SharedViewModel
 import app.futured.kmptemplate.feature.navigation.root.RootNavigator
 import app.futured.kmptemplate.network.graphql.api.RickAndMortyApi
 import app.futured.kmptemplate.network.rest.api.StarWarsApi
-import app.futured.kmptemplate.util.arch.SharedViewModel
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

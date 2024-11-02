@@ -30,11 +30,6 @@ kotlin {
     iosTargets()
 
     sourceSets {
-        androidMain {
-            dependencies {
-                implementation(libs.androidx.compose.runtime)
-            }
-        }
         commonMain {
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
@@ -45,11 +40,12 @@ kotlin {
                 implementation(libs.kotlinx.immutableCollections)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
+                implementation(libs.jetbrains.compose.runtime)
 
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.util)
+                implementation(projects.shared.arkitektDecompose)
                 implementation(projects.shared.resources)
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
