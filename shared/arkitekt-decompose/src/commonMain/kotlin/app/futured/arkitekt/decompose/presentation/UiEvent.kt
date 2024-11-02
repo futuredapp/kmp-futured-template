@@ -5,5 +5,7 @@ package app.futured.arkitekt.decompose.presentation
  *
  * Event is guaranteed to be delivered just once even if screen rotation or a similar
  * operation is in progress.
+ *
+ * TODO do we need ViewState generic argument?
  */
 interface UiEvent<VS : ViewState>
