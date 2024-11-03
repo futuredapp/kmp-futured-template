@@ -8,5 +8,6 @@ interface Picker {
 
     interface Actions {
         fun onPick(item: String)
+        fun onDismiss()
     }
 }

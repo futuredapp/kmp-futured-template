@@ -9,7 +9,7 @@ import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.seconds
 
 @Factory
-internal class FruitPickerComponent(
+internal class VegetablePickerComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: PickerNavigation,
 ) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()),
@@ -26,11 +26,13 @@ internal class FruitPickerComponent(
             delay(1.seconds)
             updateState {
                 copy(
-                    isLoading = false, items = persistentListOf(
-                        "\uD83C\uDF4F Apple",
-                        "\uD83C\uDF4C Banana",
-                        "\uD83C\uDF4A Orange"
-                    )
+                    isLoading = false,
+                    items = persistentListOf(
+                        "\uD83E\uDD55 Carrot",
+                        "\uD83E\uDED1 Pepper",
+                        "\uD83E\uDDC5 Onion",
+                        "\uD83C\uDF36\uFE0F Chilli",
+                    ),
                 )
             }
         }

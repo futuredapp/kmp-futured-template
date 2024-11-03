@@ -15,7 +15,7 @@ internal object AppComponentFactory : KoinComponent {
      */
     inline fun <reified C : ScreenComponent<*, *, *>> createComponent(
         childContext: AppComponentContext,
-        navigation: NavigationActions,
+        navigation: NavigationActions, // TODO component-specific navigation class
         vararg parameters: Any?,
     ): C = get(
         qualifier = null,

@@ -9,7 +9,6 @@ interface FirstScreen {
     val events: Flow<FirstUiEvent>
 
     interface Actions {
-        fun onBack()
         fun onNext()
     }
 }

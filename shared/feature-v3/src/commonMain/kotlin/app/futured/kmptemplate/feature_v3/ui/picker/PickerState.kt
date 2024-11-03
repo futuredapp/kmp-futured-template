@@ -8,3 +8,15 @@ data class PickerState(
     val isLoading: Boolean = false,
     val items: ImmutableList<String> = persistentListOf(),
 ) : ViewState
+
+fun pickerStatePreviews() = persistentListOf(
+    PickerState(
+        isLoading = false,
+        items = persistentListOf(
+            "\uD83E\uDD55 Carrots",
+            "\uD83E\uDED1 Peppers",
+            "\uD83E\uDDC5 Onions",
+        )
+    ),
+    PickerState(isLoading = true, items = persistentListOf())
+)

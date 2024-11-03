@@ -47,7 +47,6 @@ internal class HomeNavHostComponent(
                     AppComponentFactory.createComponent<FirstComponent>(
                         childContext = childCtx,
                         navigation = FirstScreenNavigation(
-                            pop = { homeNavigator.pop() },
                             toSecond = { homeNavigator.pushNew(HomeConfig.Second) },
                         ),
                     ),

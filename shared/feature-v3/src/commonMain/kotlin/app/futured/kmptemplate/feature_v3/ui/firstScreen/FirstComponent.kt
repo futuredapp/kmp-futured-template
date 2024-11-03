@@ -32,7 +32,6 @@ internal class FirstComponent(
     }
 
     override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
-        override fun onBack() = navigation.pop()
         override fun onNext() = navigation.toSecond()
     }
 
