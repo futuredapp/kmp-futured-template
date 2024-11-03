@@ -9,6 +9,7 @@ import app.futured.kmptemplate.resources.MR
 import co.touchlab.kermit.Logger
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds
@@ -26,7 +27,7 @@ internal class FirstComponent(
 
     private val logger = Logger.withTag("FirstComponent")
 
-    override fun onStart() {
+    override val viewState: StateFlow<FirstViewState> = componentState.whenStarted {
         syncData()
         observeCounter()
     }

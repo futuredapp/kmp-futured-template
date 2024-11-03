@@ -27,7 +27,7 @@ internal class SecondComponent(
     defaultState = SecondViewState(),
 ), SecondScreen {
 
-    override fun onStart() = Unit
+    override val viewState: StateFlow<SecondViewState> = componentState
 
     private val pickerNavigator = SlotNavigation<SecondScreen.PickerType>()
     private val pickerNavigation = PickerNavigation(

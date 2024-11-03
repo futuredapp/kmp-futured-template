@@ -33,10 +33,12 @@ internal class TEMPLATEComponent(
     @InjectedParam override val navigation: TEMPLATEScreenNavigation,
 ) : ScreenComponent<TEMPLATEViewState, Nothing, TEMPLATEScreenNavigation>(componentContext, TEMPLATEViewState), TEMPLATEScreen {
 
-    override fun onStart() = Unit
-
     override val actions: TEMPLATEScreen.Actions = object : TEMPLATEScreen.Actions {
         override fun onBack() = navigation.pop()
+    }
+
+    override val viewState: StateFlow<TEMPLATEViewState> = componentState.whenStarted {
+        // onStart
     }
 }
 

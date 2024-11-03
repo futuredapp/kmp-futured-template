@@ -30,8 +30,6 @@ internal class HomeNavHostComponent(
     @InjectedParam private val initialStack: List<HomeConfig>
 ) : AppComponent<Stateless, Nothing>(componentContext, Stateless), HomeNavHost {
 
-    override fun onStart() = Unit
-
     private val homeNavigator = StackNavigation<HomeConfig>()
 
     override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {

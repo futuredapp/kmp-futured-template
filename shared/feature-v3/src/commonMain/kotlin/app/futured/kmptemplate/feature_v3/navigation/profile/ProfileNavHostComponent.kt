@@ -50,6 +50,4 @@ internal class ProfileNavHostComponent(
             newStack.map { it.configuration }
         }
     }
-
-    override fun onStart() = Unit
 }

@@ -14,6 +14,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.koin.core.annotation.InjectedParam
@@ -22,7 +23,6 @@ internal class RootNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
 ) : AppComponent<RootNavHostState, Nothing>(componentContext, RootNavHostState()), RootNavHost {
 
-    override fun onStart() = Unit
     private val stackNavigator = StackNavigation<RootConfig>()
 
     override val stack: StateFlow<ChildStack<RootConfig, RootChild>> = childStack(
@@ -48,6 +48,15 @@ internal class RootNavHostComponent(
             }
         },
     ).asStateFlow(componentCoroutineScope())
+
+    override val viewState: StateFlow<RootNavHostState> = componentState.combine(stack) { state, stack ->
+        state.copy(
+            selectedTab = when (stack.active.instance) {
+                is RootChild.Home -> NavigationTab.HOME
+                is RootChild.Profile -> NavigationTab.PROFILE
+            },
+        )
+    }.whenStarted()
 
     override val homeTab: StateFlow<RootChild.Home?> = stack.map { childStack ->
         childStack.items.map { it.instance }.filterIsInstance<RootChild.Home>().firstOrNull()

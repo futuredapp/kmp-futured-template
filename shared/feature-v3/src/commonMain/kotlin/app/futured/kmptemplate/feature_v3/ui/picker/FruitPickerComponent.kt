@@ -4,6 +4,7 @@ import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.seconds
@@ -20,7 +21,7 @@ internal class FruitPickerComponent(
         override fun onDismiss() = navigation.dismiss(null)
     }
 
-    override fun onStart() {
+    override val viewState: StateFlow<PickerState> = componentState.whenStarted {
         launchWithHandler {
             updateState { copy(isLoading = true) }
             delay(1.seconds)

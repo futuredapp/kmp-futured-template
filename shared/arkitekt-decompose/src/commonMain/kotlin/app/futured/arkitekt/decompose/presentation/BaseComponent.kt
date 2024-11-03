@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
  */
 abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
     componentContext: GenericComponentContext<*>,
-    defaultState: VS,
+    private val defaultState: VS,
 ) : UseCaseExecutionScope {
 
     // region Lifecycle
@@ -31,11 +32,15 @@ abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
         componentContext.lifecycle.doOnDestroy { scope.cancel() }
     }
 
-    // TODO how to let component intercept the StateFlow? for example to set selected tab
-    private val state: MutableStateFlow<VS> = MutableStateFlow(defaultState)
-    val viewState: StateFlow<VS> = state
-        .onStart { onStart() }
-        .stateIn(componentCoroutineScope, SharingStarted.Lazily, defaultState)
+    protected val componentState: MutableStateFlow<VS> = MutableStateFlow(defaultState)
+
+    /**
+     * TODO KDoc
+     */
+    fun Flow<VS>.whenStarted(started: SharingStarted = SharingStarted.Lazily, onStart: () -> Unit = {}): StateFlow<VS> =
+        onStart { onStart() }.stateIn(componentCoroutineScope, started, defaultState)
+
+    // endregion
 
     // region UI events
 
@@ -47,8 +52,6 @@ abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
 
     // endregion
 
-    // endregion
-
     // region UseCaseExecutionScope
 
     override val viewModelScope: CoroutineScope = componentCoroutineScope
@@ -57,10 +60,8 @@ abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
 
     // region Implementation API
 
-    protected abstract fun onStart()
-
     protected fun updateState(update: VS.() -> VS) {
-        state.value = update(state.value)
+        componentState.update(update)
     }
 
     protected fun sendUiEvent(event: E) {
