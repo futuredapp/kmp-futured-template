@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 /**
  * TODO KDoc
  */
-abstract class BaseComponent<VS : ViewState, E : UiEvent<VS>>(
+abstract class BaseComponent<VS : Any, E : Any>(
     componentContext: GenericComponentContext<*>,
     private val defaultState: VS,
 ) : UseCaseExecutionScope {
