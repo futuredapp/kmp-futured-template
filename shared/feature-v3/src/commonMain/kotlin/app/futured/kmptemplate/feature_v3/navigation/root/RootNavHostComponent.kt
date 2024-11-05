@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature_v3.navigation.root
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
-import app.futured.arkitekt.decompose.ext.componentCoroutineScope
 import app.futured.arkitekt.decompose.ext.switchTab
 import app.futured.kmptemplate.feature_v3.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature_v3.navigation.deepLink.DeepLinkResolver
@@ -53,7 +52,7 @@ internal class RootNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope())
+    ).asStateFlow(componentCoroutineScope)
 
     override val viewState: StateFlow<RootNavHostState> = componentState.combine(stack) { state, stack ->
         state.copy(

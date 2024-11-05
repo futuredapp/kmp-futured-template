@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature_v3.navigation.profile
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
-import app.futured.arkitekt.decompose.ext.componentCoroutineScope
 import app.futured.arkitekt.decompose.presentation.Stateless
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
@@ -42,7 +41,7 @@ internal class ProfileNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope())
+    ).asStateFlow(componentCoroutineScope)
 
     override val actions: ProfileNavHost.Actions = object : ProfileNavHost.Actions {
         override fun pop() = stackNavigator.pop()

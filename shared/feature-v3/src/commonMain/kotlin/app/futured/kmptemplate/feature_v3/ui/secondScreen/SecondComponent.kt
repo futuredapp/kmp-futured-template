@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature_v3.ui.secondScreen
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
-import app.futured.arkitekt.decompose.ext.componentCoroutineScope
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
@@ -55,7 +54,7 @@ internal class SecondComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope())
+    ).asStateFlow(componentCoroutineScope)
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
         override fun onBack() = navigation.pop()
