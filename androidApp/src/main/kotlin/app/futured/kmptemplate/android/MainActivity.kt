@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.android
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
         rootNavHost = retainedComponent { retainedContext ->
             RootNavHostFactory.create(DefaultAppComponentContext(retainedContext))
         }
-//        rootNavigation.openDeepLinkIfNeeded(intent) // TODO v3
+        rootNavHost.handleIntent(intent)
 
         enableEdgeToEdge()
         setContent {
@@ -40,20 +41,19 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    // TODO v3
-//    override fun onNewIntent(intent: Intent) {
-//        super.onNewIntent(intent)
-//        rootNavigation.openDeepLinkIfNeeded(intent)
-//    }
-//
-//    private fun RootNavigation.openDeepLinkIfNeeded(intent: Intent?) {
-//        if (intent == null) {
-//            return
-//        }
-//
-//        val uri = intent.dataString ?: return
-//        actions.openDeepLink(uri)
-//    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        rootNavHost.handleIntent(intent)
+    }
+
+    private fun RootNavHost.handleIntent(intent: Intent?) {
+        if (intent == null) {
+            return
+        }
+
+        val uri = intent.dataString ?: return
+        actions.onDeepLink(uri)
+    }
 }
 
 @Preview

@@ -18,6 +18,7 @@ interface RootNavHost : BackHandlerOwner {
     val profileTab: StateFlow<RootChild.Profile?>
 
     interface Actions {
+        fun onDeepLink(uri: String)
         fun onTabSelected(tab: NavigationTab)
         fun onBack()
     }
