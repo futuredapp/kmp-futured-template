@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature_v3.navigation.home
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
-import app.futured.arkitekt.decompose.presentation.Stateless
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentFactory
@@ -27,7 +26,7 @@ import org.koin.core.annotation.InjectedParam
 internal class HomeNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam private val initialStack: List<HomeConfig>,
-) : AppComponent<Stateless, Nothing>(componentContext, Stateless), HomeNavHost {
+) : AppComponent<Unit, Nothing>(componentContext, Unit), HomeNavHost {
 
     private val homeNavigator = StackNavigation<HomeConfig>()
 

@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature_v3.navigation.profile
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
-import app.futured.arkitekt.decompose.presentation.Stateless
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentFactory
@@ -21,7 +20,7 @@ import org.koin.core.annotation.InjectedParam
 internal class ProfileNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam private val initialStack: List<ProfileConfig>,
-) : AppComponent<Stateless, Nothing>(componentContext, Stateless), ProfileNavHost {
+) : AppComponent<Unit, Nothing>(componentContext, Unit), ProfileNavHost {
 
     private val stackNavigator = StackNavigation<ProfileConfig>()
     override val stack: StateFlow<ChildStack<ProfileConfig, ProfileChild>> = childStack(

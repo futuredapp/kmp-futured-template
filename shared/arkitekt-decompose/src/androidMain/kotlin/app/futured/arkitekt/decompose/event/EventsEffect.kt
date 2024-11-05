@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
  * @param observer Event receiver lambda.
  */
 @Composable
-inline fun <reified E : UiEvent<*>> EventsEffect(
+inline fun <reified E : UiEvent> EventsEffect(
     eventsFlow: Flow<E>,
     crossinline observer: suspend E.() -> Unit,
 ) {
@@ -35,7 +35,7 @@ inline fun <reified E : UiEvent<*>> EventsEffect(
     }
 }
 
-inline fun <reified E : UiEvent<*>> UiEvent<*>.onEvent(action: (E) -> Unit) {
+inline fun <reified E : UiEvent> UiEvent.onEvent(action: (E) -> Unit) {
     if (this is E) {
         action(this)
     }

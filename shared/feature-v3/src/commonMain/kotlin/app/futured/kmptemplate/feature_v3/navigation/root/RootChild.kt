@@ -10,7 +10,7 @@ sealed interface RootChild {
      * Unique SwiftUI view identifier.
      *
      * On iOS, when displayed inside TabView, the view needs to have a unique ID assigned to it, so
-     * when a NavEntry in the stack is replaced with new one (for example after opening deep link),
+     * when a child in the stack is replaced with new one (for example after opening deep link),
      * the SwiftUI knows to render the view inside TabView again.
      */
     abstract val iosViewId: String

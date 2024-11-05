@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.feature_v3.ui._template
 
 import app.futured.arkitekt.decompose.navigation.NavigationActions
-import app.futured.arkitekt.decompose.presentation.ViewState
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +24,7 @@ internal data class TEMPLATEScreenNavigation(
     val pop: () -> Unit,
 ) : NavigationActions
 
-data object TEMPLATEViewState : ViewState
+data object TEMPLATEViewState
 
 @Factory
 internal class TEMPLATEComponent(
