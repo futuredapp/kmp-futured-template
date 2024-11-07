@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.feature_v3.navigation.root
+package app.futured.kmptemplate.feature_v3.navigation.signedIn
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
@@ -22,29 +22,29 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.koin.core.annotation.InjectedParam
 
-internal class RootNavHostComponent(
+internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     private val deepLinkResolver: DeepLinkResolver,
-) : AppComponent<RootNavHostState, Nothing>(componentContext, RootNavHostState()), RootNavHost {
+) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()), SignedInNavHost {
 
-    private val stackNavigator = StackNavigation<RootConfig>()
+    private val stackNavigator = StackNavigation<SignedInConfig>()
     private var pendingDeepLink: DeepLinkDestination? = null
 
-    override val stack: StateFlow<ChildStack<RootConfig, RootChild>> = childStack(
+    override val stack: StateFlow<ChildStack<SignedInConfig, SignedInChild>> = childStack(
         source = stackNavigator,
-        serializer = RootConfig.serializer(),
-        initialStack = { RootNavHostDefaults.getInitialStack() },
+        serializer = SignedInConfig.serializer(),
+        initialStack = { SignedInNavHostDefaults.getInitialStack() },
         handleBackButton = true,
         childFactory = { config, childCtx ->
             when (config) {
-                is RootConfig.Home -> RootChild.Home(
+                is SignedInConfig.Home -> SignedInChild.Home(
                     AppComponentFactory.createComponent<HomeNavHostComponent>(
                         childContext = childCtx,
                         config.initialStack,
                     ),
                 )
 
-                is RootConfig.Profile -> RootChild.Profile(
+                is SignedInConfig.Profile -> SignedInChild.Profile(
                     AppComponentFactory.createComponent<ProfileNavHostComponent>(
                         childContext = childCtx,
                         config.initialStack,
@@ -54,24 +54,24 @@ internal class RootNavHostComponent(
         },
     ).asStateFlow(componentCoroutineScope)
 
-    override val viewState: StateFlow<RootNavHostState> = componentState.combine(stack) { state, stack ->
+    override val viewState: StateFlow<SignedInNavHostViewState> = componentState.combine(stack) { state, stack ->
         state.copy(
             selectedTab = when (stack.active.instance) {
-                is RootChild.Home -> NavigationTab.HOME
-                is RootChild.Profile -> NavigationTab.PROFILE
+                is SignedInChild.Home -> NavigationTab.HOME
+                is SignedInChild.Profile -> NavigationTab.PROFILE
             },
         )
     }.whenStarted()
 
-    override val homeTab: StateFlow<RootChild.Home?> = stack.map { childStack ->
-        childStack.items.map { it.instance }.filterIsInstance<RootChild.Home>().firstOrNull()
+    override val homeTab: StateFlow<SignedInChild.Home?> = stack.map { childStack ->
+        childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Home>().firstOrNull()
     }.stateIn(componentCoroutineScope, SharingStarted.Lazily, null)
 
-    override val profileTab: StateFlow<RootChild.Profile?> = stack.map { childStack ->
-        childStack.items.map { it.instance }.filterIsInstance<RootChild.Profile>().firstOrNull()
+    override val profileTab: StateFlow<SignedInChild.Profile?> = stack.map { childStack ->
+        childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Profile>().firstOrNull()
     }.stateIn(componentCoroutineScope, SharingStarted.Lazily, null)
 
-    override val actions: RootNavHost.Actions = object : RootNavHost.Actions {
+    override val actions: SignedInNavHost.Actions = object : SignedInNavHost.Actions {
 
         override fun onDeepLink(uri: String) {
             val deepLinkDestination = deepLinkResolver.resolve(uri) ?: return
@@ -86,8 +86,8 @@ internal class RootNavHostComponent(
 
         override fun onTabSelected(tab: NavigationTab) = stackNavigator.switchTab(
             when (tab) {
-                NavigationTab.HOME -> RootConfig.Home()
-                NavigationTab.PROFILE -> RootConfig.Profile()
+                NavigationTab.HOME -> SignedInConfig.Home()
+                NavigationTab.PROFILE -> SignedInConfig.Profile()
             },
         )
 
@@ -97,10 +97,10 @@ internal class RootNavHostComponent(
     private fun consumeDeepLink() {
         val deepLink = pendingDeepLink ?: return
         when (deepLink) {
-            DeepLinkDestination.HomeTab -> stackNavigator.bringToFront(RootConfig.deepLinkHome())
-            DeepLinkDestination.ProfileTab -> stackNavigator.bringToFront(RootConfig.deepLinkProfile())
-            DeepLinkDestination.SecondScreen -> stackNavigator.bringToFront(RootConfig.deepLinkSecondScreen())
-            is DeepLinkDestination.ThirdScreen -> stackNavigator.bringToFront(RootConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument)))
+            DeepLinkDestination.HomeTab -> stackNavigator.bringToFront(SignedInConfig.deepLinkHome())
+            DeepLinkDestination.ProfileTab -> stackNavigator.bringToFront(SignedInConfig.deepLinkProfile())
+            DeepLinkDestination.SecondScreen -> stackNavigator.bringToFront(SignedInConfig.deepLinkSecondScreen())
+            is DeepLinkDestination.ThirdScreen -> stackNavigator.bringToFront(SignedInConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument)))
         }
     }
 }

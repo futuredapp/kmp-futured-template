@@ -1,6 +1,7 @@
-package app.futured.kmptemplate.feature_v3.navigation.root
+package app.futured.kmptemplate.feature_v3.navigation.signedIn
 
-actual object RootNavHostDefaults {
+expect object SignedInNavHostDefaults {
+
     /**
      * Returns initial stack for bottom navigation.
      *
@@ -9,5 +10,5 @@ actual object RootNavHostDefaults {
      * On iOS, this must be a complete list of all possible bottom navigation tabs,
      * last being the one on top of the stack = default selected.
      */
-    actual fun getInitialStack(): List<RootConfig> = listOf(RootConfig.Home())
+    fun getInitialStack(): List<SignedInConfig>
 }

@@ -12,21 +12,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import app.futured.kmptemplate.android.ui.navigation.RootNavHostUi
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHost
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHostFactory
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHost
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHostFactory
 import app.futured.kmptemplate.feature_v3.ui.base.DefaultAppComponentContext
 import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var rootNavHost: RootNavHost
+    private lateinit var signedInNavHost: SignedInNavHost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rootNavHost = retainedComponent { retainedContext ->
-            RootNavHostFactory.create(DefaultAppComponentContext(retainedContext))
+        signedInNavHost = retainedComponent { retainedContext ->
+            SignedInNavHostFactory.create(DefaultAppComponentContext(retainedContext))
         }
-        rootNavHost.handleIntent(intent)
+        signedInNavHost.handleIntent(intent)
 
         enableEdgeToEdge()
         setContent {
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    RootNavHostUi(navHost = rootNavHost)
+                    RootNavHostUi(navHost = signedInNavHost)
                 }
             }
         }
@@ -43,10 +43,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        rootNavHost.handleIntent(intent)
+        signedInNavHost.handleIntent(intent)
     }
 
-    private fun RootNavHost.handleIntent(intent: Intent?) {
+    private fun SignedInNavHost.handleIntent(intent: Intent?) {
         if (intent == null) {
             return
         }

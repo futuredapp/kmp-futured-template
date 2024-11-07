@@ -1,10 +1,10 @@
-package app.futured.kmptemplate.feature_v3.navigation.root
+package app.futured.kmptemplate.feature_v3.navigation.signedIn
 
 import app.futured.kmptemplate.feature_v3.navigation.home.HomeNavHost
 import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileNavHost
 import kotlinx.datetime.Clock
 
-sealed interface RootChild {
+sealed interface SignedInChild {
 
     /**
      * Unique SwiftUI view identifier.
@@ -18,10 +18,10 @@ sealed interface RootChild {
     data class Home(
         val navHost: HomeNavHost,
         override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(), // TODO replace with UUID since Kotlin 2.0.20
-    ) : RootChild
+    ) : SignedInChild
 
     data class Profile(
         val navHost: ProfileNavHost,
         override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(), // TODO replace with UUID since Kotlin 2.0.20
-    ) : RootChild
+    ) : SignedInChild
 }

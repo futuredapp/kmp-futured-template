@@ -16,11 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.feature_v3.navigation.root.NavigationTab
-import app.futured.kmptemplate.feature_v3.navigation.root.RootChild
-import app.futured.kmptemplate.feature_v3.navigation.root.RootConfig
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHost
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHostState
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.NavigationTab
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInChild
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInConfig
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHost
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHostViewState
 import app.futured.kmptemplate.resources.localized
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -31,11 +31,11 @@ import com.arkivanov.essenty.backhandler.BackHandler
 
 @Composable
 fun RootNavHostUi(
-    navHost: RootNavHost,
+    navHost: SignedInNavHost,
     modifier: Modifier = Modifier,
 ) {
-    val stack: ChildStack<RootConfig, RootChild> by navHost.stack.collectAsStateWithLifecycle()
-    val viewState: RootNavHostState by navHost.viewState.collectAsStateWithLifecycle()
+    val stack: ChildStack<SignedInConfig, SignedInChild> by navHost.stack.collectAsStateWithLifecycle()
+    val viewState: SignedInNavHostViewState by navHost.viewState.collectAsStateWithLifecycle()
     val actions = navHost.actions
 
     Scaffold(
@@ -71,7 +71,7 @@ private val NavigationTab.icon: ImageVector
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
 private fun TabsContent(
-    stack: ChildStack<RootConfig, RootChild>,
+    stack: ChildStack<SignedInConfig, SignedInChild>,
     backHandler: BackHandler,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
@@ -86,12 +86,12 @@ private fun TabsContent(
         ),
     ) { child ->
         when (val childInstance = child.instance) {
-            is RootChild.Home -> HomeNavHostUi(
+            is SignedInChild.Home -> HomeNavHostUi(
                 navHost = childInstance.navHost,
                 modifier = Modifier.fillMaxSize(),
             )
 
-            is RootChild.Profile -> ProfileNavHostUi(
+            is SignedInChild.Profile -> ProfileNavHostUi(
                 navHost = childInstance.navHost,
                 modifier = Modifier.fillMaxSize(),
             )
