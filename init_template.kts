@@ -39,6 +39,9 @@ renameInDirectory(dirPath = "iosApp/iosAppUITests", oldText = "iosApp", newText 
 renameInDirectory(dirPath = "iosApp/iosApp.xcodeproj/xcshareddata/xcschemes", oldText = "iosApp", newText = appName)
 renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
 
+// CLEANUP
+removeLicense()
+
 //// END APP
 
 // region functions
@@ -235,4 +238,8 @@ fun getNamesOfAppAndPackageAndFramework(): Triple<String, String, String> {
     }
 
     return Triple(appName, packageName, frameworkName)
+}
+
+fun removeLicense() {
+    File("LICENSE").delete()
 }
