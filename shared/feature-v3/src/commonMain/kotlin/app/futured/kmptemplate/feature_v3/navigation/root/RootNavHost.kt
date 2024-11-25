@@ -69,11 +69,22 @@ sealed interface RootConfig {
 
 sealed interface RootChild {
 
+    /**
+     * Unique SwiftUI view identifier.
+     *
+     * Each view that can be replaced by deep link, must have an ID assigned to it.
+     */
+    abstract val iosViewId: String
+
     data class Login(
         val screen: LoginScreen,
+        // TODO replace with UUID since Kotlin 2.0.20
+        override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(),
     ) : RootChild
 
     data class SignedIn(
         val navHost: SignedInNavHost,
+        // TODO replace with UUID since Kotlin 2.0.20
+        override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(),
     ) : RootChild
 }

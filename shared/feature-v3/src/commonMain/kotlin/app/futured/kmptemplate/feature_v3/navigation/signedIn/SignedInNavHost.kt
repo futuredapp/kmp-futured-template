@@ -49,9 +49,7 @@ sealed interface SignedInChild {
     /**
      * Unique SwiftUI view identifier.
      *
-     * On iOS, when displayed inside TabView, the view needs to have a unique ID assigned to it, so
-     * when a child in the stack is replaced with new one (for example after opening deep link),
-     * the SwiftUI knows to render the view inside TabView again.
+     * Each view that can be replaced by deep link, must have an ID assigned to it.
      */
     abstract val iosViewId: String
 
