@@ -4,8 +4,8 @@ import SwiftUI
 protocol SecondViewModelProtocol: DynamicProperty {
     var text: String { get }
 
-    func onNext()
-    func onBack()
+    func onPickFruit()
+    func onPickVeggie()
 }
 
 struct SecondViewModel {
@@ -23,11 +23,11 @@ extension SecondViewModel: SecondViewModelProtocol {
         viewState.text.localized()
     }
 
-    func onNext() {
-        actions.onNext()
+    func onPickFruit() {
+        actions.onPickFruit()
     }
 
-    func onBack() {
-        actions.onBack()
+    func onPickVeggie() {
+        actions.onPickVeggie()
     }
 }

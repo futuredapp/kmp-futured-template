@@ -15,7 +15,6 @@
 		111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */; };
 		112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112B170D2C35459100ADCCBF /* KotlinOptionalStateFlow.swift */; };
 		114970172C399DC9005C6924 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114970162C399DC9005C6924 /* TabContentView.swift */; };
-		1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155AEDC2B46EE5B0093EF55 /* SecretView.swift */; };
 		1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */; };
 		1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */; };
 		1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193BEEB2AEA97C900C6203F /* RootView.swift */; };
@@ -27,16 +26,14 @@
 		119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A92E72B0F37A300D93E98 /* MR+Extensions.swift */; };
 		119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */; };
 		11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC02C32B34F00ECA63A /* SignedInNavigationView.swift */; };
-		11B16AC32C32B81200ECA63A /* TabANavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC22C32B81200ECA63A /* TabANavigationView.swift */; };
-		11B16AC52C32B84D00ECA63A /* TabBNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC42C32B84D00ECA63A /* TabBNavigationView.swift */; };
-		11B16AC72C32B86800ECA63A /* TabCNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC62C32B86800ECA63A /* TabCNavigationView.swift */; };
+		11B16AC32C32B81200ECA63A /* ProfileTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC22C32B81200ECA63A /* ProfileTabNavigationView.swift */; };
+		11B16AC52C32B84D00ECA63A /* HomeTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */; };
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
 		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
 		5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */; };
-		5B21BD412C11D05B005B6191 /* SecretViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD402C11D05B005B6191 /* SecretViewModel.swift */; };
 		F4820AB72B0B51A100B13080 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4820AB62B0B51A100B13080 /* XCTest.framework */; };
 		F4820AB82B0B523E00B13080 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AA02B0B4D3E00B13080 /* iosAppTests.swift */; };
 		F4820AC22B0B528100B13080 /* iosAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AC12B0B528100B13080 /* iosAppUITestsLaunchTests.swift */; };
@@ -81,7 +78,6 @@
 		111C3A7D2AEBE59900873511 /* View+EventsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EventsEffect.swift"; sourceTree = "<group>"; };
 		112B170D2C35459100ADCCBF /* KotlinOptionalStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinOptionalStateFlow.swift; sourceTree = "<group>"; };
 		114970162C399DC9005C6924 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
-		1155AEDC2B46EE5B0093EF55 /* SecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretView.swift; sourceTree = "<group>"; };
 		1193BEE52AEA8A4A00C6203F /* ComponentHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentHolder.swift; sourceTree = "<group>"; };
 		1193BEE92AEA8B3E00C6203F /* DecomposeNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeNavigationStack.swift; sourceTree = "<group>"; };
 		1193BEEB2AEA97C900C6203F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -95,16 +91,14 @@
 		119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		119C5F4C2AEBDFCB00CB58E3 /* KotlinStateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinStateFlow.swift; sourceTree = "<group>"; };
 		11B16AC02C32B34F00ECA63A /* SignedInNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedInNavigationView.swift; sourceTree = "<group>"; };
-		11B16AC22C32B81200ECA63A /* TabANavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabANavigationView.swift; sourceTree = "<group>"; };
-		11B16AC42C32B84D00ECA63A /* TabBNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBNavigationView.swift; sourceTree = "<group>"; };
-		11B16AC62C32B86800ECA63A /* TabCNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCNavigationView.swift; sourceTree = "<group>"; };
+		11B16AC22C32B81200ECA63A /* ProfileTabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabNavigationView.swift; sourceTree = "<group>"; };
+		11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabNavigationView.swift; sourceTree = "<group>"; };
 		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		5B21BD402C11D05B005B6191 /* SecretViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretViewModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7FFCC52B691F0400A70102 /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		DC7FFCC72B69297800A70102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -195,9 +189,8 @@
 				1193BEF02AEA986900C6203F /* Interop */,
 				1193BEF12AEA987D00C6203F /* RootNavigationView.swift */,
 				11B16AC02C32B34F00ECA63A /* SignedInNavigationView.swift */,
-				11B16AC22C32B81200ECA63A /* TabANavigationView.swift */,
-				11B16AC42C32B84D00ECA63A /* TabBNavigationView.swift */,
-				11B16AC62C32B86800ECA63A /* TabCNavigationView.swift */,
+				11B16AC22C32B81200ECA63A /* ProfileTabNavigationView.swift */,
+				11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -209,7 +202,6 @@
 				5B21BD342C11C50E005B6191 /* Second */,
 				5B21BD352C11C513005B6191 /* Third */,
 				5B21BD362C11C51F005B6191 /* Login */,
-				5B21BD372C11C526005B6191 /* Secret */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -275,15 +267,6 @@
 				5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		5B21BD372C11C526005B6191 /* Secret */ = {
-			isa = PBXGroup;
-			children = (
-				1155AEDC2B46EE5B0093EF55 /* SecretView.swift */,
-				5B21BD402C11D05B005B6191 /* SecretViewModel.swift */,
-			);
-			path = Secret;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -553,28 +536,25 @@
 				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
-				11B16AC72C32B86800ECA63A /* TabCNavigationView.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
 				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
-				5B21BD412C11D05B005B6191 /* SecretViewModel.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
 				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
 				11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
 				119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
-				11B16AC52C32B84D00ECA63A /* TabBNavigationView.swift in Sources */,
+				11B16AC52C32B84D00ECA63A /* HomeTabNavigationView.swift in Sources */,
 				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
 				1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */,
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,
-				1155AEDD2B46EE5B0093EF55 /* SecretView.swift in Sources */,
-				11B16AC32C32B81200ECA63A /* TabANavigationView.swift in Sources */,
+				11B16AC32C32B81200ECA63A /* ProfileTabNavigationView.swift in Sources */,
 				112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */,
 				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
 				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,

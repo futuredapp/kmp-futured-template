@@ -9,15 +9,9 @@ struct LoginView<ViewModel: LoginViewModelProtocol>: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                Spacer(minLength: 20.0)
-                Text(Localizable.login_screen_text.localized)
-                Button("Login", action: viewModel.onLoginClick).buttonStyle(.borderedProminent)
-            }.scaledToFill()
-        }
-        .refreshable {
-            await viewModel.onRefresh()
+        VStack(spacing: 10) {
+            Text("Welcome to the sample app")
+            Button("Sign In", action: viewModel.onLoginClick).buttonStyle(.borderedProminent)
         }
     }
 }

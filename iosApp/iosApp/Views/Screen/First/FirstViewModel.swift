@@ -8,7 +8,6 @@ protocol FirstViewModelProtocol: DynamicProperty {
     var alertText: String { get }
 
     func onNext()
-    func onBack()
     func showToast(event: FirstUiEvent.ShowToast)
     func hideToast()
 }
@@ -42,10 +41,6 @@ extension FirstViewModel: FirstViewModelProtocol {
 
     func onNext() {
         actions.onNext()
-    }
-
-    func onBack() {
-        actions.onBack()
     }
 
     func showToast(event: FirstUiEvent.ShowToast) {
