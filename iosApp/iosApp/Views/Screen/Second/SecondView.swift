@@ -17,5 +17,19 @@ struct SecondView<ViewModel: SecondViewModelProtocol>: View {
             }
         }
         .navigationTitle(Localizable.second_screen_title.localized)
+        .sheet(
+            isPresented: Binding(
+                get: {
+                    viewModel.picker != nil
+                },
+                set: { _ in
+                    viewModel.onPickerDismissed()
+                }
+            )
+        ) {
+            if let picker = viewModel.picker {
+                PickerView(PickerViewModel(picker)).presentationDetents([.medium])
+            }
+        }
     }
 }

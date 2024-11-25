@@ -30,6 +30,8 @@
 		11B16AC52C32B84D00ECA63A /* HomeTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */; };
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
+		11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1D2CF4CF9A0088E48F /* PickerView.swift */; };
+		11D73F202CF4CFA40088E48F /* PickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */; };
 		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
 		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
@@ -95,6 +97,8 @@
 		11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabNavigationView.swift; sourceTree = "<group>"; };
 		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
+		11D73F1D2CF4CF9A0088E48F /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewModel.swift; sourceTree = "<group>"; };
 		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 		1193BEEF2AEA986000C6203F /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				11D73F1C2CF4CF1A0088E48F /* Picker */,
 				5B21BD332C11C505005B6191 /* First */,
 				5B21BD342C11C50E005B6191 /* Second */,
 				5B21BD352C11C513005B6191 /* Third */,
@@ -231,6 +236,15 @@
 				119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */,
 			);
 			path = "Config Files";
+			sourceTree = "<group>";
+		};
+		11D73F1C2CF4CF1A0088E48F /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */,
+				11D73F1D2CF4CF9A0088E48F /* PickerView.swift */,
+			);
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		5B21BD332C11C505005B6191 /* First */ = {
@@ -539,12 +553,14 @@
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
+				11D73F202CF4CFA40088E48F /* PickerViewModel.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
 				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
 				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
 				11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */,
+				11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
 				119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,

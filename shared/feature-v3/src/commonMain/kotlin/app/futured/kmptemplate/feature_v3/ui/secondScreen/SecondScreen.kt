@@ -12,8 +12,9 @@ interface SecondScreen {
     val picker: StateFlow<ChildSlot<PickerType, Picker>>
 
     @Serializable
-    enum class PickerType {
-        FRUIT, VEGETABLE
+    sealed interface PickerType {
+        data object Fruit : PickerType
+        data object Vegetable : PickerType
     }
 
     interface Actions {

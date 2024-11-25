@@ -43,12 +43,12 @@ internal class SecondComponent(
         serializer = SecondScreen.PickerType.serializer(),
         childFactory = { type, childContext ->
             when (type) {
-                SecondScreen.PickerType.FRUIT -> AppComponentFactory.createComponent<FruitPickerComponent>(
+                SecondScreen.PickerType.Fruit -> AppComponentFactory.createComponent<FruitPickerComponent>(
                     childContext,
                     pickerNavigation,
                 )
 
-                SecondScreen.PickerType.VEGETABLE -> AppComponentFactory.createComponent<VegetablePickerComponent>(
+                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createComponent<VegetablePickerComponent>(
                     childContext,
                     pickerNavigation,
                 )
@@ -58,8 +58,8 @@ internal class SecondComponent(
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
         override fun onBack() = navigation.pop()
-        override fun onPickVeggie() = pickerNavigator.activate(SecondScreen.PickerType.VEGETABLE)
-        override fun onPickFruit() = pickerNavigator.activate(SecondScreen.PickerType.FRUIT)
+        override fun onPickVeggie() = pickerNavigator.activate(SecondScreen.PickerType.Vegetable)
+        override fun onPickFruit() = pickerNavigator.activate(SecondScreen.PickerType.Fruit)
         override fun onPickerDismissed() = pickerNavigator.dismiss()
     }
 }
