@@ -10,5 +10,5 @@ expect object SignedInNavHostDefaults {
      * On iOS, this must be a complete list of all possible bottom navigation tabs,
      * last being the one on top of the stack = default selected.
      */
-    fun getInitialStack(): List<SignedInConfig>
+    fun getInitialStack(initialConfig: SignedInConfig): List<SignedInConfig>
 }

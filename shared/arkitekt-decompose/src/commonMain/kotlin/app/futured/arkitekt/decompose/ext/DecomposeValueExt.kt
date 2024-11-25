@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
 /**
@@ -26,8 +27,10 @@ fun <T : Any> Value<T>.asFlow(): Flow<T> = callbackFlow {
 /**
  * Converts this Decompose [Value] to Kotlin [StateFlow].
  */
-fun <T : Any> Value<T>.asStateFlow(coroutineScope: CoroutineScope): StateFlow<T> = asFlow().stateIn(
-    scope = coroutineScope,
-    started = SharingStarted.Lazily,
-    initialValue = value,
-)
+fun <T : Any> Value<T>.asStateFlow(coroutineScope: CoroutineScope, onStart: () -> Unit = {}): StateFlow<T> = asFlow()
+    .onStart { onStart() }
+    .stateIn(
+        scope = coroutineScope,
+        started = SharingStarted.Lazily,
+        initialValue = value,
+    )

@@ -9,5 +9,7 @@ actual object SignedInNavHostDefaults {
      * On iOS, this must be a complete list of all possible bottom navigation tabs,
      * last being the one on top of the stack = default selected.
      */
-    actual fun getInitialStack(): List<SignedInConfig> = listOf(SignedInConfig.Home())
+    actual fun getInitialStack(
+        initialConfig: SignedInConfig,
+    ): List<SignedInConfig> = listOf(initialConfig)
 }
