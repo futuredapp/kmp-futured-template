@@ -20,8 +20,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@Factory
 internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     private val deepLinkResolver: DeepLinkResolver,
@@ -61,7 +63,7 @@ internal class SignedInNavHostComponent(
                 is SignedInChild.Profile -> NavigationTab.PROFILE
             },
         )
-    }.whenStarted()
+    }.asStateFlow()
 
     override val homeTab: StateFlow<SignedInChild.Home?> = stack.map { childStack ->
         childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Home>().firstOrNull()

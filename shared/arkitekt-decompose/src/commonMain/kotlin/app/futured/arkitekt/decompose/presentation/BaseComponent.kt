@@ -37,8 +37,14 @@ abstract class BaseComponent<VS : Any, E : Any>(
     /**
      * TODO KDoc
      */
-    fun Flow<VS>.whenStarted(started: SharingStarted = SharingStarted.Lazily, onStart: () -> Unit = {}): StateFlow<VS> =
-        onStart { onStart() }.stateIn(componentCoroutineScope, started, defaultState)
+    protected fun Flow<VS>.whenStarted(started: SharingStarted = SharingStarted.Lazily, onStart: () -> Unit = {}): StateFlow<VS> =
+        onStart { onStart() }.asStateFlow(started)
+
+    /**
+     * TODO KDoc
+     */
+    protected fun Flow<VS>.asStateFlow(started: SharingStarted = SharingStarted.Lazily) =
+        stateIn(componentCoroutineScope, started, defaultState)
 
     // endregion
 
