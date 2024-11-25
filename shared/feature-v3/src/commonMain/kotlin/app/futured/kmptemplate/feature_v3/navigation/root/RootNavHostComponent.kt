@@ -27,10 +27,6 @@ internal class RootNavHostComponent(
     private val slotNavigator = SlotNavigation<RootConfig>()
     private var pendingDeepLink: DeepLinkDestination? = null
 
-    init {
-        slotNavigator.activate(RootConfig.Login)
-    }
-
     override val slot: StateFlow<ChildSlot<RootConfig, RootChild>> = childSlot(
         source = slotNavigator,
         serializer = RootConfig.serializer(),
@@ -57,7 +53,9 @@ internal class RootNavHostComponent(
     ).asStateFlow(
         coroutineScope = componentCoroutineScope,
         onStart = {
-            slotNavigator.activate(RootConfig.Login)
+            if (!consumeDeepLink()) {
+                slotNavigator.activate(RootConfig.Login)
+            }
         },
     )
 
@@ -65,22 +63,23 @@ internal class RootNavHostComponent(
         override fun onDeepLink(uri: String) {
             val deepLinkDestination = deepLinkResolver.resolve(uri) ?: return
             pendingDeepLink = deepLinkDestination
-
-            /*
-            You might wanna defer call to this function for later,
-            for example when you need to load some initial data before navigating somewhere, etc.
-            */
             consumeDeepLink()
         }
     }
 
-    private fun consumeDeepLink() {
-        val deepLink = pendingDeepLink ?: return
+    /**
+     * Consumes pending deep links.
+     *
+     * @return `true` if deep link was consumed, or `false` if there was no deep link to consume.
+     */
+    private fun consumeDeepLink(): Boolean {
+        val deepLink = pendingDeepLink ?: return false
         when (deepLink) {
             DeepLinkDestination.HomeTab -> slotNavigator.activate(RootConfig.deepLinkHome())
             DeepLinkDestination.ProfileTab -> slotNavigator.activate(RootConfig.deepLinkProfile())
             DeepLinkDestination.SecondScreen -> slotNavigator.activate(RootConfig.deepLinkSecondScreen())
             is DeepLinkDestination.ThirdScreen -> slotNavigator.activate(RootConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument)))
         }
+        return true
     }
 }

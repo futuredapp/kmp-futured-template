@@ -27,7 +27,11 @@ sealed interface RootConfig {
     data object Login : RootConfig
 
     @Serializable
-    data class SignedIn(val initialConfig: SignedInConfig = SignedInConfig.Home()) : RootConfig
+    data class SignedIn(
+        // Changing the seed ensures that entire navigation tree is regenerated. Useful for when deep link is opened.
+        private val seed: Long = 0L,
+        val initialConfig: SignedInConfig = SignedInConfig.Home()
+    ) : RootConfig
 
     companion object {
 
@@ -36,29 +40,29 @@ sealed interface RootConfig {
         fun deepLinkHome(): RootConfig = RootConfig.SignedIn(
             initialConfig = SignedInConfig.Home(
                 initialStack = listOf(HomeConfig.First),
-                seed = newSeed(),
             ),
+            seed = newSeed(),
         )
 
         fun deepLinkProfile(): RootConfig = RootConfig.SignedIn(
             initialConfig = SignedInConfig.Profile(
                 initialStack = listOf(ProfileConfig.Profile),
-                seed = newSeed(),
             ),
+            seed = newSeed(),
         )
 
         fun deepLinkSecondScreen(): RootConfig = RootConfig.SignedIn(
             initialConfig = SignedInConfig.Home(
                 initialStack = listOf(HomeConfig.First, HomeConfig.Second),
-                seed = newSeed(),
             ),
+            seed = newSeed(),
         )
 
         fun deepLinkThirdScreen(args: ThirdScreenArgs): RootConfig = RootConfig.SignedIn(
             initialConfig = SignedInConfig.Home(
                 initialStack = listOf(HomeConfig.First, HomeConfig.Second, HomeConfig.Third(args)),
-                seed = newSeed(),
             ),
+            seed = newSeed(),
         )
     }
 }

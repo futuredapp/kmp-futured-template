@@ -35,15 +35,11 @@ sealed interface SignedInConfig {
     @Serializable
     data class Home(
         val initialStack: List<HomeConfig> = listOf(HomeConfig.First),
-        // Changing the seed ensures that entire navigation stack is regenerated, useful for when deep link is opened
-        private val seed: Long = 0L,
     ) : SignedInConfig
 
     @Serializable
     data class Profile(
         val initialStack: List<ProfileConfig> = listOf(ProfileConfig.Profile),
-        // Changing the seed ensures that entire navigation stack is regenerated, useful for when deep link is opened
-        private val seed: Long = 0L,
     ) : SignedInConfig
 }
 
