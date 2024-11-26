@@ -24,7 +24,7 @@ final class PlatformFirebaseCrashlyticsImpl: PlatformFirebaseCrashlytics {
     }
 }
 
-// TODO uncomment when FirebaseCrashlytics is added as dependency
+// TODO PROJECT-SETUP uncomment when FirebaseCrashlytics is added as dependency
 // extension NSException {
 //
 //    /**

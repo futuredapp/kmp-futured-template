@@ -6,8 +6,6 @@ struct ProfileTabNavigationView: View {
     private let stack: SkieSwiftStateFlow<ChildStack<ProfileConfig, ProfileChild>>
     private let actions: ProfileNavHostActions
 
-    // TODO profile tab
-
     init(_ component: ProfileNavHost) {
         self.stack = component.stack
         self.actions = component.actions
