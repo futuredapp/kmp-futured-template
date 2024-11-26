@@ -1,7 +1,7 @@
 [versions]
 agp = "8.5.2"
-kotlin = "2.0.0"
-ksp = "2.0.0-1.0.24" # Must be compatible with: `kotlin`
+kotlin = "2.0.21"
+ksp = "2.0.21-1.0.28" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
 androidxLifecycle = "2.8.6"
 androidxComposeBom = "2024.10.00"
@@ -10,7 +10,7 @@ androidxActivity = "1.9.2"
 decompose = "3.1.0"
 essenty = "2.1.0"
 koin = "3.5.6"
-koinAnnotations = "1.3.1" # Must be compatible with: `ksp`
+koinAnnotations = "1.4.0" # Must be compatible with: `ksp`
 kotlinx-coroutines = "1.8.1"
 kotlinx-immutableCollections = "0.3.8"
 kotlinx-dateTime = "0.6.1"
@@ -19,13 +19,12 @@ ktlint = "1.2.1"
 detektGradlePlugin = "1.23.6"
 composeLint = "1.3.1"
 apollo = "4.0.0"
-ktorfit = "2.1.0" # Must be compatible with: `ksp`
-ktorfitConverter = "2.1.0"
-ktor = "2.3.12" # Must be compatible with: `ktorfit`
-kotlinx-serialization = "1.7.1" # Must be compatible with: `kotlin`
+ktorfit = "2.2.0" # Must be compatible with: `ksp`
+ktor = "3.0.1" # Must be compatible with: `ktorfit`
+kotlinx-serialization = "1.7.3" # Must be compatible with: `kotlin`
 timber = "5.0.1"
 kermit = "2.0.2"
-skie = "0.8.4" # Must be compatible with: `kotlin`
+skie = "0.9.3" # Must be compatible with: `kotlin`
 buildkonfig = "0.15.2"
 nsExceptionKt = "1.0.0-BETA-7"
 datastore = "1.1.1"
@@ -124,7 +123,7 @@ network-apollo-normalizedCache-core = { group = "com.apollographql.apollo", name
 network-apollo-normalizedCache-sqlite = { group = "com.apollographql.apollo", name = "apollo-normalized-cache-sqlite", version.ref = "apollo" }
 network-ktorfit-ksp = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-ksp", version.ref = "ktorfit" }
 network-ktorfit-lib = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib", version.ref = "ktorfit" }
-network-ktorfit-converters = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-response", version.ref = "ktorfitConverter" }
+network-ktorfit-converters = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-response", version.ref = "ktorfit" }
 network-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
 network-ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 network-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
