@@ -7,8 +7,9 @@ import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileNavHost
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 interface SignedInNavHost : BackHandlerOwner {
 
@@ -43,25 +44,23 @@ sealed interface SignedInConfig {
     ) : SignedInConfig
 }
 
-
+@OptIn(ExperimentalUuidApi::class)
 sealed interface SignedInChild {
 
     /**
      * Unique SwiftUI view identifier.
-     *
-     * Each view that can be replaced by deep link, must have an ID assigned to it.
+     * Each view that can get replaced by deep link, must have a unique ID assigned to it.
+     * (Otherwise, the view will lose the state and become unresponsive).
      */
-    abstract val iosViewId: String
+    val iosViewId: String
 
     data class Home(
         val navHost: HomeNavHost,
-        // TODO replace with UUID since Kotlin 2.0.20
-        override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(),
+        override val iosViewId: String = Uuid.random().toString(),
     ) : SignedInChild
 
     data class Profile(
         val navHost: ProfileNavHost,
-        // TODO replace with UUID since Kotlin 2.0.20
-        override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(),
+        override val iosViewId: String = Uuid.random().toString(),
     ) : SignedInChild
 }

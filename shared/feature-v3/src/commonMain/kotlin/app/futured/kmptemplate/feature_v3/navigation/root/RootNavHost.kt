@@ -10,6 +10,8 @@ import com.arkivanov.decompose.router.slot.ChildSlot
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 interface RootNavHost {
     val slot: StateFlow<ChildSlot<RootConfig, RootChild>>
@@ -30,7 +32,7 @@ sealed interface RootConfig {
     data class SignedIn(
         // Changing the seed ensures that entire navigation tree is regenerated. Useful for when deep link is opened.
         private val seed: Long = 0L,
-        val initialConfig: SignedInConfig = SignedInConfig.Home()
+        val initialConfig: SignedInConfig = SignedInConfig.Home(),
     ) : RootConfig
 
     companion object {
@@ -67,24 +69,23 @@ sealed interface RootConfig {
     }
 }
 
+@OptIn(ExperimentalUuidApi::class)
 sealed interface RootChild {
 
     /**
      * Unique SwiftUI view identifier.
-     *
-     * Each view that can be replaced by deep link, must have an ID assigned to it.
+     * Each view that can get replaced by deep link, must have a unique ID assigned to it.
+     * (Otherwise, the view will lose the state and become unresponsive).
      */
-    abstract val iosViewId: String
+    val iosViewId: String
 
     data class Login(
         val screen: LoginScreen,
-        // TODO replace with UUID since Kotlin 2.0.20
-        override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(),
+        override val iosViewId: String = Uuid.random().toString(),
     ) : RootChild
 
     data class SignedIn(
         val navHost: SignedInNavHost,
-        // TODO replace with UUID since Kotlin 2.0.20
-        override val iosViewId: String = Clock.System.now().nanosecondsOfSecond.toString(),
+        override val iosViewId: String = Uuid.random().toString(),
     ) : RootChild
 }
