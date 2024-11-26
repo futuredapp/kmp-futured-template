@@ -9,6 +9,7 @@ import app.futured.kmptemplate.resources.MR
 import co.touchlab.kermit.Logger
 import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds
@@ -60,6 +61,6 @@ internal class FirstComponent(
     }
 
     private fun updateCount(count: Long) {
-        updateState { copy(text = MR.strings.first_screen_counter.format(count)) }
+        componentState.update { it.copy(text = MR.strings.first_screen_counter.format(count)) }
     }
 }

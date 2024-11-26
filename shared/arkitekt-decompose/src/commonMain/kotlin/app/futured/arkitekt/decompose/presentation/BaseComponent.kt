@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -66,11 +65,6 @@ abstract class BaseComponent<VS : Any, E : Any>(
     // endregion
 
     // region Implementation API
-
-    // TODO consider removing in favor of direct access to componentState
-    protected fun updateState(update: VS.() -> VS) {
-        componentState.update(update)
-    }
 
     protected fun sendUiEvent(event: E) {
         componentCoroutineScope.launch {

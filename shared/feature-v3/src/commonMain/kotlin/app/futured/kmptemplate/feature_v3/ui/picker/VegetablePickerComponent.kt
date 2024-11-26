@@ -7,6 +7,7 @@ import dev.icerock.moko.resources.desc.desc
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.seconds
@@ -25,10 +26,10 @@ internal class VegetablePickerComponent(
 
     override val viewState: StateFlow<PickerState> = componentState.whenStarted {
         launchWithHandler {
-            updateState { copy(isLoading = true) }
+            componentState.update { it.copy(isLoading = true) }
             delay(1.seconds)
-            updateState {
-                copy(
+            componentState.update {
+                it.copy(
                     isLoading = false,
                     items = persistentListOf(
                         MR.strings.veggie_carrot.desc(),
