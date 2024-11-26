@@ -9,7 +9,7 @@ import org.koin.core.annotation.InjectedParam
 @Factory
 internal class ProfileComponent(
     @InjectedParam componentContext: AppComponentContext,
-    @InjectedParam override val navigation: ProfileScreenNavigation, // TODO Injection scoping - inject tree-specific instance
+    @InjectedParam override val navigation: ProfileScreenNavigation,
 ) : ScreenComponent<ProfileViewState, Nothing, ProfileScreenNavigation>(
     componentContext,
     ProfileViewState,
