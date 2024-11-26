@@ -1,7 +1,7 @@
-package app.futured.kmptemplate.feature_v3.ui.profileScreen
+package app.futured.kmptemplate.feature_v3.navigation.profile
 
 import app.futured.arkitekt.decompose.navigation.NavigationActions
 
-internal data class ProfileScreenNavigation(
+data class ProfileNavHostNavigation(
     val toLogin: () -> Unit
 ) : NavigationActions

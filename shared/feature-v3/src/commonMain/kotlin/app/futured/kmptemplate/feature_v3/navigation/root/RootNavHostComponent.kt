@@ -4,6 +4,7 @@ import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature_v3.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature_v3.navigation.deepLink.DeepLinkResolver
 import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHostComponent
+import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHostNavigation
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentFactory
@@ -46,7 +47,13 @@ internal class RootNavHostComponent(
                 )
 
                 is RootConfig.SignedIn -> RootChild.SignedIn(
-                    navHost = AppComponentFactory.createComponent<SignedInNavHostComponent>(childCtx, config.initialConfig),
+                    navHost = AppComponentFactory.createComponent<SignedInNavHostComponent>(
+                        childContext = childCtx,
+                        config.initialConfig,
+                        SignedInNavHostNavigation(
+                            toLogin = { slotNavigator.activate(RootConfig.Login) },
+                        ),
+                    ),
                 )
             }
         },

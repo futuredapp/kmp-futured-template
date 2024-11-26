@@ -1,5 +1,8 @@
 package app.futured.arkitekt.decompose.navigation
 
+/**
+ * TODO This is useless
+ */
 interface NavigationActions
 
 /**

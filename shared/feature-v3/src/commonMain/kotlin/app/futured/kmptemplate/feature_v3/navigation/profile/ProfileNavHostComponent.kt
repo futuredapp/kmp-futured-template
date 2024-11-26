@@ -19,6 +19,7 @@ import org.koin.core.annotation.InjectedParam
 @Factory
 internal class ProfileNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
+    @InjectedParam navigationActions: ProfileNavHostNavigation,
     @InjectedParam private val initialStack: List<ProfileConfig>,
 ) : AppComponent<Unit, Nothing>(componentContext, Unit), ProfileNavHost {
 
@@ -34,7 +35,7 @@ internal class ProfileNavHostComponent(
                     AppComponentFactory.createComponent<ProfileComponent>(
                         childContext = childCtx,
                         navigation = ProfileScreenNavigation(
-                            pop = {},
+                            toLogin = navigationActions.toLogin,
                         ),
                     ),
                 )

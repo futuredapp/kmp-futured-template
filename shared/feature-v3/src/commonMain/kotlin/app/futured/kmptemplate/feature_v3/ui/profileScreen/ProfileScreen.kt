@@ -7,6 +7,6 @@ interface ProfileScreen {
     val actions: Actions
 
     interface Actions {
-        fun onBack()
+        fun onLogout()
     }
 }

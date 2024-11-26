@@ -4,6 +4,7 @@ import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
 import app.futured.kmptemplate.feature_v3.navigation.home.HomeNavHostComponent
 import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileNavHostComponent
+import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileNavHostNavigation
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponent
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentFactory
@@ -22,6 +23,7 @@ import org.koin.core.annotation.InjectedParam
 @Factory
 internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
+    @InjectedParam navigationActions: SignedInNavHostNavigation,
     @InjectedParam initialConfig: SignedInConfig,
 ) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()), SignedInNavHost {
 
@@ -44,6 +46,9 @@ internal class SignedInNavHostComponent(
                 is SignedInConfig.Profile -> SignedInChild.Profile(
                     AppComponentFactory.createComponent<ProfileNavHostComponent>(
                         childContext = childCtx,
+                        ProfileNavHostNavigation(
+                            toLogin = navigationActions.toLogin,
+                        ),
                         config.initialStack,
                     ),
                 )

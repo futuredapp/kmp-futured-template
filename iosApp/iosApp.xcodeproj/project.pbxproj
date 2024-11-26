@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
+		11057D522CF5C438004A383B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11057D512CF5C436004A383B /* ProfileView.swift */; };
+		11057D542CF5C43F004A383B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11057D532CF5C43D004A383B /* ProfileViewModel.swift */; };
 		1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */; };
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
@@ -74,6 +76,8 @@
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		11057D512CF5C436004A383B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		11057D532CF5C43D004A383B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformBindingsImpl.swift; sourceTree = "<group>"; };
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
@@ -147,6 +151,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		11057D502CF5C429004A383B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				11057D532CF5C43D004A383B /* ProfileViewModel.swift */,
+				11057D512CF5C436004A383B /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		1113BA392AE6955200ABDE61 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +215,7 @@
 		1193BEEF2AEA986000C6203F /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				11057D502CF5C429004A383B /* Profile */,
 				11D73F1C2CF4CF1A0088E48F /* Picker */,
 				5B21BD332C11C505005B6191 /* First */,
 				5B21BD342C11C50E005B6191 /* Second */,
@@ -549,6 +563,7 @@
 			files = (
 				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
+				11057D542CF5C43F004A383B /* ProfileViewModel.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
@@ -559,6 +574,7 @@
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
 				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
+				11057D522CF5C438004A383B /* ProfileView.swift in Sources */,
 				11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */,
 				11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
