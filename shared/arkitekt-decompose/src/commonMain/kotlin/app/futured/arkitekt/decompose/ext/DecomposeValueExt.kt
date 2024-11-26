@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.callbackFlow
@@ -26,10 +27,14 @@ fun <T : Any> Value<T>.asFlow(): Flow<T> = callbackFlow {
 
 /**
  * Converts this Decompose [Value] to Kotlin [StateFlow].
- * TODO FlowCollector onStarted
+ *
+ * TODO KDoc args
  */
-fun <T : Any> Value<T>.asStateFlow(coroutineScope: CoroutineScope, onStart: () -> Unit = {}): StateFlow<T> = asFlow()
-    .onStart { onStart() }
+fun <T : Any> Value<T>.asStateFlow(
+    coroutineScope: CoroutineScope,
+    onStarted: suspend FlowCollector<T>.() -> Unit = {},
+): StateFlow<T> = asFlow()
+    .onStart(onStarted)
     .stateIn(
         scope = coroutineScope,
         started = SharingStarted.Lazily,

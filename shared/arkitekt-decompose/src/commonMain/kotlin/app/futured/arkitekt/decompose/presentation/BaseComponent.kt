@@ -8,6 +8,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -35,10 +36,11 @@ abstract class BaseComponent<VS : Any, E : Any>(
 
     /**
      * TODO KDoc
-     * TODO FlowCollector onStart
      */
-    protected fun Flow<VS>.whenStarted(started: SharingStarted = SharingStarted.Lazily, onStart: () -> Unit = {}): StateFlow<VS> =
-        onStart { onStart() }.asStateFlow(started)
+    protected fun Flow<VS>.whenStarted(
+        started: SharingStarted = SharingStarted.Lazily,
+        onStarted: suspend FlowCollector<VS>.() -> Unit = {},
+    ): StateFlow<VS> = onStart(onStarted).asStateFlow(started)
 
     /**
      * TODO KDoc

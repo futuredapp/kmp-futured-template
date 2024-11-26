@@ -59,7 +59,7 @@ internal class RootNavHostComponent(
         },
     ).asStateFlow(
         coroutineScope = componentCoroutineScope,
-        onStart = {
+        onStarted = {
             if (!consumeDeepLink()) {
                 slotNavigator.activate(RootConfig.Login)
             }
