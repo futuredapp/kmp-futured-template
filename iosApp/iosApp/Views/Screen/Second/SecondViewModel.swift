@@ -2,7 +2,6 @@ import shared
 import SwiftUI
 
 protocol SecondViewModelProtocol: DynamicProperty {
-    var text: String { get }
     var picker: shared.Picker? { get }
 
     func onPickFruit()
@@ -23,10 +22,6 @@ struct SecondViewModel {
 }
 
 extension SecondViewModel: SecondViewModelProtocol {
-
-    var text: String {
-        viewState.text.localized()
-    }
 
     var picker: shared.Picker? {
         pickerSlot.child?.instance

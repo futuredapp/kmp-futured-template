@@ -9,12 +9,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,10 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondScreen
-import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
-import app.futured.kmptemplate.resources.localized
 
 @Composable
 fun SecondScreenUi(
@@ -42,10 +39,9 @@ fun SecondScreenUi(
     modifier: Modifier = Modifier,
 ) {
     val actions = screen.actions
-    val viewState by screen.viewState.collectAsStateWithLifecycle()
     val picker by screen.picker.collectAsStateWithLifecycle()
 
-    Content(viewState = viewState, actions = actions, modifier = modifier)
+    Content(actions = actions, modifier = modifier)
 
     val bottomSheetState = rememberModalBottomSheetState()
     picker.child?.instance?.let {
@@ -61,7 +57,6 @@ fun SecondScreenUi(
 
 @Composable
 private fun Content(
-    viewState: SecondViewState,
     actions: SecondScreen.Actions,
     modifier: Modifier = Modifier,
 ) {
@@ -74,7 +69,7 @@ private fun Content(
                 windowInsets = WindowInsets.navigationBars,
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = null)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
             )
@@ -87,15 +82,13 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text.localized())
-            Spacer(modifier = Modifier.height(4.dp))
             Row(Modifier.padding(horizontal = 20.dp)) {
                 Button(onClick = { actions.onPickFruit() }, modifier = Modifier.weight(1f)) {
-                    Text(text = "Pick a fruit")
+                    Text(text = kmpStringResource(MR.strings.second_screen_button_fruit))
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Button(onClick = { actions.onPickVeggie() }, modifier = Modifier.weight(1f)) {
-                    Text(text = "Pick a veggie")
+                    Text(text = kmpStringResource(MR.strings.second_screen_button_veggie))
                 }
             }
         }

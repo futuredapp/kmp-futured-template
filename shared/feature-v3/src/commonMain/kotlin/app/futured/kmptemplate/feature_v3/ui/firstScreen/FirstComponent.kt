@@ -7,8 +7,7 @@ import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
 import co.touchlab.kermit.Logger
-import dev.icerock.moko.resources.desc.ResourceFormatted
-import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
@@ -24,6 +23,10 @@ internal class FirstComponent(
     componentContext = componentContext,
     defaultState = FirstViewState(),
 ), FirstScreen {
+
+    companion object {
+        private const val COUNTER_ALERT = 10L
+    }
 
     private val logger = Logger.withTag("FirstComponent")
 
@@ -46,9 +49,9 @@ internal class FirstComponent(
         onNext { count ->
             updateCount(count)
 
-            if (count == 10L) {
+            if (count == COUNTER_ALERT) {
                 logger.d { "Counter reached 10" }
-                sendUiEvent(FirstUiEvent.ShowToast("Counter reached 10 🎉"))
+                sendUiEvent(FirstUiEvent.ShowToast(MR.strings.first_screen_counter_alert.format(COUNTER_ALERT)))
             }
         }
         onError { error ->
@@ -57,14 +60,6 @@ internal class FirstComponent(
     }
 
     private fun updateCount(count: Long) {
-        updateState {
-            copy(
-                text = StringDesc.ResourceFormatted(
-                    stringRes = MR.strings.first_screen_text,
-                    1,
-                    count,
-                ),
-            )
-        }
+        updateState { copy(text = MR.strings.first_screen_counter.format(count)) }
     }
 }

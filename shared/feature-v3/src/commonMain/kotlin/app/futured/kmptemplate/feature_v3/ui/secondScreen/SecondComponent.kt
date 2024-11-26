@@ -23,7 +23,7 @@ internal class SecondComponent(
     @InjectedParam override val navigation: SecondScreenNavigation,
 ) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
     componentContext = componentContext,
-    defaultState = SecondViewState(),
+    defaultState = SecondViewState,
 ), SecondScreen {
 
     override val viewState: StateFlow<SecondViewState> = componentState

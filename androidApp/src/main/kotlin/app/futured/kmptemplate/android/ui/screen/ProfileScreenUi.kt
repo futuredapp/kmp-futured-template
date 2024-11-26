@@ -18,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature_v3.ui.profileScreen.ProfileScreen
+import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.kmpStringResource
 
 @Composable
 fun ProfileScreenUi(
@@ -37,7 +39,7 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Profile") },
+                title = { Text(kmpStringResource(MR.strings.profile_screen_title)) },
                 windowInsets = WindowInsets.navigationBars,
             )
         },
@@ -52,7 +54,7 @@ private fun Content(
             Text(text = "Profile")
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = actions::onLogout) {
-                Text("Sign Out")
+                Text(kmpStringResource(MR.strings.generic_sign_out))
             }
         }
     }

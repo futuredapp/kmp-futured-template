@@ -17,6 +17,6 @@ struct ThirdViewModel {
 
 extension ThirdViewModel: ThirdViewModelProtocol {
     var text: String {
-        viewState.id.localized()
+        viewState.text.localized()
     }
 }

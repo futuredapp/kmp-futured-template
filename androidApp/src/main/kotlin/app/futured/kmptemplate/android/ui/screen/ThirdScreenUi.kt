@@ -65,7 +65,7 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.id.localized())
+            Text(text = viewState.text.localized())
         }
     }
 }

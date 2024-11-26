@@ -2,6 +2,8 @@ package app.futured.kmptemplate.feature_v3.ui.picker
 
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
+import app.futured.kmptemplate.resources.MR
+import dev.icerock.moko.resources.desc.desc
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
@@ -28,9 +30,9 @@ internal class FruitPickerComponent(
             updateState {
                 copy(
                     isLoading = false, items = persistentListOf(
-                        "\uD83C\uDF4F Apple",
-                        "\uD83C\uDF4C Banana",
-                        "\uD83C\uDF4A Orange"
+                        MR.strings.fruit_apple.desc(),
+                        MR.strings.fruit_banana.desc(),
+                        MR.strings.fruit_orange.desc()
                     )
                 )
             }

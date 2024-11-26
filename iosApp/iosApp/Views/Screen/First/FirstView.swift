@@ -11,9 +11,9 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
     var body: some View {
         VStack(spacing: 10) {
             Text(viewModel.text)
-            Button("Go to second screen", action: viewModel.onNext).buttonStyle(.borderedProminent)
+            Button(Localizable.first_screen_button.localized, action: viewModel.onNext).buttonStyle(.borderedProminent)
         }
-        .navigationTitle("First screen")
+        .navigationTitle(Localizable.first_screen_title.localized)
         .eventsEffect(for: viewModel.events) { event in
             switch onEnum(of: event) {
             case .showToast(let event):
@@ -21,7 +21,7 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
             }
         }
         .alert(viewModel.alertText, isPresented: viewModel.isAlertVisible) {
-            Button("Close") { viewModel.hideToast() }
+            Button(Localizable.generic_close.localized) { viewModel.hideToast() }
         }
     }
 }

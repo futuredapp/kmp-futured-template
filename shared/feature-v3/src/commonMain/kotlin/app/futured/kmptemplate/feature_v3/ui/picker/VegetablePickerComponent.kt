@@ -2,6 +2,8 @@ package app.futured.kmptemplate.feature_v3.ui.picker
 
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
+import app.futured.kmptemplate.resources.MR
+import dev.icerock.moko.resources.desc.desc
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
@@ -29,10 +31,10 @@ internal class VegetablePickerComponent(
                 copy(
                     isLoading = false,
                     items = persistentListOf(
-                        "\uD83E\uDD55 Carrot",
-                        "\uD83E\uDED1 Pepper",
-                        "\uD83E\uDDC5 Onion",
-                        "\uD83C\uDF36\uFE0F Chilli",
+                        MR.strings.veggie_carrot.desc(),
+                        MR.strings.veggie_pepper.desc(),
+                        MR.strings.veggie_onion.desc(),
+                        MR.strings.veggie_chilli.desc(),
                     ),
                 )
             }

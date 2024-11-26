@@ -36,6 +36,7 @@ abstract class BaseComponent<VS : Any, E : Any>(
 
     /**
      * TODO KDoc
+     * TODO FlowCollector onStart
      */
     protected fun Flow<VS>.whenStarted(started: SharingStarted = SharingStarted.Lazily, onStart: () -> Unit = {}): StateFlow<VS> =
         onStart { onStart() }.asStateFlow(started)
@@ -66,6 +67,7 @@ abstract class BaseComponent<VS : Any, E : Any>(
 
     // region Implementation API
 
+    // TODO consider removing in favor of direct access to componentState
     protected fun updateState(update: VS.() -> VS) {
         componentState.update(update)
     }

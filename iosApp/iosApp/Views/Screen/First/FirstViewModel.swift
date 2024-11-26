@@ -44,7 +44,7 @@ extension FirstViewModel: FirstViewModelProtocol {
     }
 
     func showToast(event: FirstUiEvent.ShowToast) {
-        alertText = event.text
+        alertText = event.text.localized()
         alertVisible = true
     }
 

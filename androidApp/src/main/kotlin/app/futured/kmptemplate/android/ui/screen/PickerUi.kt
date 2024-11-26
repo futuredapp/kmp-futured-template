@@ -30,6 +30,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.feature_v3.ui.picker.Picker
 import app.futured.kmptemplate.feature_v3.ui.picker.PickerState
 import app.futured.kmptemplate.feature_v3.ui.picker.pickerStatePreviews
+import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.kmpStringResource
+import app.futured.kmptemplate.resources.localized
 
 @Composable
 fun PickerUi(
@@ -53,10 +56,10 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Pick an item") },
+                title = { Text(kmpStringResource(MR.strings.picker_title)) },
                 actions = {
                     IconButton(onClick = actions::onDismiss) {
-                        Icon(Icons.Filled.Close, contentDescription = "Close")
+                        Icon(Icons.Filled.Close, contentDescription = kmpStringResource(MR.strings.generic_close))
                     }
                 },
                 windowInsets = WindowInsets(0),
@@ -79,14 +82,15 @@ private fun Content(
                     false -> {
                         Column {
                             for (item in viewState.items) {
+                                val title = item.localized()
                                 ListItem(
                                     headlineContent = {
-                                        Text(item)
+                                        Text(title)
                                     },
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .clickable {
-                                            actions.onPick(item)
+                                            actions.onPick(title)
                                         },
                                 )
                             }

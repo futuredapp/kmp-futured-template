@@ -10,8 +10,8 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text("Profile")
-            Button("Sign Out", action: viewModel.onLogoutClick)
+            Text(Localizable.login_screen_title.localized)
+            Button(Localizable.generic_sign_out.localized, action: viewModel.onLogoutClick)
         }
     }
 }

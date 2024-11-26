@@ -11,8 +11,8 @@ struct PickerView<ViewModel: PickerViewModelProtocol>: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Pick an item").font(.headline)
-                Button("Close", action: viewModel.onDismiss)
+                Text(Localizable.picker_title.localized).font(.headline)
+                Button(Localizable.generic_close.localized, action: viewModel.onDismiss)
             }
             if viewModel.isLoading {
                 ProgressView()

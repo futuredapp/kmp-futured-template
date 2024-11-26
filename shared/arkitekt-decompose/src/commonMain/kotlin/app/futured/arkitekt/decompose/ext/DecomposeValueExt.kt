@@ -26,6 +26,7 @@ fun <T : Any> Value<T>.asFlow(): Flow<T> = callbackFlow {
 
 /**
  * Converts this Decompose [Value] to Kotlin [StateFlow].
+ * TODO FlowCollector onStarted
  */
 fun <T : Any> Value<T>.asStateFlow(coroutineScope: CoroutineScope, onStart: () -> Unit = {}): StateFlow<T> = asFlow()
     .onStart { onStart() }

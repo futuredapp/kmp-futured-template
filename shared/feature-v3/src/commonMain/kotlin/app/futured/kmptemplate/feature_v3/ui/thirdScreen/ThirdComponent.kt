@@ -2,7 +2,8 @@ package app.futured.kmptemplate.feature_v3.ui.thirdScreen
 
 import app.futured.kmptemplate.feature_v3.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature_v3.ui.base.ScreenComponent
-import dev.icerock.moko.resources.desc.desc
+import app.futured.kmptemplate.resources.MR
+import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
@@ -14,9 +15,7 @@ internal class ThirdComponent(
     @InjectedParam override val navigation: ThirdScreenNavigation,
 ) : ScreenComponent<ThirdViewState, Nothing, ThirdScreenNavigation>(
     componentContext = componentContext,
-    defaultState = ThirdViewState(
-        id = "Screen argument: ${args.id}".desc(),
-    ),
+    defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
 ), ThirdScreen {
 
     override val viewState: StateFlow<ThirdViewState> = componentState

@@ -31,7 +31,7 @@ extension PickerViewModel: PickerViewModelProtocol {
 
     var items: [PickerItem] {
         viewState.items.map { id in
-            PickerItem(id: id)
+            PickerItem(id: id.localized())
         }
     }
 

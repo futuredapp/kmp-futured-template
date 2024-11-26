@@ -50,7 +50,7 @@ fun FirstScreenUi(
 
     EventsEffect(eventsFlow = screen.events) {
         onEvent<FirstUiEvent.ShowToast> { event ->
-            Toast.makeText(context, event.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, event.text.toString(context), Toast.LENGTH_SHORT).show()
         }
     }
 }
@@ -81,7 +81,7 @@ private fun Content(
             Text(text = viewState.text.localized())
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
-                Text(text = "Go to second screen")
+                Text(text = kmpStringResource(MR.strings.first_screen_button))
             }
         }
     }

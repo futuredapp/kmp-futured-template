@@ -9,12 +9,9 @@ struct SecondView<ViewModel: SecondViewModelProtocol>: View {
     }
 
     var body: some View {
-        VStack(spacing: 10) {
-            Text(viewModel.text)
-            HStack {
-                Button("Pick a fruit", action: viewModel.onPickFruit).buttonStyle(.bordered)
-                Button("Pick a veggie", action: viewModel.onPickVeggie).buttonStyle(.bordered)
-            }
+        HStack {
+            Button(Localizable.second_screen_button_fruit.localized, action: viewModel.onPickFruit).buttonStyle(.bordered)
+            Button(Localizable.second_screen_button_veggie.localized, action: viewModel.onPickVeggie).buttonStyle(.bordered)
         }
         .navigationTitle(Localizable.second_screen_title.localized)
         .sheet(
