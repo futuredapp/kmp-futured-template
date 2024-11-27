@@ -19,23 +19,42 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 /**
- * TODO KDoc
+ * Base class for all Components in architecture.
+ * The BaseComponent allows implementation of stateful screen / navigation host Components which perform some presentation logic.
+ *
+ * @param VS The type of the component state.
+ * @param E The type of the UI events.
+ * @param componentContext The context of the component.
+ * @param defaultState The default Component state.
  */
 abstract class BaseComponent<VS : Any, E : Any>(
     componentContext: GenericComponentContext<*>,
     private val defaultState: VS,
 ) : UseCaseExecutionScope {
 
+    /**
+     * An internal state of the component of type [VS].
+     */
+    protected val componentState: MutableStateFlow<VS> = MutableStateFlow(defaultState)
+
     // region Lifecycle
 
+    /**
+     * The coroutine scope tied to the lifecycle of the component.
+     * It is cancelled when the component is destroyed.
+     */
     protected val componentCoroutineScope = MainScope().also { scope ->
         componentContext.lifecycle.doOnDestroy { scope.cancel() }
     }
 
-    protected val componentState: MutableStateFlow<VS> = MutableStateFlow(defaultState)
-
     /**
-     * TODO KDoc
+     * Converts a [Flow] of states (typically the [componentState]) to a [StateFlow] that
+     * invokes [onStarted] lambda before the flow starts to be collected.
+     *
+     * @param started The [SharingStarted] strategy for the [StateFlow].
+     * @param onStarted A lambda to be executed when before the flow starts collecting.
+     *
+     * @return A [StateFlow] emitting the values of the [Flow].
      */
     protected fun Flow<VS>.whenStarted(
         started: SharingStarted = SharingStarted.Lazily,
@@ -43,7 +62,10 @@ abstract class BaseComponent<VS : Any, E : Any>(
     ): StateFlow<VS> = onStart(onStarted).asStateFlow(started)
 
     /**
-     * TODO KDoc
+     * Converts a [Flow] of component states to a [StateFlow].
+     *
+     * @param started The [SharingStarted] strategy for the [StateFlow].
+     * @return A [StateFlow] emitting the values of the [Flow].
      */
     protected fun Flow<VS>.asStateFlow(started: SharingStarted = SharingStarted.Lazily) =
         stateIn(componentCoroutineScope, started, defaultState)
@@ -52,8 +74,14 @@ abstract class BaseComponent<VS : Any, E : Any>(
 
     // region UI events
 
+    /**
+     * Channel for sending UI events.
+     */
     private val uiEventChannel = Channel<E>(Channel.BUFFERED)
 
+    /**
+     * Flow of UI events.
+     */
     val events: Flow<E> = uiEventChannel
         .receiveAsFlow()
         .shareIn(componentCoroutineScope, SharingStarted.Lazily)
@@ -62,12 +90,20 @@ abstract class BaseComponent<VS : Any, E : Any>(
 
     // region UseCaseExecutionScope
 
+    /**
+     * The coroutine scope for executing use cases.
+     */
     override val viewModelScope: CoroutineScope = componentCoroutineScope
 
     // endregion
 
     // region Implementation API
 
+    /**
+     * Sends a UI event.
+     *
+     * @param event The event to send.
+     */
     protected fun sendUiEvent(event: E) {
         componentCoroutineScope.launch {
             uiEventChannel.send(event)

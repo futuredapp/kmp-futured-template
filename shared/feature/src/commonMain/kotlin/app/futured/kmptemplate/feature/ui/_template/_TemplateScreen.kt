@@ -7,10 +7,12 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
-/*
-TODO add TEMPLATE docs
+/**
+ * A copy-paste template for creating new screen.
+ * All you need to do is to copy contents of this file into your destination package and replace "TEMPLATE" with name of the screen.
+ *
+ * Hint: Ctrl+G
  */
-
 interface TEMPLATEScreen {
     val viewState: StateFlow<TEMPLATEViewState>
     val actions: Actions

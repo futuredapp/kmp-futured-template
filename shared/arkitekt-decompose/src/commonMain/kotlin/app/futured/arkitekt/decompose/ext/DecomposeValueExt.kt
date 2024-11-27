@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.stateIn
 
 /**
  * Converts this Decompose [Value] to Kotlin [Flow].
+ *
+ * @param T The type of the value.
+ * @return A [Flow] emitting the values of the Decompose [Value].
  */
 fun <T : Any> Value<T>.asFlow(): Flow<T> = callbackFlow {
     val cancellation = subscribe { value ->
@@ -28,15 +31,20 @@ fun <T : Any> Value<T>.asFlow(): Flow<T> = callbackFlow {
 /**
  * Converts this Decompose [Value] to Kotlin [StateFlow].
  *
- * TODO KDoc args
+ * @param T The type of the value.
+ * @param coroutineScope The [CoroutineScope] in which the [StateFlow] is active.
+ * @param started The [SharingStarted] strategy for the [StateFlow].
+ * @param onStarted A lambda to be executed before the flow start to be collected.
+ * @return A [StateFlow] emitting the values of the [Value].
  */
 fun <T : Any> Value<T>.asStateFlow(
     coroutineScope: CoroutineScope,
+    started: SharingStarted = SharingStarted.Lazily,
     onStarted: suspend FlowCollector<T>.() -> Unit = {},
 ): StateFlow<T> = asFlow()
     .onStart(onStarted)
     .stateIn(
         scope = coroutineScope,
-        started = SharingStarted.Lazily,
+        started = started,
         initialValue = value,
     )

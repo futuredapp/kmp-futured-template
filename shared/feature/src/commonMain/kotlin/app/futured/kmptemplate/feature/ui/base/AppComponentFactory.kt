@@ -6,16 +6,22 @@ import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 /**
- * TODO KDoc
+ * Factory object for creating application components using Koin.
  */
 internal object AppComponentFactory : KoinComponent {
 
     /**
-     * TODO KDoc
+     * Injects a [ScreenComponent] instance with the specified context, navigation actions, and additional injection parameters.
+     *
+     * @param C The type of the screen component.
+     * @param childContext The context of the component.
+     * @param navigation The navigation actions for the component.
+     * @param parameters Additional parameters for the component.
+     * @return The created screen component.
      */
     inline fun <reified C : ScreenComponent<*, *, *>> createComponent(
         childContext: AppComponentContext,
-        navigation: NavigationActions, // TODO component-specific navigation class
+        navigation: NavigationActions,
         vararg parameters: Any?,
     ): C = get(
         qualifier = null,
@@ -25,7 +31,12 @@ internal object AppComponentFactory : KoinComponent {
     )
 
     /**
-     * TODO KDoc
+     * Injects an [AppComponent] instance with the specified context and additional injection parameters.
+     *
+     * @param C The type of the application component.
+     * @param childContext The context of the component.
+     * @param parameters Additional parameters for the component.
+     * @return The created application component.
      */
     inline fun <reified C : AppComponent<*, *>> createComponent(
         childContext: AppComponentContext,

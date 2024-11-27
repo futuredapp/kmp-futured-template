@@ -11,10 +11,12 @@ import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponent
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreenNavigation
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
+import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
@@ -27,6 +29,8 @@ internal class RootNavHostComponent(
 
     private val slotNavigator = SlotNavigation<RootConfig>()
     private var pendingDeepLink: DeepLinkDestination? = null
+
+    private val logger = Logger.withTag("RootNavHostComponent")
 
     override val slot: StateFlow<ChildSlot<RootConfig, RootChild>> = childSlot(
         source = slotNavigator,
@@ -59,7 +63,9 @@ internal class RootNavHostComponent(
         },
     ).asStateFlow(
         coroutineScope = componentCoroutineScope,
+        started = SharingStarted.WhileSubscribed(5000),
         onStarted = {
+            logger.d { "slot started" }
             if (!consumeDeepLink()) {
                 slotNavigator.activate(RootConfig.Login)
             }
