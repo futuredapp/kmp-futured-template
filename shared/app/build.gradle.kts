@@ -36,7 +36,7 @@ kotlin {
 
             export(projects.shared.platform)
             export(projects.shared.arkitektDecompose)
-            export(projects.shared.featureV3)
+            export(projects.shared.feature)
             export(projects.shared.resources)
 
             export(libs.decompose)
@@ -52,7 +52,7 @@ kotlin {
 
             dependencies {
                 implementation(projects.shared.platform)
-                implementation(projects.shared.featureV3)
+                implementation(projects.shared.feature)
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
@@ -75,7 +75,7 @@ kotlin {
             dependencies {
                 api(projects.shared.platform)
                 api(projects.shared.arkitektDecompose)
-                api(projects.shared.featureV3)
+                api(projects.shared.feature)
                 api(projects.shared.resources)
 
                 api(libs.decompose)
