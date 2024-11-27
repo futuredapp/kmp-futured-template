@@ -8,5 +8,5 @@ enum class NavigationTab(
     val title: StringDesc,
 ) {
     HOME(MR.strings.tab_home.desc()),
-    PROFILE(MR.strings.tab_profile.desc())
+    PROFILE(MR.strings.tab_profile.desc()),
 }

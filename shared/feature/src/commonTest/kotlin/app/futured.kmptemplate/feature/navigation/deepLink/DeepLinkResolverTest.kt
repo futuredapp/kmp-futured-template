@@ -11,7 +11,7 @@ class DeepLinkResolverTest {
     fun `test unknown deep link`() {
         assertEquals(
             expected = null,
-            actual = deepLinkResolver.resolve("kmptemplate://stub")
+            actual = deepLinkResolver.resolve("kmptemplate://stub"),
         )
     }
 
@@ -19,7 +19,7 @@ class DeepLinkResolverTest {
     fun `test home deep link`() {
         assertEquals(
             expected = DeepLinkDestination.HomeTab,
-            actual = deepLinkResolver.resolve("kmptemplate://home")
+            actual = deepLinkResolver.resolve("kmptemplate://home"),
         )
     }
 
@@ -27,7 +27,7 @@ class DeepLinkResolverTest {
     fun `test profile deep link`() {
         assertEquals(
             expected = DeepLinkDestination.ProfileTab,
-            actual = deepLinkResolver.resolve("kmptemplate://profile")
+            actual = deepLinkResolver.resolve("kmptemplate://profile"),
         )
     }
 
@@ -35,7 +35,7 @@ class DeepLinkResolverTest {
     fun `test secondScreen deep link`() {
         assertEquals(
             expected = DeepLinkDestination.SecondScreen,
-            actual = deepLinkResolver.resolve("kmptemplate://home/second")
+            actual = deepLinkResolver.resolve("kmptemplate://home/second"),
         )
     }
 
@@ -43,7 +43,7 @@ class DeepLinkResolverTest {
     fun `test thirdScreen deep link - no params`() {
         assertEquals(
             expected = null,
-            actual = deepLinkResolver.resolve("kmptemplate://home/third")
+            actual = deepLinkResolver.resolve("kmptemplate://home/third"),
         )
     }
 
@@ -51,7 +51,7 @@ class DeepLinkResolverTest {
     fun `test thirdScreen deep link - with path param`() {
         assertEquals(
             expected = DeepLinkDestination.ThirdScreen("ARGUMENT"),
-            actual = deepLinkResolver.resolve("kmptemplate://home/third/ARGUMENT")
+            actual = deepLinkResolver.resolve("kmptemplate://home/third/ARGUMENT"),
         )
     }
 
@@ -59,7 +59,7 @@ class DeepLinkResolverTest {
     fun `test thirdScreen deep link - with query param`() {
         assertEquals(
             expected = DeepLinkDestination.ThirdScreen("ARGUMENT"),
-            actual = deepLinkResolver.resolve("kmptemplate://home/third?arg=ARGUMENT")
+            actual = deepLinkResolver.resolve("kmptemplate://home/third?arg=ARGUMENT"),
         )
     }
 }

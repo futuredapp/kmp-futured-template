@@ -108,7 +108,9 @@ private class PickerUiPreviewProvider : PreviewParameterProvider<PickerState> {
 
 @Preview
 @Composable
-private fun PickerUiPreview(@PreviewParameter(PickerUiPreviewProvider::class) state: PickerState) {
+private fun PickerUiPreview(
+    @PreviewParameter(PickerUiPreviewProvider::class) state: PickerState,
+) {
     MaterialTheme {
         Content(
             viewState = state,

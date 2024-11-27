@@ -57,7 +57,6 @@ internal class ApolloApiAdapter(
             .filter { if (filterOutExceptions) it.exception == null else true }
             .map { apolloResponse -> runCatching { executeOperation(throwOnPartialData) { apolloResponse } } }
 
-
     /**
      * Executes the [Mutation] and returns the [DATA].
      *
@@ -133,7 +132,7 @@ internal class ApolloApiAdapter(
         // A GraphQL request error happened or a Graph field error bubbled up.
         throw NetworkError.CloudError(
             code = errorResponseParser.getErrorResponseCode(response),
-            message = errorResponseParser.getErrorMessage(response)
+            message = errorResponseParser.getErrorMessage(response),
         )
     }
 }

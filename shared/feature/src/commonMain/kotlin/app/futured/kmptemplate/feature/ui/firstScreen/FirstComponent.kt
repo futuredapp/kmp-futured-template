@@ -21,9 +21,10 @@ internal class FirstComponent(
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
-    componentContext = componentContext,
-    defaultState = FirstViewState(),
-), FirstScreen {
+        componentContext = componentContext,
+        defaultState = FirstViewState(),
+    ),
+    FirstScreen {
 
     companion object {
         private const val COUNTER_ALERT = 10L

@@ -24,4 +24,3 @@ interface SecondScreen {
         fun onPickerDismissed()
     }
 }
-

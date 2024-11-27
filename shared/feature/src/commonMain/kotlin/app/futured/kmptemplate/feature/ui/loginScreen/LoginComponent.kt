@@ -10,9 +10,11 @@ import org.koin.core.annotation.InjectedParam
 internal class LoginComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: LoginScreenNavigation,
-) : ScreenComponent<LoginViewState, Nothing, LoginScreenNavigation>(componentContext,
-    LoginViewState
-), LoginScreen {
+) : ScreenComponent<LoginViewState, Nothing, LoginScreenNavigation>(
+        componentContext,
+        LoginViewState,
+    ),
+    LoginScreen {
 
     override val actions: LoginScreen.Actions = object : LoginScreen.Actions {
         override fun onLoginClick() = navigation.toSignedIn()
