@@ -16,11 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.feature_v3.navigation.signedIn.NavigationTab
-import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInChild
-import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInConfig
-import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHost
-import app.futured.kmptemplate.feature_v3.navigation.signedIn.SignedInNavHostViewState
+import app.futured.kmptemplate.feature.navigation.signedIn.NavigationTab
+import app.futured.kmptemplate.feature.navigation.signedIn.SignedInChild
+import app.futured.kmptemplate.feature.navigation.signedIn.SignedInConfig
+import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHost
+import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostViewState
 import app.futured.kmptemplate.resources.localized
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children

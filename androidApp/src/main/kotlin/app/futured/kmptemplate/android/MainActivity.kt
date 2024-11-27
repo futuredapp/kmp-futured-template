@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import app.futured.kmptemplate.android.ui.navigation.RootNavHostUi
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHost
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHostFactory
-import app.futured.kmptemplate.feature_v3.ui.base.DefaultAppComponentContext
+import app.futured.kmptemplate.feature.navigation.root.RootNavHost
+import app.futured.kmptemplate.feature.navigation.root.RootNavHostFactory
+import app.futured.kmptemplate.feature.ui.base.DefaultAppComponentContext
 import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {

@@ -10,9 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.ui.screen.ProfileScreenUi
-import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileChild
-import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileConfig
-import app.futured.kmptemplate.feature_v3.navigation.profile.ProfileNavHost
+import app.futured.kmptemplate.feature.navigation.profile.ProfileChild
+import app.futured.kmptemplate.feature.navigation.profile.ProfileConfig
+import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHost
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable

@@ -27,9 +27,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.feature_v3.ui.picker.Picker
-import app.futured.kmptemplate.feature_v3.ui.picker.PickerState
-import app.futured.kmptemplate.feature_v3.ui.picker.pickerStatePreviews
+import app.futured.kmptemplate.feature.ui.picker.Picker
+import app.futured.kmptemplate.feature.ui.picker.PickerState
+import app.futured.kmptemplate.feature.ui.picker.pickerStatePreviews
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized

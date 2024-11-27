@@ -29,7 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.feature_v3.ui.secondScreen.SecondScreen
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreen
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 

@@ -12,9 +12,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
 import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
 import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
-import app.futured.kmptemplate.feature_v3.navigation.home.HomeChild
-import app.futured.kmptemplate.feature_v3.navigation.home.HomeConfig
-import app.futured.kmptemplate.feature_v3.navigation.home.HomeNavHost
+import app.futured.kmptemplate.feature.navigation.home.HomeChild
+import app.futured.kmptemplate.feature.navigation.home.HomeConfig
+import app.futured.kmptemplate.feature.navigation.home.HomeNavHost
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable

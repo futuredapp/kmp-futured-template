@@ -13,9 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.ui.screen.LoginScreenUi
-import app.futured.kmptemplate.feature_v3.navigation.root.RootChild
-import app.futured.kmptemplate.feature_v3.navigation.root.RootConfig
-import app.futured.kmptemplate.feature_v3.navigation.root.RootNavHost
+import app.futured.kmptemplate.feature.navigation.root.RootChild
+import app.futured.kmptemplate.feature.navigation.root.RootConfig
+import app.futured.kmptemplate.feature.navigation.root.RootNavHost
 import com.arkivanov.decompose.router.slot.ChildSlot
 
 @Composable
