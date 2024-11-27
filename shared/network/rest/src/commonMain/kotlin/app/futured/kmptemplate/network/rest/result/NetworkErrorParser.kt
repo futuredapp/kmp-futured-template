@@ -3,7 +3,7 @@ package app.futured.kmptemplate.network.rest.result
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
 import io.ktor.util.network.UnresolvedAddressException
-import io.ktor.utils.io.errors.IOException
+import kotlinx.io.IOException
 import kotlinx.serialization.SerializationException
 import org.koin.core.annotation.Single
 import kotlin.coroutines.cancellation.CancellationException
