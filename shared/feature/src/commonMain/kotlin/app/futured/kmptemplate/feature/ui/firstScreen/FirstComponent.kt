@@ -7,6 +7,7 @@ import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
 import co.touchlab.kermit.Logger
+import com.arkivanov.essenty.lifecycle.doOnCreate
 import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -21,9 +22,9 @@ internal class FirstComponent(
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
-        componentContext = componentContext,
-        defaultState = FirstViewState(),
-    ),
+    componentContext = componentContext,
+    defaultState = FirstViewState(),
+),
     FirstScreen {
 
     companion object {
@@ -32,13 +33,17 @@ internal class FirstComponent(
 
     private val logger = Logger.withTag("FirstComponent")
 
-    override val viewState: StateFlow<FirstViewState> = componentState.whenStarted {
-        syncData()
-        observeCounter()
-    }
+    override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
 
     override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
         override fun onNext() = navigation.toSecond()
+    }
+
+    init {
+        doOnCreate {
+            syncData()
+            observeCounter()
+        }
     }
 
     private fun syncData() = syncDataUseCase.execute {

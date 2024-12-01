@@ -16,7 +16,7 @@ import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
-import kotlinx.coroutines.flow.SharingStarted
+import com.arkivanov.essenty.lifecycle.doOnCreate
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
@@ -61,16 +61,15 @@ internal class RootNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(
-        coroutineScope = componentCoroutineScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        onStarted = {
-            logger.d { "slot started" }
+    ).asStateFlow(coroutineScope = componentCoroutineScope)
+
+    init {
+        doOnCreate {
             if (!consumeDeepLink()) {
                 slotNavigator.activate(RootConfig.Login)
             }
-        },
-    )
+        }
+    }
 
     override val actions: RootNavHost.Actions = object : RootNavHost.Actions {
         override fun onDeepLink(uri: String) {

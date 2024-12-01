@@ -20,7 +20,5 @@ internal class LoginComponent(
         override fun onLoginClick() = navigation.toSignedIn()
     }
 
-    override val viewState: StateFlow<LoginViewState> = componentState.whenStarted {
-        // onStart
-    }
+    override val viewState: StateFlow<LoginViewState> = componentState.asStateFlow()
 }

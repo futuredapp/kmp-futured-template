@@ -38,7 +38,5 @@ internal class TEMPLATEComponent(
         override fun onBack() = navigation.pop()
     }
 
-    override val viewState: StateFlow<TEMPLATEViewState> = componentState.whenStarted {
-        // onStart
-    }
+    override val viewState: StateFlow<TEMPLATEViewState> = componentState.asStateFlow()
 }

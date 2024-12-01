@@ -8,11 +8,9 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
@@ -46,20 +44,6 @@ abstract class BaseComponent<VS : Any, E : Any>(
     protected val componentCoroutineScope = MainScope().also { scope ->
         componentContext.lifecycle.doOnDestroy { scope.cancel() }
     }
-
-    /**
-     * Converts a [Flow] of states (typically the [componentState]) to a [StateFlow] that
-     * invokes [onStarted] lambda before the flow starts to be collected.
-     *
-     * @param started The [SharingStarted] strategy for the [StateFlow].
-     * @param onStarted A lambda to be executed when before the flow starts collecting.
-     *
-     * @return A [StateFlow] emitting the values of the [Flow].
-     */
-    protected fun Flow<VS>.whenStarted(
-        started: SharingStarted = SharingStarted.Lazily,
-        onStarted: suspend FlowCollector<VS>.() -> Unit = {},
-    ): StateFlow<VS> = onStart(onStarted).asStateFlow(started)
 
     /**
      * Converts a [Flow] of component states to a [StateFlow].
