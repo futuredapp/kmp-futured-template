@@ -10,7 +10,7 @@ import org.koin.core.annotation.InjectedParam
 
 @Factory
 internal class ThirdComponent(
-    componentContext: AppComponentContext,
+    @InjectedParam componentContext: AppComponentContext,
     @InjectedParam args: ThirdScreenArgs,
     @InjectedParam override val navigation: ThirdScreenNavigation,
 ) : ScreenComponent<ThirdViewState, Nothing, ThirdScreenNavigation>(

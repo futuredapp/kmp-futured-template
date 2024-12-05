@@ -19,7 +19,7 @@ import org.koin.core.annotation.InjectedParam
 
 @Factory
 internal class SecondComponent(
-    componentContext: AppComponentContext,
+    @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: SecondScreenNavigation,
 ) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
         componentContext = componentContext,
