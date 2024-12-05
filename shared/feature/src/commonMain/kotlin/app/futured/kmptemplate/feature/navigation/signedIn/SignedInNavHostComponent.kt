@@ -32,7 +32,7 @@ internal class SignedInNavHostComponent(
     override val stack: StateFlow<ChildStack<SignedInConfig, SignedInChild>> = childStack(
         source = stackNavigator,
         serializer = SignedInConfig.serializer(),
-        initialStack = { SignedInNavHostDefaults.getInitialStack(initialConfig) },
+        initialStack = { RootNavHostDefaults.getInitialStack(initialConfig) },
         handleBackButton = true,
         childFactory = { config, childCtx ->
             when (config) {
