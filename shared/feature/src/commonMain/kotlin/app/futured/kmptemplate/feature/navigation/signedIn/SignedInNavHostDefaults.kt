@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.signedIn
 
-expect object RootNavHostDefaults {
+expect object SignedInNavHostDefaults {
 
     /**
      * Returns initial stack for bottom navigation.
