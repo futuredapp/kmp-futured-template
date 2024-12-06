@@ -2,7 +2,7 @@ package app.futured.kmptemplate.feature.ui.secondScreen
 
 import app.futured.arkitekt.decompose.navigation.NavigationActions
 
-data class SecondScreenNavigation(
-    val pop: () -> Unit,
-    val toThird: (id: String) -> Unit,
-) : NavigationActions
+internal interface SecondScreenNavigation : NavigationActions {
+    fun SecondComponent.pop()
+    fun SecondComponent.navigateToThird(id: String)
+}

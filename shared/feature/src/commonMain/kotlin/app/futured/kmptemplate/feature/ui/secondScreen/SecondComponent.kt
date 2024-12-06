@@ -25,7 +25,7 @@ internal class SecondComponent(
         componentContext = componentContext,
         defaultState = SecondViewState,
     ),
-    SecondScreen {
+    SecondScreen, SecondScreenNavigation by navigation {
 
     override val viewState: StateFlow<SecondViewState> = componentState
 
@@ -34,7 +34,7 @@ internal class SecondComponent(
         dismiss = { result ->
             pickerNavigator.dismiss()
             if (result != null) {
-                navigation.toThird(result)
+                navigateToThird(result)
             }
         },
     )
@@ -58,7 +58,7 @@ internal class SecondComponent(
     ).asStateFlow(componentCoroutineScope)
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
-        override fun onBack() = navigation.pop()
+        override fun onBack() = pop()
         override fun onPickVeggie() = pickerNavigator.activate(SecondScreen.PickerType.Vegetable)
         override fun onPickFruit() = pickerNavigator.activate(SecondScreen.PickerType.Fruit)
         override fun onPickerDismissed() = pickerNavigator.dismiss()

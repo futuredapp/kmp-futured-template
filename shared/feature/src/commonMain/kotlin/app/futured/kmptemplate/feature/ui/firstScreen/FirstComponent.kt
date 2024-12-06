@@ -25,7 +25,7 @@ internal class FirstComponent(
     componentContext = componentContext,
     defaultState = FirstViewState(),
 ),
-    FirstScreen {
+    FirstScreen,  FirstScreenNavigation by navigation{
 
     companion object {
         private const val COUNTER_ALERT = 10L
@@ -36,7 +36,7 @@ internal class FirstComponent(
     override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
 
     override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
-        override fun onNext() = navigation.toSecond()
+        override fun onNext() = navigateToSecond()
     }
 
     init {

@@ -23,8 +23,10 @@ sealed interface ProfileConfig {
 
     @Serializable
     data object Profile : ProfileConfig
+//    data object Third : ProfileConfig
 }
 
 sealed interface ProfileChild {
     data class Profile(val screen: ProfileScreen) : ProfileChild
+//    data class Third(val screen: DeepLinkDestination.ThirdScreen) : ProfileChild
 }
