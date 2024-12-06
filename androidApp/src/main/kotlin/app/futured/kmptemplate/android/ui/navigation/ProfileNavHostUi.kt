@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.android.ui.screen.ProfileScreenUi
+import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
 import app.futured.kmptemplate.feature.navigation.profile.ProfileChild
 import app.futured.kmptemplate.feature.navigation.profile.ProfileConfig
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHost
@@ -43,6 +44,7 @@ fun ProfileNavHostUi(
             ) { child ->
                 when (val childInstance = child.instance) {
                     is ProfileChild.Profile -> ProfileScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                    is ProfileChild.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
                 }
             }
         },

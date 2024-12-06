@@ -40,7 +40,7 @@ internal class RootNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 RootConfig.Login -> RootChild.Login(
-                    screen = AppComponentFactory.createComponent<LoginComponent>(
+                    screen = AppComponentFactory.createComponent<LoginComponent, LoginScreenNavigation>(
                         childContext = childCtx,
                         navigation = LoginScreenNavigation(
                             toSignedIn = {

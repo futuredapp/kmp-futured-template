@@ -4,7 +4,6 @@ import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponent
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostComponent
-import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostNavigation
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
@@ -46,9 +45,7 @@ internal class SignedInNavHostComponent(
                 is SignedInConfig.Profile -> SignedInChild.Profile(
                     AppComponentFactory.createComponent<ProfileNavHostComponent>(
                         childContext = childCtx,
-                        ProfileNavHostNavigation(
-                            toLogin = navigationActions.toLogin,
-                        ),
+                        navigationActions.toLogin,
                         config.initialStack,
                     ),
                 )

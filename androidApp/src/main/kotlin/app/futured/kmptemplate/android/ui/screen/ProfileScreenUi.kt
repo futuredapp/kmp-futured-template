@@ -56,6 +56,9 @@ private fun Content(
             Button(onClick = actions::onLogout) {
                 Text(kmpStringResource(MR.strings.generic_sign_out))
             }
+            Button(onClick = actions::onThird) {
+                Text("Nav to third")
+            }
         }
     }
 }

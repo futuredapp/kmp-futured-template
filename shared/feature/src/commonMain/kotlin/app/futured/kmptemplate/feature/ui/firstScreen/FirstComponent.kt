@@ -24,8 +24,7 @@ internal class FirstComponent(
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
     componentContext = componentContext,
     defaultState = FirstViewState(),
-),
-    FirstScreen,  FirstScreenNavigation by navigation{
+), FirstScreen, FirstScreenNavigation by navigation {
 
     companion object {
         private const val COUNTER_ALERT = 10L

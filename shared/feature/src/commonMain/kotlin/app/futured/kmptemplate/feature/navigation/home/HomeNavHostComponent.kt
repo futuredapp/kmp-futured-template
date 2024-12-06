@@ -5,8 +5,11 @@ import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponent
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenNavigation
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponent
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenNavigation
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponent
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.childStack
@@ -20,9 +23,9 @@ import org.koin.core.annotation.InjectedParam
 internal class HomeNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam private val initialStack: List<HomeConfig>,
-    private val homeNavigator: HomeNavigation,
 ) : AppComponent<Unit, Nothing>(componentContext, Unit), HomeNavHost {
 
+    private val homeNavigator: HomeNavigation = HomeNavigator()
 
     override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
         override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) =
@@ -40,21 +43,21 @@ internal class HomeNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 HomeConfig.First -> HomeChild.First(
-                    AppComponentFactory.createComponent<FirstComponent>(
+                    AppComponentFactory.createComponent<FirstComponent, FirstScreenNavigation>(
                         childContext = childCtx,
                         navigation = homeNavigator,
                     ),
                 )
 
                 HomeConfig.Second -> HomeChild.Second(
-                    AppComponentFactory.createComponent<SecondComponent>(
+                    AppComponentFactory.createComponent<SecondComponent, SecondScreenNavigation>(
                         childContext = childCtx,
                         navigation = homeNavigator,
                     ),
                 )
 
                 is HomeConfig.Third -> HomeChild.Third(
-                    AppComponentFactory.createComponent<ThirdComponent>(
+                    AppComponentFactory.createComponent<ThirdComponent, ThirdScreenNavigation>(
                         childContext = childCtx,
                         navigation = homeNavigator,
                         config.args,

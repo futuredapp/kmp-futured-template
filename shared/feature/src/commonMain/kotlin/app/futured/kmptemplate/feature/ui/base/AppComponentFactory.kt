@@ -19,9 +19,9 @@ internal object AppComponentFactory : KoinComponent {
      * @param parameters Additional parameters for the component.
      * @return The created screen component.
      */
-    inline fun <reified C : ScreenComponent<*, *, *>> createComponent(
+    inline fun <reified C : ScreenComponent<*, *, N>, reified N: NavigationActions> createComponent(
         childContext: AppComponentContext,
-        navigation: NavigationActions,
+        navigation: N,
         vararg parameters: Any?,
     ): C = get(
         qualifier = null,
