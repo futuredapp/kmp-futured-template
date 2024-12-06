@@ -22,9 +22,9 @@ internal class SecondComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: SecondScreenNavigation,
 ) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
-        componentContext = componentContext,
-        defaultState = SecondViewState,
-    ),
+    componentContext = componentContext,
+    defaultState = SecondViewState,
+),
     SecondScreen {
 
     override val viewState: StateFlow<SecondViewState> = componentState
@@ -55,7 +55,7 @@ internal class SecondComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
         override fun onBack() = navigation.pop()
