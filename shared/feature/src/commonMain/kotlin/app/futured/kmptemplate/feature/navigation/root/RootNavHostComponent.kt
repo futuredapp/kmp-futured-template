@@ -61,7 +61,7 @@ internal class RootNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(coroutineScope = componentCoroutineScope)
+    ).asStateFlow()
 
     init {
         doOnCreate {

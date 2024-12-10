@@ -54,7 +54,7 @@ internal class SignedInNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
 
     override val viewState: StateFlow<SignedInNavHostViewState> = componentState.combine(stack) { state, stack ->
         state.copy(
