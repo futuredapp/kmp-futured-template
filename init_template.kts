@@ -11,29 +11,135 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+import kotlin.io.path.exists
+import kotlin.io.path.isRegularFile
 
 //// APP
 
 val templatePackageName = "app.futured.kmptemplate"
-val (appName, packageName, frameworkName) = getNamesOfAppAndPackageAndFramework()
-renameAndroidRelatedPackages(packageName)
-renamePackagesInShared(packageName = packageName)
-renameTextInPath(pathText = "gradle/libs.versions.toml", oldText = templatePackageName, newText = packageName)
-renameTextInPath(pathText = "build.gradle.kts", oldText = templatePackageName, newText = packageName)
-renameTextInPath(pathText = "settings.gradle.kts", oldText = "KMP_Futured_template", newText = appName)
+val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
+
+val (appName, appPackageName, frameworkName) = getNamesOfAppAndPackageAndFramework()
+
+renameGradleSubproject("buildSrc", appPackageName)
+renameGradleSubproject("baselineprofile", appPackageName)
+renameGradleSubproject("androidApp", appPackageName)
+renameGradleSubproject("shared/app", appPackageName)
+renameGradleSubproject("shared/feature", appPackageName)
+renameGradleSubproject("shared/network", appPackageName)
+renameGradleSubproject("shared/persistence", appPackageName)
+renameGradleSubproject("shared/platform", appPackageName)
+renameGradleSubproject("shared/resources", appPackageName)
+
+findAndReplaceInFileTree(
+    parent = Path.of("shared/arkitekt-decompose"),
+    search = templatePackageName,
+    replaceWith = appPackageName
+)
+
+findAndReplaceInFileTree(
+    parent = Path.of("shared/arkitekt-cr-usecases"),
+    search = templatePackageName,
+    replaceWith = appPackageName
+)
+
+findAndReplaceInFileTree(
+    parent = Path.of(".github"),
+    search = templatePackageName,
+    replaceWith = appPackageName
+)
+
+findAndReplaceInFile(
+    file = File("gradle/libs.versions.toml"),
+    search = templatePackageName,
+    replaceWith = appPackageName
+)
+
+findAndReplaceInFile(
+    file = File("build.gradle.kts"),
+    search = templatePackageName,
+    replaceWith = appPackageName
+)
+
+findAndReplaceInFile(
+    file = File("settings.gradle.kts"),
+    search = "KMP_Futured_template",
+    replaceWith = appName
+)
+
+fun renameGradleSubproject(subproject: String, appPackage: String) {
+    val sourceSets = listOf(
+        Path.of("$subproject/src/main/kotlin"),
+        Path.of("$subproject/src/commonMain/kotlin"),
+        Path.of("$subproject/src/commonTest/kotlin"),
+        Path.of("$subproject/src/androidMain/kotlin"),
+        Path.of("$subproject/src/iosMain/kotlin")
+    )
+
+    for (sourceSet in sourceSets) {
+        moveFileTree(
+            parent = sourceSet,
+            fromPath = templatePackagePath,
+            toPath = Path.of(appPackage.replace('.', '/'))
+        )
+    }
+
+    findAndReplaceInFileTree(
+        parent = Path.of(subproject),
+        search = templatePackageName,
+        replaceWith = appPackage
+    )
+}
+
+fun findAndReplaceInFileTree(parent: Path, search: String, replaceWith: String) {
+    if (parent.exists().not()) {
+        return
+    }
+    Files.walk(parent)
+        .filter { path -> path.isRegularFile() }
+        .map { it.toFile() }
+        .forEach { file ->
+            with(file) { writeText(readText(Charsets.UTF_8).replace(search, replaceWith)) }
+        }
+}
+
+fun findAndReplaceInFile(file: File, search: String, replaceWith: String) {
+    if (file.exists().not()) {
+        return
+    }
+    with(file) { writeText(readText(Charsets.UTF_8).replace(search, replaceWith)) }
+}
+
+fun moveFileTree(parent: Path, fromPath: Path, toPath: Path) {
+    if (parent.exists().not()) {
+        return
+    }
+    val sourcePath = parent.resolve(fromPath)
+    val targetPath = parent.resolve(toPath)
+
+    Files.walk(parent.resolve(fromPath))
+        .filter { path -> path.isRegularFile() }
+        .forEach { source ->
+            val target = targetPath.resolve(sourcePath.relativize(source))
+            Files.createDirectories(target.parent)
+            Files.move(source, target, StandardCopyOption.REPLACE_EXISTING)
+            println("moved file: $source -> $target")
+        }
+}
 
 // IOS
-updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_IDENTIFIER", newValue = packageName)
+updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_IDENTIFIER", newValue = appPackageName)
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_NAME", newValue = appName)
 updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_SCHEME", newValue = appName)
-updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp", newValue = packageName)
-updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppTests", newValue = "${packageName}.${appName}Test")
-updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppUITests", newValue = "${packageName}.${appName}UITest")
-renameTextInPath(pathText = "buildSrc/src/main/kotlin/${packageName.replace(".", "/")}/gradle/configuration/ProjectSettings.kt", oldText = "shared", newText = "${frameworkName}")
+updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp", newValue = appPackageName)
+updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppTests", newValue = "${appPackageName}.${appName}Test")
+updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppUITests", newValue = "${appPackageName}.${appName}UITest")
+renameTextInPath(pathText = "buildSrc/src/main/kotlin/${appPackageName.replace(".", "/")}/gradle/configuration/ProjectSettings.kt", oldText = "shared", newText = "$frameworkName")
 replaceTextInSwiftFiles(dirPath = "iosApp", oldText = "import shared", newText = "import ${frameworkName}")
 replaceTextInSwiftFiles(dirPath = "iosApp", oldText = "extension shared", newText =  "extension ${frameworkName}")
 replaceTextInXConfigFiles(dirPath = "iosApp", oldText = "shared", newText = "${frameworkName}")
-replaceTextInAllFilesInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
+findAndReplaceInFileTree(parent = Path.of("iosApp"), search = "iosApp", replaceWith = appName)
 renameInDirectory(dirPath = "iosApp/iosAppTests", oldText = "iosApp", newText = appName)
 renameInDirectory(dirPath = "iosApp/iosAppUITests", oldText = "iosApp", newText = appName)
 renameInDirectory(dirPath = "iosApp/iosApp.xcodeproj/xcshareddata/xcschemes", oldText = "iosApp", newText = appName)
@@ -46,20 +152,20 @@ renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
 fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) {
     File(dirPath).walk()
         .filter { it.isFile && it.extension == "xcconfig" }
-        .forEach { file ->  renameTextInPath(file.path, oldText, newText) }
+        .forEach { file -> renameTextInPath(file.path, oldText, newText) }
 }
 
 fun replaceTextInSwiftFiles(dirPath: String, oldText: String, newText: String) {
     File(dirPath).walk()
         .filter { it.isFile && it.extension == "swift" }
-        .forEach { file ->  renameTextInPath(file.path, oldText, newText) }
+        .forEach { file -> renameTextInPath(file.path, oldText, newText) }
 }
 
 fun updatePbxprojValues(filePath: String, oldValue: String, newValue: String) {
     val file = File(filePath)
     if (!file.exists()) {
-       println("File does not exist: $filePath")
-       return
+        println("File does not exist: $filePath")
+        return
     }
     var content = file.readText()
     content = content.replace(oldValue, newValue)
@@ -96,111 +202,16 @@ fun renameInDirectory(dirPath: String, oldText: String, newText: String) {
 
     // exclude root directory from walk results
     dir.walk().drop(1).forEach { file ->
-            if (file.name.contains(oldText)) {
-                val oldName = file.name
-                val newName = file.name.replace(oldText, newText)
-                renameDirectory(from = "$dirPath/$oldName", to = "$dirPath/$newName")
-            }
+        if (file.name.contains(oldText)) {
+            val oldName = file.name
+            val newName = file.name.replace(oldText, newText)
+            renameDirectory(from = "$dirPath/$oldName", to = "$dirPath/$newName")
         }
-}
-
-fun replaceTextInAllFilesInDirectory(dirPath: String, oldText: String, newText: String) {
-    val dir = File(dirPath)
-    if (dir.exists()) {
-        dir.walk().filter { it.isFile }.forEach { file ->
-            renameTextInPath(file.path, oldText, newText)
-        }
-    } else {
-        error("Directory does not exist: $dirPath")
-    }
-}
-
-fun renameAndroidRelatedPackages(packageName: String) {
-    // move androidApp to new package
-    val baseDir = "androidApp/src/main/kotlin"
-    renamePackageNameInDirectory(baseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
-
-    // rename package and imports
-    renameTextInPath("androidApp/build.gradle.kts", templatePackageName, packageName)
-    renameTextInPath("androidApp/proguard-rules.pro", templatePackageName, packageName)
-
-    renameTextInFilePath(baseDir, templatePackageName, packageName)
-
-    // buildSrc
-    val buildSrcBaseDir = "buildSrc/src/main/kotlin"
-    renamePackageNameInDirectory(buildSrcBaseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
-    renameTextInFilePath(buildSrcBaseDir, templatePackageName, packageName)
-
-    // baseline profiles
-    val baselineProfilesBaseDir = "baselineprofile/src/main/kotlin"
-    renamePackageNameInDirectory(baselineProfilesBaseDir, templatePackageName.replace(".", "/"), packageName.replace(".", "/"))
-    renameTextInFilePath(baselineProfilesBaseDir, templatePackageName, packageName)
-    renameTextInPath("baselineprofile/build.gradle.kts", templatePackageName, packageName)
-}
-
-fun renamePackageNameInDirectory(dir: String, oldPackageNamePath: String, newPackageNamePath: String) {
-    val oldPackageNameSeparated = oldPackageNamePath.split("/")
-    val newPackageNameSeparated = newPackageNamePath.split("/")
-
-    var newPath = dir
-    oldPackageNameSeparated.forEachIndexed { index, name ->
-        val toBeRenamed = "$newPath/$name"
-        newPath = "$newPath/${newPackageNameSeparated[index]}"
-        renameDirectory(toBeRenamed, newPath)
     }
 }
 
 fun renameDirectory(from: String, to: String) {
     File(from).renameTo(File(to))
-}
-
-fun renamePackagesInShared(packageName: String) {
-    val packagePath = packageName.replace('.', '/')
-    val oldPackagePath = templatePackageName.replace('.', '/')
-
-    val sourceSets = listOf(
-        "androidMain",
-        "commonMain",
-        "iosMain",
-    )
-    val modules = listOf(
-        "app",
-        "feature",
-        "network/graphql",
-        "network/rest",
-        "persistence",
-        "platform",
-        "resources",
-        "util",
-    )
-    modules.forEach { moduleName ->
-        sourceSets.forEach { targetName ->
-            val baseDir = "shared/$moduleName/src/$targetName"
-            if (File(baseDir).exists()) {
-                renamePackageNameInDirectory(
-                    dir = "$baseDir/kotlin",
-                    oldPackageNamePath = oldPackagePath,
-                    newPackageNamePath = packagePath,
-                )
-                renameTextInFilePath(
-                    path = "$baseDir/kotlin",
-                    oldText = templatePackageName,
-                    newText = packageName,
-                )
-            }
-        }
-
-        renameTextInPath("shared/$moduleName/build.gradle.kts", templatePackageName, packageName)
-    }
-}
-
-fun renameTextInFilePath(path: String, oldText: String, newText: String) {
-    val f = File(path)
-    f.walk().forEach {
-        if (it.isDirectory.not()) {
-            renameTextInPath(it.path, oldText, newText)
-        }
-    }
 }
 
 fun renameTextInPath(pathText: String, oldText: String, newText: String) {
