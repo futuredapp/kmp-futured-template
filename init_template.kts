@@ -7,27 +7,28 @@ exec kscript $0 "$@"
 \*** IMPORTANT: Any code including imports and annotations must come after this line ***/
 
 import java.io.File
-import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import kotlin.io.path.exists
+import kotlin.io.path.extension
 import kotlin.io.path.isRegularFile
-
-//// APP
 
 val templatePackageName = "app.futured.kmptemplate"
 val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
 
-val (appName, appPackageName, frameworkName) = getNamesOfAppAndPackageAndFramework()
+val (appName, appPackageName, frameworkName) = readInput()
+val appPackagePath = Path.of(appPackageName.replace('.', '/'))
+
+// region Android + KMP + Gradle
 
 renameGradleSubproject("buildSrc", appPackageName)
 renameGradleSubproject("baselineprofile", appPackageName)
 renameGradleSubproject("androidApp", appPackageName)
 renameGradleSubproject("shared/app", appPackageName)
 renameGradleSubproject("shared/feature", appPackageName)
-renameGradleSubproject("shared/network", appPackageName)
+renameGradleSubproject("shared/network/graphql", appPackageName)
+renameGradleSubproject("shared/network/rest", appPackageName)
 renameGradleSubproject("shared/persistence", appPackageName)
 renameGradleSubproject("shared/platform", appPackageName)
 renameGradleSubproject("shared/resources", appPackageName)
@@ -68,6 +69,102 @@ findAndReplaceInFile(
     replaceWith = appName
 )
 
+// endregion
+
+// region XCode project
+
+findAndReplaceInFile(
+    file = Path.of("buildSrc/src/main/kotlin")
+        .resolve(appPackagePath)
+        .resolve("gradle/configuration/ProjectSettings.kt")
+        .toFile(),
+    search = "shared",
+    replaceWith = frameworkName
+)
+updateFastfileEnvVariables(
+    file = File("iosApp/fastlane/Fastfile"),
+    varName = "APP_IDENTIFIER",
+    newValue = appPackageName
+)
+updateFastfileEnvVariables(
+    file = File("iosApp/fastlane/Fastfile"),
+    varName = "APP_NAME",
+    newValue = appName
+)
+updateFastfileEnvVariables(
+    file = File("iosApp/fastlane/Fastfile"),
+    varName = "APP_SCHEME",
+    newValue = appName
+)
+findAndReplaceInFile(
+    file = File("iosApp/iosApp.xcodeproj/project.pbxproj"),
+    search = "orgIdentifier.iosApp",
+    replaceWith = appPackageName
+)
+findAndReplaceInFile(
+    file = File("iosApp/iosApp.xcodeproj/project.pbxproj"),
+    search = "orgIdentifier.iosApp.iosAppTests",
+    replaceWith = "${appPackageName}.${appName}Test"
+)
+findAndReplaceInFile(
+    file = File("iosApp/iosApp.xcodeproj/project.pbxproj"),
+    search = "orgIdentifier.iosApp.iosAppUITests",
+    replaceWith = "${appPackageName}.${appName}UITest"
+)
+findAndReplaceInFileTree(
+    parent = Path.of("iosApp"),
+    search = "import shared",
+    replaceWith = "import $frameworkName",
+    extensionFilter = { extension -> extension == "swift"}
+)
+findAndReplaceInFileTree(
+    parent = Path.of("iosApp"),
+    search = "extension shared",
+    replaceWith = "extension $frameworkName",
+    extensionFilter = { extension -> extension == "swift"}
+)
+findAndReplaceInFileTree(
+    parent = Path.of("iosApp"),
+    search = "shared",
+    replaceWith = frameworkName,
+    extensionFilter = { extension -> extension == "xcconfig"}
+)
+
+findAndReplaceInFileTree(parent = Path.of("iosApp"), search = "iosApp", replaceWith = appName)
+
+moveFileTree(
+    parent = Path.of("iosApp"),
+    fromPath = Path.of("iosApp"),
+    toPath = Path.of(appName)
+)
+moveFileTree(
+    parent = Path.of("iosApp"),
+    fromPath = Path.of("iosApp.xcodeproj"),
+    toPath = Path.of("$appName.xcodeproj")
+)
+Files.move(
+    File("iosApp/iosAppTests/iosAppTests.swift").toPath(),
+    File("iosApp/iosAppTests/${appName}Tests.swift").toPath(),
+)
+moveFileTree(
+    parent = Path.of("iosApp"),
+    fromPath = Path.of("iosAppTests"),
+    toPath = Path.of("${appName}Tests")
+)
+Files.move(
+    File("iosApp/iosAppUITests/iosAppUITestsLaunchTests.swift").toPath(),
+    File("iosApp/iosAppUITests/${appName}UITestsLaunchTests.swift").toPath(),
+)
+moveFileTree(
+    parent = Path.of("iosApp"),
+    fromPath = Path.of("iosAppUITests"),
+    toPath = Path.of("${appName}UITests")
+)
+
+// endregion
+
+// region Functions
+
 fun renameGradleSubproject(subproject: String, appPackage: String) {
     val sourceSets = listOf(
         Path.of("$subproject/src/main/kotlin"),
@@ -81,30 +178,41 @@ fun renameGradleSubproject(subproject: String, appPackage: String) {
         moveFileTree(
             parent = sourceSet,
             fromPath = templatePackagePath,
-            toPath = Path.of(appPackage.replace('.', '/'))
+            toPath = appPackagePath
         )
     }
 
     findAndReplaceInFileTree(
         parent = Path.of(subproject),
         search = templatePackageName,
-        replaceWith = appPackage
+        replaceWith = appPackage,
+        extensionFilter = { extension -> extension == "kt" || extension == "kts"}
     )
 }
 
-fun findAndReplaceInFileTree(parent: Path, search: String, replaceWith: String) {
+fun findAndReplaceInFileTree(
+    parent: Path,
+    search: String,
+    replaceWith: String,
+    extensionFilter: (extension: String) -> Boolean = { true },
+) {
     if (parent.exists().not()) {
         return
     }
     Files.walk(parent)
         .filter { path -> path.isRegularFile() }
+        .filter { path -> extensionFilter(path.extension) }
         .map { it.toFile() }
         .forEach { file ->
             with(file) { writeText(readText(Charsets.UTF_8).replace(search, replaceWith)) }
         }
 }
 
-fun findAndReplaceInFile(file: File, search: String, replaceWith: String) {
+fun findAndReplaceInFile(
+    file: File,
+    search: String,
+    replaceWith: String,
+) {
     if (file.exists().not()) {
         return
     }
@@ -124,58 +232,12 @@ fun moveFileTree(parent: Path, fromPath: Path, toPath: Path) {
             val target = targetPath.resolve(sourcePath.relativize(source))
             Files.createDirectories(target.parent)
             Files.move(source, target, StandardCopyOption.REPLACE_EXISTING)
-            println("moved file: $source -> $target")
         }
 }
 
-// IOS
-updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_IDENTIFIER", newValue = appPackageName)
-updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_NAME", newValue = appName)
-updateFastfileEnvVariables(filePath = "iosApp/fastlane/Fastfile", varName = "APP_SCHEME", newValue = appName)
-updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp", newValue = appPackageName)
-updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppTests", newValue = "${appPackageName}.${appName}Test")
-updatePbxprojValues(filePath = "iosApp/iosApp.xcodeproj/project.pbxproj", oldValue = "orgIdentifier.iosApp.iosAppUITests", newValue = "${appPackageName}.${appName}UITest")
-renameTextInPath(pathText = "buildSrc/src/main/kotlin/${appPackageName.replace(".", "/")}/gradle/configuration/ProjectSettings.kt", oldText = "shared", newText = "$frameworkName")
-replaceTextInSwiftFiles(dirPath = "iosApp", oldText = "import shared", newText = "import ${frameworkName}")
-replaceTextInSwiftFiles(dirPath = "iosApp", oldText = "extension shared", newText =  "extension ${frameworkName}")
-replaceTextInXConfigFiles(dirPath = "iosApp", oldText = "shared", newText = "${frameworkName}")
-findAndReplaceInFileTree(parent = Path.of("iosApp"), search = "iosApp", replaceWith = appName)
-renameInDirectory(dirPath = "iosApp/iosAppTests", oldText = "iosApp", newText = appName)
-renameInDirectory(dirPath = "iosApp/iosAppUITests", oldText = "iosApp", newText = appName)
-renameInDirectory(dirPath = "iosApp/iosApp.xcodeproj/xcshareddata/xcschemes", oldText = "iosApp", newText = appName)
-renameInDirectory(dirPath = "iosApp", oldText = "iosApp", newText = appName)
-
-//// END APP
-
-// region functions
-
-fun replaceTextInXConfigFiles(dirPath: String, oldText: String, newText: String) {
-    File(dirPath).walk()
-        .filter { it.isFile && it.extension == "xcconfig" }
-        .forEach { file -> renameTextInPath(file.path, oldText, newText) }
-}
-
-fun replaceTextInSwiftFiles(dirPath: String, oldText: String, newText: String) {
-    File(dirPath).walk()
-        .filter { it.isFile && it.extension == "swift" }
-        .forEach { file -> renameTextInPath(file.path, oldText, newText) }
-}
-
-fun updatePbxprojValues(filePath: String, oldValue: String, newValue: String) {
-    val file = File(filePath)
+fun updateFastfileEnvVariables(file: File, varName: String, newValue: String) {
     if (!file.exists()) {
-        println("File does not exist: $filePath")
-        return
-    }
-    var content = file.readText()
-    content = content.replace(oldValue, newValue)
-    file.writeText(content)
-}
-
-fun updateFastfileEnvVariables(filePath: String, varName: String, newValue: String) {
-    val file = File(filePath)
-    if (!file.exists()) {
-        println("File does not exist: $filePath")
+        println("File does not exist: $file")
         return
     }
 
@@ -192,38 +254,7 @@ fun updateFastfileEnvVariables(filePath: String, varName: String, newValue: Stri
     }
 }
 
-
-fun renameInDirectory(dirPath: String, oldText: String, newText: String) {
-    val dir = File(dirPath)
-    if (!dir.exists()) {
-        error("Directory does not exist: $dirPath")
-        return
-    }
-
-    // exclude root directory from walk results
-    dir.walk().drop(1).forEach { file ->
-        if (file.name.contains(oldText)) {
-            val oldName = file.name
-            val newName = file.name.replace(oldText, newText)
-            renameDirectory(from = "$dirPath/$oldName", to = "$dirPath/$newName")
-        }
-    }
-}
-
-fun renameDirectory(from: String, to: String) {
-    File(from).renameTo(File(to))
-}
-
-fun renameTextInPath(pathText: String, oldText: String, newText: String) {
-    val path: Path = Paths.get(pathText)
-    val charset = StandardCharsets.UTF_8
-
-    var content = String(Files.readAllBytes(path), charset)
-    content = content.replace(oldText.toRegex(), newText)
-    Files.write(path, content.toByteArray(charset))
-}
-
-fun getNamesOfAppAndPackageAndFramework(): Triple<String, String, String> {
+fun readInput(): Triple<String, String, String> {
     print("Project name: ")
     val appName: String = readLine()
         ?.takeIf { it.isNotBlank() }
@@ -241,9 +272,7 @@ fun getNamesOfAppAndPackageAndFramework(): Triple<String, String, String> {
         ?.replace(" ", "_")
         ?: "shared"
 
-    if (packageName.count { it == '.' } != 2) {
-        error("You did not enter package name correctly")
-    }
-
     return Triple(appName, packageName, frameworkName)
 }
+
+// endregion
