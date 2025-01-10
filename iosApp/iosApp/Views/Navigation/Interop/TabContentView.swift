@@ -5,7 +5,7 @@ import SwiftUI
  This view is used to display content inside native `TabView` in a KMP-compatible manner.
  */
 struct TabContentView<
-    Entry: SignedInNavEntry,
+    Entry: SignedInChild,
     Content: View
 >: View {
 
@@ -47,11 +47,9 @@ struct TabContentView<
 extension NavigationTab {
     func icon() -> String {
         switch self {
-        case .a:
+        case .home:
             "house.fill"
-        case .b:
-            "plus"
-        case .c:
+        case .profile:
             "person.crop.circle"
         }
     }

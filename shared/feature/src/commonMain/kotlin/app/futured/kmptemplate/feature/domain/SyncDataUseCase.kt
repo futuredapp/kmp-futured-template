@@ -9,7 +9,7 @@ import kotlin.time.Duration.Companion.seconds
 internal class SyncDataUseCase : UseCase<Unit, Nothing>() {
 
     override suspend fun build(args: Unit): Nothing {
-        delay(10.seconds)
-        error("Jokes on you, there's no data to be fetched in here.")
+        delay(2.seconds)
+        error("This is mock implementation of UseCase and this error only serves demonstration purpose. No actual data is being fetched.")
     }
 }

@@ -10,9 +10,9 @@ jobs:
     runs-on: [ ubuntu-latest ]
     env:
       EXCLUDE_AAB_FILTER: .*intermediate
-      # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
+      # TODO PROJECT-SETUP Platform-specific slack channel name for notifications, eg. "gmlh-android"
       SLACK_CHANNEL: project-slack-channel-name
-      # TODO verify product flavor configuration
+      # TODO PROJECT-SETUP verify product flavor configuration
       # Specifies API environment for KMP build.
       # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
       KMP_FLAVOR: prod
@@ -38,9 +38,9 @@ jobs:
       - name: Generate app bundle
         shell: bash
         env:
-          # TODO Set up `ANDROID_RELEASE_KEYSTORE_PASSWORD` secret for this GitHub repository
-          # TODO Set up `ANDROID_RELEASE_KEY_PASSWORD` secret for this GitHub repository
-          # TODO Set up `ANDROID_RELEASE_KEY_ALIAS` secret for this GitHub repository
+          # TODO PROJECT-SETUP Set up `ANDROID_RELEASE_KEYSTORE_PASSWORD` secret for this GitHub repository
+          # TODO PROJECT-SETUP Set up `ANDROID_RELEASE_KEY_PASSWORD` secret for this GitHub repository
+          # TODO PROJECT-SETUP Set up `ANDROID_RELEASE_KEY_ALIAS` secret for this GitHub repository
           RELEASE_KEYSTORE_PASS: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
           RELEASE_KEY_PASS: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
           RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
@@ -54,9 +54,9 @@ jobs:
       - name: Upload Android Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.1
         with:
-          # TODO Set up `GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
+          # TODO PROJECT-SETUP Set up `GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT }}
-          # TODO This has to be applicationId
+          # TODO PROJECT-SETUP This has to be applicationId
           packageName: app.futured.kmptemplate.android
           releaseFiles: ${{ steps.artifacts.outputs.aab_file }}
           track: internal

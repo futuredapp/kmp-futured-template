@@ -9,7 +9,7 @@ plugins {
 
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
-    // TODO enable after providing google-services.json
+    // TODO PROJECT-SETUP enable after providing google-services.json
     // alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.distribution)
 }

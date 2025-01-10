@@ -3,18 +3,16 @@ import SwiftUI
 
 struct SignedInNavigationView: View {
 
-    private let actions: SignedInNavigationActions
+    private let actions: SignedInNavHostActions
 
-    @StateObject @KotlinOptionalStateFlow private var tabA: SignedInNavEntry.A?
-    @StateObject @KotlinOptionalStateFlow private var tabB: SignedInNavEntry.B?
-    @StateObject @KotlinOptionalStateFlow private var tabC: SignedInNavEntry.C?
+    @StateObject @KotlinOptionalStateFlow private var homeTab: SignedInChildHome?
+    @StateObject @KotlinOptionalStateFlow private var profileTab: SignedInChildProfile?
 
-    @StateObject @KotlinStateFlow private var viewState: SignedInNavigationViewState
+    @StateObject @KotlinStateFlow private var viewState: SignedInNavHostViewState
 
-    init(_ component: SignedInNavigation) {
-        self._tabA = .init(component.tabA)
-        self._tabB = .init(component.tabB)
-        self._tabC = .init(component.tabC)
+    init(_ component: SignedInNavHost) {
+        self._homeTab = .init(component.homeTab)
+        self._profileTab = .init(component.profileTab)
         self._viewState = .init(component.viewState)
         self.actions = component.actions
     }
@@ -30,16 +28,11 @@ struct SignedInNavigationView: View {
                 set: { actions.onTabSelected(tab: $0 ) }
             )
         ) {
-            TabContentView(ofNavigationEntry: tabA, forNavigationTab: NavigationTab.a) { entry in
-                TabANavigationView(entry.instance)
+            TabContentView(ofNavigationEntry: homeTab, forNavigationTab: NavigationTab.home) { child in
+                HomeTabNavigationView(child.navHost)
             }
-
-            TabContentView(ofNavigationEntry: tabB, forNavigationTab: NavigationTab.b) { entry in
-                TabBNavigationView(entry.instance)
-            }
-
-            TabContentView(ofNavigationEntry: tabC, forNavigationTab: NavigationTab.c) { entry in
-                TabCNavigationView(entry.instance)
+            TabContentView(ofNavigationEntry: profileTab, forNavigationTab: NavigationTab.profile) { child in
+                ProfileTabNavigationView(child.navHost)
             }
         }
     }

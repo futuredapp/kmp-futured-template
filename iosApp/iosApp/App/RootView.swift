@@ -4,7 +4,7 @@ import SwiftUI
 struct RootView: View {
 
     @State private var componentHolder = ComponentHolder {
-        RootNavigationFactory().create(componentContext: $0)
+        RootNavHostFactory().create(componentContext: $0)
     }
 
     @Environment(\.scenePhase)

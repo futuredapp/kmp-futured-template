@@ -37,13 +37,13 @@ jobs:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
     env:
-      # TODO Verify app distribution groups
+      # TODO PROJECT-SETUP Verify app distribution groups
       APP_DISTRIBUTION_GROUPS: futured-qa, devs
       APP_DISTRIBUTION_ARTIFACT_TYPE: APK
       FIREBASE_CREDENTIALS_FILE: firebase_credentials.json
-      # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
+      # TODO PROJECT-SETUP Platform-specific slack channel name for notifications, eg. "gmlh-android"
       SLACK_CHANNEL: project-slack-channel-name
-      # TODO verify product flavor configuration
+      # TODO PROJECT-SETUP verify product flavor configuration
       # Specifies API environment for KMP build.
       # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
       KMP_FLAVOR: dev

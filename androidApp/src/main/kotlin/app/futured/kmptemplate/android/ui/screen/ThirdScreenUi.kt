@@ -21,8 +21,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.feature.ui.third.ThirdScreen
-import app.futured.kmptemplate.feature.ui.third.ThirdViewState
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreen
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized

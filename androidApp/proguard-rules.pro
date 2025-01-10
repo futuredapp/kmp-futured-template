@@ -29,13 +29,13 @@
     kotlinx.serialization.KSerializer serializer(...);
 }
 
-# TODO update package name
+# TODO PROJECT-SETUP update package name
 -keep,includedescriptorclasses class app.futured.kmptemplate.**$$serializer { *; }
-# TODO update package name
+# TODO PROJECT-SETUP update package name
 -keepclassmembers class app.futured.kmptemplate.** {
     *** Companion;
 }
-# TODO update package name
+# TODO PROJECT-SETUP update package name
 -keepclasseswithmembers class app.futured.kmptemplate.** {
     kotlinx.serialization.KSerializer serializer(...);
 }

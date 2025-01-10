@@ -12,13 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,9 +29,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.arkitekt.decompose.event.onEvent
 import app.futured.kmptemplate.android.MyApplicationTheme
-import app.futured.kmptemplate.feature.ui.first.FirstScreen
-import app.futured.kmptemplate.feature.ui.first.FirstUiEvent
-import app.futured.kmptemplate.feature.ui.first.FirstViewState
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
@@ -54,7 +50,7 @@ fun FirstScreenUi(
 
     EventsEffect(eventsFlow = screen.events) {
         onEvent<FirstUiEvent.ShowToast> { event ->
-            Toast.makeText(context, event.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, event.text.toString(context), Toast.LENGTH_SHORT).show()
         }
     }
 }
@@ -72,11 +68,6 @@ private fun Content(
                 title = { Text(kmpStringResource(res = MR.strings.first_screen_title)) },
                 modifier = Modifier.fillMaxWidth(),
                 windowInsets = WindowInsets.navigationBars,
-                navigationIcon = {
-                    IconButton(onClick = { actions.onBack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = null)
-                    }
-                },
             )
         },
     ) { paddingValues ->
@@ -90,7 +81,7 @@ private fun Content(
             Text(text = viewState.text.localized())
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
-                Text(text = "Go to second screen")
+                Text(text = kmpStringResource(MR.strings.first_screen_button))
             }
         }
     }
@@ -100,7 +91,6 @@ private fun Content(
 @Composable
 private fun FirstScreenPreview() {
     val actions = object : FirstScreen.Actions {
-        override fun onBack() = Unit
         override fun onNext() = Unit
     }
     MyApplicationTheme {
