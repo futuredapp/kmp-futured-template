@@ -33,8 +33,8 @@ jobs:
           java-version: '17'
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Generate baseline profiles
-        run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=${{env.KMP_FLAVOR}}
+      # TODO https://github.com/futuredapp/kmp-futured-template/issues/89 - name: Generate baseline profiles
+      #  run: ./gradlew generateReleaseBaselineProfile -P buildkonfig.flavor=${{env.KMP_FLAVOR}}
       - name: Generate app bundle
         shell: bash
         env:
