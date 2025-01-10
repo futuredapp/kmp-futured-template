@@ -20,6 +20,12 @@ val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
 val (appName, appPackageName, frameworkName) = readInput()
 val appPackagePath = Path.of(appPackageName.replace('.', '/'))
 
+// region Repo
+
+removeLicense()
+
+// endregion
+
 // region Android + KMP + Gradle
 
 renameGradleSubproject("buildSrc", appPackageName)
@@ -273,6 +279,10 @@ fun readInput(): Triple<String, String, String> {
         ?: "shared"
 
     return Triple(appName, packageName, frameworkName)
+}
+
+fun removeLicense() {
+    File("LICENSE").delete()
 }
 
 // endregion
