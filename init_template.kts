@@ -20,12 +20,6 @@ val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
 val (appName, appPackageName, frameworkName) = readInput()
 val appPackagePath = Path.of(appPackageName.replace('.', '/'))
 
-// region Repo
-
-removeLicense()
-
-// endregion
-
 // region Android + KMP + Gradle
 
 renameGradleSubproject("buildSrc", appPackageName)
@@ -166,6 +160,13 @@ moveFileTree(
     fromPath = Path.of("iosAppUITests"),
     toPath = Path.of("${appName}UITests")
 )
+
+// endregion
+
+// region Repo
+
+File("LICENSE").delete()
+File("init_template.kts").delete()
 
 // endregion
 
