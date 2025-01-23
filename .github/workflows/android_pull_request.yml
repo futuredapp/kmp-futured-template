@@ -33,7 +33,7 @@ jobs:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
     env:
-      # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
+      # TODO PROJECT-SETUP Platform-specific slack channel name for notifications, eg. "gmlh-android"
       SLACK_CHANNEL: project-slack-channel-name
     steps:
       - name: Checkout

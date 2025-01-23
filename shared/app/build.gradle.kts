@@ -4,6 +4,7 @@ import co.touchlab.skie.configuration.DefaultArgumentInterop
 import co.touchlab.skie.configuration.EnumInterop
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SealedInterop
+import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
 
@@ -22,10 +23,8 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
@@ -36,7 +35,7 @@ kotlin {
             isStatic = true
 
             export(projects.shared.platform)
-            export(projects.shared.util)
+            export(projects.shared.arkitektDecompose)
             export(projects.shared.feature)
             export(projects.shared.resources)
 
@@ -68,15 +67,14 @@ kotlin {
 
         commonTest {
             dependencies {
-                implementation(libs.kotlin.testCommon)
-                implementation(libs.kotlin.testAnnotationsCommon)
+                implementation(libs.kotlin.test)
             }
         }
 
         iosMain {
             dependencies {
                 api(projects.shared.platform)
-                api(projects.shared.util)
+                api(projects.shared.arkitektDecompose)
                 api(projects.shared.feature)
                 api(projects.shared.resources)
 
@@ -116,6 +114,7 @@ skie {
             FlowInterop.Enabled(true)
             EnumInterop.Enabled(true)
             SealedInterop.Enabled(true)
+            SuppressSkieWarning.NameCollision(true)
         }
     }
 }

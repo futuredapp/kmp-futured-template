@@ -6,7 +6,12 @@ plugins {
     id(libs.plugins.com.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
+
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
+    // TODO PROJECT-SETUP enable after providing google-services.json
+    // alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.distribution)
 }
 
 kotlin {
@@ -28,11 +33,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     packaging {
@@ -92,7 +92,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTarget
+        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
 }
 
@@ -103,7 +103,7 @@ dependencies {
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
-    implementation(projects.shared.util)
+    implementation(projects.shared.arkitektDecompose)
     implementation(projects.shared.resources)
 
     implementation(platform(libs.androidx.compose.bom))
@@ -112,6 +112,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.compose)
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.ext)

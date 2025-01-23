@@ -9,18 +9,18 @@ To give you a short overview of our stack, we use:
 
 - Native UI on both platforms. Jetpack Compose on Android and SwiftUI on iOS. The rest of the application is shared in KMP.
 - [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation state.
-- The app follows the MVVM design pattern, ViewModels are built around the Decompose InstanceKeeper feature.
+- The presentation layer follows the MVI-like design pattern.
 - [Koin](https://insert-koin.io/) for dependency injection.
 - [SKIE](https://skie.touchlab.co/) for better Kotlin->Swift interop (exhaustive enums, sealed classes, Coroutines support).
-- [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string, color and image resources.
-- [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) client for apps that call GraphQL APIs.
-- [ktorfit](https://github.com/Foso/Ktorfit) client for apps that call plain HTTP APIs.
+- [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string (and other types of) resources.
+- [apollo-kotlin](https://github.com/apollographql/apollo-kotlin) network client for apps that call GraphQL APIs.
+- [ktorfit](https://github.com/Foso/Ktorfit) network client for apps that call plain HTTP APIs.
 - [Jetpack DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) as a simple preferences storage (we have JSON-based and primitive implementations).
 - [iOS-templates](https://github.com/futuredapp/iOS-templates) as template which generates a new iOS scene using MVVM-C architecture.
 
-The template is a sample app with several screens to let you kick off the project with everything set up including navigation and some API calls.
+The template is a sample app with several screens to let you kick off the project with everything set up, incl. navigation and some API calls.
 
---------------- CUT HERE AFTER CLONING ---------------
+-------8<------- CUT HERE AFTER CLONING -------8<-------
 
 # Project Name
 
@@ -28,7 +28,7 @@ The template is a sample app with several screens to let you kick off the projec
 ![compose](https://img.shields.io/badge/jetpack_compose-2bab6b.svg?style=for-the-badge&logo=android&logoColor=white)
 ![swiftui](https://img.shields.io/badge/swiftui-%23000000.svg?style=for-the-badge&logo=swift&logoColor=white)
 
-![kotlin-version](https://img.shields.io/badge/kotlin-1.9.20-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.0.0-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white)
 ![android-minsdk](https://img.shields.io/badge/minsdk-29-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![android-targetsdk](https://img.shields.io/badge/targetsdk-34-2bab6b.svg?style=flat-square&logo=android&logoColor=white)
 ![ios-target](https://img.shields.io/badge/target-16.0-%23000000.svg?style=flat-square&logo=apple&logoColor=white)
@@ -101,17 +101,33 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
 ## Navigation Structure
 
 The app utilizes [Decompose](https://arkivanov.github.io/Decompose/) to share presentation logic and navigation state in KMP.  
-The following meta-description provides an overview of the Decompose navigation tree:
+The following meta-description provides an overview of Decompose navigation tree:
 
 ```kotlin
-Navigation("RootNavigation") {
+Navigation("RootNavHost") {
     Slot {
         Screen("LoginScreen")
-        Navigation("HomeNavigation") {
+        Navigation("SignedInNavHost") {
+            // Bottom navigation stack
             Stack {
-                Screen("FirstScreen")
-                Screen("SecondScreen")
-                Screen("ThirdScreen")
+                // Home tab
+                Navigation("HomeNavHost") {
+                    Stack {
+                        Screen("FirstScreen")
+                        Screen("SecondScreen") {
+                            Slot {
+                                Screen("Picker")
+                            }
+                        }
+                        Screen("ThirdScreen")
+                    }
+                }
+                // Profile tab
+                Navigation("ProfileNavHost") {
+                    Stack {
+                        Screen("ProfileScreen")
+                    }
+                }
             }
         }
     }
@@ -195,9 +211,11 @@ ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/uplo
 
 ## Deep Linking
 
-Deep links are provided by each platform to common code and processed using `DeepLinkResolver` and `DeepLinkNavigator` classes.
-The (example) app currently supports the following scheme: `kmptemplate` and the following links:
+Deep links are provided by each platform to common code and parsed using `DeepLinkResolver` class.
+The (sample) app currently supports the following url scheme: `kmptemplate` and the following links:
 
-- `kmptemplate://third` -- Navigates to third example screen.
-- `kmptemplate://secret?arg={OptionalArgument}` -- Navigates to secret screen reachable only by deep
-  link with optional argument `arg`.
+- `kmptemplate://home` -- Opens Home tab with default stack.
+- `kmptemplate://profile` -- Opens Profile tab with default stack.
+- `kmptemplate://home/second` -- Opens SecondScreen in Home tab.
+- `kmptemplate://home/third?arg={argument}` -- Opens ThirdScreen in Home tab with provided argument. The `argument` is mandatory.
+- `kmptemplate://home/third/{argument}` -- Opens ThirdScreen in Home tab with provided argument. The `argument` is mandatory.

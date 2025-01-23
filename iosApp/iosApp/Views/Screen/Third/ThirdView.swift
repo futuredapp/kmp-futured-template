@@ -11,8 +11,7 @@ struct ThirdView<ViewModel: ThirdViewModelProtocol>: View {
     var body: some View {
         VStack(spacing: 10) {
             Text(viewModel.text)
-            Button("Go back", action: viewModel.onBack)
         }
-        .navigationTitle(Localizable.third_screen_text.localized)
+        .navigationTitle(Localizable.third_screen_title.localized)
     }
 }

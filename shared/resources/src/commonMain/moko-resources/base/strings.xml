@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="template_app_name">KMP Template</string>
 
-    <string name="login_screen_text">Welcome!</string>
+    <!-- App -->
+    <string name="template_app_name">Futured KMP Template</string>
 
+    <!-- Generic -->
+    <string name="generic_close">Close</string>
+    <string name="generic_sign_in">Sign In</string>
+    <string name="generic_sign_out">Sign Out</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- Login -->
+    <string name="login_screen_title">Welcome to the sample app!</string>
+
+    <!-- First screen -->
     <string name="first_screen_title">First screen</string>
-    <string name="first_screen_text">Screen number %1$d x %2$d</string>
+    <string name="first_screen_counter">Counter: %1$s</string>
+    <string name="first_screen_counter_alert">Counter reached %1$s 🎉</string>
+    <string name="first_screen_button">Continue</string>
 
+    <!-- Second screen -->
     <string name="second_screen_title">Second screen</string>
-    <string name="second_screen_text">Screen number 2</string>
+    <string name="second_screen_button_fruit">Pick a fruit</string>
+    <string name="second_screen_button_veggie">Pick a veggie</string>
 
+    <!-- Picker -->
+    <string name="picker_title">Pick an item!</string>
+    <string name="veggie_carrot">🥕 Carrot</string>
+    <string name="veggie_pepper">🫑 Pepper</string>
+    <string name="veggie_onion">🧅 Onion</string>
+    <string name="veggie_chilli">🌶 Chilli</string>
+    <string name="fruit_apple">🍎 Apple</string>
+    <string name="fruit_banana">🍌 Banana</string>
+    <string name="fruit_orange">🍊 Orange</string>
+
+    <!-- Third screen -->
     <string name="third_screen_title">Third screen</string>
-    <string name="third_screen_text">Screen number 3</string>
+    <string name="third_screen_text">Screen argument: %1$s</string>
 
-    <string name="secret_screen_title">Secret screen</string>
-    <string name="secret_screen_text">Deep link argument: %1$s</string>
+    <!-- Profile screen -->
+    <string name="profile_screen_title">Profile</string>
 </resources>

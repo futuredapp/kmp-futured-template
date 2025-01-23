@@ -4,8 +4,9 @@ package app.futured.kmptemplate.android.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -16,12 +17,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import app.futured.kmptemplate.feature.ui.third.ThirdScreen
-import app.futured.kmptemplate.feature.ui.third.ThirdViewState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreen
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
@@ -32,7 +33,7 @@ fun ThirdScreenUi(
     modifier: Modifier = Modifier,
 ) {
     val actions = screen.actions
-    val viewState by screen.viewState.collectAsState()
+    val viewState by screen.viewState.collectAsStateWithLifecycle()
 
     Content(viewState = viewState, actions = actions, modifier = modifier)
 }
@@ -48,7 +49,7 @@ private fun Content(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(kmpStringResource(res = MR.strings.third_screen_title)) },
-                modifier = Modifier.fillMaxWidth(),
+                windowInsets = WindowInsets.navigationBars,
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = null)

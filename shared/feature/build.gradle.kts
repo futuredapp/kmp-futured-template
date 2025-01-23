@@ -1,5 +1,6 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import app.futured.kmptemplate.gradle.ext.iosTargets
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -8,7 +9,9 @@ plugins {
     id(libs.plugins.conventions.lint.get().pluginId)
     id(libs.plugins.koin.annotations.plugin.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.dokka)
 }
 
 dependencies {
@@ -19,21 +22,14 @@ kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
     iosTargets()
 
     sourceSets {
-        androidMain {
-            dependencies {
-                implementation(libs.androidx.compose.runtime)
-            }
-        }
         commonMain {
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
@@ -43,21 +39,23 @@ kotlin {
                 implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.immutableCollections)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.dateTime)
+                implementation(libs.jetbrains.compose.runtime)
 
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.util)
+                implementation(projects.shared.arkitektDecompose)
                 implementation(projects.shared.resources)
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
+                implementation(libs.network.ktor.http)
             }
         }
 
         commonTest {
             dependencies {
-                implementation(libs.kotlin.testCommon)
-                implementation(libs.kotlin.testAnnotationsCommon)
+                implementation(libs.kotlin.test)
             }
         }
     }
@@ -77,8 +75,23 @@ android {
     buildFeatures {
         compose = true
     }
+}
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets.configureEach {
+        outputDirectory.set(layout.projectDirectory.dir("../../doc/documentation/html"))
+
+        val dokkaBaseConfiguration = """
+    {
+      "customStyleSheets": ["${file("../../assets/docs-style.css")}"],
+      "footerMessage": "(c) 2024 Futured - KMP Template"
+    }
+    """
+        pluginsMapConfiguration.set(
+            mapOf(
+                // fully qualified plugin name to json configuration
+                "org.jetbrains.dokka.base.DokkaBase" to dokkaBaseConfiguration,
+            ),
+        )
     }
 }

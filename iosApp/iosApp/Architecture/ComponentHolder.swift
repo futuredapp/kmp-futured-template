@@ -7,9 +7,11 @@ final class ComponentHolder<T> {
     let lifecycle: LifecycleRegistry
     let component: T
 
-    init(factory: (ComponentContext) -> T) {
+    init(factory: (AppComponentContext) -> T) {
         let lifecycle = LifecycleRegistryKt.LifecycleRegistry()
-        let component = factory(DefaultComponentContext(lifecycle: lifecycle))
+        let genericComponentContext = DefaultComponentContext(lifecycle: lifecycle)
+        let appComponentContext = DefaultAppComponentContext(componentContext: genericComponentContext)
+        let component = factory(appComponentContext)
         self.lifecycle = lifecycle
         self.component = component
 
@@ -17,6 +19,7 @@ final class ComponentHolder<T> {
     }
 
     deinit {
-        LifecycleRegistryExtKt.create(lifecycle)
+        // Destroy the root component before it is deallocated
+        LifecycleRegistryExtKt.destroy(lifecycle)
     }
 }

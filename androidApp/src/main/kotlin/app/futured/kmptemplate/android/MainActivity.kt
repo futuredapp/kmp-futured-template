@@ -11,19 +11,22 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import app.futured.kmptemplate.android.ui.navigation.RootNavGraph
-import app.futured.kmptemplate.feature.navigation.root.RootNavigation
-import app.futured.kmptemplate.feature.navigation.root.RootNavigationFactory
-import com.arkivanov.decompose.defaultComponentContext
+import app.futured.kmptemplate.android.ui.navigation.RootNavHostUi
+import app.futured.kmptemplate.feature.navigation.root.RootNavHost
+import app.futured.kmptemplate.feature.navigation.root.RootNavHostFactory
+import app.futured.kmptemplate.feature.ui.base.DefaultAppComponentContext
+import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var rootNavigation: RootNavigation
+    private lateinit var rootNavHost: RootNavHost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rootNavigation = RootNavigationFactory.create(defaultComponentContext())
-        rootNavigation.openDeepLinkIfNeeded(intent)
+        rootNavHost = retainedComponent { retainedContext ->
+            RootNavHostFactory.create(DefaultAppComponentContext(retainedContext))
+        }
+        rootNavHost.handleIntent(intent)
 
         enableEdgeToEdge()
         setContent {
@@ -32,30 +35,29 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    RootNavGraph(rootNavigation = rootNavigation)
+                    RootNavHostUi(navHost = rootNavHost)
                 }
             }
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        rootNavigation.openDeepLinkIfNeeded(intent)
+        rootNavHost.handleIntent(intent)
     }
 
-    private fun RootNavigation.openDeepLinkIfNeeded(intent: Intent?) {
+    private fun RootNavHost.handleIntent(intent: Intent?) {
         if (intent == null) {
             return
         }
 
         val uri = intent.dataString ?: return
-        openDeepLink(uri)
+        actions.onDeepLink(uri)
     }
 }
 
 @Preview
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
-    }
+    MyApplicationTheme {}
 }

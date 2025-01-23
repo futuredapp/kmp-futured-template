@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
 
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.moko.resources)
 }
 
@@ -17,10 +18,8 @@ kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = ProjectSettings.Android.KotlinJvmTarget
-            }
+        compilerOptions {
+            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
         }
     }
 
@@ -30,11 +29,14 @@ kotlin {
         commonMain {
             dependencies {
                 api(libs.moko.resources)
+                implementation(libs.jetbrains.compose.runtime)
+                implementation(libs.kotlinx.dateTime)
+
+                implementation(projects.shared.platform)
             }
         }
         androidMain {
             dependencies {
-                implementation(libs.androidx.compose.runtime)
                 implementation(libs.androidx.compose.foundation)
             }
         }
@@ -53,9 +55,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
 

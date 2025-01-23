@@ -3,8 +3,6 @@ import SwiftUI
 
 protocol ThirdViewModelProtocol: DynamicProperty {
     var text: String { get }
-
-    func onBack()
 }
 
 struct ThirdViewModel {
@@ -20,9 +18,5 @@ struct ThirdViewModel {
 extension ThirdViewModel: ThirdViewModelProtocol {
     var text: String {
         viewState.text.localized()
-    }
-
-    func onBack() {
-        actions.onBack()
     }
 }
