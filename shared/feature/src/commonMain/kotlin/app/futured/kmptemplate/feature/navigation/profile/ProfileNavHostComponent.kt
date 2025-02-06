@@ -50,7 +50,7 @@ internal class ProfileNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
 
     override val actions: ProfileNavHost.Actions = object : ProfileNavHost.Actions {
         override fun pop() = navigator.stackNavigator.pop()

@@ -55,7 +55,7 @@ internal class SecondComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
         override fun onBack() = pop()

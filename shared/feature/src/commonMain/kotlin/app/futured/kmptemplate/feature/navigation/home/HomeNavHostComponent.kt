@@ -65,5 +65,5 @@ internal class HomeNavHostComponent(
                 )
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
 }
