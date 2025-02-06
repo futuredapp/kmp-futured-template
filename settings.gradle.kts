@@ -28,6 +28,8 @@ include(":shared:feature")
 include(":shared:persistence")
 include(":shared:platform")
 include(":shared:resources")
+include(":shared:factory-generator:annotation")
+include(":shared:factory-generator:processor")
 
 includeBuild("convention-plugins")
 include(":baselineprofile")

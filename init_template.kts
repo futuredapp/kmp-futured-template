@@ -172,6 +172,8 @@ fun renamePackagesInShared(packageName: String) {
         "platform",
         "resources",
         "util",
+        "factory-generator/annotation",
+        "factory-generator/processor",
     )
     modules.forEach { moduleName ->
         sourceSets.forEach { targetName ->

@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.firstScreen
 
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
 import app.futured.kmptemplate.feature.domain.SyncDataUseCase
@@ -16,6 +17,7 @@ import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds
 
 @Factory
+@GenerateFactory
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: FirstScreenNavigation,

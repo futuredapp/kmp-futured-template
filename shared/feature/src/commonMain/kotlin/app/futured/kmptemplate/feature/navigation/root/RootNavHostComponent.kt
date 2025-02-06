@@ -8,7 +8,7 @@ import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostNaviga
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
-import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponent
+import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponentFactory
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreenNavigation
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import co.touchlab.kermit.Logger
@@ -40,13 +40,9 @@ internal class RootNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 RootConfig.Login -> RootChild.Login(
-                    screen = AppComponentFactory.createComponent<LoginComponent, LoginScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = LoginScreenNavigation(
-                            toSignedIn = {
-                                slotNavigator.activate(RootConfig.SignedIn())
-                            },
-                        ),
+                    LoginComponentFactory.createComponent(
+                        childCtx,
+                        LoginScreenNavigation(toSignedIn = { slotNavigator.activate(RootConfig.SignedIn()) }),
                     ),
                 )
 

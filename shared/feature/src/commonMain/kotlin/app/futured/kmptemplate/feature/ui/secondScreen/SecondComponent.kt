@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.ui.secondScreen
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@GenerateFactory
 @Factory
 internal class SecondComponent(
     @InjectedParam componentContext: AppComponentContext,

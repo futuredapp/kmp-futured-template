@@ -3,13 +3,9 @@ package app.futured.kmptemplate.feature.navigation.home
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
-import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponent
-import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenNavigation
-import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponent
-import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenNavigation
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponent
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponentFactory
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponentFactory
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponentFactory
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.childStack
@@ -42,27 +38,9 @@ internal class HomeNavHostComponent(
         handleBackButton = true,
         childFactory = { config, childCtx ->
             when (config) {
-                HomeConfig.First -> HomeChild.First(
-                    AppComponentFactory.createComponent<FirstComponent, FirstScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = homeNavigator,
-                    ),
-                )
-
-                HomeConfig.Second -> HomeChild.Second(
-                    AppComponentFactory.createComponent<SecondComponent, SecondScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = homeNavigator,
-                    ),
-                )
-
-                is HomeConfig.Third -> HomeChild.Third(
-                    AppComponentFactory.createComponent<ThirdComponent, ThirdScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = homeNavigator,
-                        config.args,
-                    ),
-                )
+                HomeConfig.First -> HomeChild.First(FirstComponentFactory.createComponent(childCtx, homeNavigator))
+                HomeConfig.Second -> HomeChild.Second(SecondComponentFactory.createComponent(childCtx, homeNavigator))
+                is HomeConfig.Third -> HomeChild.Third(ThirdComponentFactory.createComponent(childCtx, homeNavigator, config.args))
             }
         },
     ).asStateFlow(componentCoroutineScope)
