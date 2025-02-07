@@ -44,12 +44,12 @@ internal class SecondComponent(
         serializer = SecondScreen.PickerType.serializer(),
         childFactory = { type, childContext ->
             when (type) {
-                SecondScreen.PickerType.Fruit -> AppComponentFactory.createComponent<FruitPickerComponent>(
+                SecondScreen.PickerType.Fruit -> AppComponentFactory.createAppComponent<FruitPickerComponent>(
                     childContext,
                     pickerNavigation,
                 )
 
-                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createComponent<VegetablePickerComponent>(
+                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createAppComponent<VegetablePickerComponent>(
                     childContext,
                     pickerNavigation,
                 )

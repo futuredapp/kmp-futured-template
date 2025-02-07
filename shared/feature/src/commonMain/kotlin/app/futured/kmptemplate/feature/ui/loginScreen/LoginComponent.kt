@@ -11,13 +11,12 @@ internal class LoginComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: LoginScreenNavigation,
 ) : ScreenComponent<LoginViewState, Nothing, LoginScreenNavigation>(
-        componentContext,
-        LoginViewState,
-    ),
-    LoginScreen {
+    componentContext = componentContext,
+    defaultState = LoginViewState,
+), LoginScreen, LoginScreenNavigation by navigation {
 
     override val actions: LoginScreen.Actions = object : LoginScreen.Actions {
-        override fun onLoginClick() = navigation.toSignedIn()
+        override fun onLoginClick() = toSignedIn()
     }
 
     override val viewState: StateFlow<LoginViewState> = componentState.asStateFlow()

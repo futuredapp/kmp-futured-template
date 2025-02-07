@@ -27,13 +27,6 @@ internal class HomeNavHostComponent(
 
     private val homeNavigator: HomeNavigation = HomeNavigator()
 
-    override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
-        override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) =
-            homeNavigator.navigator.navigate { newStack.map { it.configuration } }
-
-        override fun pop() = homeNavigator.navigator.pop()
-    }
-
     override val stack: StateFlow<ChildStack<HomeConfig, HomeChild>> = childStack(
         source = homeNavigator.navigator,
         serializer = HomeConfig.serializer(),
@@ -43,21 +36,21 @@ internal class HomeNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 HomeConfig.First -> HomeChild.First(
-                    AppComponentFactory.createComponent<FirstComponent, FirstScreenNavigation>(
+                    AppComponentFactory.createScreenComponent<FirstComponent, FirstScreenNavigation>(
                         childContext = childCtx,
                         navigation = homeNavigator,
                     ),
                 )
 
                 HomeConfig.Second -> HomeChild.Second(
-                    AppComponentFactory.createComponent<SecondComponent, SecondScreenNavigation>(
+                    AppComponentFactory.createScreenComponent<SecondComponent, SecondScreenNavigation>(
                         childContext = childCtx,
                         navigation = homeNavigator,
                     ),
                 )
 
                 is HomeConfig.Third -> HomeChild.Third(
-                    AppComponentFactory.createComponent<ThirdComponent, ThirdScreenNavigation>(
+                    AppComponentFactory.createScreenComponent<ThirdComponent, ThirdScreenNavigation>(
                         childContext = childCtx,
                         navigation = homeNavigator,
                         config.args,
@@ -66,4 +59,11 @@ internal class HomeNavHostComponent(
             }
         },
     ).asStateFlow()
+
+    override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
+        override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) =
+            homeNavigator.navigator.navigate { newStack.map { it.configuration } }
+
+        override fun pop() = homeNavigator.navigator.pop()
+    }
 }

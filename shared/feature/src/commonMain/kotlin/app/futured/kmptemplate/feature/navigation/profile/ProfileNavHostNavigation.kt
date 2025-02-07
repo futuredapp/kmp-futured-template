@@ -9,12 +9,14 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 
-internal interface ProfileNavHostNavigation : ProfileScreenNavigation, ThirdScreenNavigation
+internal interface ProfileNavHostNavigation : ProfileScreenNavigation, ThirdScreenNavigation {
+    val stackNavigator: StackNavigation<ProfileConfig>
+}
 
 internal class ProfileNavHostNavigator(
     private val navigateToLogin: () -> Unit,
 ) : ProfileNavHostNavigation {
-    val stackNavigator = StackNavigation<ProfileConfig>()
+    override val stackNavigator = StackNavigation<ProfileConfig>()
 
     override fun ProfileScreen.toLogin() = navigateToLogin()
 

@@ -22,7 +22,7 @@ import org.koin.core.annotation.InjectedParam
 @Factory
 internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
-    @InjectedParam navigationActions: SignedInNavHostNavigation,
+    @InjectedParam navigationToLogin: () -> Unit,
     @InjectedParam initialConfig: SignedInConfig,
 ) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()), SignedInNavHost {
 
@@ -36,16 +36,16 @@ internal class SignedInNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 is SignedInConfig.Home -> SignedInChild.Home(
-                    AppComponentFactory.createComponent<HomeNavHostComponent>(
+                    AppComponentFactory.createAppComponent<HomeNavHostComponent>(
                         childContext = childCtx,
                         config.initialStack,
                     ),
                 )
 
                 is SignedInConfig.Profile -> SignedInChild.Profile(
-                    AppComponentFactory.createComponent<ProfileNavHostComponent>(
+                    navHost = AppComponentFactory.createAppComponent<ProfileNavHostComponent>(
                         childContext = childCtx,
-                        navigationActions.toLogin,
+                        navigationToLogin,
                         config.initialStack,
                     ),
                 )
