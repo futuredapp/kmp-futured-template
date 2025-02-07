@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.picker
 
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -13,6 +14,7 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.seconds
 
+@GenerateFactory
 @Factory
 internal class FruitPickerComponent(
     @InjectedParam componentContext: AppComponentContext,

@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.profile
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.profileScreen.ProfileComponentFactory
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@GenerateFactory
 @Factory
 internal class ProfileNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,

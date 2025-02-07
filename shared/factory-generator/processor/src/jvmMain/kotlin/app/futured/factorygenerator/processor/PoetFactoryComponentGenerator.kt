@@ -37,7 +37,6 @@ object PoetFactoryComponentGenerator {
 
     private const val INJECTED_PARAM_ANNOTATION = "InjectedParam"
     private const val APP_COMPONENT_CONTEXT_TYPE_NAME = "AppComponentContext"
-    private const val ARGUMENT_TYPE_NAME = "Arg"
     private const val NAVIGATION_TYPE_NAME = "Navigation"
 
     private object Imports {
@@ -53,7 +52,8 @@ object PoetFactoryComponentGenerator {
         codeGenerator: CodeGenerator,
     ) {
         // Component name without package e.g. FirstComponent
-        val baseName: String = factoryComponent.qualifiedName?.asString()?.substringAfterLast('.') ?: error("Unable to get base name")
+        val baseName: String = factoryComponent.qualifiedName?.asString()?.substringAfterLast('.')
+            ?: error("Unable to get base name")
 
         val factoryComponentPackageName = factoryComponent.packageName.asString()
         val factoryClassName = ClassName(
@@ -69,7 +69,11 @@ object PoetFactoryComponentGenerator {
         val componentTypeSpec = createComponentTypeSpec(
             factoryClassName = factoryClassName,
             koinComponentClass = koinComponentClass,
-            createComponentFunction = createComponentFunction(baseName, factoryComponentPackageName, factoryComponent),
+            createComponentFunction = createComponentFunction(
+                baseName,
+                factoryComponentPackageName,
+                factoryComponent
+            ),
         )
 
         val fileSpec = createFileSpec(factoryClassName, componentTypeSpec)
@@ -87,12 +91,13 @@ object PoetFactoryComponentGenerator {
         .addFunction(createComponentFunction)
         .build()
 
-    private fun createFileSpec(factoryClassName: ClassName, componentTypeSpec: TypeSpec) = FileSpec.builder(factoryClassName)
-        .addImport(Imports.KOIN_COMPONENT_PACKAGE, Imports.KOIN_COMPONENT_CLASS_NAME)
-        .addImport(Imports.KOIN_COMPONENT_PACKAGE, Imports.KOIN_GET_FUNCTION_NAME)
-        .addImport(Imports.KOIN_PARAMETER_PACKAGE, Imports.KOIN_PARAMETERS_OF_FUNCTION_NAME)
-        .addType(componentTypeSpec)
-        .build()
+    private fun createFileSpec(factoryClassName: ClassName, componentTypeSpec: TypeSpec) =
+        FileSpec.builder(factoryClassName)
+            .addImport(Imports.KOIN_COMPONENT_PACKAGE, Imports.KOIN_COMPONENT_CLASS_NAME)
+            .addImport(Imports.KOIN_COMPONENT_PACKAGE, Imports.KOIN_GET_FUNCTION_NAME)
+            .addImport(Imports.KOIN_PARAMETER_PACKAGE, Imports.KOIN_PARAMETERS_OF_FUNCTION_NAME)
+            .addType(componentTypeSpec)
+            .build()
 
     private fun createComponentFunction(
         baseName: String,
@@ -107,39 +112,64 @@ object PoetFactoryComponentGenerator {
             ?.findTypeByName(APP_COMPONENT_CONTEXT_TYPE_NAME)
             ?: error("Unable to find $APP_COMPONENT_CONTEXT_TYPE_NAME in $baseName's constructor")
         val navigationType = unInjectedConstructorParams
-            .findTypeByName(NAVIGATION_TYPE_NAME) ?: error("Unable to find Navigation type in $baseName's constructor")
-        val argsType = unInjectedConstructorParams.findTypeByName(ARGUMENT_TYPE_NAME)
+            .findTypeByName(NAVIGATION_TYPE_NAME)
+        val argsTypes = unInjectedConstructorParams
+            .filter {
+                it.containsTypeName(NAVIGATION_TYPE_NAME).not() && it.containsTypeName(
+                    APP_COMPONENT_CONTEXT_TYPE_NAME
+                ).not()
+            }
+            .map { it.type.toTypeName() }
 
         val returnType = ClassName(
             packageName = factoryComponentPackageName,
             simpleNames = listOf(baseName),
         )
-
-        val params = if (argsType != null) {
-            "parameters = { parametersOf(componentContext, navigation, args) }"
-        } else {
-            "parameters = { parametersOf(componentContext, navigation) }"
+        val paramNameAndType = argsTypes.mapIndexed { index, arg ->
+            val paramName =
+                unInjectedConstructorParams.find { it.type.toTypeName() == arg }?.name?.asString()
+                    ?: "param$index"
+            paramName to arg
         }
+        val paramNames = paramNameAndType.joinToString { it.first }
+
+        val params = when {
+            argsTypes.isNotEmpty() && navigationType != null -> "parameters = { parametersOf(componentContext, navigation, $paramNames) }"
+            argsTypes.isNotEmpty() -> "parameters = { parametersOf(componentContext, $paramNames) }"
+            navigationType != null -> "parameters = { parametersOf(componentContext, navigation) }"
+            else -> "parameters = { parametersOf(componentContext) }"
+        }
+
         val createComponentFunSpec = FunSpec.builder("createComponent")
             .addParameter(name = "componentContext", appComponentContextType)
-            .addParameter(name = "navigation", navigationType)
 
-        if (argsType != null) {
-            createComponentFunSpec.addParameter(name = "args", argsType)
+        if (navigationType != null) {
+            createComponentFunSpec.addParameter(name = "navigation", navigationType)
+        }
+
+        if (paramNameAndType.isNotEmpty()) {
+            paramNameAndType.forEach { (name, type) ->
+                createComponentFunSpec.addParameter(
+                    name = name, type
+                )
+            }
         }
 
         return createComponentFunSpec
             .returns(returnType)
             .addStatement(
                 "return get(\n" +
-                    "qualifier = null,\n" +
-                    "$params,\n" +
-                    ")",
+                        "qualifier = null,\n" +
+                        "$params,\n" +
+                        ")",
             )
             .build()
     }
 
     private fun List<KSValueParameter>.findTypeByName(name: String): TypeName? = this
-        .find { it.type.toTypeName().toString().contains(name) }
+        .find { it.containsTypeName(name) }
         ?.type?.toTypeName()
+
+    private fun KSValueParameter.containsTypeName(name: String): Boolean =
+        this.type.toTypeName().toString().contains(name)
 }

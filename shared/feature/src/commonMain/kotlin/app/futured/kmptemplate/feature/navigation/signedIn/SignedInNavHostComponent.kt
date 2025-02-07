@@ -2,11 +2,11 @@ package app.futured.kmptemplate.feature.navigation.signedIn
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
-import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponent
-import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostComponent
+import app.futured.factorygenerator.annotation.GenerateFactory
+import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponentFactory
+import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostComponentFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@GenerateFactory
 @Factory
 internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
@@ -36,17 +37,17 @@ internal class SignedInNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 is SignedInConfig.Home -> SignedInChild.Home(
-                    AppComponentFactory.createAppComponent<HomeNavHostComponent>(
-                        childContext = childCtx,
-                        config.initialStack,
+                    HomeNavHostComponentFactory.createComponent(
+                        componentContext = childCtx,
+                        initialStack = config.initialStack,
                     ),
                 )
 
                 is SignedInConfig.Profile -> SignedInChild.Profile(
-                    navHost = AppComponentFactory.createAppComponent<ProfileNavHostComponent>(
-                        childContext = childCtx,
-                        navigationToLogin,
-                        config.initialStack,
+                    navHost = ProfileNavHostComponentFactory.createComponent(
+                        componentContext = childCtx,
+                        toLogin = navigationToLogin,
+                        initialStack = config.initialStack,
                     ),
                 )
             }

@@ -3,12 +3,11 @@ package app.futured.kmptemplate.feature.ui.secondScreen
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
-import app.futured.kmptemplate.feature.ui.picker.FruitPickerComponent
+import app.futured.kmptemplate.feature.ui.picker.FruitPickerComponentFactory
 import app.futured.kmptemplate.feature.ui.picker.Picker
 import app.futured.kmptemplate.feature.ui.picker.PickerNavigation
-import app.futured.kmptemplate.feature.ui.picker.VegetablePickerComponent
+import app.futured.kmptemplate.feature.ui.picker.VegetablePickerComponentFactory
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
@@ -24,10 +23,9 @@ internal class SecondComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: SecondScreenNavigation,
 ) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
-        componentContext = componentContext,
-        defaultState = SecondViewState,
-    ),
-    SecondScreen, SecondScreenNavigation by navigation {
+    componentContext = componentContext,
+    defaultState = SecondViewState,
+), SecondScreen, SecondScreenNavigation by navigation {
 
     override val viewState: StateFlow<SecondViewState> = componentState
 
@@ -46,14 +44,14 @@ internal class SecondComponent(
         serializer = SecondScreen.PickerType.serializer(),
         childFactory = { type, childContext ->
             when (type) {
-                SecondScreen.PickerType.Fruit -> AppComponentFactory.createAppComponent<FruitPickerComponent>(
-                    childContext,
-                    pickerNavigation,
+                SecondScreen.PickerType.Fruit -> FruitPickerComponentFactory.createComponent(
+                    componentContext = childContext,
+                    navigation = pickerNavigation,
                 )
 
-                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createAppComponent<VegetablePickerComponent>(
-                    childContext,
-                    pickerNavigation,
+                SecondScreen.PickerType.Vegetable -> VegetablePickerComponentFactory.createComponent(
+                    componentContext = childContext,
+                    navigation = pickerNavigation,
                 )
             }
         },
