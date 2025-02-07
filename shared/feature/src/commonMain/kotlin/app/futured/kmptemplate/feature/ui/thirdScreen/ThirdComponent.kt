@@ -18,11 +18,11 @@ internal class ThirdComponent(
 ) : ScreenComponent<ThirdViewState, Nothing, ThirdScreenNavigation>(
     componentContext = componentContext,
     defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
-), ThirdScreen, ThirdScreenNavigation by navigation {
+), ThirdScreen, ThirdScreenNavigation by navigation, ThirdScreen.Actions {
 
     override val viewState: StateFlow<ThirdViewState> = componentState
 
-    override val actions: ThirdScreen.Actions = object : ThirdScreen.Actions {
-        override fun onBack() = pop()
-    }
+    override val actions: ThirdScreen.Actions = this
+
+    override fun onBack() = pop()
 }

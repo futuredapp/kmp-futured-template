@@ -15,11 +15,10 @@ internal class LoginComponent(
 ) : ScreenComponent<LoginViewState, Nothing, LoginScreenNavigation>(
     componentContext = componentContext,
     defaultState = LoginViewState,
-), LoginScreen, LoginScreenNavigation by navigation {
+), LoginScreen, LoginScreenNavigation by navigation, LoginScreen.Actions {
 
-    override val actions: LoginScreen.Actions = object : LoginScreen.Actions {
-        override fun onLoginClick() = toSignedIn()
-    }
-
+    override val actions: LoginScreen.Actions = this
     override val viewState: StateFlow<LoginViewState> = componentState.asStateFlow()
+
+    override fun onLoginClick() = toSignedIn()
 }

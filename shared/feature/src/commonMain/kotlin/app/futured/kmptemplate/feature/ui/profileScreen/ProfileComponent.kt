@@ -15,12 +15,10 @@ internal class ProfileComponent(
 ) : ScreenComponent<ProfileViewState, Nothing, ProfileScreenNavigation>(
     componentContext,
     ProfileViewState,
-), ProfileScreen, ProfileScreenNavigation by navigation {
+), ProfileScreen, ProfileScreenNavigation by navigation, ProfileScreen.Actions {
 
-    override val actions: ProfileScreen.Actions = object : ProfileScreen.Actions {
-        override fun onLogout() = toLogin()
-        override fun onThird() = navigateToThird("hello third from profile")
-    }
-
+    override val actions: ProfileScreen.Actions = this
     override val viewState: StateFlow<ProfileViewState> = componentState
+    override fun onLogout() = toLogin()
+    override fun onThird() = navigateToThird("hello third from profile")
 }

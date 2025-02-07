@@ -20,14 +20,11 @@ internal class FruitPickerComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: PickerNavigation,
 ) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()),
-    Picker {
-
-    override val actions: Picker.Actions = object : Picker.Actions {
-        override fun onPick(item: String) = navigation.dismiss(item)
-        override fun onDismiss() = navigation.dismiss(null)
-    }
+    Picker, Picker.Actions {
 
     override val viewState: StateFlow<PickerState> = componentState.asStateFlow()
+
+    override val actions: Picker.Actions = this
 
     init {
         doOnCreate {
@@ -47,4 +44,8 @@ internal class FruitPickerComponent(
             }
         }
     }
+
+    override fun onPick(item: String) = navigation.dismiss(item)
+
+    override fun onDismiss() = navigation.dismiss(null)
 }

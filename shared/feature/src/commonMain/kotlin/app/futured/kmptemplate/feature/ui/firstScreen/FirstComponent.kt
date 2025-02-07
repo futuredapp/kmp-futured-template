@@ -26,7 +26,7 @@ internal class FirstComponent(
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
     componentContext = componentContext,
     defaultState = FirstViewState(),
-), FirstScreen, FirstScreenNavigation by navigation {
+), FirstScreen, FirstScreenNavigation by navigation, FirstScreen.Actions {
 
     companion object {
         private const val COUNTER_ALERT = 10L
@@ -35,10 +35,7 @@ internal class FirstComponent(
     private val logger = Logger.withTag("FirstComponent")
 
     override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
-
-    override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
-        override fun onNext() = navigateToSecond()
-    }
+    override val actions: FirstScreen.Actions = this
 
     init {
         doOnCreate {
@@ -46,6 +43,8 @@ internal class FirstComponent(
             observeCounter()
         }
     }
+
+    override fun onNext() = navigateToSecond()
 
     private fun syncData() = syncDataUseCase.execute {
         onError { error ->
