@@ -2,10 +2,12 @@ package app.futured.factorygenerator.processor
 
 import app.futured.factorygenerator.annotation.GenerateFactory
 import com.google.devtools.ksp.processing.CodeGenerator
+import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import kotlin.math.log
 import kotlin.reflect.KClass
 
 class ComponentFactoryProcessor(
@@ -19,7 +21,7 @@ class ComponentFactoryProcessor(
         return emptyList()
     }
 
-    private fun generateComponent(component: KSClassDeclaration) =
+    private fun generateComponent(component: KSClassDeclaration, logger: KSPLogger) =
         PoetFactoryComponentGenerator.generateFactory(component, codeGenerator)
 
     private fun Resolver.findAnnotationsForClass(kClass: KClass<*>): Sequence<KSClassDeclaration> =
