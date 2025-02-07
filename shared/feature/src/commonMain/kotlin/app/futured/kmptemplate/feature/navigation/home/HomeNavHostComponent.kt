@@ -23,13 +23,6 @@ internal class HomeNavHostComponent(
 
     private val homeNavigator: HomeNavigation = HomeNavigator()
 
-    override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
-        override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) =
-            homeNavigator.navigator.navigate { newStack.map { it.configuration } }
-
-        override fun pop() = homeNavigator.navigator.pop()
-    }
-
     override val stack: StateFlow<ChildStack<HomeConfig, HomeChild>> = childStack(
         source = homeNavigator.navigator,
         serializer = HomeConfig.serializer(),
@@ -43,5 +36,12 @@ internal class HomeNavHostComponent(
                 is HomeConfig.Third -> HomeChild.Third(ThirdComponentFactory.createComponent(childCtx, homeNavigator, config.args))
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
+
+    override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
+        override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) =
+            homeNavigator.navigator.navigate { newStack.map { it.configuration } }
+
+        override fun pop() = homeNavigator.navigator.pop()
+    }
 }

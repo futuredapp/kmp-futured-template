@@ -21,7 +21,7 @@ internal class ProfileNavHostComponent(
     @InjectedParam private val initialStack: List<ProfileConfig>,
 ) : AppComponent<Unit, Nothing>(componentContext, Unit), ProfileNavHost {
 
-    private val navigator = ProfileNavHostNavigator(toLogin)
+    private val navigator: ProfileNavHostNavigation = ProfileNavHostNavigator(toLogin)
 
     override val stack: StateFlow<ChildStack<ProfileConfig, ProfileChild>> = childStack(
         source = navigator.stackNavigator,
@@ -34,12 +34,12 @@ internal class ProfileNavHostComponent(
                 is ProfileConfig.Third -> ProfileChild.Third(ThirdComponentFactory.createComponent(childCtx, navigator, config.args))
             }
         },
-    ).asStateFlow(componentCoroutineScope)
+    ).asStateFlow()
 
     override val actions: ProfileNavHost.Actions = object : ProfileNavHost.Actions {
+        override fun navigate(newStack: List<Child<ProfileConfig, ProfileChild>>) =
+            navigator.stackNavigator.navigate { newStack.map { it.configuration } }
+
         override fun pop() = navigator.stackNavigator.pop()
-        override fun navigate(newStack: List<Child<ProfileConfig, ProfileChild>>) = navigator.stackNavigator.navigate {
-            newStack.map { it.configuration }
-        }
     }
 }

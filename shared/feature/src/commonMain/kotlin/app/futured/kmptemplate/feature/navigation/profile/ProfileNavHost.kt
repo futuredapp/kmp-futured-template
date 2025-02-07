@@ -1,6 +1,5 @@
 package app.futured.kmptemplate.feature.navigation.profile
 
-import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature.ui.profileScreen.ProfileScreen
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreen
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
