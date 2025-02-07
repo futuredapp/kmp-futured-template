@@ -166,6 +166,10 @@ During local development, the build flavor can be specified in `gradle.propertie
 buildkonfig.flavor=dev
 ```
 
+#### Charles Proxy
+
+[Charles Proxy](https://www.charlesproxy.com/documentation/welcome/) is enabled for debug and enterprise builds.
+
 #### iOS
 
 On iOS, we utilize .xcconfig [Build Configuration](https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig) files,
