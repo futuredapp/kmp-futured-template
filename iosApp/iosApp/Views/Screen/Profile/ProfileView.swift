@@ -12,6 +12,7 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
         VStack(spacing: 10) {
             Text(Localizable.login_screen_title.localized)
             Button(Localizable.generic_sign_out.localized, action: viewModel.onLogoutClick)
+            Button("Navigate to third", action: viewModel.onThirdClick)
         }
     }
 }
