@@ -20,8 +20,8 @@ object ProjectSettings {
 
         const val ApplicationId = "app.futured.kmptemplate.android"
 
-        val VersionCode = System.getenv("BUILD_NUMBER")?.toInt() ?: 1
-        val VersionName = System.getenv("VERSION_NAME") ?: "1.0.0"
+        val VersionCode = System.getenv("ANDROID_BUILD_NUMBER")?.toInt() ?: 1
+        val VersionName = System.getenv("ANDROID_VERSION_NAME") ?: "1.0.0"
 
         val JavaCompatibility = JavaVersion.VERSION_11
         val KotlinJvmTarget = JvmTarget.JVM_11
@@ -41,9 +41,9 @@ object ProjectSettings {
             }
 
             object Release {
-                val StorePassword = System.getenv("RELEASE_KEYSTORE_PASS") ?: ""
-                val KeyAlias = System.getenv("RELEASE_KEY_ALIAS") ?: ""
-                val KeyPassword = System.getenv("RELEASE_KEY_PASS") ?: ""
+                val StorePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD").orEmpty()
+                val KeyAlias = System.getenv("ANDROID_KEY_ALIAS").orEmpty()
+                val KeyPassword = System.getenv("ANDROID_KEY_PASSWORD").orEmpty()
             }
         }
     }
