@@ -1,0 +1,31 @@
+site_name: Futured KMP Template documentation
+site_url: https://sitename.example
+repo_url: https://github.com/futuredapp/kmp-futured-template/
+repo_name: KMP Template
+
+# Theme
+theme:
+  name: material
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  palette:
+    primary: black
+    accent: deep orange
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+# Navigation
+nav:
+  - Home:
+      - Home: index.md
+      - Getting Started: home/home.md
+      - Setup: home/setup.md
+  - About: about/about.md
+
+# Plugins
+plugins:
+  - search
