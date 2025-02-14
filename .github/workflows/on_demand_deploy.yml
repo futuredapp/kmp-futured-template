@@ -1,22 +1,37 @@
-name: Publish QA snapshot
+name: Deploy On-Demand QA Snapshot
 
 on:
-  push:
-    branches:
-      - develop
-
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
+  workflow_dispatch:
+    inputs:
+      DEPLOY_IOS:
+        description: 'Deploy iOS app to internal TestFlight'
+        required: true
+        type: boolean
+        default: true
+      DEPLOY_ANDROID:
+        description: 'Deploy Android app to Firebase'
+        required: true
+        type: boolean
+        default: true
+      VERSION_NAME:
+        description: 'Version name (Android)'
+        required: true
+        type: string
+        default: '1.X.X-snapshot'
+      APP_DISTRIBUTION_GROUPS:
+        description: 'App distribution group IDs (Firebase, comma-separated)'
+        required: true
+        type: string
+        default: futured-devs
+      RELEASE_NOTES:
+        description: 'Release notes (Firebase)'
+        required: true
+        type: string
 
 jobs:
-  detect-changes:
-    uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@main
-
-  deploy_ios_beta:
+  deploy_ios:
     name: Deploy iOS Beta
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
+    if: ${{ inputs.DEPLOY_IOS }}
     uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-build.yml@main
     secrets:
       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
@@ -24,23 +39,22 @@ jobs:
       APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
       APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
 
-  deploy_android_enterprise:
-    name: Deploy Android Enterprise
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
+  deploy_android:
+    name: Deploy Android to Firebase
+    if: ${{ inputs.DEPLOY_ANDROID }}
     uses: futuredapp/.github/.github/workflows/android-cloud-release-firebaseAppDistribution.yml@main
     with:
-      # `testReleaseUnitTest` covers androidApp module and all shared modules all at once. No need to call `testEnterpriseUnitTest` and `testReleaseUnitTest`.
+      VERSION_NAME: ${{ inputs.VERSION_NAME }}
       TEST_GRADLE_TASKS: testReleaseUnitTest
       BUNDLE_GRADLE_TASK: bundleEnterprise
       UPLOAD_GRADLE_TASK: appDistributionUploadEnterprise
       SIGNING_KEYSTORE_PATH: androidApp/keystore/debug.keystore
-      # TODO PROJECT-SETUP Verify app distribution groups
-      APP_DISTRIBUTION_GROUPS: futured-devs, futured-qa
+      APP_DISTRIBUTION_GROUPS: ${{ inputs.APP_DISTRIBUTION_GROUPS }}
       # TODO PROJECT-SETUP verify product flavor configuration
       # Specifies API environment for KMP build.
       # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
-      KMP_FLAVOR: dev
+      KMP_FLAVOR: 'dev'
+      RELEASE_NOTES: ${{ inputs.RELEASE_NOTES }}
     secrets:
       # TODO PROJECT-SETUP Set up `APP_DISTRIBUTION_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
       SIGNING_KEYSTORE_PASSWORD: android
