@@ -1,0 +1,63 @@
+name: Deploy On-Demand QA Snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      DEPLOY_IOS:
+        description: 'Deploy iOS app to internal TestFlight'
+        required: true
+        type: boolean
+        default: true
+      DEPLOY_ANDROID:
+        description: 'Deploy Android app to Firebase'
+        required: true
+        type: boolean
+        default: true
+      VERSION_NAME:
+        description: 'Version name (Android)'
+        required: true
+        type: string
+        default: '1.X.X-snapshot'
+      APP_DISTRIBUTION_GROUPS:
+        description: 'App distribution group IDs (Firebase, comma-separated)'
+        required: true
+        type: string
+        default: futured-devs
+      RELEASE_NOTES:
+        description: 'Release notes (Firebase)'
+        required: true
+        type: string
+
+jobs:
+  deploy_ios:
+    name: Deploy iOS Beta
+    if: ${{ inputs.DEPLOY_IOS }}
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-build.yml@main
+    secrets:
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+      APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+
+  deploy_android:
+    name: Deploy Android to Firebase
+    if: ${{ inputs.DEPLOY_ANDROID }}
+    uses: futuredapp/.github/.github/workflows/android-cloud-release-firebaseAppDistribution.yml@main
+    with:
+      VERSION_NAME: ${{ inputs.VERSION_NAME }}
+      TEST_GRADLE_TASKS: testReleaseUnitTest
+      BUNDLE_GRADLE_TASK: bundleEnterprise
+      UPLOAD_GRADLE_TASK: appDistributionUploadEnterprise
+      SIGNING_KEYSTORE_PATH: androidApp/keystore/debug.keystore
+      APP_DISTRIBUTION_GROUPS: ${{ inputs.APP_DISTRIBUTION_GROUPS }}
+      # TODO PROJECT-SETUP verify product flavor configuration
+      # Specifies API environment for KMP build.
+      # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
+      KMP_FLAVOR: 'dev'
+      RELEASE_NOTES: ${{ inputs.RELEASE_NOTES }}
+    secrets:
+      # TODO PROJECT-SETUP Set up `APP_DISTRIBUTION_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
+      SIGNING_KEYSTORE_PASSWORD: android
+      SIGNING_KEY_ALIAS: androiddebugkey
+      SIGNING_KEY_PASSWORD: android
+      APP_DISTRIBUTION_SERVICE_ACCOUNT: ${{ secrets.APP_DISTRIBUTION_SERVICE_ACCOUNT }}
