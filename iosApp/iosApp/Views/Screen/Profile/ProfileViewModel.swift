@@ -1,4 +1,4 @@
-import shared
+import KMP
 import SwiftUI
 
 protocol ProfileViewModelProtocol: DynamicProperty {
