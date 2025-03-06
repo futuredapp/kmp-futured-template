@@ -8,11 +8,11 @@ build:
 ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), debug)
 	@echo "Building debug framework"
 	cd ../../.. && \
-	./gradlew clean assembleAndCopyDebugSwiftPackage -P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)
+	./gradlew assembleAndCopyDebugSwiftPackage -P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)
 else ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), release)
 	@echo "Building release framework"
 	cd ../../.. && \
-	./gradlew clean assembleAndCopyReleaseSwiftPackage -P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)
+	./gradlew assembleAndCopyReleaseSwiftPackage -P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)
 else
 	@echo "Unknown or no build type specified. Please provide 'KMP_FRAMEWORK_BUILD_TYPE' env variable: [debug|release]"
 	exit 1
