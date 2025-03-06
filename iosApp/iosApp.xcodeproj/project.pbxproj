@@ -370,6 +370,25 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		11B83C242D79CAD0007D03F7 /* KMP Package */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 11B83C252D79CAD0007D03F7 /* Build configuration list for PBXLegacyTarget "KMP Package" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "${PROJECT_DIR}/shared/KMP";
+			dependencies = (
+			);
+			name = "KMP Package";
+			packageProductDependencies = (
+			);
+			passBuildSettingsInEnvironment = 1;
+			productName = "KMP Package";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		7555FF7A242A565900829871 /* iosApp */ = {
 			isa = PBXNativeTarget;
@@ -437,6 +456,9 @@
 				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = orgName;
 				TargetAttributes = {
+					11B83C242D79CAD0007D03F7 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					7555FF7A242A565900829871 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -469,6 +491,7 @@
 				7555FF7A242A565900829871 /* iosApp */,
 				F4820AAB2B0B4D6E00B13080 /* iosAppTests */,
 				F4820ABC2B0B528100B13080 /* iosAppUITests */,
+				11B83C242D79CAD0007D03F7 /* KMP Package */,
 			);
 		};
 /* End PBXProject section */
@@ -590,6 +613,57 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		11B83C262D79CAD0007D03F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 119C5F4A2AEBC40200CB58E3 /* Debug.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		11B83C272D79CAD0007D03F7 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC7FFCC52B691F0400A70102 /* Beta.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Beta;
+		};
+		11B83C282D79CAD0007D03F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		7555FFA3242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1018,6 +1092,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		11B83C252D79CAD0007D03F7 /* Build configuration list for PBXLegacyTarget "KMP Package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11B83C262D79CAD0007D03F7 /* Debug */,
+				11B83C272D79CAD0007D03F7 /* Beta */,
+				11B83C282D79CAD0007D03F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7555FF76242A565900829871 /* Build configuration list for PBXProject "iosApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
