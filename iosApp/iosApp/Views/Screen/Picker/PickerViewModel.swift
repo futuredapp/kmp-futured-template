@@ -1,4 +1,4 @@
-import shared
+import KMP
 import SwiftUI
 
 struct PickerItem: Identifiable {
@@ -17,7 +17,7 @@ struct PickerViewModel {
     @StateObject @KotlinStateFlow private var viewState: PickerState
     private let actions: PickerActions
 
-    init(_ screen: shared.Picker) {
+    init(_ screen: KMP.Picker) {
         _viewState = .init(screen.viewState)
         actions = screen.actions
     }

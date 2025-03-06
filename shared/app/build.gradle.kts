@@ -7,6 +7,8 @@ import co.touchlab.skie.configuration.SealedInterop
 import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     id(libs.plugins.com.android.library.get().pluginId)
@@ -32,6 +34,8 @@ kotlin {
         }
     }
 
+    val xcf = XCFramework(ProjectSettings.IOS.FrameworkName)
+
     iosTargets {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
@@ -47,6 +51,8 @@ kotlin {
             export(libs.essenty)
             export(libs.kotlinx.immutableCollections)
             export(libs.moko.resources)
+
+            xcf.add(this)
         }
     }
 
@@ -130,4 +136,36 @@ multiplatformResources {
     resourcesVisibility.set(MRVisibility.Internal)
     resourcesClassName.set("MR")
     iosBaseLocalizationRegion.set(ProjectSettings.IOS.MokoBaseLocalizationRegion)
+}
+
+private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildType) {
+    group = ProjectSettings.Gradle.TaskGroup
+
+    val frameworkName = ProjectSettings.IOS.FrameworkName
+    val xcfDirectory = project.layout.buildDirectory.dir("XCFrameworks/${buildType.getName()}")
+    val iosDirectory = rootProject.layout.projectDirectory.dir("iosApp/shared/KMP/Sources")
+
+    doFirst {
+        delete(iosDirectory)
+    }
+
+    // Produces assembleKMPDebugXCFramework or assembleKMPReleaseXCFramework depending on input build type
+    val xcfTask = buildString {
+        append("assemble")
+        append(frameworkName.replaceFirstChar { it.titlecase() })
+        append(buildType.getName().replaceFirstChar { it.titlecase() })
+        append("XCFramework")
+    }
+
+    dependsOn(xcfTask)
+    from(xcfDirectory)
+    into(iosDirectory)
+}
+
+tasks.register<Copy>("assembleAndCopyDebugSwiftPackage") {
+    assembleAndCopySwiftPackageForBuildType(NativeBuildType.DEBUG)
+}
+
+tasks.register<Copy>("assembleAndCopyReleaseSwiftPackage") {
+    assembleAndCopySwiftPackageForBuildType(NativeBuildType.RELEASE)
 }
