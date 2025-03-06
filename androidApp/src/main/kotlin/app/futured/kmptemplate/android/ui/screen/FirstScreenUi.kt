@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -82,6 +83,16 @@ private fun Content(
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
                 Text(text = kmpStringResource(MR.strings.first_screen_button))
+            }
+            viewState.randomPerson?.let { person ->
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = person.localized(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }

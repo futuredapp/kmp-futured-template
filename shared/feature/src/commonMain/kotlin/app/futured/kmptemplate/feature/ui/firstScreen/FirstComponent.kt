@@ -47,6 +47,9 @@ internal class FirstComponent(
     }
 
     private fun syncData() = syncDataUseCase.execute {
+        onSuccess { person ->
+            componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format(person.name.orEmpty())) }
+        }
         onError { error ->
             logger.e(error) { error.message.toString() }
         }

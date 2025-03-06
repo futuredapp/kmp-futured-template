@@ -21,6 +21,7 @@
     <string name="first_screen_counter">Counter: %1$s</string>
     <string name="first_screen_counter_alert">Counter reached %1$s 🎉</string>
     <string name="first_screen_button">Continue</string>
+    <string name="first_screen_random_person">Random Star Wars character:\n%1$s</string>
 
     <!-- Second screen -->
     <string name="second_screen_title">Second screen</string>
