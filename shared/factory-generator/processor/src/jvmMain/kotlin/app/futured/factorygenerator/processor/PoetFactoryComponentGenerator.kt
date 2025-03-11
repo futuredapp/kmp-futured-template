@@ -53,7 +53,7 @@ object PoetFactoryComponentGenerator {
     ) {
         // Component name without package e.g. FirstComponent
         val baseName: String = factoryComponent.qualifiedName?.asString()?.substringAfterLast('.')
-            ?: error("Unable to get base name")
+            ?: error("Unable to get base name, component qualified name: ${factoryComponent.qualifiedName?.asString()}")
 
         val factoryComponentPackageName = factoryComponent.packageName.asString()
         val factoryClassName = ClassName(
