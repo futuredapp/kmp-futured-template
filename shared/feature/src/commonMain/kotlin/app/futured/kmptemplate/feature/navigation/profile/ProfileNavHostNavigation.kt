@@ -14,11 +14,11 @@ internal interface ProfileNavHostNavigation : ProfileScreenNavigation, ThirdScre
 }
 
 internal class ProfileNavHostNavigator(
-    private val navigateToLogin: () -> Unit,
+    private val onNavigateToLogin: () -> Unit,
 ) : ProfileNavHostNavigation {
     override val stackNavigator = StackNavigation<ProfileConfig>()
 
-    override fun ProfileScreen.toLogin() = navigateToLogin()
+    override fun ProfileScreen.navigateToLogin() = onNavigateToLogin()
 
     override fun ProfileScreen.navigateToThird(id: String) {
         stackNavigator.push(ProfileConfig.Third(ThirdScreenArgs(id)))
