@@ -16,7 +16,7 @@ internal class ProfileComponent(
 ), ProfileScreen, ProfileScreenNavigation by navigation {
 
     override val actions: ProfileScreen.Actions = object : ProfileScreen.Actions {
-        override fun onLogout() = toLogin()
+        override fun onLogout() = navigateToLogin()
         override fun onThird() = navigateToThird("hello third from profile")
     }
 
