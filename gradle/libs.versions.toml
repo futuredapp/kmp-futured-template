@@ -168,8 +168,7 @@ firebase-distribution = { id = "com.google.firebase.appdistribution", version.re
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
-koin-annotations-plugin = { id = "koin-annotations" }
-component-factory-annotations-plugin = { id = "component-factory-annotations" }
+annotations-processor-plugin = { id = "annotations-processor" }
 
 [bundles]
 compose = [
