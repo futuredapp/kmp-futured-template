@@ -23,7 +23,7 @@ interface TEMPLATEScreen {
 }
 
 internal interface TEMPLATEScreenNavigation : NavigationActions {
-    fun pop()
+    fun TEMPLATEComponent.pop()
 }
 
 data object TEMPLATEViewState
@@ -32,11 +32,14 @@ data object TEMPLATEViewState
 internal class TEMPLATEComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: TEMPLATEScreenNavigation,
-) : ScreenComponent<TEMPLATEViewState, Nothing, TEMPLATEScreenNavigation>(componentContext, TEMPLATEViewState), TEMPLATEScreen,
+) : ScreenComponent<TEMPLATEViewState, Nothing, TEMPLATEScreenNavigation>(
+    componentContext = componentContext,
+    defaultState = TEMPLATEViewState,
+), TEMPLATEScreen, TEMPLATEScreenNavigation by navigation,
     TEMPLATEScreen.Actions {
 
     override val actions: TEMPLATEScreen.Actions = this
     override val viewState: StateFlow<TEMPLATEViewState> = componentState.asStateFlow()
 
-    override fun onBack() = navigation.pop()
+    override fun onBack() = pop()
 }
