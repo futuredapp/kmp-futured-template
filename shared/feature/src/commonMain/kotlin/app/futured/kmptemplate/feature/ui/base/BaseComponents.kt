@@ -4,7 +4,6 @@ import app.futured.arkitekt.decompose.navigation.NavigationActions
 import app.futured.arkitekt.decompose.navigation.NavigationActionsProducer
 import app.futured.arkitekt.decompose.presentation.BaseComponent
 
-
 /**
  * Base class for application components - usually nav host components that are not screens and do not need to implement
  * navigation actions.
