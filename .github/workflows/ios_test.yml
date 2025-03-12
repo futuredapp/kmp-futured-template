@@ -1,7 +1,0 @@
-name: iOS Test
-
-on: [pull_request]
-
-jobs:
-  test:
-    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@main

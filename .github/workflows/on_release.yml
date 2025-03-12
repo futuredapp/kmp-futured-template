@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  release_ios:
+    name: iOS Release
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-release.yml@main
+    secrets:
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_CUSTOMER || secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+      APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID_CUSTOMER || secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID_CUSTOMER || secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+
+  release_android:
+    name: Android Release
+    uses: futuredapp/.github/.github/workflows/android-cloud-release-googlePlay.yml@main
+    with:
+      VERSION_NAME: ${{ github.event.release.tag_name }}
+      BUNDLE_GRADLE_TASK: bundleRelease
+      SIGNING_KEYSTORE_PATH: androidApp/keystore/release.keystore
+      # TODO PROJECT-SETUP This has to be applicationId
+      GOOGLE_PLAY_APPLICATION_ID: app.futured.kmptemplate.android
+      GOOGLE_PLAY_WHATSNEW_DIRECTORY: androidApp/whatsnew
+      # TODO PROJECT-SETUP verify product flavor configuration
+      # Specifies API environment for KMP build.
+      # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
+      KMP_FLAVOR: 'prod'
+    secrets:
+      # TODO PROJECT-SETUP Set up `ANDROID_RELEASE_KEYSTORE_PASSWORD` secret for this GitHub repository
+      # TODO PROJECT-SETUP Set up `ANDROID_RELEASE_KEY_PASSWORD` secret for this GitHub repository
+      # TODO PROJECT-SETUP Set up `ANDROID_RELEASE_KEY_ALIAS` secret for this GitHub repository
+      # TODO PROJECT-SETUP Set up `GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
+      SIGNING_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+      SIGNING_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+      GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_PUBLISH_SERVICE_ACCOUNT }}
