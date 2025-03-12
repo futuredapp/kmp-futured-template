@@ -33,9 +33,12 @@ internal class TEMPLATEComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: TEMPLATEScreenNavigation,
 ) : ScreenComponent<TEMPLATEViewState, Nothing, TEMPLATEScreenNavigation>(
-    componentContext = componentContext,
-    defaultState = TEMPLATEViewState,
-), TEMPLATEScreen, TEMPLATEScreenNavigation by navigation, TEMPLATEScreen.Actions {
+        componentContext = componentContext,
+        defaultState = TEMPLATEViewState,
+    ),
+    TEMPLATEScreen,
+    TEMPLATEScreenNavigation by navigation,
+    TEMPLATEScreen.Actions {
 
     override val actions: TEMPLATEScreen.Actions = this
     override val viewState: StateFlow<TEMPLATEViewState> = componentState.asStateFlow()
