@@ -32,6 +32,8 @@ renameGradleSubproject("shared/network/rest", appPackageName)
 renameGradleSubproject("shared/persistence", appPackageName)
 renameGradleSubproject("shared/platform", appPackageName)
 renameGradleSubproject("shared/resources", appPackageName)
+//"factory-generator/annotation", TODO ?
+//"factory-generator/processor", TODO ?
 
 findAndReplaceInFileTree(
     parent = Path.of("shared/arkitekt-decompose"),

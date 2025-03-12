@@ -3,6 +3,7 @@ import SwiftUI
 
 protocol ProfileViewModelProtocol: DynamicProperty {
     func onLogoutClick()
+    func onThirdClick()
 }
 
 struct ProfileViewModel {
@@ -16,5 +17,8 @@ struct ProfileViewModel {
 extension ProfileViewModel: ProfileViewModelProtocol {
     func onLogoutClick() {
         actions.onLogout()
+    }
+    func onThirdClick() {
+        actions.onThird()
     }
 }

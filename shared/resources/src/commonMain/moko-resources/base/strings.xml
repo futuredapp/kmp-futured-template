@@ -44,4 +44,5 @@
 
     <!-- Profile screen -->
     <string name="profile_screen_title">Profile</string>
+    <string name="profile_navigate_to_third">Navigate to third</string>
 </resources>

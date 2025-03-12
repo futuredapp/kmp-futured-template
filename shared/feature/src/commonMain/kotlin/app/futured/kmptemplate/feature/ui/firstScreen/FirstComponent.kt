@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.firstScreen
 
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
 import app.futured.kmptemplate.feature.domain.SyncDataUseCase
@@ -16,16 +17,19 @@ import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds
 
 @Factory
+@GenerateFactory
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: FirstScreenNavigation,
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
-    componentContext = componentContext,
-    defaultState = FirstViewState(),
-),
-    FirstScreen {
+        componentContext = componentContext,
+        defaultState = FirstViewState(),
+    ),
+    FirstScreen,
+    FirstScreenNavigation by navigation,
+    FirstScreen.Actions {
 
     companion object {
         private const val COUNTER_ALERT = 10L
@@ -34,10 +38,7 @@ internal class FirstComponent(
     private val logger = Logger.withTag("FirstComponent")
 
     override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
-
-    override val actions: FirstScreen.Actions = object : FirstScreen.Actions {
-        override fun onNext() = navigation.toSecond()
-    }
+    override val actions: FirstScreen.Actions = this
 
     init {
         doOnCreate {
@@ -45,6 +46,8 @@ internal class FirstComponent(
             observeCounter()
         }
     }
+
+    override fun onNext() = navigateToSecond()
 
     private fun syncData() = syncDataUseCase.execute {
         onSuccess { person ->
