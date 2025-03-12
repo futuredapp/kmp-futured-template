@@ -1,15 +1,12 @@
 package app.futured.kmptemplate.feature.navigation.home
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
-import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponent
-import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenNavigation
-import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponent
-import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenNavigation
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponent
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponentFactory
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponentFactory
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponentFactory
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.childStack
@@ -19,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@GenerateFactory
 @Factory
 internal class HomeNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
@@ -35,27 +33,9 @@ internal class HomeNavHostComponent(
         handleBackButton = true,
         childFactory = { config, childCtx ->
             when (config) {
-                HomeConfig.First -> HomeChild.First(
-                    AppComponentFactory.createScreenComponent<FirstComponent, FirstScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = homeNavigator,
-                    ),
-                )
-
-                HomeConfig.Second -> HomeChild.Second(
-                    AppComponentFactory.createScreenComponent<SecondComponent, SecondScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = homeNavigator,
-                    ),
-                )
-
-                is HomeConfig.Third -> HomeChild.Third(
-                    AppComponentFactory.createScreenComponent<ThirdComponent, ThirdScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = homeNavigator,
-                        config.args,
-                    ),
-                )
+                HomeConfig.First -> HomeChild.First(FirstComponentFactory.createComponent(childCtx, homeNavigator))
+                HomeConfig.Second -> HomeChild.Second(SecondComponentFactory.createComponent(childCtx, homeNavigator))
+                is HomeConfig.Third -> HomeChild.Third(ThirdComponentFactory.createComponent(childCtx, homeNavigator, config.args))
             }
         },
     ).asStateFlow()

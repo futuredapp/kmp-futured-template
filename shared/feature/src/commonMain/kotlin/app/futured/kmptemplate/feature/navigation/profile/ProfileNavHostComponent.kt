@@ -1,13 +1,11 @@
 package app.futured.kmptemplate.feature.navigation.profile
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
-import app.futured.kmptemplate.feature.ui.profileScreen.ProfileComponent
-import app.futured.kmptemplate.feature.ui.profileScreen.ProfileScreenNavigation
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponent
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
+import app.futured.kmptemplate.feature.ui.profileScreen.ProfileComponentFactory
+import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponentFactory
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.childStack
@@ -17,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@GenerateFactory
 @Factory
 internal class ProfileNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
@@ -33,20 +32,8 @@ internal class ProfileNavHostComponent(
         handleBackButton = true,
         childFactory = { config, childCtx ->
             when (config) {
-                ProfileConfig.Profile -> ProfileChild.Profile(
-                    AppComponentFactory.createScreenComponent<ProfileComponent, ProfileScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = navigator,
-                    ),
-                )
-
-                is ProfileConfig.Third -> ProfileChild.Third(
-                    AppComponentFactory.createScreenComponent<ThirdComponent, ThirdScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = navigator,
-                        config.args,
-                    ),
-                )
+                ProfileConfig.Profile -> ProfileChild.Profile(ProfileComponentFactory.createComponent(childCtx, navigator))
+                is ProfileConfig.Third -> ProfileChild.Third(ThirdComponentFactory.createComponent(childCtx, navigator, config.args))
             }
         },
     ).asStateFlow()

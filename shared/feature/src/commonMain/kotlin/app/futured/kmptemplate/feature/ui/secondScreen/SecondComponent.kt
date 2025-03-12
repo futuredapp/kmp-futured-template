@@ -1,13 +1,13 @@
 package app.futured.kmptemplate.feature.ui.secondScreen
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
-import app.futured.kmptemplate.feature.ui.picker.FruitPickerComponent
+import app.futured.kmptemplate.feature.ui.picker.FruitPickerComponentFactory
 import app.futured.kmptemplate.feature.ui.picker.Picker
 import app.futured.kmptemplate.feature.ui.picker.PickerNavigation
-import app.futured.kmptemplate.feature.ui.picker.VegetablePickerComponent
+import app.futured.kmptemplate.feature.ui.picker.VegetablePickerComponentFactory
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
+@GenerateFactory
 @Factory
 internal class SecondComponent(
     @InjectedParam componentContext: AppComponentContext,
@@ -26,9 +27,11 @@ internal class SecondComponent(
         defaultState = SecondViewState,
     ),
     SecondScreen,
-    SecondScreenNavigation by navigation {
+    SecondScreenNavigation by navigation,
+    SecondScreen.Actions {
 
     override val viewState: StateFlow<SecondViewState> = componentState
+    override val actions: SecondScreen.Actions = this
 
     private val pickerNavigator = SlotNavigation<SecondScreen.PickerType>()
     private val pickerNavigation = PickerNavigation(
@@ -45,23 +48,24 @@ internal class SecondComponent(
         serializer = SecondScreen.PickerType.serializer(),
         childFactory = { type, childContext ->
             when (type) {
-                SecondScreen.PickerType.Fruit -> AppComponentFactory.createAppComponent<FruitPickerComponent>(
-                    childContext,
-                    pickerNavigation,
+                SecondScreen.PickerType.Fruit -> FruitPickerComponentFactory.createComponent(
+                    componentContext = childContext,
+                    navigation = pickerNavigation,
                 )
 
-                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createAppComponent<VegetablePickerComponent>(
-                    childContext,
-                    pickerNavigation,
+                SecondScreen.PickerType.Vegetable -> VegetablePickerComponentFactory.createComponent(
+                    componentContext = childContext,
+                    navigation = pickerNavigation,
                 )
             }
         },
     ).asStateFlow()
 
-    override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
-        override fun onBack() = pop()
-        override fun onPickVeggie() = pickerNavigator.activate(SecondScreen.PickerType.Vegetable)
-        override fun onPickFruit() = pickerNavigator.activate(SecondScreen.PickerType.Fruit)
-        override fun onPickerDismissed() = pickerNavigator.dismiss()
-    }
+    override fun onBack() = pop()
+
+    override fun onPickVeggie() = pickerNavigator.activate(SecondScreen.PickerType.Vegetable)
+
+    override fun onPickFruit() = pickerNavigator.activate(SecondScreen.PickerType.Fruit)
+
+    override fun onPickerDismissed() = pickerNavigator.dismiss()
 }

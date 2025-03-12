@@ -7,10 +7,14 @@ plugins {
     id(libs.plugins.com.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.koin.annotations.plugin.get().pluginId)
+    id(libs.plugins.annotations.processor.plugin.get().pluginId)
 
     alias(libs.plugins.apollo)
     alias(libs.plugins.buildkonfig)
+}
+
+annotations {
+    useKoin = true
 }
 
 kotlin {

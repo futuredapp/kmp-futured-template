@@ -3,13 +3,10 @@ package app.futured.kmptemplate.feature.navigation.root
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkResolver
-import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostComponent
+import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostComponentFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
-import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponent
-import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
-import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreenNavigation
+import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponentFactory
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.router.slot.ChildSlot
@@ -38,19 +35,18 @@ internal class RootNavHostComponent(
         handleBackButton = false,
         childFactory = { config, childCtx ->
             when (config) {
-                RootConfig.Login -> {
-                    val screen: LoginScreen = AppComponentFactory.createScreenComponent<LoginComponent, LoginScreenNavigation>(
-                        childContext = childCtx,
-                        navigation = rootNavigator,
-                    )
-                    RootChild.Login(screen = screen)
-                }
+                RootConfig.Login -> RootChild.Login(
+                    LoginComponentFactory.createComponent(
+                        childCtx,
+                        rootNavigator,
+                    ),
+                )
 
                 is RootConfig.SignedIn -> RootChild.SignedIn(
-                    navHost = AppComponentFactory.createAppComponent<SignedInNavHostComponent>(
-                        childContext = childCtx,
-                        { rootNavigator.slotNavigator.activate(RootConfig.Login) },
-                        config.initialConfig,
+                    navHost = SignedInNavHostComponentFactory.createComponent(
+                        componentContext = childCtx,
+                        navigationToLogin = { rootNavigator.slotNavigator.activate(RootConfig.Login) },
+                        initialConfig = config.initialConfig,
                     ),
                 )
             }

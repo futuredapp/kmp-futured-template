@@ -7,11 +7,16 @@ plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.kotlin.parcelize.get().pluginId)
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.koin.annotations.plugin.get().pluginId)
+    id(libs.plugins.annotations.processor.plugin.get().pluginId)
 
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.dokka)
+}
+
+annotations {
+    useKoin = true
+    useComponentFactory = true
 }
 
 dependencies {
@@ -47,6 +52,8 @@ kotlin {
                 implementation(projects.shared.persistence)
                 implementation(projects.shared.arkitektDecompose)
                 implementation(projects.shared.resources)
+                implementation(projects.shared.factoryGenerator.annotation)
+
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
                 implementation(libs.network.ktor.http)
