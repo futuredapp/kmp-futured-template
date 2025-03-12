@@ -35,8 +35,7 @@ internal class TEMPLATEComponent(
 ) : ScreenComponent<TEMPLATEViewState, Nothing, TEMPLATEScreenNavigation>(
     componentContext = componentContext,
     defaultState = TEMPLATEViewState,
-), TEMPLATEScreen, TEMPLATEScreenNavigation by navigation,
-    TEMPLATEScreen.Actions {
+), TEMPLATEScreen, TEMPLATEScreenNavigation by navigation, TEMPLATEScreen.Actions {
 
     override val actions: TEMPLATEScreen.Actions = this
     override val viewState: StateFlow<TEMPLATEViewState> = componentState.asStateFlow()
