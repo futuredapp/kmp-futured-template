@@ -8,5 +8,6 @@ interface ProfileScreen {
 
     interface Actions {
         fun onLogout()
+        fun onThird()
     }
 }

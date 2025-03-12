@@ -4,16 +4,15 @@ import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkResolver
 import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostComponent
-import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostNavigation
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponent
+import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreenNavigation
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.router.slot.ChildSlot
-import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.essenty.lifecycle.doOnCreate
@@ -27,36 +26,31 @@ internal class RootNavHostComponent(
     private val deepLinkResolver: DeepLinkResolver,
 ) : AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState), RootNavHost {
 
-    private val slotNavigator = SlotNavigation<RootConfig>()
+    private val rootNavigator: RootNavHostNavigation = RootNavHostNavigator()
     private var pendingDeepLink: DeepLinkDestination? = null
 
     private val logger = Logger.withTag("RootNavHostComponent")
 
     override val slot: StateFlow<ChildSlot<RootConfig, RootChild>> = childSlot(
-        source = slotNavigator,
+        source = rootNavigator.slotNavigator,
         serializer = RootConfig.serializer(),
         initialConfiguration = { null },
         handleBackButton = false,
         childFactory = { config, childCtx ->
             when (config) {
-                RootConfig.Login -> RootChild.Login(
-                    screen = AppComponentFactory.createComponent<LoginComponent>(
+                RootConfig.Login -> {
+                    val screen: LoginScreen = AppComponentFactory.createScreenComponent<LoginComponent, LoginScreenNavigation>(
                         childContext = childCtx,
-                        navigation = LoginScreenNavigation(
-                            toSignedIn = {
-                                slotNavigator.activate(RootConfig.SignedIn())
-                            },
-                        ),
-                    ),
-                )
+                        navigation = rootNavigator,
+                    )
+                    RootChild.Login(screen = screen)
+                }
 
                 is RootConfig.SignedIn -> RootChild.SignedIn(
-                    navHost = AppComponentFactory.createComponent<SignedInNavHostComponent>(
+                    navHost = AppComponentFactory.createAppComponent<SignedInNavHostComponent>(
                         childContext = childCtx,
+                        { rootNavigator.slotNavigator.activate(RootConfig.Login) },
                         config.initialConfig,
-                        SignedInNavHostNavigation(
-                            toLogin = { slotNavigator.activate(RootConfig.Login) },
-                        ),
                     ),
                 )
             }
@@ -66,7 +60,7 @@ internal class RootNavHostComponent(
     init {
         doOnCreate {
             if (!consumeDeepLink()) {
-                slotNavigator.activate(RootConfig.Login)
+                rootNavigator.slotNavigator.activate(RootConfig.Login)
             }
         }
     }
@@ -86,12 +80,13 @@ internal class RootNavHostComponent(
      */
     private fun consumeDeepLink(): Boolean {
         val deepLink = pendingDeepLink ?: return false
-        when (deepLink) {
-            DeepLinkDestination.HomeTab -> slotNavigator.activate(RootConfig.deepLinkHome())
-            DeepLinkDestination.ProfileTab -> slotNavigator.activate(RootConfig.deepLinkProfile())
-            DeepLinkDestination.SecondScreen -> slotNavigator.activate(RootConfig.deepLinkSecondScreen())
-            is DeepLinkDestination.ThirdScreen -> slotNavigator.activate(RootConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument)))
+        val deepLinkConfig = when (deepLink) {
+            DeepLinkDestination.HomeTab -> RootConfig.deepLinkHome()
+            DeepLinkDestination.ProfileTab -> RootConfig.deepLinkProfile()
+            DeepLinkDestination.SecondScreen -> RootConfig.deepLinkSecondScreen()
+            is DeepLinkDestination.ThirdScreen -> RootConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument))
         }
+        rootNavigator.slotNavigator.activate(deepLinkConfig)
         return true
     }
 }

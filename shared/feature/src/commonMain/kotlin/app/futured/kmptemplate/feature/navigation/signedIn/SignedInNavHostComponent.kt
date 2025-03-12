@@ -4,7 +4,6 @@ import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponent
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostComponent
-import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostNavigation
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.AppComponentFactory
@@ -23,7 +22,7 @@ import org.koin.core.annotation.InjectedParam
 @Factory
 internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
-    @InjectedParam navigationActions: SignedInNavHostNavigation,
+    @InjectedParam navigationToLogin: () -> Unit,
     @InjectedParam initialConfig: SignedInConfig,
 ) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()), SignedInNavHost {
 
@@ -37,18 +36,16 @@ internal class SignedInNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 is SignedInConfig.Home -> SignedInChild.Home(
-                    AppComponentFactory.createComponent<HomeNavHostComponent>(
+                    AppComponentFactory.createAppComponent<HomeNavHostComponent>(
                         childContext = childCtx,
                         config.initialStack,
                     ),
                 )
 
                 is SignedInConfig.Profile -> SignedInChild.Profile(
-                    AppComponentFactory.createComponent<ProfileNavHostComponent>(
+                    navHost = AppComponentFactory.createAppComponent<ProfileNavHostComponent>(
                         childContext = childCtx,
-                        ProfileNavHostNavigation(
-                            toLogin = navigationActions.toLogin,
-                        ),
+                        navigationToLogin,
                         config.initialStack,
                     ),
                 )

@@ -22,10 +22,11 @@ internal class SecondComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: SecondScreenNavigation,
 ) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
-    componentContext = componentContext,
-    defaultState = SecondViewState,
-),
-    SecondScreen {
+        componentContext = componentContext,
+        defaultState = SecondViewState,
+    ),
+    SecondScreen,
+    SecondScreenNavigation by navigation {
 
     override val viewState: StateFlow<SecondViewState> = componentState
 
@@ -34,7 +35,7 @@ internal class SecondComponent(
         dismiss = { result ->
             pickerNavigator.dismiss()
             if (result != null) {
-                navigation.toThird(result)
+                navigateToThird(result)
             }
         },
     )
@@ -44,12 +45,12 @@ internal class SecondComponent(
         serializer = SecondScreen.PickerType.serializer(),
         childFactory = { type, childContext ->
             when (type) {
-                SecondScreen.PickerType.Fruit -> AppComponentFactory.createComponent<FruitPickerComponent>(
+                SecondScreen.PickerType.Fruit -> AppComponentFactory.createAppComponent<FruitPickerComponent>(
                     childContext,
                     pickerNavigation,
                 )
 
-                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createComponent<VegetablePickerComponent>(
+                SecondScreen.PickerType.Vegetable -> AppComponentFactory.createAppComponent<VegetablePickerComponent>(
                     childContext,
                     pickerNavigation,
                 )
@@ -58,7 +59,7 @@ internal class SecondComponent(
     ).asStateFlow()
 
     override val actions: SecondScreen.Actions = object : SecondScreen.Actions {
-        override fun onBack() = navigation.pop()
+        override fun onBack() = pop()
         override fun onPickVeggie() = pickerNavigator.activate(SecondScreen.PickerType.Vegetable)
         override fun onPickFruit() = pickerNavigator.activate(SecondScreen.PickerType.Fruit)
         override fun onPickerDismissed() = pickerNavigator.dismiss()

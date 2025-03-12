@@ -9,15 +9,12 @@ import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenNavigation
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponent
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenNavigation
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponent
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
 import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.pushNew
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
@@ -28,15 +25,10 @@ internal class HomeNavHostComponent(
     @InjectedParam private val initialStack: List<HomeConfig>,
 ) : AppComponent<Unit, Nothing>(componentContext, Unit), HomeNavHost {
 
-    private val homeNavigator = StackNavigation<HomeConfig>()
-
-    override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
-        override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) = homeNavigator.navigate { newStack.map { it.configuration } }
-        override fun pop() = homeNavigator.pop()
-    }
+    private val homeNavigator: HomeNavigation = HomeNavigator()
 
     override val stack: StateFlow<ChildStack<HomeConfig, HomeChild>> = childStack(
-        source = homeNavigator,
+        source = homeNavigator.navigator,
         serializer = HomeConfig.serializer(),
         initialStack = { initialStack },
         key = "HomeStack",
@@ -44,34 +36,34 @@ internal class HomeNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 HomeConfig.First -> HomeChild.First(
-                    AppComponentFactory.createComponent<FirstComponent>(
+                    AppComponentFactory.createScreenComponent<FirstComponent, FirstScreenNavigation>(
                         childContext = childCtx,
-                        navigation = FirstScreenNavigation(
-                            toSecond = { homeNavigator.pushNew(HomeConfig.Second) },
-                        ),
+                        navigation = homeNavigator,
                     ),
                 )
 
                 HomeConfig.Second -> HomeChild.Second(
-                    AppComponentFactory.createComponent<SecondComponent>(
+                    AppComponentFactory.createScreenComponent<SecondComponent, SecondScreenNavigation>(
                         childContext = childCtx,
-                        navigation = SecondScreenNavigation(
-                            pop = { homeNavigator.pop() },
-                            toThird = { id -> homeNavigator.pushNew(HomeConfig.Third(ThirdScreenArgs(id))) },
-                        ),
+                        navigation = homeNavigator,
                     ),
                 )
 
                 is HomeConfig.Third -> HomeChild.Third(
-                    AppComponentFactory.createComponent<ThirdComponent>(
+                    AppComponentFactory.createScreenComponent<ThirdComponent, ThirdScreenNavigation>(
                         childContext = childCtx,
-                        navigation = ThirdScreenNavigation(
-                            pop = { homeNavigator.pop() },
-                        ),
+                        navigation = homeNavigator,
                         config.args,
                     ),
                 )
             }
         },
     ).asStateFlow()
+
+    override val actions: HomeNavHost.Actions = object : HomeNavHost.Actions {
+        override fun navigate(newStack: List<Child<HomeConfig, HomeChild>>) =
+            homeNavigator.navigator.navigate { newStack.map { it.configuration } }
+
+        override fun pop() = homeNavigator.navigator.pop()
+    }
 }
