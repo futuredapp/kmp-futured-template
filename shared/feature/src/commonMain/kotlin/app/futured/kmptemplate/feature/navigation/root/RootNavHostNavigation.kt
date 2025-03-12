@@ -11,7 +11,7 @@ internal interface RootNavHostNavigation : LoginScreenNavigation, SignedInNavHos
     val slotNavigator: SlotNavigation<RootConfig>
 }
 
-internal class RootNavHostNavigator: RootNavHostNavigation {
+internal class RootNavHostNavigator : RootNavHostNavigation {
     override val slotNavigator: SlotNavigation<RootConfig> = SlotNavigation()
 
     override fun LoginComponent.toSignedIn() {

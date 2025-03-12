@@ -10,7 +10,6 @@ import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
-import org.koin.core.annotation.Single
 
 internal interface HomeNavigation : FirstScreenNavigation, SecondScreenNavigation, ThirdScreenNavigation {
     val navigator: StackNavigation<HomeConfig>

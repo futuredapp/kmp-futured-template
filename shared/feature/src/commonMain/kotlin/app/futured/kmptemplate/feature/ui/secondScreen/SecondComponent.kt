@@ -25,7 +25,8 @@ internal class SecondComponent(
         componentContext = componentContext,
         defaultState = SecondViewState,
     ),
-    SecondScreen, SecondScreenNavigation by navigation {
+    SecondScreen,
+    SecondScreenNavigation by navigation {
 
     override val viewState: StateFlow<SecondViewState> = componentState
 

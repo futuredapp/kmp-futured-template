@@ -17,7 +17,8 @@ internal class ThirdComponent(
         componentContext = componentContext,
         defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
     ),
-    ThirdScreen, ThirdScreenNavigation by navigation {
+    ThirdScreen,
+    ThirdScreenNavigation by navigation {
 
     override val viewState: StateFlow<ThirdViewState> = componentState
 
