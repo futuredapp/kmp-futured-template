@@ -23,4 +23,8 @@ jobs:
   check-ios:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
-    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@main
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@34a11d61d30203fb1aa86b0c05fae521aa29b5ce
+    with:
+      kmp_swift_package_integration: true
+      kmp_swift_package_path: iosApp/shared/KMP
+      kmp_swift_package_flavor: dev
