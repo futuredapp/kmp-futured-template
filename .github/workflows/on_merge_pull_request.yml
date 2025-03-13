@@ -9,6 +9,11 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
+env:
+  # Specifies API environment for KMP build.
+  # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
+  KMP_FLAVOR: dev
+
 jobs:
   detect-changes:
     uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@main
@@ -18,6 +23,10 @@ jobs:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
     uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-build.yml@main
+    with:
+      kmp_swift_package_integration: true
+      kmp_swift_package_path: iosApp/shared/KMP
+      kmp_swift_package_flavor: ${{ env.KMP_FLAVOR }}
     secrets:
       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
@@ -38,9 +47,7 @@ jobs:
       # TODO PROJECT-SETUP Verify app distribution groups
       APP_DISTRIBUTION_GROUPS: futured-devs, futured-qa
       # TODO PROJECT-SETUP verify product flavor configuration
-      # Specifies API environment for KMP build.
-      # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
-      KMP_FLAVOR: dev
+      KMP_FLAVOR: ${{ env.KMP_FLAVOR }}
     secrets:
       # TODO PROJECT-SETUP Set up `APP_DISTRIBUTION_SERVICE_ACCOUNT` as plaintext JSON for this GitHub repository
       SIGNING_KEYSTORE_PASSWORD: android
