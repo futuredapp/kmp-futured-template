@@ -371,21 +371,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		11B83C242D79CAD0007D03F7 /* KMP Package */ = {
+		11B4EDFA2D83026500D775CC /* Build KMP */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 11B83C252D79CAD0007D03F7 /* Build configuration list for PBXLegacyTarget "KMP Package" */;
+			buildConfigurationList = 11B4EDFE2D83026500D775CC /* Build configuration list for PBXLegacyTarget "Build KMP" */;
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
 			buildWorkingDirectory = "${PROJECT_DIR}/shared/KMP";
 			dependencies = (
 			);
-			name = "KMP Package";
+			name = "Build KMP";
 			packageProductDependencies = (
 			);
 			passBuildSettingsInEnvironment = 1;
-			productName = "KMP Package";
+			productName = "Build KMP";
 		};
 /* End PBXLegacyTarget section */
 
@@ -456,7 +456,7 @@
 				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = orgName;
 				TargetAttributes = {
-					11B83C242D79CAD0007D03F7 = {
+					11B4EDFA2D83026500D775CC = {
 						CreatedOnToolsVersion = 16.0;
 					};
 					7555FF7A242A565900829871 = {
@@ -491,7 +491,7 @@
 				7555FF7A242A565900829871 /* iosApp */,
 				F4820AAB2B0B4D6E00B13080 /* iosAppTests */,
 				F4820ABC2B0B528100B13080 /* iosAppUITests */,
-				11B83C242D79CAD0007D03F7 /* KMP Package */,
+				11B4EDFA2D83026500D775CC /* Build KMP */,
 			);
 		};
 /* End PBXProject section */
@@ -613,7 +613,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		11B83C262D79CAD0007D03F7 /* Debug */ = {
+		11B4EDFB2D83026500D775CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 119C5F4A2AEBC40200CB58E3 /* Debug.xcconfig */;
 			buildSettings = {
@@ -632,7 +632,7 @@
 			};
 			name = Debug;
 		};
-		11B83C272D79CAD0007D03F7 /* Beta */ = {
+		11B4EDFC2D83026500D775CC /* Beta */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC7FFCC52B691F0400A70102 /* Beta.xcconfig */;
 			buildSettings = {
@@ -648,7 +648,7 @@
 			};
 			name = Beta;
 		};
-		11B83C282D79CAD0007D03F7 /* Release */ = {
+		11B4EDFD2D83026500D775CC /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */;
 			buildSettings = {
@@ -1092,12 +1092,12 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		11B83C252D79CAD0007D03F7 /* Build configuration list for PBXLegacyTarget "KMP Package" */ = {
+		11B4EDFE2D83026500D775CC /* Build configuration list for PBXLegacyTarget "Build KMP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				11B83C262D79CAD0007D03F7 /* Debug */,
-				11B83C272D79CAD0007D03F7 /* Beta */,
-				11B83C282D79CAD0007D03F7 /* Release */,
+				11B4EDFB2D83026500D775CC /* Debug */,
+				11B4EDFC2D83026500D775CC /* Beta */,
+				11B4EDFD2D83026500D775CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
