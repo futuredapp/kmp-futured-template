@@ -14,16 +14,16 @@ object ProjectSettings {
 
     object Android {
         const val MinSdkVersion = 29
-        const val TargetSdkVersion = 34
-        const val CompileSdkVersion = 34
+        const val TargetSdkVersion = 35
+        const val CompileSdkVersion = 35
 
         const val ApplicationId = "app.futured.kmptemplate.android"
 
         val VersionCode = System.getenv("ANDROID_BUILD_NUMBER")?.toInt() ?: 1
         val VersionName = System.getenv("ANDROID_VERSION_NAME") ?: "1.0.0"
 
-        val JavaCompatibility = JavaVersion.VERSION_11
-        const val KotlinJvmTargetNum = "11"
+        val JavaCompatibility = JavaVersion.VERSION_17
+        const val KotlinJvmTargetNum = "17"
 
         object BuildTypes {
             const val Debug = "debug"
