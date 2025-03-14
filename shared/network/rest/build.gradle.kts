@@ -1,6 +1,7 @@
 import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
@@ -23,7 +24,7 @@ kotlin {
 
     androidTarget {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
         }
     }
 
@@ -67,13 +68,13 @@ kotlin {
     }
 }
 
-dependencies {
-    /* ref:
-    https://foso.github.io/Ktorfit/installation/
-    https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
-     */
-    add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
-}
+//dependencies {
+//    /* ref:
+//    https://foso.github.io/Ktorfit/installation/
+//    https://github.com/Foso/Ktorfit/blob/master/example/MultiplatformExample/shared/build.gradle.kts
+//     */
+//    add("kspCommonMainMetadata", libs.network.ktorfit.ksp)
+//}
 
 android {
     namespace = libs.versions.project.shared.network.rest.namespace.get()
