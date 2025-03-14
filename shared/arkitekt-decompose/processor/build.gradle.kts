@@ -17,7 +17,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.shared.factoryGenerator.annotation)
+                implementation(projects.shared.arkitektDecompose.annotation)
             }
         }
 

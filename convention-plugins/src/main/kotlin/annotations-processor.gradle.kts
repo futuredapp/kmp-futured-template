@@ -36,7 +36,7 @@ afterEvaluate {
 
         // Enable source generation by KSP to commonMain only
         if (extension.useComponentFactory) {
-            add("kspCommonMainMetadata", project(":shared:factory-generator:processor"))
+            add("kspCommonMainMetadata", project(":shared:arkitekt-decompose:processor"))
             // DO NOT add bellow dependencies
             // add("kspAndroid", Deps.Koin.kspCompiler)
             // add("kspIosX64", Deps.Koin.kspCompiler)

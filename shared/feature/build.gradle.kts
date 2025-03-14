@@ -51,8 +51,8 @@ kotlin {
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
                 implementation(projects.shared.arkitektDecompose)
+                implementation(projects.shared.arkitektDecompose.annotation)
                 implementation(projects.shared.resources)
-                implementation(projects.shared.factoryGenerator.annotation)
 
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
