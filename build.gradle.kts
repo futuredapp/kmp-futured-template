@@ -1,6 +1,17 @@
 import app.futured.kmptemplate.gradle.task.LintCheckTask
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 
+plugins {
+    // Apply plugins at the top level but don't apply to this project
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.android.test) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.detekt) apply false
+}
+
 tasks.register<LintCheckTask>("lintCheck")
 tasks.register<ReportMergeTask>("detektReportMerge") {
     output.set(rootProject.layout.buildDirectory.file("reports/detekt/merged.xml"))

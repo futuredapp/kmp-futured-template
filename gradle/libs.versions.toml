@@ -66,7 +66,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime" , version.ref = "jetbrainsComposeRuntime"}
+jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeRuntime" }
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -95,7 +95,7 @@ essenty = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "
 
 # KSP api
 ksp-lib = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
-poet-interop = { module = "com.squareup:kotlinpoet-ksp", version.ref = "poet"}
+poet-interop = { module = "com.squareup:kotlinpoet-ksp", version.ref = "poet" }
 
 # Testing
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
@@ -148,12 +148,13 @@ gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gr
 gradlePlugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 [plugins]
-com-android-application = { id = "com.android.application", version.ref = "agp" }
-com-android-library = { id = "com.android.library", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-test = { id = "com.android.test", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" } # TODO Verify if still needed (Decompose no longer uses parcelable)
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
@@ -161,10 +162,11 @@ skie = { id = "co.touchlab.skie", version.ref = "skie" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineProfile" }
-android-test = { id = "com.android.test", version.ref = "agp" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokkaVersion" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-servicesPlugin" }
 firebase-distribution = { id = "com.google.firebase.appdistribution", version.ref = "google-firebaseAppDistributionPlugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

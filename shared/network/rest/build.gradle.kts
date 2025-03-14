@@ -1,17 +1,17 @@
 import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import app.futured.kmptemplate.gradle.ext.iosTargets
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
-    id(libs.plugins.com.android.library.get().pluginId)
-    id(libs.plugins.kotlin.multiplatform.get().pluginId)
-    id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.annotations.processor.plugin.get().pluginId)
-
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
+
+    id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.annotations.processor.plugin.get().pluginId)
 }
 
 annotations {
@@ -23,11 +23,13 @@ kotlin {
 
     androidTarget {
         compilerOptions {
-            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
 
-    iosTargets()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain {

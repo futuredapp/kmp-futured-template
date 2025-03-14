@@ -1,8 +1,7 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import app.futured.kmptemplate.gradle.ext.iosTargets
 
 plugins {
-    id(libs.plugins.kotlin.multiplatform.get().pluginId)
+    alias(libs.plugins.kotlin.multiplatform)
 }
 
 kotlin {
@@ -12,11 +11,13 @@ kotlin {
 
     jvm()
 
-    iosTargets()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain {
-            dependencies {  }
+            dependencies { }
         }
     }
 }

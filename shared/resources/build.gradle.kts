@@ -1,13 +1,12 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import app.futured.kmptemplate.gradle.ext.iosTargets
 
 plugins {
-    id(libs.plugins.com.android.library.get().pluginId)
-    id(libs.plugins.kotlin.multiplatform.get().pluginId)
-    id(libs.plugins.conventions.lint.get().pluginId)
-
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.moko.resources)
+
+    id(libs.plugins.conventions.lint.get().pluginId)
 }
 
 dependencies {
@@ -19,11 +18,13 @@ kotlin {
 
     androidTarget {
         compilerOptions {
-            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
 
-    iosTargets()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain {
