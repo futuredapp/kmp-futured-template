@@ -30,6 +30,6 @@ include(":shared:feature")
 include(":shared:persistence")
 include(":shared:platform")
 include(":shared:resources")
+include(":baselineprofile")
 
 includeBuild("convention-plugins")
-include(":baselineprofile")

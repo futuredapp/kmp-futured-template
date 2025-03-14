@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.buildkonfig)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.annotations.processor.plugin.get().pluginId)
+    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
 }
 
 annotations {

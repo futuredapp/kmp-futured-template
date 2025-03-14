@@ -154,7 +154,6 @@ android-test = { id = "com.android.test", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" } # TODO Verify if still needed (Decompose no longer uses parcelable)
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
@@ -170,7 +169,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
-annotations-processor-plugin = { id = "annotations-processor" }
+conventions-annotationProcessing = { id = "conventions-annotations-processor" }
 
 [bundles]
 compose = [
