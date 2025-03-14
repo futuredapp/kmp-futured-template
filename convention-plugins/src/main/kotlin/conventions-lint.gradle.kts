@@ -35,12 +35,19 @@ project.configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 // Detekt
 project.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
     ignoreFailures = false
-    source.setFrom(files(projectDir))
+    source.setFrom(files(
+        "src/main/kotlin",
+        "src/commonMain/kotlin",
+        "src/jvmMain/kotlin",
+        "src/androidMain/kotlin",
+        "src/appleMain/kotlin",
+        "src/iosMain/kotlin",
+    ))
     config.setFrom(files("$rootDir/config/detekt.yml"))
     buildUponDefaultConfig = true
 }
 
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+tasks.withType<Detekt> {
     reports {
         sarif.required.set(false)
         md.required.set(false)
