@@ -49,7 +49,7 @@ object ProjectSettings {
     }
 
     object IOS {
-        const val FrameworkName = "shared"
+        const val FrameworkName = "KMP"
         const val FrameworkBundleId = "app.futured.kmptemplate.shared"
         const val MokoBaseLocalizationRegion = "en"
     }

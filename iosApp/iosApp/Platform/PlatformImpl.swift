@@ -1,4 +1,4 @@
-import shared
+import KMP
 import UIKit.UIDevice
 
 final class PlatformImpl: Platform {
