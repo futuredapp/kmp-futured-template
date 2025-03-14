@@ -34,8 +34,6 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
