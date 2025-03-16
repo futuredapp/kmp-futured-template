@@ -11,11 +11,11 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 
-internal interface HomeNavigation : FirstScreenNavigation, SecondScreenNavigation, ThirdScreenNavigation {
+internal interface HomeNavHostNavigation : FirstScreenNavigation, SecondScreenNavigation, ThirdScreenNavigation {
     val navigator: StackNavigation<HomeConfig>
 }
 
-internal class HomeNavigator : HomeNavigation {
+internal class HomeNavigator : HomeNavHostNavigation {
     override val navigator = StackNavigation<HomeConfig>()
 
     override fun FirstComponent.navigateToSecond() =

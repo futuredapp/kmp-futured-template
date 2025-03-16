@@ -23,7 +23,7 @@ internal class HomeNavHostComponent(
     @InjectedParam private val initialStack: List<HomeConfig>,
 ) : AppComponent<Unit, Nothing>(componentContext, Unit), HomeNavHost {
 
-    private val homeNavigator: HomeNavigation = HomeNavigator()
+    private val homeNavigator: HomeNavHostNavigation = HomeNavigator()
 
     override val stack: StateFlow<ChildStack<HomeConfig, HomeChild>> = childStack(
         source = homeNavigator.navigator,
