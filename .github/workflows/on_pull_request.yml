@@ -1,0 +1,30 @@
+name: Check Pull request
+
+on: [ pull_request ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect-changes:
+    uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@main
+
+  check-android:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
+    uses: futuredapp/.github/.github/workflows/android-cloud-check.yml@main
+    with:
+      # `lintRelease` covers androidApp module and all shared modules all at once. No need to call `lintEnterprise` and `lintRelease`.
+      LINT_GRADLE_TASKS: lintCheck lintRelease
+      # `testReleaseUnitTest` covers androidApp module and all shared modules all at once. No need to call `testEnterpriseUnitTest` and `testReleaseUnitTest`.
+      TEST_GRADLE_TASKS: testReleaseUnitTest
+
+  check-ios:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@main
+    with:
+      kmp_swift_package_integration: true
+      kmp_swift_package_path: iosApp/shared/KMP
+      kmp_swift_package_flavor: dev

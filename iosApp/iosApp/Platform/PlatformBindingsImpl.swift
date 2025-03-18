@@ -1,5 +1,5 @@
 import Foundation
-import shared
+import KMP
 
 final class PlatformBindingsImpl: PlatformBindings {
 

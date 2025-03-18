@@ -1,4 +1,4 @@
-import shared
+import KMP
 import SwiftUI
 
 // swiftlint:disable discouraged_optional_collection

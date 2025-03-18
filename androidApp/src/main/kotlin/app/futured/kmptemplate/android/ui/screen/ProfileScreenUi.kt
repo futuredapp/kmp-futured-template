@@ -51,10 +51,12 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = "Profile")
-            Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = actions::onLogout) {
                 Text(kmpStringResource(MR.strings.generic_sign_out))
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = actions::onThird) {
+                Text(kmpStringResource(MR.strings.profile_navigate_to_third))
             }
         }
     }

@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.picker
 
+import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -13,18 +14,14 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.seconds
 
+@GenerateFactory
 @Factory
 internal class VegetablePickerComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: PickerNavigation,
-) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()),
-    Picker {
+) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()), Picker, Picker.Actions {
 
-    override val actions: Picker.Actions = object : Picker.Actions {
-        override fun onPick(item: String) = navigation.dismiss(item)
-        override fun onDismiss() = navigation.dismiss(null)
-    }
-
+    override val actions: Picker.Actions = this
     override val viewState: StateFlow<PickerState> = componentState.asStateFlow()
 
     init {
@@ -46,4 +43,8 @@ internal class VegetablePickerComponent(
             }
         }
     }
+
+    override fun onPick(item: String) = navigation.dismiss(item)
+
+    override fun onDismiss() = navigation.dismiss(null)
 }

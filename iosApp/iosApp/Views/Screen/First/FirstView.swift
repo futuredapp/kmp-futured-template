@@ -1,4 +1,4 @@
-import shared
+import KMP
 import SwiftUI
 
 struct FirstView<ViewModel: FirstViewModelProtocol>: View {
@@ -12,6 +12,9 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
         VStack(spacing: 10) {
             Text(viewModel.text)
             Button(Localizable.first_screen_button.localized, action: viewModel.onNext).buttonStyle(.borderedProminent)
+            if let randomPerson = viewModel.randomPerson {
+                Text(randomPerson).multilineTextAlignment(.center)
+            }
         }
         .navigationTitle(Localizable.first_screen_title.localized)
         .eventsEffect(for: viewModel.events) { event in
