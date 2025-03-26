@@ -19,10 +19,7 @@ import org.koin.core.annotation.Single
  * The class responsible for communication directly with [ApolloClient] via GraphQL queries and mutations.
  */
 @Single
-internal class ApolloApiAdapter(
-    private val apolloClient: ApolloClient,
-    private val errorResponseParser: ErrorResponseParser,
-) {
+internal class ApolloApiAdapter(private val apolloClient: ApolloClient, private val errorResponseParser: ErrorResponseParser) {
 
     /**
      * Executes the [Query] and returns the [DATA].

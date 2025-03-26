@@ -25,7 +25,8 @@ internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam navigationToLogin: () -> Unit,
     @InjectedParam initialConfig: SignedInConfig,
-) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()), SignedInNavHost {
+) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()),
+    SignedInNavHost {
 
     private val stackNavigator = StackNavigation<SignedInConfig>()
 

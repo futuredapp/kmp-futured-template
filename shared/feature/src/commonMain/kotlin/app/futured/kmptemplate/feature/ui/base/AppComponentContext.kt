@@ -19,9 +19,8 @@ interface AppComponentContext : ArkitektComponentContext<AppComponentContext>
  *
  * @param componentContext [ComponentContext] to wrap.
  */
-class DefaultAppComponentContext(
-    componentContext: ComponentContext,
-) : AppComponentContext,
+class DefaultAppComponentContext(componentContext: ComponentContext) :
+    AppComponentContext,
     LifecycleOwner by componentContext,
     StateKeeperOwner by componentContext,
     InstanceKeeperOwner by componentContext,

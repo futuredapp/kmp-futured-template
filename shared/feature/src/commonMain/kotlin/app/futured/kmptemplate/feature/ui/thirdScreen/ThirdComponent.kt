@@ -16,9 +16,9 @@ internal class ThirdComponent(
     @InjectedParam args: ThirdScreenArgs,
     @InjectedParam override val navigation: ThirdScreenNavigation,
 ) : ScreenComponent<ThirdViewState, Nothing, ThirdScreenNavigation>(
-        componentContext = componentContext,
-        defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
-    ),
+    componentContext = componentContext,
+    defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
+),
     ThirdScreen,
     ThirdScreenNavigation by navigation,
     ThirdScreen.Actions {

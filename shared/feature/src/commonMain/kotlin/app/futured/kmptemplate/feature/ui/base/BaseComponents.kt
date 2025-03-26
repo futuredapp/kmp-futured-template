@@ -13,10 +13,9 @@ import app.futured.arkitekt.decompose.presentation.BaseComponent
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class AppComponent<VS : Any, E : Any>(
-    componentContext: AppComponentContext,
-    defaultState: VS,
-) : BaseComponent<VS, E>(componentContext, defaultState), AppComponentContext by componentContext
+abstract class AppComponent<VS : Any, E : Any>(componentContext: AppComponentContext, defaultState: VS) :
+    BaseComponent<VS, E>(componentContext, defaultState),
+    AppComponentContext by componentContext
 
 /**
  * Base class for screen components with navigation actions.
@@ -27,7 +26,6 @@ abstract class AppComponent<VS : Any, E : Any>(
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(
-    componentContext: AppComponentContext,
-    defaultState: VS,
-) : AppComponent<VS, E>(componentContext, defaultState), NavigationActionsProducer<NAV>
+abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(componentContext: AppComponentContext, defaultState: VS) :
+    AppComponent<VS, E>(componentContext, defaultState),
+    NavigationActionsProducer<NAV>
