@@ -15,10 +15,7 @@ import kotlinx.serialization.json.Json
  * [DataStore]-backed Persistence which allows storage and observing of complex JSON objects.
  * Uses [kotlinx.serialization] to serialize and deserialize objects into Strings.
  */
-internal class JsonPersistence(
-    private val dataStore: DataStore<Preferences>,
-    private val json: Json,
-) {
+internal class JsonPersistence(private val dataStore: DataStore<Preferences>, private val json: Json) {
 
     private val logger = Logger.withTag("JsonPersistence")
 

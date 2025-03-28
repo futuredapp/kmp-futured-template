@@ -10,9 +10,7 @@ import kotlinx.coroutines.flow.mapNotNull
 /**
  * [DataStore]-backed Persistence which allows storage and observing of persisted entities.
  */
-internal class PrimitivePersistence(
-    private val dataStore: DataStore<Preferences>,
-) {
+internal class PrimitivePersistence(private val dataStore: DataStore<Preferences>) {
 
     suspend fun <T : Any> get(key: Preferences.Key<T>): T? = dataStore.data.firstOrNull()?.run {
         this[key]

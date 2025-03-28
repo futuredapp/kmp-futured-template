@@ -24,9 +24,9 @@ internal class FirstComponent(
     private val syncDataUseCase: SyncDataUseCase,
     private val counterUseCase: CounterUseCase,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
-        componentContext = componentContext,
-        defaultState = FirstViewState(),
-    ),
+    componentContext = componentContext,
+    defaultState = FirstViewState(),
+),
     FirstScreen,
     FirstScreenNavigation by navigation,
     FirstScreen.Actions {

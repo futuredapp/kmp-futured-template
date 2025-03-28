@@ -21,7 +21,8 @@ internal class ProfileNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam toLogin: () -> Unit,
     @InjectedParam private val initialStack: List<ProfileConfig>,
-) : AppComponent<Unit, Nothing>(componentContext, Unit), ProfileNavHost {
+) : AppComponent<Unit, Nothing>(componentContext, Unit),
+    ProfileNavHost {
 
     private val navigator: ProfileNavHostNavigation = ProfileNavHostNavigator(toLogin)
 

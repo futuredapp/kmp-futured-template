@@ -195,16 +195,14 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
                 this.disposePrevious = disposePrevious
             }
 
-            fun build(): FlowUseCaseConfig<T, M> {
-                return FlowUseCaseConfig(
-                    onStart ?: { },
-                    onNext ?: { },
-                    onError ?: { throw it },
-                    onComplete ?: { },
-                    disposePrevious,
-                    onMap,
-                )
-            }
+            fun build(): FlowUseCaseConfig<T, M> = FlowUseCaseConfig(
+                onStart ?: { },
+                onNext ?: { },
+                onError ?: { throw it },
+                onComplete ?: { },
+                disposePrevious,
+                onMap,
+            )
         }
     }
 }

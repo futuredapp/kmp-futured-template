@@ -9,7 +9,9 @@ import kotlinx.coroutines.launch
  * Combines [SingleUseCaseExecutionScope] and [FlowUseCaseExecutionScope] under one interface.
  * The [UseCaseExecutionScope] would be usually implemented in class that wishes to execute UseCases.
  */
-interface UseCaseExecutionScope : SingleUseCaseExecutionScope, FlowUseCaseExecutionScope {
+interface UseCaseExecutionScope :
+    SingleUseCaseExecutionScope,
+    FlowUseCaseExecutionScope {
 
     /**
      * Launch suspend [block] in [viewModelScope].
@@ -42,11 +44,7 @@ interface UseCaseExecutionScope : SingleUseCaseExecutionScope, FlowUseCaseExecut
      * This method is called when coroutine launched with [launchWithHandler] throws an exception and
      * this exception isn't [CancellationException]. By default, it rethrows this exception.
      */
-    fun defaultErrorHandler(exception: Throwable) {
-        throw exception
-    }
+    fun defaultErrorHandler(exception: Throwable): Unit = throw exception
 }
 
-fun <T> Result<T>.getOrCancel(): T {
-    return this.getOrElse { throw CancellationException("Result was not Success") }
-}
+fun <T> Result<T>.getOrCancel(): T = this.getOrElse { throw CancellationException("Result was not Success") }

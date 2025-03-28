@@ -79,13 +79,7 @@ sealed interface RootChild {
      */
     val iosViewId: String
 
-    data class Login(
-        val screen: LoginScreen,
-        override val iosViewId: String = Uuid.random().toString(),
-    ) : RootChild
+    data class Login(val screen: LoginScreen, override val iosViewId: String = Uuid.random().toString()) : RootChild
 
-    data class SignedIn(
-        val navHost: SignedInNavHost,
-        override val iosViewId: String = Uuid.random().toString(),
-    ) : RootChild
+    data class SignedIn(val navHost: SignedInNavHost, override val iosViewId: String = Uuid.random().toString()) : RootChild
 }
