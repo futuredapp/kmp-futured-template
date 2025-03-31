@@ -19,7 +19,9 @@ import kotlin.time.Duration.Companion.seconds
 internal class FruitPickerComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: PickerNavigation,
-) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()), Picker, Picker.Actions {
+) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()),
+    Picker,
+    Picker.Actions {
 
     override val viewState: StateFlow<PickerState> = componentState.asStateFlow()
 

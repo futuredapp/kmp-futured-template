@@ -16,9 +16,7 @@ import dev.icerock.moko.resources.desc.StringDesc
  */
 @Composable
 @ReadOnlyComposable
-fun kmpStringResource(res: StringResource): String {
-    return stringResource(id = res.resourceId)
-}
+fun kmpStringResource(res: StringResource): String = stringResource(id = res.resourceId)
 
 /**
  * Load a string resource with formatting.
@@ -29,9 +27,7 @@ fun kmpStringResource(res: StringResource): String {
  */
 @Composable
 @ReadOnlyComposable
-fun kmpStringResource(res: StringResource, vararg formatArgs: Any): String {
-    return stringResource(id = res.resourceId, *formatArgs)
-}
+fun kmpStringResource(res: StringResource, vararg formatArgs: Any): String = stringResource(id = res.resourceId, *formatArgs)
 
 /**
  * Convert provided [StringDesc] from KMP to [String] using Android [Context].

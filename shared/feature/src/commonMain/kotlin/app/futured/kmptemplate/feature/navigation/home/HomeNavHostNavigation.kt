@@ -11,7 +11,10 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 
-internal interface HomeNavHostNavigation : FirstScreenNavigation, SecondScreenNavigation, ThirdScreenNavigation {
+internal interface HomeNavHostNavigation :
+    FirstScreenNavigation,
+    SecondScreenNavigation,
+    ThirdScreenNavigation {
     val navigator: StackNavigation<HomeConfig>
 }
 

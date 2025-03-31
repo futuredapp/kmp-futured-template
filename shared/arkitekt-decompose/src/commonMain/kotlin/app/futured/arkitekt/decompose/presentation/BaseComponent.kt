@@ -25,10 +25,8 @@ import kotlinx.coroutines.launch
  * @param componentContext The context of the component.
  * @param defaultState The default Component state.
  */
-abstract class BaseComponent<VS : Any, E : Any>(
-    componentContext: GenericComponentContext<*>,
-    private val defaultState: VS,
-) : UseCaseExecutionScope {
+abstract class BaseComponent<VS : Any, E : Any>(componentContext: GenericComponentContext<*>, private val defaultState: VS) :
+    UseCaseExecutionScope {
 
     /**
      * An internal state of the component of type [VS].

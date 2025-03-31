@@ -7,7 +7,9 @@ import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreenNavigation
 import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
 
-internal interface RootNavHostNavigation : LoginScreenNavigation, SignedInNavHostNavigation {
+internal interface RootNavHostNavigation :
+    LoginScreenNavigation,
+    SignedInNavHostNavigation {
     val slotNavigator: SlotNavigation<RootConfig>
 }
 
