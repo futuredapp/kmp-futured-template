@@ -1,31 +1,104 @@
-site_name: Futured KMP Template documentation
-site_url: https://sitename.example
-repo_url: https://github.com/futuredapp/kmp-futured-template/
-repo_name: KMP Template
+#$schema: https://squidfunk.github.io/mkdocs-material/schema.json
 
-# Theme
+site_name: Futured KMP Template
+site_url: https://futuredapp.github.io/kmp-futured-template/
+repo_url: https://github.com/futuredapp/kmp-futured-template/
+repo_name: kmp-futured-template
+docs_dir: mkdocs
+
 theme:
   name: material
-
-  # Don't include MkDocs' JavaScript
-  include_search_page: false
-  search_index_only: true
-
-  palette:
-    primary: black
-    accent: deep orange
+  language: en
+  font:
+    text: Space Grotesk
+    code: JetBrains Mono
   icon:
     repo: fontawesome/brands/github
   features:
     - navigation.tabs
-# Navigation
-nav:
-  - Home:
-      - Home: index.md
-      - Getting Started: home/home.md
-      - Setup: home/setup.md
-  - About: about/about.md
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.expand
+    - content.code.copy
 
-# Plugins
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+extra_css:
+  - stylesheets/extra.css
+
 plugins:
   - search
+
+#nav:
+#  - Home: index.md
+#  - Teams:
+#      - Android & KMP:
+#          - Overview: Teams/android/index.md
+#          - Project Setup:
+#              - First Steps: Teams/android/project_setup/00_new_repo.md
+#              - GitHub: Teams/android/project_setup/10_github.md
+#              - Firebase: Teams/android/project_setup/20_firebase.md
+#              - CI/CD: Teams/android/project_setup/30_ci_cd.md
+#          - Development:
+#              - Git Flow: Teams/android/development/00_git_flow.md
+#              - Code Style: Teams/android/development/10_code_style.md
+#              - Build Distribution: Teams/android/development/20_build_distrubution.md
+#          - Release:
+#              - Google Play: Teams/android/release/00_google_play.md
+#      - iOS:
+#          - Overview: Teams/iOS/index.md
+#          - Customer Account: Teams/iOS/ios_customer_account.md
+#          - Builds: Teams/iOS/ios_builds.md
+#          - Release: Teams/iOS/ios_release.md
+#    # - Design:
+#    #   - Overview: Teams/Design/design_page.md
+#    # - QA:
+#    #   - Overview: Teams/QA/qa_page.md
+#  - Editors: editors.md
+
+copyright: Made with ❤️‍🔥 at Futured
+
+extra:
+  social:
+    - icon: material/web
+      name: Web
+      link: https://www.futured.app
+    - icon: fontawesome/brands/github
+      name: GitHub
+      link: https://www.github.com/futuredapp
+    - icon: fontawesome/brands/linkedin
+      name: LinkedIn
+      link: https://www.linkedin.com/company/futuredapps
+    - icon: fontawesome/brands/instagram
+      name: Instagram
+      link: https://www.instagram.com/futuredapps
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
