@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC02C32B34F00ECA63A /* SignedInNavigationView.swift */; };
 		11B16AC32C32B81200ECA63A /* ProfileTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC22C32B81200ECA63A /* ProfileTabNavigationView.swift */; };
 		11B16AC52C32B84D00ECA63A /* HomeTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */; };
+		11B83C232D79C075007D03F7 /* KMP in Frameworks */ = {isa = PBXBuildFile; productRef = 11B83C222D79C075007D03F7 /* KMP */; };
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1D2CF4CF9A0088E48F /* PickerView.swift */; };
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11B83C232D79C075007D03F7 /* KMP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,18 +370,35 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		11B4EDFA2D83026500D775CC /* Build KMP */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 11B4EDFE2D83026500D775CC /* Build configuration list for PBXLegacyTarget "Build KMP" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "${PROJECT_DIR}/shared/KMP";
+			dependencies = (
+			);
+			name = "Build KMP";
+			packageProductDependencies = (
+			);
+			passBuildSettingsInEnvironment = 1;
+			productName = "Build KMP";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		7555FF7A242A565900829871 /* iosApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
-				7555FFB5242A651A00829871 /* Build KMP framework */,
 				7555FF77242A565900829871 /* Sources */,
 				F4820A982B065E0800B13080 /* Run Swiftlint */,
 				7555FF78242A565900829871 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
 				7555FFB4242A642300829871 /* Embed Frameworks */,
-				114791D62AF29142004DD43B /* Copy Multiplatform resources */,
 			);
 			buildRules = (
 			);
@@ -437,6 +456,9 @@
 				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = orgName;
 				TargetAttributes = {
+					11B4EDFA2D83026500D775CC = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					7555FF7A242A565900829871 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -459,6 +481,9 @@
 				Base,
 			);
 			mainGroup = 7555FF72242A565900829871;
+			packageReferences = (
+				11B83C212D79C062007D03F7 /* XCLocalSwiftPackageReference "shared/KMP" */,
+			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -466,6 +491,7 @@
 				7555FF7A242A565900829871 /* iosApp */,
 				F4820AAB2B0B4D6E00B13080 /* iosAppTests */,
 				F4820ABC2B0B528100B13080 /* iosAppUITests */,
+				11B4EDFA2D83026500D775CC /* Build KMP */,
 			);
 		};
 /* End PBXProject section */
@@ -497,44 +523,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		114791D62AF29142004DD43B /* Copy Multiplatform resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Multiplatform resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/../gradlew\" -p \"$SRCROOT/../\" :shared:app:copyFrameworkResourcesToApp \\\n    -Pmoko.resources.PLATFORM_NAME=\"$PLATFORM_NAME\" \\\n    -Pmoko.resources.CONFIGURATION=\"$KOTLIN_FRAMEWORK_BUILD_TYPE\" \\\n    -Pmoko.resources.ARCHS=\"$ARCHS\" \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\" \n";
-		};
-		7555FFB5242A651A00829871 /* Build KMP framework */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build KMP framework";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:app:embedAndSignAppleFrameworkForXcode -P buildkonfig.flavor=$KMP_FLAVOR\n";
-		};
 		F4820A982B065E0800B13080 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -625,6 +613,57 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		11B4EDFB2D83026500D775CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 119C5F4A2AEBC40200CB58E3 /* Debug.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		11B4EDFC2D83026500D775CC /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC7FFCC52B691F0400A70102 /* Beta.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Beta;
+		};
+		11B4EDFD2D83026500D775CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 119C5F4B2AEBC42400CB58E3 /* Release.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		7555FFA3242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -753,10 +792,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../shared/app/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -769,8 +805,6 @@
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-framework",
-					"$(KOTLIN_FRAMEWORK_NAME)",
 					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.futured.iosApp;
@@ -791,10 +825,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../shared/app/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -807,8 +838,6 @@
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-framework",
-					"$(KOTLIN_FRAMEWORK_NAME)",
 					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
@@ -890,10 +919,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../shared/app/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -907,8 +933,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-framework",
-					"$(KOTLIN_FRAMEWORK_NAME)",
 					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.futured.iosApp.beta;
@@ -1068,6 +1092,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		11B4EDFE2D83026500D775CC /* Build configuration list for PBXLegacyTarget "Build KMP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11B4EDFB2D83026500D775CC /* Debug */,
+				11B4EDFC2D83026500D775CC /* Beta */,
+				11B4EDFD2D83026500D775CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7555FF76242A565900829871 /* Build configuration list for PBXProject "iosApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1109,6 +1143,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		11B83C212D79C062007D03F7 /* XCLocalSwiftPackageReference "shared/KMP" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = shared/KMP;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		11B83C222D79C075007D03F7 /* KMP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B83C212D79C062007D03F7 /* XCLocalSwiftPackageReference "shared/KMP" */;
+			productName = KMP;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }

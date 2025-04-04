@@ -1,5 +1,4 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import app.futured.kmptemplate.gradle.ext.iosTargets
 import co.touchlab.skie.configuration.DefaultArgumentInterop
 import co.touchlab.skie.configuration.EnumInterop
 import co.touchlab.skie.configuration.FlowInterop
@@ -7,15 +6,22 @@ import co.touchlab.skie.configuration.SealedInterop
 import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-    id(libs.plugins.com.android.library.get().pluginId)
-    id(libs.plugins.kotlin.multiplatform.get().pluginId)
-    id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.koin.annotations.plugin.get().pluginId)
-
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.skie)
     alias(libs.plugins.moko.resources)
+
+    id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
+}
+
+annotations {
+    useKoin = true
 }
 
 kotlin {
@@ -24,11 +30,17 @@ kotlin {
 
     androidTarget {
         compilerOptions {
-            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
+            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
         }
     }
 
-    iosTargets {
+    val xcf = XCFramework(ProjectSettings.IOS.FrameworkName)
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
@@ -43,6 +55,8 @@ kotlin {
             export(libs.essenty)
             export(libs.kotlinx.immutableCollections)
             export(libs.moko.resources)
+
+            xcf.add(this)
         }
     }
 
@@ -126,4 +140,36 @@ multiplatformResources {
     resourcesVisibility.set(MRVisibility.Internal)
     resourcesClassName.set("MR")
     iosBaseLocalizationRegion.set(ProjectSettings.IOS.MokoBaseLocalizationRegion)
+}
+
+private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildType) {
+    group = ProjectSettings.Gradle.TaskGroup
+
+    val frameworkName = ProjectSettings.IOS.FrameworkName
+    val xcfDirectory = project.layout.buildDirectory.dir("XCFrameworks/${buildType.getName()}")
+    val iosDirectory = rootProject.layout.projectDirectory.dir("iosApp/shared/KMP/Sources")
+
+    doFirst {
+        delete(iosDirectory)
+    }
+
+    // Produces assembleKMPDebugXCFramework or assembleKMPReleaseXCFramework depending on input build type
+    val xcfTask = buildString {
+        append("assemble")
+        append(frameworkName.replaceFirstChar { it.titlecase() })
+        append(buildType.getName().replaceFirstChar { it.titlecase() })
+        append("XCFramework")
+    }
+
+    dependsOn(xcfTask)
+    from(xcfDirectory)
+    into(iosDirectory)
+}
+
+tasks.register<Copy>("assembleAndCopyDebugSwiftPackage") {
+    assembleAndCopySwiftPackageForBuildType(NativeBuildType.DEBUG)
+}
+
+tasks.register<Copy>("assembleAndCopyReleaseSwiftPackage") {
+    assembleAndCopySwiftPackageForBuildType(NativeBuildType.RELEASE)
 }

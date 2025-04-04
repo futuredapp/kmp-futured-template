@@ -10,17 +10,15 @@ import kotlinx.coroutines.CancellationException
  *
  * If [Throwable] is not [CancellationException] then [doBeforeThrow] is called before throw.
  */
-inline fun <VALUE> Result<VALUE>.getOrCancel(doBeforeThrow: (Throwable) -> Unit = {}): VALUE {
-    return fold(
-        onSuccess = { value -> value },
-        onFailure = { exception ->
-            if (exception !is CancellationException) {
-                doBeforeThrow(exception)
-            }
-            throw CancellationException(
-                message = "Cancellation caused by $exception",
-                cause = exception,
-            )
-        },
-    )
-}
+inline fun <VALUE> Result<VALUE>.getOrCancel(doBeforeThrow: (Throwable) -> Unit = {}): VALUE = fold(
+    onSuccess = { value -> value },
+    onFailure = { exception ->
+        if (exception !is CancellationException) {
+            doBeforeThrow(exception)
+        }
+        throw CancellationException(
+            message = "Cancellation caused by $exception",
+            cause = exception,
+        )
+    },
+)

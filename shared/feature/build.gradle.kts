@@ -1,17 +1,21 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import app.futured.kmptemplate.gradle.ext.iosTargets
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id(libs.plugins.com.android.library.get().pluginId)
-    id(libs.plugins.kotlin.multiplatform.get().pluginId)
-    id(libs.plugins.kotlin.parcelize.get().pluginId)
-    id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.koin.annotations.plugin.get().pluginId)
-
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.dokka)
+
+    id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
+}
+
+annotations {
+    useKoin = true
+    useComponentFactory = true
 }
 
 dependencies {
@@ -23,11 +27,13 @@ kotlin {
 
     androidTarget {
         compilerOptions {
-            jvmTarget.set(ProjectSettings.Android.KotlinJvmTarget)
+            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
         }
     }
 
-    iosTargets()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain {
@@ -46,7 +52,9 @@ kotlin {
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
                 implementation(projects.shared.arkitektDecompose)
+                implementation(projects.shared.arkitektDecompose.annotation)
                 implementation(projects.shared.resources)
+
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
                 implementation(libs.network.ktor.http)

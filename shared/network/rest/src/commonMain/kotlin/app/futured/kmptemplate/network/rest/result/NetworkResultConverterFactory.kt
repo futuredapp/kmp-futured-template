@@ -15,9 +15,7 @@ import io.ktor.client.statement.HttpResponse as KtorHttpResponse
  * This converter allows usage of [NetworkResult] as API return type.
  */
 @Single
-class NetworkResultConverterFactory internal constructor(
-    private val errorParser: NetworkErrorParser,
-) : Converter.Factory {
+class NetworkResultConverterFactory internal constructor(private val errorParser: NetworkErrorParser) : Converter.Factory {
 
     override fun suspendResponseConverter(
         typeData: TypeData,

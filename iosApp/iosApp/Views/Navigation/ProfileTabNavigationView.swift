@@ -1,4 +1,4 @@
-import shared
+import KMP
 import SwiftUI
 
 struct ProfileTabNavigationView: View {
@@ -19,6 +19,8 @@ struct ProfileTabNavigationView: View {
             switch onEnum(of: child) {
             case .profile(let entry):
                 ProfileView(ProfileViewModel(entry.screen))
+            case .third(let entry):
+                ThirdView(ThirdViewModel(entry.screen))
             }
         }
     }

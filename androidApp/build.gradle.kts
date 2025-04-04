@@ -1,17 +1,15 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 
 plugins {
-    // Wondering why not `alias`? https://github.com/gradle/gradle/issues/17968
-    // (this is only for plugins we already have dependency on in `buildSrc`)
-    id(libs.plugins.com.android.application.get().pluginId)
-    id(libs.plugins.kotlin.android.get().pluginId)
-    id(libs.plugins.conventions.lint.get().pluginId)
-
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
     // TODO PROJECT-SETUP enable after providing google-services.json
     // alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.distribution)
+
+    id(libs.plugins.conventions.lint.get().pluginId)
 }
 
 kotlin {

@@ -1,7 +1,6 @@
 package app.futured.kmptemplate.gradle.configuration
 
 import org.gradle.api.JavaVersion
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 object ProjectSettings {
 
@@ -15,17 +14,16 @@ object ProjectSettings {
 
     object Android {
         const val MinSdkVersion = 29
-        const val TargetSdkVersion = 34
-        const val CompileSdkVersion = 34
+        const val TargetSdkVersion = 35
+        const val CompileSdkVersion = 35
 
         const val ApplicationId = "app.futured.kmptemplate.android"
 
-        val VersionCode = System.getenv("BUILD_NUMBER")?.toInt() ?: 1
-        val VersionName = System.getenv("VERSION_NAME") ?: "1.0.0"
+        val VersionCode = System.getenv("ANDROID_BUILD_NUMBER")?.toInt() ?: 1
+        val VersionName = System.getenv("ANDROID_VERSION_NAME") ?: "1.0.0"
 
-        val JavaCompatibility = JavaVersion.VERSION_11
-        val KotlinJvmTarget = JvmTarget.JVM_11
-        const val KotlinJvmTargetNum = "11"
+        val JavaCompatibility = JavaVersion.VERSION_17
+        const val KotlinJvmTargetNum = "17"
 
         object BuildTypes {
             const val Debug = "debug"
@@ -41,15 +39,15 @@ object ProjectSettings {
             }
 
             object Release {
-                val StorePassword = System.getenv("RELEASE_KEYSTORE_PASS") ?: ""
-                val KeyAlias = System.getenv("RELEASE_KEY_ALIAS") ?: ""
-                val KeyPassword = System.getenv("RELEASE_KEY_PASS") ?: ""
+                val StorePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD").orEmpty()
+                val KeyAlias = System.getenv("ANDROID_KEY_ALIAS").orEmpty()
+                val KeyPassword = System.getenv("ANDROID_KEY_PASSWORD").orEmpty()
             }
         }
     }
 
     object IOS {
-        const val FrameworkName = "shared"
+        const val FrameworkName = "KMP"
         const val FrameworkBundleId = "app.futured.kmptemplate.shared"
         const val MokoBaseLocalizationRegion = "en"
     }

@@ -1,8 +1,8 @@
-import shared
+import KMP
 import SwiftUI
 
 protocol SecondViewModelProtocol: DynamicProperty {
-    var picker: shared.Picker? { get }
+    var picker: KMP.Picker? { get }
 
     func onPickFruit()
     func onPickVeggie()
@@ -11,7 +11,7 @@ protocol SecondViewModelProtocol: DynamicProperty {
 
 struct SecondViewModel {
     @StateObject @KotlinStateFlow private var viewState: SecondViewState
-    @StateObject @KotlinStateFlow private var pickerSlot: ChildSlot<SecondScreenPickerType, shared.Picker>
+    @StateObject @KotlinStateFlow private var pickerSlot: ChildSlot<SecondScreenPickerType, KMP.Picker>
     private let actions: SecondScreenActions
 
     init(_ screen: SecondScreen) {
@@ -23,7 +23,7 @@ struct SecondViewModel {
 
 extension SecondViewModel: SecondViewModelProtocol {
 
-    var picker: shared.Picker? {
+    var picker: KMP.Picker? {
         pickerSlot.child?.instance
     }
 

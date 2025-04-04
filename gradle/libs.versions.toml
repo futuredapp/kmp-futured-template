@@ -1,7 +1,7 @@
 [versions]
-agp = "8.5.2"
-kotlin = "2.0.21"
-ksp = "2.0.21-1.0.28" # Must be compatible with: `kotlin`
+agp = "8.9.0"
+kotlin = "2.1.10"
+ksp = "2.1.10-1.0.31" # Must be compatible with: `kotlin`
 desugarLibs = "1.1.5"
 androidxLifecycle = "2.8.6"
 androidxComposeBom = "2024.10.00"
@@ -14,21 +14,21 @@ koinAnnotations = "1.4.0" # Must be compatible with: `ksp`
 kotlinx-coroutines = "1.8.1"
 kotlinx-immutableCollections = "0.3.8"
 kotlinx-dateTime = "0.6.1"
-ktlintGradlePlugin = "12.1.1"
-ktlint = "1.2.1"
-detektGradlePlugin = "1.23.6"
+ktlintGradlePlugin = "12.2.0"
+ktlint = "1.5.0"
+detektGradlePlugin = "1.23.8"
 composeLint = "1.3.1"
 apollo = "4.0.0"
-ktorfit = "2.2.0" # Must be compatible with: `ksp`
-ktor = "3.0.1" # Must be compatible with: `ktorfit`
-kotlinx-serialization = "1.7.3" # Must be compatible with: `kotlin`
+ktorfit = "2.4.0" # Must be compatible with: `ksp`
+ktor = "3.1.0" # Must be compatible with: `ktorfit`
+kotlinx-serialization = "1.8.0" # Must be compatible with: `kotlin`
 timber = "5.0.1"
 kermit = "2.0.2"
-skie = "0.9.3" # Must be compatible with: `kotlin`
+skie = "0.10.1" # Must be compatible with: `kotlin`
 buildkonfig = "0.15.2"
 nsExceptionKt = "1.0.0-BETA-7"
 datastore = "1.1.1"
-moko-resources = "0.24.0"
+moko-resources = "0.24.5"
 baselineProfile = "1.3.0"
 junit = "1.2.1"
 espressoCore = "3.6.1"
@@ -38,6 +38,7 @@ profileinstaller = "1.3.1"
 dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
+poet = "2.0.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -65,7 +66,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime" , version.ref = "jetbrainsComposeRuntime"}
+jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeRuntime" }
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -91,6 +92,10 @@ androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-r
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-compose-ext = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 essenty = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
+
+# KSP api
+ksp-lib = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+poet-interop = { module = "com.squareup:kotlinpoet-ksp", version.ref = "poet" }
 
 # Testing
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
@@ -135,20 +140,19 @@ network-ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-seri
 # Datastore
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 
-# Gradle Plugins used in buildSrc
+# Convention plugin dependencies
 gradlePlugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-gradlePlugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 gradlePlugin-ktlint = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
 gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
 gradlePlugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 [plugins]
-com-android-application = { id = "com.android.application", version.ref = "agp" }
-com-android-library = { id = "com.android.library", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-test = { id = "com.android.test", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
@@ -156,14 +160,15 @@ skie = { id = "co.touchlab.skie", version.ref = "skie" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineProfile" }
-android-test = { id = "com.android.test", version.ref = "agp" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokkaVersion" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-servicesPlugin" }
 firebase-distribution = { id = "com.google.firebase.appdistribution", version.ref = "google-firebaseAppDistributionPlugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
-koin-annotations-plugin = { id = "koin-annotations" }
+conventions-annotationProcessing = { id = "conventions-annotations-processor" }
 
 [bundles]
 compose = [
