@@ -39,6 +39,7 @@ dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
 poet = "2.0.0"
+graphAssertion = "2.8.0"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -165,6 +166,7 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 firebase-distribution = { id = "com.google.firebase.appdistribution", version.ref = "google-firebaseAppDistributionPlugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+graphassertion = { id = "com.jraska.module.graph.assertion", version.ref = "graphAssertion" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

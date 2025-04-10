@@ -8,6 +8,7 @@ plugins {
     // TODO PROJECT-SETUP enable after providing google-services.json
     // alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.distribution)
+    alias(libs.plugins.graphassertion)
 
     id(libs.plugins.conventions.lint.get().pluginId)
 }
@@ -92,6 +93,10 @@ android {
     kotlinOptions {
         jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
+}
+
+moduleGraphAssert {
+    configurations += setOf("commonMainImplementation", "commonMainApi")
 }
 
 dependencies {
