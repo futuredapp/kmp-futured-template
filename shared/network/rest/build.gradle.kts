@@ -43,7 +43,7 @@ kotlin {
                 implementation(libs.logging.kermit)
 
                 implementation(projects.shared.platform)
-                implementation(projects.shared.networkApi.rest)
+                implementation(projects.shared.network.restApi)
             }
         }
 

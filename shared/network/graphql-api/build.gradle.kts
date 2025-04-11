@@ -46,7 +46,7 @@ kotlin {
 }
 
 android {
-    namespace = libs.versions.project.shared.network.graphql.namespace.get()
+    namespace = libs.versions.project.shared.network.graphql.api.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion
@@ -59,7 +59,7 @@ android {
 
 apollo {
     service("ExampleRickAndMortyService") {
-        packageName.set(libs.versions.project.shared.network.api.graphql.packageName.get())
+        packageName.set(libs.versions.project.shared.network.graphql.api.packageName.get())
         schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
 
         introspection {

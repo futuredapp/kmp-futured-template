@@ -47,7 +47,7 @@ kotlin {
 }
 
 android {
-    namespace = libs.versions.project.shared.network.rest.namespace.get()
+    namespace = libs.versions.project.shared.network.rest.api.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion

@@ -37,7 +37,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
 
-                implementation(projects.shared.networkApi.graphql)
+                implementation(projects.shared.network.graphqlApi)
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.apollo)
