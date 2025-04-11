@@ -21,7 +21,8 @@ import org.koin.core.annotation.InjectedParam
 internal class HomeNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam private val initialStack: List<HomeConfig>,
-) : AppComponent<Unit, Nothing>(componentContext, Unit), HomeNavHost {
+) : AppComponent<Unit, Nothing>(componentContext, Unit),
+    HomeNavHost {
 
     private val homeNavigator: HomeNavHostNavigation = HomeNavigator()
 

@@ -69,33 +69,29 @@ internal interface ApiManager {
      * Rethrows any [CancellationException] as is. This is a standard way of handling cancellation in coroutines.
      */
     @Suppress("TooGenericExceptionCaught")
-    private suspend fun <DATA> runWrapping(operation: suspend () -> DATA): NetworkResult<DATA> {
-        return try {
-            NetworkResult.Success(operation())
-        } catch (cancellation: CancellationException) {
-            throw cancellation
-        } catch (networkError: NetworkError) {
-            NetworkResult.Failure(networkError)
-        } catch (throwable: Throwable) {
-            NetworkResult.Failure(NetworkError.UnknownError(throwable))
-        }
+    private suspend fun <DATA> runWrapping(operation: suspend () -> DATA): NetworkResult<DATA> = try {
+        NetworkResult.Success(operation())
+    } catch (cancellation: CancellationException) {
+        throw cancellation
+    } catch (networkError: NetworkError) {
+        NetworkResult.Failure(networkError)
+    } catch (throwable: Throwable) {
+        NetworkResult.Failure(NetworkError.UnknownError(throwable))
     }
 
     /**
      * You can use this to intercept errors before thrown to upper layers.
      * Eg. for force logging out user on [CloudErrorCode.Unauthorized], etc.
      */
-    private suspend fun <RESULT> errorInterceptor(operation: suspend () -> RESULT): RESULT {
-        return try {
-            operation()
-        } catch (error: NetworkError.CloudError) {
-            if (error.isUnauthorizedCloudError()) {
-                // Force log out user here, via some relay interface
-                // logoutRelay.onUserUnauthorizedError()
-                throw error
-            } else {
-                throw error
-            }
+    private suspend fun <RESULT> errorInterceptor(operation: suspend () -> RESULT): RESULT = try {
+        operation()
+    } catch (error: NetworkError.CloudError) {
+        if (error.isUnauthorizedCloudError()) {
+            // Force log out user here, via some relay interface
+            // logoutRelay.onUserUnauthorizedError()
+            throw error
+        } else {
+            throw error
         }
     }
 }
