@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.network.rest.dto
+package app.futured.kmptemplate.network.api.rest.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

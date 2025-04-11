@@ -1,11 +1,12 @@
 package app.futured.kmptemplate.network.graphql.api
 
-import app.futured.kmptemplate.network.graphql.GetEpisodesQuery
+import app.futured.kmptemplate.network.api.graphql.GetEpisodesQuery
+import app.futured.kmptemplate.network.api.graphql.RickAndMortyApi
 import app.futured.kmptemplate.network.graphql.client.ApiManager
 import app.futured.kmptemplate.network.graphql.client.ApolloApiAdapter
-import app.futured.kmptemplate.network.graphql.fragment.EpisodeFragment
-import app.futured.kmptemplate.network.graphql.result.NetworkResult
-import app.futured.kmptemplate.network.graphql.result.map
+import app.futured.kmptemplate.network.api.graphql.fragment.EpisodeFragment
+import app.futured.kmptemplate.network.api.graphql.result.NetworkResult
+import app.futured.kmptemplate.network.api.graphql.result.map
 import org.koin.core.annotation.Single
 
 @Single

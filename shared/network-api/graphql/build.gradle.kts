@@ -4,9 +4,14 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.apollo)
 
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
+}
+
+annotations {
+    useKoin = true
 }
 
 kotlin {
@@ -24,14 +29,11 @@ kotlin {
 
     sourceSets {
         commonMain {
-            dependencies {
-                implementation(libs.koin.core)
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.logging.kermit)
-                implementation(libs.kotlinx.serialization.json)
-                implementation(libs.androidx.datastore.preferences.core)
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
-                implementation(projects.shared.coreApi)
+            dependencies {
+                implementation(libs.bundles.apollo)
+                implementation(libs.logging.kermit)
             }
         }
 
@@ -44,7 +46,7 @@ kotlin {
 }
 
 android {
-    namespace = libs.versions.project.shared.persistence.namespace.get()
+    namespace = libs.versions.project.shared.network.graphql.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion
@@ -52,5 +54,17 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
+    }
+}
+
+apollo {
+    service("ExampleRickAndMortyService") {
+        packageName.set(libs.versions.project.shared.network.api.graphql.packageName.get())
+        schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+
+        introspection {
+            endpointUrl.set("https://rickandmortyapi.com/graphql")
+            schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+        }
     }
 }

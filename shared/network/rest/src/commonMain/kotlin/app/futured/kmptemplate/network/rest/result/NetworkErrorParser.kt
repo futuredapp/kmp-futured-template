@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.network.rest.result
 
+import app.futured.kmptemplate.network.api.rest.result.NetworkError
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
 import io.ktor.util.network.UnresolvedAddressException

@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.network.graphql.result
+package app.futured.kmptemplate.network.api.graphql.result
 
 /**
  * Network error wrapper that encapsulate all the errors that occurred during execution of the network module operations.

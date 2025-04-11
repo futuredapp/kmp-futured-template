@@ -1,9 +1,9 @@
 @file:OptIn(ExperimentalContracts::class)
 
-package app.futured.kmptemplate.network.rest.result
+package app.futured.kmptemplate.network.api.rest.result
 
-import app.futured.kmptemplate.network.rest.result.NetworkResult.Failure
-import app.futured.kmptemplate.network.rest.result.NetworkResult.Success
+import app.futured.kmptemplate.network.api.rest.result.NetworkResult.Failure
+import app.futured.kmptemplate.network.api.rest.result.NetworkResult.Success
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract

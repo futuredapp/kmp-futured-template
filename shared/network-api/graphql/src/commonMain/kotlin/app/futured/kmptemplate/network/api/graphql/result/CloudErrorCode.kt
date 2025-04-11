@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.network.graphql.result
+package app.futured.kmptemplate.network.api.graphql.result
 
 sealed class CloudErrorCode {
     data object Unauthorized : CloudErrorCode()

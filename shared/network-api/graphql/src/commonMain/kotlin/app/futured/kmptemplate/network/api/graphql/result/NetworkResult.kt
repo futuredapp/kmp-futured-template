@@ -1,9 +1,9 @@
 @file:OptIn(ExperimentalContracts::class)
 
-package app.futured.kmptemplate.network.graphql.result
+package app.futured.kmptemplate.network.api.graphql.result
 
-import app.futured.kmptemplate.network.graphql.result.NetworkResult.Failure
-import app.futured.kmptemplate.network.graphql.result.NetworkResult.Success
+import app.futured.kmptemplate.network.api.graphql.result.NetworkResult.Failure
+import app.futured.kmptemplate.network.api.graphql.result.NetworkResult.Success
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract

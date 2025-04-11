@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.network.graphql.ext
 
-import app.futured.kmptemplate.network.graphql.result.CloudErrorCode
-import app.futured.kmptemplate.network.graphql.result.NetworkError
+import app.futured.kmptemplate.network.api.graphql.result.CloudErrorCode
+import app.futured.kmptemplate.network.api.graphql.result.NetworkError
 
 /**
  * Checks whether given [Throwable] is [NetworkError.CloudError] with Unauthorized code.

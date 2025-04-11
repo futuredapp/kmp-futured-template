@@ -30,8 +30,6 @@ kotlin {
                 implementation(libs.logging.kermit)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.androidx.datastore.preferences.core)
-
-                implementation(projects.shared.coreApi)
             }
         }
 
@@ -44,7 +42,7 @@ kotlin {
 }
 
 android {
-    namespace = libs.versions.project.shared.persistence.namespace.get()
+    namespace = libs.versions.project.shared.core.namespace.get()
     compileSdk = ProjectSettings.Android.CompileSdkVersion
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion

@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.network.graphql.client
 
-import app.futured.kmptemplate.network.graphql.result.NetworkError
+import app.futured.kmptemplate.network.api.graphql.result.NetworkError
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.ApolloResponse
 import com.apollographql.apollo.api.Mutation

@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.network.rest.result
 
+import app.futured.kmptemplate.network.api.rest.result.NetworkResult
 import de.jensklingenberg.ktorfit.Ktorfit
 import de.jensklingenberg.ktorfit.converter.Converter
 import de.jensklingenberg.ktorfit.converter.KtorfitResult

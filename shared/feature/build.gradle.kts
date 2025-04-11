@@ -47,10 +47,9 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.jetbrains.compose.runtime)
-
-                implementation(projects.shared.network.graphql)
-                implementation(projects.shared.network.rest)
-                implementation(projects.shared.persistence)
+                implementation(projects.shared.coreApi)
+                implementation(projects.shared.networkApi.graphql)
+                implementation(projects.shared.networkApi.rest)
                 implementation(projects.shared.arkitektDecompose)
                 implementation(projects.shared.arkitektDecompose.annotation)
                 implementation(projects.shared.resources)

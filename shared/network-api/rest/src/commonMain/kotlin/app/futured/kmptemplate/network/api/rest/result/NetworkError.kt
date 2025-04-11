@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.network.rest.result
+package app.futured.kmptemplate.network.api.rest.result
 
 import io.ktor.http.HttpStatusCode
 
@@ -12,7 +12,7 @@ sealed class NetworkError(message: String?, cause: Throwable?) : RuntimeExceptio
      */
     class HttpError(val statusCode: Int, message: String?) : NetworkError(message = message, cause = null) {
 
-        internal constructor(statusCode: HttpStatusCode) : this(statusCode = statusCode.value, message = statusCode.description)
+        constructor(statusCode: HttpStatusCode) : this(statusCode = statusCode.value, message = statusCode.description)
     }
 
     class SerializationError(cause: Throwable?) : NetworkError(message = cause?.message, cause = cause)

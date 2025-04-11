@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.ktorfit)
+    alias(libs.plugins.ktorfit) // TODO unable to delete, koin annotations won't work without it
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
 
@@ -43,6 +43,7 @@ kotlin {
                 implementation(libs.logging.kermit)
 
                 implementation(projects.shared.platform)
+                implementation(projects.shared.networkApi.rest)
             }
         }
 

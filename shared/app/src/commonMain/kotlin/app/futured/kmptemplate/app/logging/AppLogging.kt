@@ -5,8 +5,8 @@ import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
 import kotlin.coroutines.cancellation.CancellationException
-import app.futured.kmptemplate.network.graphql.result.NetworkError as GraphqlNetworkError
-import app.futured.kmptemplate.network.rest.result.NetworkError as RestNetworkError
+import app.futured.kmptemplate.network.api.graphql.result.NetworkError as GraphqlNetworkError
+import app.futured.kmptemplate.network.api.rest.result.NetworkError as RestNetworkError
 
 /**
  * This object takes care of KMP logging setup.

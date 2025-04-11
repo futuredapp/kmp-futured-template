@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.apollo)
     alias(libs.plugins.buildkonfig)
 
     id(libs.plugins.conventions.lint.get().pluginId)
@@ -38,6 +37,8 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
 
+                implementation(projects.shared.networkApi.graphql)
+
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.bundles.apollo)
                 implementation(libs.logging.kermit)
@@ -61,18 +62,6 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-}
-
-apollo {
-    service("ExampleRickAndMortyService") {
-        packageName.set(libs.versions.project.shared.network.graphql.packageName.get())
-        schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
-
-        introspection {
-            endpointUrl.set("https://rickandmortyapi.com/graphql")
-            schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
-        }
     }
 }
 

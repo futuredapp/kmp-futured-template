@@ -1,7 +1,7 @@
-package app.futured.kmptemplate.network.rest.api
+package app.futured.kmptemplate.network.api.rest
 
-import app.futured.kmptemplate.network.rest.dto.Person
-import app.futured.kmptemplate.network.rest.result.NetworkResult
+import app.futured.kmptemplate.network.api.rest.dto.Person
+import app.futured.kmptemplate.network.api.rest.result.NetworkResult
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Path
 
