@@ -35,6 +35,7 @@
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1D2CF4CF9A0088E48F /* PickerView.swift */; };
 		11D73F202CF4CFA40088E48F /* PickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */; };
+		49877BFD2DCA33C000671AC6 /* FirstMultiplatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49877BFC2DCA33B200671AC6 /* FirstMultiplatformView.swift */; };
 		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
 		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
@@ -104,6 +105,7 @@
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		11D73F1D2CF4CF9A0088E48F /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewModel.swift; sourceTree = "<group>"; };
+		49877BFC2DCA33B200671AC6 /* FirstMultiplatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMultiplatformView.swift; sourceTree = "<group>"; };
 		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		5B21BD332C11C505005B6191 /* First */ = {
 			isa = PBXGroup;
 			children = (
+				49877BFC2DCA33B200671AC6 /* FirstMultiplatformView.swift */,
 				1193BEF52AEA989600C6203F /* FirstView.swift */,
 				5B21BD382C11C55F005B6191 /* FirstViewModel.swift */,
 			);
@@ -553,6 +556,7 @@
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
 				11057D542CF5C43F004A383B /* ProfileViewModel.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
+				49877BFD2DCA33C000671AC6 /* FirstMultiplatformView.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,

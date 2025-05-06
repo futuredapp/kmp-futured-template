@@ -10,6 +10,7 @@ import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.replaceCurrent
 
 internal interface HomeNavHostNavigation :
     FirstScreenNavigation,
@@ -23,6 +24,14 @@ internal class HomeNavigator : HomeNavHostNavigation {
 
     override fun FirstComponent.navigateToSecond() =
         navigator.pushNew(HomeConfig.Second)
+
+    override fun FirstComponent.switchToFirstMultiplatform() {
+        navigator.replaceCurrent(HomeConfig.FirstMultiplatform)
+    }
+
+    override fun FirstComponent.switchToFirstNative() {
+        navigator.replaceCurrent(HomeConfig.First)
+    }
 
     override fun SecondComponent.pop() =
         navigator.pop()

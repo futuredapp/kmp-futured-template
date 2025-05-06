@@ -3,9 +3,9 @@ agp = "8.9.0"
 kotlin = "2.1.10"
 ksp = "2.1.10-1.0.31" # Must be compatible with: `kotlin`
 desugarLibs = "2.1.5"
-androidxLifecycle = "2.8.6"
-androidxComposeBom = "2024.10.00"
-jetbrainsComposeRuntime = "1.7.0" # Needs to align with version in Compose BOM as closely as possible
+androidxLifecycle = "2.9.0-alpha07"
+androidxComposeBom = "2025.04.01"
+jetbrainsComposeRuntime = "1.8.0-rc01" # Needs to align with version in Compose BOM as closely as possible
 androidxActivity = "1.9.2"
 decompose = "3.1.0"
 essenty = "2.1.0"
@@ -39,6 +39,7 @@ dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
 poet = "2.0.0"
+compose-multiplatform-plugin = "1.8.0-rc01"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -52,6 +53,7 @@ project-shared-persistence-namespace = "app.futured.kmptemplate.persistence.andr
 project-shared-arkitekt-crUsecases-namespace = "app.futured.arkitekt.cr_usecases.android"
 project-shared-arkitekt-decompose-namespace = "app.futured.arkitekt.decompose.android"
 project-shared-platform-namespace = "app.futured.kmptemplate.platform.android"
+project-shared-ui-multiplatform-namespace = "app.futured.kmptemplate.uimultiplatform.android"
 project-shared-resources-namespace = "app.futured.kmptemplate.resources.android"
 project-shared-resources-packageName = "app.futured.kmptemplate.resources"
 project-baselineprofile-namespace = "app.futured.kmptemplate.baselineprofile"
@@ -86,7 +88,7 @@ kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
-androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 
 # Decompose
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
@@ -121,7 +123,7 @@ skie-annotations = { group = "co.touchlab.skie", name = "configuration-annotatio
 
 # Moko
 moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }
-
+moko-resources-multiplatform = { group = "dev.icerock.moko", name = "resources-compose", version.ref = "moko-resources" }
 # Network
 network-apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 network-apollo-normalizedCache-core = { group = "com.apollographql.apollo", name = "apollo-normalized-cache", version.ref = "apollo" }
@@ -146,6 +148,7 @@ gradlePlugin-ktlint = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle"
 gradlePlugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
 gradlePlugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -165,6 +168,9 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 firebase-distribution = { id = "com.google.firebase.appdistribution", version.ref = "google-firebaseAppDistributionPlugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+#Compose multiplatform
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform-plugin" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

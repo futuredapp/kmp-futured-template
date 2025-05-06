@@ -8,6 +8,8 @@
     <string name="generic_close">Close</string>
     <string name="generic_sign_in">Sign In</string>
     <string name="generic_sign_out">Sign Out</string>
+    <string name="generic_switch_to_multiplatform">Switch to multiplatform</string>
+    <string name="generic_switch_to_native">Switch to native</string>
 
     <!-- Tabs -->
     <string name="tab_home">Home</string>
@@ -18,6 +20,7 @@
 
     <!-- First screen -->
     <string name="first_screen_title">First screen</string>
+    <string name="first_screen_multiplatform_title">First screen</string>
     <string name="first_screen_counter">Counter: %1$s</string>
     <string name="first_screen_counter_alert">Counter reached %1$s 🎉</string>
     <string name="first_screen_button">Continue</string>

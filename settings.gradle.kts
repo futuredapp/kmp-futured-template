@@ -31,5 +31,6 @@ include(":shared:persistence")
 include(":shared:platform")
 include(":shared:resources")
 include(":baselineprofile")
+include(":shared:ui-multiplatform")
 
 includeBuild("convention-plugins")

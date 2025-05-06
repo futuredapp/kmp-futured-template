@@ -49,6 +49,10 @@ internal class FirstComponent(
 
     override fun onNext() = navigateToSecond()
 
+    override fun switchToComposeMultiplatform() { switchToFirstMultiplatform() }
+
+    override fun switchToNative() { switchToFirstNative() }
+
     private fun syncData() = syncDataUseCase.execute {
         onSuccess { person ->
             componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format(person.name.orEmpty())) }

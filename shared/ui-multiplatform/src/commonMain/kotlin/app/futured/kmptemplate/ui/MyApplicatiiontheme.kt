@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.android
+package app.futured.kmptemplate.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.futured.kmptemplate.android.ui.theme.TemplateStackAnimationProvider
+import app.futured.kmptemplate.ui.theme.TemplateStackAnimationProvider
 import com.arkivanov.decompose.extensions.compose.stack.animation.LocalStackAnimationProvider
 
 @Composable

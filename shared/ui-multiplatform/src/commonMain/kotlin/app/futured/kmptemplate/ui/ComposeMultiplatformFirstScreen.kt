@@ -1,8 +1,7 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package app.futured.kmptemplate.android.ui.screen
+package app.futured.kmptemplate.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,16 +15,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.arkitekt.decompose.event.onEvent
@@ -33,28 +31,28 @@ import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.resources.kmpStringResource
-import app.futured.kmptemplate.resources.localized
-import app.futured.kmptemplate.ui.MyApplicationTheme
-import dev.icerock.moko.resources.desc.desc
+import dev.icerock.moko.resources.compose.localized
+import dev.icerock.moko.resources.compose.stringResource
+
 
 @Composable
-fun FirstScreenUi(
+fun ComposeMultiplatformFirstScreen(
     screen: FirstScreen,
     modifier: Modifier = Modifier,
 ) {
+    val lifecycleOwner = LocalLifecycleOwner.current
     val actions = screen.actions
-    val viewState by screen.viewState.collectAsStateWithLifecycle()
-    val context = LocalContext.current
+    val viewState by screen.viewState.collectAsStateWithLifecycle(lifecycleOwner.lifecycle)
 
     Content(viewState = viewState, actions = actions, modifier = modifier)
-
     EventsEffect(eventsFlow = screen.events) {
         onEvent<FirstUiEvent.ShowToast> { event ->
-            Toast.makeText(context, event.text.toString(context), Toast.LENGTH_SHORT).show()
+
         }
     }
+
 }
+
 
 @Composable
 private fun Content(
@@ -66,7 +64,7 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(kmpStringResource(res = MR.strings.first_screen_title)) },
+                title = { Text(stringResource(MR.strings.first_screen_multiplatform_title)) },
                 modifier = Modifier.fillMaxWidth(),
                 windowInsets = WindowInsets.navigationBars,
             )
@@ -82,10 +80,10 @@ private fun Content(
             Text(text = viewState.text.localized())
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = { actions.onNext() }) {
-                Text(text = kmpStringResource(MR.strings.first_screen_button))
+                Text(text = stringResource(MR.strings.first_screen_button))
             }
-            Button(onClick = { actions.switchToComposeMultiplatform() }) {
-                Text(text = kmpStringResource(MR.strings.generic_switch_to_multiplatform))
+            Button(onClick = { actions.switchToNative() }) {
+                Text(text = stringResource(MR.strings.generic_switch_to_native))
             }
             viewState.randomPerson?.let { person ->
                 Spacer(modifier = Modifier.height(4.dp))
@@ -97,25 +95,6 @@ private fun Content(
                     textAlign = TextAlign.Center,
                 )
             }
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun FirstScreenPreview() {
-    val actions = object : FirstScreen.Actions {
-        override fun onNext() = Unit
-        override fun switchToComposeMultiplatform() = Unit
-        override fun switchToNative() = Unit
-    }
-    MyApplicationTheme {
-        Surface {
-            Content(
-                viewState = FirstViewState(text = "Hey there".desc()),
-                actions = actions,
-                modifier = Modifier.fillMaxSize(),
-            )
         }
     }
 }

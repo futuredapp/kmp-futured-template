@@ -11,6 +11,8 @@ protocol FirstViewModelProtocol: DynamicProperty {
     func onNext()
     func showToast(event: FirstUiEvent.ShowToast)
     func hideToast()
+    func switchToComposeMultiplatform()
+    func switchToNative()
 }
 
 struct FirstViewModel {
@@ -55,5 +57,13 @@ extension FirstViewModel: FirstViewModelProtocol {
 
     func hideToast() {
         alertVisible = false
+    }
+
+    func switchToComposeMultiplatform() {
+        actions.switchToComposeMultiplatform()
+    }
+
+    func switchToNative() {
+        actions.switchToNative()
     }
 }

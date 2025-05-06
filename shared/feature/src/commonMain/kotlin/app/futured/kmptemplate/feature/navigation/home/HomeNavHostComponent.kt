@@ -37,6 +37,7 @@ internal class HomeNavHostComponent(
                 HomeConfig.First -> HomeChild.First(FirstComponentFactory.createComponent(childCtx, homeNavigator))
                 HomeConfig.Second -> HomeChild.Second(SecondComponentFactory.createComponent(childCtx, homeNavigator))
                 is HomeConfig.Third -> HomeChild.Third(ThirdComponentFactory.createComponent(childCtx, homeNavigator, config.args))
+                HomeConfig.FirstMultiplatform-> HomeChild.FirstMultiplatform(FirstComponentFactory.createComponent(childCtx, homeNavigator))
             }
         },
     ).asStateFlow()

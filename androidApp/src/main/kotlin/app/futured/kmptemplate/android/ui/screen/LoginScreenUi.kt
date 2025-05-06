@@ -14,10 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.futured.kmptemplate.android.MyApplicationTheme
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
+import app.futured.kmptemplate.ui.MyApplicationTheme
 
 @Composable
 fun LoginScreenUi(

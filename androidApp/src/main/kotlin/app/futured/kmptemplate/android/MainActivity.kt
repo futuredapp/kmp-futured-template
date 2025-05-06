@@ -15,6 +15,7 @@ import app.futured.kmptemplate.android.ui.navigation.RootNavHostUi
 import app.futured.kmptemplate.feature.navigation.root.RootNavHost
 import app.futured.kmptemplate.feature.navigation.root.RootNavHostFactory
 import app.futured.kmptemplate.feature.ui.base.DefaultAppComponentContext
+import app.futured.kmptemplate.ui.MyApplicationTheme
 import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {

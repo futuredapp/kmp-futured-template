@@ -12,6 +12,7 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
         VStack(spacing: 10) {
             Text(viewModel.text)
             Button(Localizable.first_screen_button.localized, action: viewModel.onNext).buttonStyle(.borderedProminent)
+            Button(Localizable.generic_switch_to_multiplatform.localized, action: viewModel.switchToComposeMultiplatform).buttonStyle(.borderedProminent)
             if let randomPerson = viewModel.randomPerson {
                 Text(randomPerson).multilineTextAlignment(.center)
             }

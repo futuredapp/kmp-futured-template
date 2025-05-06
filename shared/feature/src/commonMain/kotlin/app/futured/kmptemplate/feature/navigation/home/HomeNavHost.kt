@@ -28,6 +28,9 @@ sealed interface HomeConfig {
     data object First : HomeConfig
 
     @Serializable
+    data object FirstMultiplatform: HomeConfig
+
+    @Serializable
     data object Second : HomeConfig
 
     @Serializable
@@ -37,6 +40,7 @@ sealed interface HomeConfig {
 sealed interface HomeChild {
 
     data class First(val screen: FirstScreen) : HomeChild
+    data class FirstMultiplatform(val screen: FirstScreen) : HomeChild
     data class Second(val screen: SecondScreen) : HomeChild
     data class Third(val screen: ThirdScreen) : HomeChild
 }

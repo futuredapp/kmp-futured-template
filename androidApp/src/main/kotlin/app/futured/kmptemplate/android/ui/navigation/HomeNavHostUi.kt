@@ -15,6 +15,7 @@ import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
 import app.futured.kmptemplate.feature.navigation.home.HomeChild
 import app.futured.kmptemplate.feature.navigation.home.HomeConfig
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHost
+import app.futured.kmptemplate.ui.ComposeMultiplatformFirstScreen
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
@@ -47,6 +48,7 @@ fun HomeNavHostUi(
                     is HomeChild.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
                     is HomeChild.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
                     is HomeChild.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+                    is HomeChild.FirstMultiplatform -> ComposeMultiplatformFirstScreen(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
                 }
             }
         },

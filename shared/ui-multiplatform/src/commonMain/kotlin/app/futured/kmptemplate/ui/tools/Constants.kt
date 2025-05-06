@@ -1,6 +1,6 @@
 @file:Suppress("MagicNumber")
 
-package app.futured.kmptemplate.android.tools
+package app.futured.kmptemplate.ui.tools
 
 import androidx.compose.animation.core.tween
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade

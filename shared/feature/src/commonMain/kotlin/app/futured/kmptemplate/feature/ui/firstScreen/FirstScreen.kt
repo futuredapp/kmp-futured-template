@@ -10,5 +10,7 @@ interface FirstScreen {
 
     interface Actions {
         fun onNext()
+        fun switchToComposeMultiplatform()
+        fun switchToNative()
     }
 }

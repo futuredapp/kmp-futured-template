@@ -103,6 +103,7 @@ dependencies {
     implementation(projects.shared.platform)
     implementation(projects.shared.arkitektDecompose)
     implementation(projects.shared.resources)
+    implementation(projects.shared.uiMultiplatform)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
