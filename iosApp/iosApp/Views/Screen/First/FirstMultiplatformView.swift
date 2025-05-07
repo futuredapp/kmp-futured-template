@@ -16,14 +16,24 @@ struct FirstMultiplatformComposeView<FirstScreen: KMP.FirstScreen>: UIViewContro
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
-struct FirstMultiplatformView<FirstScreen: KMP.FirstScreen>: View {
-    private let screen: FirstScreen
+struct FirstMultiplatformView<ViewModel: FirstViewModelProtocol>: View {
+    private let viewModel: ViewModel
 
-    init(_ screen: FirstScreen) {
-        self.screen = screen
+    init(_ viewModel: ViewModel) {
+        self.viewModel = viewModel
     }
     var body: some View {
-        FirstMultiplatformComposeView(screen)
-                .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+        FirstMultiplatformComposeView(viewModel.screen)
+                .ignoresSafeArea(.all) // we will use compose Window Insets API
+                .ignoresSafeArea(.keyboard)  // Compose has own keyboard handler
+                .eventsEffect(for: viewModel.events) { event in
+                    switch onEnum(of: event) {
+                    case .showToast(let event):
+                        viewModel.showToast(event: event)
+                    }
+                }
+                .alert(viewModel.alertText, isPresented: viewModel.isAlertVisible) {
+                    Button(Localizable.generic_close.localized) { viewModel.hideToast() }
+                }
     }
 }

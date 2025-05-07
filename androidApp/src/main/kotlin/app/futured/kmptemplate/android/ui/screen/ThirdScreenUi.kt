@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -49,7 +49,6 @@ private fun Content(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(kmpStringResource(res = MR.strings.third_screen_title)) },
-                windowInsets = WindowInsets.navigationBars,
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = null)
@@ -57,6 +56,7 @@ private fun Content(
                 },
             )
         },
+        contentWindowInsets = WindowInsets.statusBars,
     ) { paddingValues ->
         Column(
             modifier = Modifier

@@ -7,6 +7,7 @@ protocol FirstViewModelProtocol: DynamicProperty {
     var events: SkieSwiftFlow<FirstUiEvent> { get }
     var isAlertVisible: Binding<Bool> { get }
     var alertText: String { get }
+    var screen: FirstScreen { get }
 
     func onNext()
     func showToast(event: FirstUiEvent.ShowToast)
@@ -19,7 +20,7 @@ struct FirstViewModel {
     @StateObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
     let events: SkieSwiftFlow<FirstUiEvent>
-
+    let screen: FirstScreen
     @State private var alertVisible: Bool = false
     @State private(set) var alertText: String = ""
 
@@ -27,6 +28,7 @@ struct FirstViewModel {
         _viewState = .init(screen.viewState)
         actions = screen.actions
         events = screen.events
+        self.screen = screen
     }
 }
 

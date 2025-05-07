@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -68,9 +69,9 @@ private fun Content(
             CenterAlignedTopAppBar(
                 title = { Text(kmpStringResource(res = MR.strings.first_screen_title)) },
                 modifier = Modifier.fillMaxWidth(),
-                windowInsets = WindowInsets.navigationBars,
             )
         },
+        contentWindowInsets = WindowInsets.statusBars
     ) { paddingValues ->
         Column(
             modifier = Modifier

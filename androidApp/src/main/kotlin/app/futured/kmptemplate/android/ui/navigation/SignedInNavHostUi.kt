@@ -1,7 +1,9 @@
 package app.futured.kmptemplate.android.ui.navigation
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -40,6 +42,7 @@ fun SignedInNavHostUi(
 
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets.Companion.navigationBars,
         bottomBar = {
             NavigationBar(modifier = Modifier.fillMaxWidth()) {
                 for (tab in viewState.navigationTabs) {

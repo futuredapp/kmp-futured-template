@@ -24,7 +24,7 @@ struct HomeTabNavigationView: View {
             case .third(let entry):
                 ThirdView(ThirdViewModel(entry.screen))
             case .firstMultiplatform(let entry):
-                FirstMultiplatformView(entry.screen)
+                FirstMultiplatformView(FirstViewModel(entry.screen))
             }
         }
     }

@@ -5,7 +5,7 @@ ksp = "2.1.10-1.0.31" # Must be compatible with: `kotlin`
 desugarLibs = "2.1.5"
 androidxLifecycle = "2.9.0-alpha07"
 androidxComposeBom = "2025.04.01"
-jetbrainsComposeRuntime = "1.8.0-rc01" # Needs to align with version in Compose BOM as closely as possible
+jetbrainsComposeMultiplatform= "1.8.0" # Needs to align with version in Compose BOM as closely as possible
 androidxActivity = "1.9.2"
 decompose = "3.1.0"
 essenty = "2.1.0"
@@ -39,7 +39,6 @@ dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
 poet = "2.0.0"
-compose-multiplatform-plugin = "1.8.0-rc01"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -68,7 +67,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeRuntime" }
+jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeMultiplatform" }
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -170,7 +169,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 #Compose multiplatform
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform-plugin" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "jetbrainsComposeMultiplatform" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
