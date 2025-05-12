@@ -1,9 +1,6 @@
 package app.futured.kmptemplate.persistence.injection
 
-import org.koin.core.qualifier.named
+import org.koin.core.annotation.Named
 
-internal object Qualifiers {
-
-    val PersistenceJson = named("PersistenceJson")
-    val DataStorePath = named("DataStoreFilePath")
-}
+@Named
+annotation class PersistenceJson
