@@ -1,17 +1,20 @@
+@file:OptIn(ExperimentalLayoutApi::class)
+
 package app.futured.kmptemplate.android.ui.navigation
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.recalculateWindowInsets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
-import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
-import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
-import app.futured.kmptemplate.feature.navigation.home.HomeChild
-import app.futured.kmptemplate.feature.navigation.home.HomeConfig
-import app.futured.kmptemplate.feature.navigation.home.HomeNavHost
-import app.futured.kmptemplate.ui.screen.ComposeMultiplatformFirstScreen
+import app.futured.kmptemplate.feature.navigation.cmp.CmpChild
+import app.futured.kmptemplate.feature.navigation.cmp.CmpConfig
+import app.futured.kmptemplate.feature.navigation.cmp.CmpNavHost
+import app.futured.kmptemplate.ui.screen.ComposeMultiplatformFormScreen
+import app.futured.kmptemplate.ui.screen.ComposeMultiplatformInteropCheckScreen
+import app.futured.kmptemplate.ui.screen.NativeComponentInteropCheckScreen
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
@@ -20,12 +23,14 @@ import com.arkivanov.decompose.router.stack.ChildStack
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
-fun HomeNavHostUi(
-    navHost: HomeNavHost,
+fun CmpNavHostUi(
+    navHost: CmpNavHost,
     modifier: Modifier = Modifier,
 ) {
-    val stack: ChildStack<HomeConfig, HomeChild> by navHost.stack.collectAsStateWithLifecycle()
+
+    val stack: ChildStack<CmpConfig, CmpChild> by navHost.stack.collectAsStateWithLifecycle()
     val actions = navHost.actions
+
 
     Children(
         stack = stack,
@@ -37,13 +42,11 @@ fun HomeNavHostUi(
         ),
     ) { child ->
         when (val childInstance = child.instance) {
-            is HomeChild.First -> FirstScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-            is HomeChild.Second -> SecondScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-            is HomeChild.Third -> ThirdScreenUi(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
-            is HomeChild.FirstMultiplatform -> ComposeMultiplatformFirstScreen(
-                screen = childInstance.screen,
-                modifier = Modifier.fillMaxSize(),
-            )
+            is CmpChild.Form -> ComposeMultiplatformFormScreen(screen = childInstance.screen, modifier = Modifier.fillMaxSize())
+            is CmpChild.InteropCheck -> ComposeMultiplatformInteropCheckScreen(screen = childInstance.screen, nativeComponent = { screen, nativeModifier ->
+                NativeComponentInteropCheckScreen(screen, nativeModifier)
+            }, modifier = Modifier.fillMaxSize())
         }
     }
+
 }

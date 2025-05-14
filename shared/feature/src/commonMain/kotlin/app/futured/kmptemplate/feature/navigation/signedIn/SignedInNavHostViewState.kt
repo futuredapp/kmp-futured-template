@@ -7,6 +7,7 @@ data class SignedInNavHostViewState(
     val navigationTabs: ImmutableList<NavigationTab> = persistentListOf(
         NavigationTab.HOME,
         NavigationTab.PROFILE,
+        NavigationTab.CMP
     ),
     val selectedTab: NavigationTab = NavigationTab.HOME,
 )

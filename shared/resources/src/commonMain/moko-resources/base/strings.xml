@@ -14,6 +14,7 @@
     <!-- Tabs -->
     <string name="tab_home">Home</string>
     <string name="tab_profile">Profile</string>
+    <string name="tab_cmp">CMP</string>
 
     <!-- Login -->
     <string name="login_screen_title">Welcome to the sample app!</string>
@@ -48,4 +49,17 @@
     <!-- Profile screen -->
     <string name="profile_screen_title">Profile</string>
     <string name="profile_navigate_to_third">Navigate to third</string>
+
+    <!-- Form screen -->
+    <string name="form_screen_title">Form screen</string>
+    <string name="form_text_field_label_first_name">First Name</string>
+    <string name="form_text_field_label_surname">Surname</string>
+    <string name="form_text_field_label_email">Email</string>
+    <string name="form_text_field_label_phone">Phone</string>
+    <string name="form_text_field_label_password">Password</string>
+    <string name="form_text_field_label_confirm_password">Confirm Password</string>
+    <string name="form_button_interop_screen">Continue</string>
+
+    <string name="interop_check_launch_web">Launch in browser</string>
+
 </resources>

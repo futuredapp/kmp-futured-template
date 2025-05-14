@@ -3,6 +3,7 @@ package app.futured.kmptemplate.feature.navigation.signedIn
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
 import app.futured.factorygenerator.annotation.GenerateFactory
+import app.futured.kmptemplate.feature.navigation.cmp.CmpNavHostComponentFactory
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponentFactory
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostComponentFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
@@ -51,6 +52,12 @@ internal class SignedInNavHostComponent(
                         initialStack = config.initialStack,
                     ),
                 )
+                is SignedInConfig.Cmp -> SignedInChild.Cmp(
+                    navHost = CmpNavHostComponentFactory.createComponent(
+                        componentContext = childCtx,
+                        initialStack = config.initialStack,
+                    ),
+                )
             }
         },
     ).asStateFlow()
@@ -60,6 +67,7 @@ internal class SignedInNavHostComponent(
             selectedTab = when (stack.active.instance) {
                 is SignedInChild.Home -> NavigationTab.HOME
                 is SignedInChild.Profile -> NavigationTab.PROFILE
+                is SignedInChild.Cmp -> NavigationTab.HOME
             },
         )
     }.asStateFlow()
@@ -72,12 +80,17 @@ internal class SignedInNavHostComponent(
         childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Profile>().firstOrNull()
     }.stateIn(componentCoroutineScope, SharingStarted.Lazily, null)
 
+    override val cmpTab: StateFlow<SignedInChild.Cmp?> = stack.map { childStack ->
+        childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Cmp>().firstOrNull()
+    }.stateIn(componentCoroutineScope, SharingStarted.Lazily, null)
+
     override val actions: SignedInNavHost.Actions = object : SignedInNavHost.Actions {
 
         override fun onTabSelected(tab: NavigationTab) = stackNavigator.switchTab(
             when (tab) {
                 NavigationTab.HOME -> SignedInConfig.Home()
                 NavigationTab.PROFILE -> SignedInConfig.Profile()
+                NavigationTab.CMP -> SignedInConfig.Cmp()
             },
         )
 

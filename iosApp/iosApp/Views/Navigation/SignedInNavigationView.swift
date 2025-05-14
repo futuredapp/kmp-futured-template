@@ -7,12 +7,14 @@ struct SignedInNavigationView: View {
 
     @StateObject @KotlinOptionalStateFlow private var homeTab: SignedInChildHome?
     @StateObject @KotlinOptionalStateFlow private var profileTab: SignedInChildProfile?
+    @StateObject @KotlinOptionalStateFlow private var cmpTab: SignedInChildCmp?
 
     @StateObject @KotlinStateFlow private var viewState: SignedInNavHostViewState
 
     init(_ component: SignedInNavHost) {
         self._homeTab = .init(component.homeTab)
         self._profileTab = .init(component.profileTab)
+        self._cmpTab = .init(component.cmpTab)
         self._viewState = .init(component.viewState)
         self.actions = component.actions
     }
@@ -33,6 +35,9 @@ struct SignedInNavigationView: View {
             }
             TabContentView(ofNavigationEntry: profileTab, forNavigationTab: NavigationTab.profile) { child in
                 ProfileTabNavigationView(child.navHost)
+            }
+            TabContentView(ofNavigationEntry: cmpTab, forNavigationTab: NavigationTab.cmp) { child in
+                CmpTabNavigationView(child.navHost)
             }
         }
     }

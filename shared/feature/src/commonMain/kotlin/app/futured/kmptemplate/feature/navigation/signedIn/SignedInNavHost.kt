@@ -1,5 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.signedIn
 
+import app.futured.kmptemplate.feature.navigation.cmp.CmpConfig
+import app.futured.kmptemplate.feature.navigation.cmp.CmpNavHost
 import app.futured.kmptemplate.feature.navigation.home.HomeConfig
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHost
 import app.futured.kmptemplate.feature.navigation.profile.ProfileConfig
@@ -23,6 +25,7 @@ interface SignedInNavHost : BackHandlerOwner {
      */
     val homeTab: StateFlow<SignedInChild.Home?>
     val profileTab: StateFlow<SignedInChild.Profile?>
+    val cmpTab: StateFlow<SignedInChild.Cmp?>
 
     interface Actions {
         fun onTabSelected(tab: NavigationTab)
@@ -38,6 +41,9 @@ sealed interface SignedInConfig {
 
     @Serializable
     data class Profile(val initialStack: List<ProfileConfig> = listOf(ProfileConfig.Profile)) : SignedInConfig
+
+    @Serializable
+    data class Cmp(val initialStack: List<CmpConfig> = listOf(CmpConfig.Form)) : SignedInConfig
 }
 
 @OptIn(ExperimentalUuidApi::class)
@@ -53,4 +59,6 @@ sealed interface SignedInChild {
     data class Home(val navHost: HomeNavHost, override val iosViewId: String = Uuid.random().toString()) : SignedInChild
 
     data class Profile(val navHost: ProfileNavHost, override val iosViewId: String = Uuid.random().toString()) : SignedInChild
+
+    data class Cmp(val navHost: CmpNavHost, override val iosViewId: String = Uuid.random().toString()) : SignedInChild
 }

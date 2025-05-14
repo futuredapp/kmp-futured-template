@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,6 +35,7 @@
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1D2CF4CF9A0088E48F /* PickerView.swift */; };
 		11D73F202CF4CFA40088E48F /* PickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */; };
+		494977192DD1D69300F49899 /* CmpTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494977182DD1D68A00F49899 /* CmpTabNavigationView.swift */; };
 		49877BFD2DCA33C000671AC6 /* FirstMultiplatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49877BFC2DCA33B200671AC6 /* FirstMultiplatformView.swift */; };
 		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
@@ -105,6 +106,7 @@
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		11D73F1D2CF4CF9A0088E48F /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewModel.swift; sourceTree = "<group>"; };
+		494977182DD1D68A00F49899 /* CmpTabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmpTabNavigationView.swift; sourceTree = "<group>"; };
 		49877BFC2DCA33B200671AC6 /* FirstMultiplatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMultiplatformView.swift; sourceTree = "<group>"; };
 		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
@@ -119,6 +121,10 @@
 		F4820ABD2B0B528100B13080 /* iosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4820AC12B0B528100B13080 /* iosAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4949771A2DD1D81600F49899 /* cmp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = cmp; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7555FF78242A565900829871 /* Frameworks */ = {
@@ -212,6 +218,7 @@
 				11B16AC02C32B34F00ECA63A /* SignedInNavigationView.swift */,
 				11B16AC22C32B81200ECA63A /* ProfileTabNavigationView.swift */,
 				11B16AC42C32B84D00ECA63A /* HomeTabNavigationView.swift */,
+				494977182DD1D68A00F49899 /* CmpTabNavigationView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -219,6 +226,7 @@
 		1193BEEF2AEA986000C6203F /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				4949771A2DD1D81600F49899 /* cmp */,
 				11057D502CF5C429004A383B /* Profile */,
 				11D73F1C2CF4CF1A0088E48F /* Picker */,
 				5B21BD332C11C505005B6191 /* First */,
@@ -407,6 +415,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				4949771A2DD1D81600F49899 /* cmp */,
+			);
 			name = iosApp;
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -579,6 +590,7 @@
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,
 				11B16AC32C32B81200ECA63A /* ProfileTabNavigationView.swift in Sources */,
+				494977192DD1D69300F49899 /* CmpTabNavigationView.swift in Sources */,
 				112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */,
 				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
 				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,

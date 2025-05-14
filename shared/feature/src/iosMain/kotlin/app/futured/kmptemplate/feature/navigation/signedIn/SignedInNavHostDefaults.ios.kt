@@ -12,7 +12,8 @@ actual object SignedInNavHostDefaults {
     actual fun getInitialStack(
         initialConfig: SignedInConfig,
     ): List<SignedInConfig> = when (initialConfig) {
-        is SignedInConfig.Home -> listOf(SignedInConfig.Profile(), initialConfig)
-        is SignedInConfig.Profile -> listOf(SignedInConfig.Home(), initialConfig)
+        is SignedInConfig.Home -> listOf(SignedInConfig.Profile(), SignedInConfig.Cmp(), initialConfig)
+        is SignedInConfig.Profile -> listOf(SignedInConfig.Home(), SignedInConfig.Cmp(), initialConfig)
+        is SignedInConfig.Cmp -> listOf(SignedInConfig.Home(), SignedInConfig.Profile(), initialConfig)
     }
 }

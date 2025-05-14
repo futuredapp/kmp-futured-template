@@ -51,6 +51,8 @@ extension NavigationTab {
             "house.fill"
         case .profile:
             "person.crop.circle"
+        case .cmp:
+            "wrench.fill"
         }
     }
 }
