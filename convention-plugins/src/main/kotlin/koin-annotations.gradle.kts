@@ -29,6 +29,8 @@ dependencies {
 // WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
 tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
+        if (tasks.findByName("kspCommonMainKotlinMetadata") != null) {
+            dependsOn("kspCommonMainKotlinMetadata")
+        }
     }
 }
