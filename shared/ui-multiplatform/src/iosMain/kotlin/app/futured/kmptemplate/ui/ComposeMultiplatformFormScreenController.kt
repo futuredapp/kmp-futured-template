@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.ComposeUIViewController
 import app.futured.kmptemplate.feature.ui.formScreen.FormScreen
+import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.ui.screen.ComposeMultiplatformFormScreen
+import dev.icerock.moko.resources.compose.stringResource
 
 fun ComposeMultiplatformFormScreenController(screen: FormScreen) = ComposeUIViewController {
     MyApplicationTheme {

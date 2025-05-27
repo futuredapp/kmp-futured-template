@@ -1,38 +1,26 @@
 package app.futured.kmptemplate.android.ui.navigation
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.union
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.feature.navigation.signedIn.NavigationTab
 import app.futured.kmptemplate.feature.navigation.signedIn.SignedInChild
@@ -46,7 +34,6 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandler
-import timber.log.Timber
 
 @Composable
 fun SignedInNavHostUi(
@@ -61,9 +48,11 @@ fun SignedInNavHostUi(
         modifier = modifier,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            AnimatedVisibility(visible = WindowInsets.ime.getBottom(LocalDensity.current) ==0 ) {
-                NavigationBar(modifier = Modifier
-                    .fillMaxWidth()) {
+            AnimatedVisibility(visible = WindowInsets.ime.getBottom(LocalDensity.current) == 0) {
+                NavigationBar(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
                     for (tab in viewState.navigationTabs) {
                         NavigationBarItem(
                             selected = tab == viewState.selectedTab,
@@ -82,7 +71,7 @@ fun SignedInNavHostUi(
             onBack = actions::onBack,
             modifier = Modifier
                 .padding(paddingValues)
-                .imePadding()
+                .imePadding(),
         )
     }
 }

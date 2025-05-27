@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,10 +33,12 @@ import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.ui.MyApplicationTheme
 import app.futured.kmptemplate.ui.tools.SnackbarHost
 import app.futured.kmptemplate.ui.tools.SnackbarHostState
 import dev.icerock.moko.resources.compose.localized
 import dev.icerock.moko.resources.compose.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable
@@ -101,6 +105,35 @@ private fun Content(
                     textAlign = TextAlign.Center,
                 )
             }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewContent(){
+    MyApplicationTheme() {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background,
+        ) {
+            Content(
+                viewState = FirstViewState(),
+                actions = object: FirstScreen.Actions{
+                    override fun onNext() {
+
+                    }
+
+                    override fun switchToComposeMultiplatform() {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun switchToNative() {
+                        TODO("Not yet implemented")
+                    }
+                },
+                snackbarState = SnackbarHostState(),
+            )
         }
     }
 }

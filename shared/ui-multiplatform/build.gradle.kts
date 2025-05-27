@@ -63,3 +63,6 @@ android {
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }
+dependencies {
+    debugImplementation(libs.androidx.compose.ui.tooling)
+}
