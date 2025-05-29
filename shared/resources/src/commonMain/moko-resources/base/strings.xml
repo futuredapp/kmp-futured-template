@@ -59,6 +59,11 @@
     <string name="form_text_field_label_password">Password</string>
     <string name="form_text_field_label_confirm_password">Confirm Password</string>
     <string name="form_button_interop_screen">Continue</string>
+    <string name="form_alert_test">Show native alert</string>
+    <string name="form_alert_title">Alert title</string>
+    <string name="form_alert_message">Alert message</string>
+    <string name="form_alert_positive_button">Positive button</string>
+    <string name="form_alert_dismiss_button">Dismiss button</string>
 
     <string name="interop_check_launch_web">Launch in browser</string>
 

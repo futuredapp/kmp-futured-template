@@ -20,5 +20,7 @@ interface FormScreen {
         fun onPhoneChange(string: String)
         fun onPasswordChange(string: String)
         fun onNext()
+        fun onShowAlertDialog()
+
     }
 }

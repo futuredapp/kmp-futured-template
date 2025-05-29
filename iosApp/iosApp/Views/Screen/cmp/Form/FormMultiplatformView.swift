@@ -25,5 +25,8 @@ struct FormMultiplatformView<ViewModel: FormViewModelProtocol>: View {
     var body: some View {
         FormMultiplatformComposeView(viewModel.screen)
                 .ignoresSafeArea(.all) // we will use compose Window Insets API
+                .alert(viewModel.alertMessage, isPresented: viewModel.isAlertPresent) {
+                    Button(viewModel.alertPositiveButtonText) { viewModel.positiveAction() }
+                }
     }
 }

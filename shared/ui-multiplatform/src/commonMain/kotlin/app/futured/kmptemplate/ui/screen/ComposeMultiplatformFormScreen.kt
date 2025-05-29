@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,6 +40,7 @@ import app.futured.kmptemplate.feature.ui.formScreen.FormViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.ui.MyApplicationTheme
 import app.futured.kmptemplate.ui.tools.SnackbarHostState
+import app.futured.kmptemplate.ui.widgets.Alert
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -53,6 +55,9 @@ fun ComposeMultiplatformFormScreen(
     val viewState by screen.viewState.collectAsStateWithLifecycle(lifecycleOwner.lifecycle)
     val snackbarState = remember { SnackbarHostState() }
 
+    viewState.alertDialogUi?.also {
+        Alert(it)
+    }
     Content(viewState = viewState, actions = actions, modifier = modifier, snackbarState)
 
 }
@@ -177,9 +182,16 @@ private fun Content(
                     .testTag(stringResource(MR.strings.form_text_field_label_password)),
             )
 
-            Button(onClick = { actions.onNext() }) {
-                Text(text = stringResource(MR.strings.form_button_interop_screen))
+            Row {
+                Button(onClick = { actions.onNext() }) {
+                    Text(text = stringResource(MR.strings.form_button_interop_screen))
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Button(onClick = { actions.onShowAlertDialog() }) {
+                    Text(text = stringResource(MR.strings.form_alert_test))
+                }
             }
+
 
         }
     }
@@ -221,6 +233,10 @@ private fun PreviewContent() {
                     }
 
                     override fun onNext() {
+                    }
+
+                    override fun onShowAlertDialog() {
+                        TODO("Not yet implemented")
                     }
                 },
                 snackbarState = SnackbarHostState(),
