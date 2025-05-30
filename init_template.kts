@@ -104,7 +104,7 @@ findAndReplaceInFile(
     replaceWith = "${appPackageName}.${appName}UITest",
 )
 
-findAndReplaceInFileTree(parent = Path.of("iosApp"), search = "iosApp", replaceWith = appName)
+findAndReplaceInFileTree(parent = Path.of("iosApp/iosApp.xcodeproj"), search = "iosApp", replaceWith = appName)
 
 moveFileTree(
     parent = Path.of("iosApp"),
@@ -189,7 +189,13 @@ fun findAndReplaceInFileTree(
         .filter { path -> extensionFilter(path.extension) }
         .map { it.toFile() }
         .forEach { file ->
-            with(file) { writeText(readText(Charsets.UTF_8).replace(search, replaceWith)) }
+            with(file) {
+                val text = readText(Charsets.UTF_8)
+                val shouldOverwrite = text.contains(search)
+                if (shouldOverwrite) {
+                    writeText(text.replace(search, replaceWith))
+                }
+            }
         }
 }
 
@@ -255,7 +261,8 @@ fun readInput(): Pair<String, String> {
 }
 
 fun confirmBuild(): Boolean {
-    print("The script will now build Swift Package for the first time? [y/n]\n\n (This is optional, but needs to be done manually for the first time using './gradlew assembleKMPDebugXCFramework' in order for XCode build to work)")
+    println()
+    println("The script will now build Swift Package for the first time.\n(This is optional, but needs to be done manually for the first time using './gradlew assembleKMPDebugXCFramework' in order for XCode build to work)\n\nConfirm [Y/n]: ")
     return readlnOrNull()?.trim()?.lowercase() == "y"
 }
 
