@@ -142,6 +142,10 @@ moveFileTree(
 File("LICENSE").delete()
 File("init_template.kts").delete()
 
+if (confirmBuild()) {
+    ProcessBuilder("./gradlew", "assembleKMPDebugXCFramework").inheritIO().start().waitFor()
+}
+
 // endregion
 
 // region Functions
@@ -237,17 +241,22 @@ fun updateFastfileEnvVariables(file: File, varName: String, newValue: String) {
 
 fun readInput(): Pair<String, String> {
     print("Project name: ")
-    val appName: String = readLine()
+    val appName: String = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?.replace(" ", "_")
         ?: error("Invalid name entered")
 
     print("Package name (e.g. com.example.test): ")
-    val packageName = readLine()
+    val packageName = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?: error("Invalid package name")
 
     return Pair(appName, packageName)
+}
+
+fun confirmBuild(): Boolean {
+    print("The script will now build Swift Package for the first time? [y/n]\n\n (This is optional, but needs to be done manually for the first time using './gradlew assembleKMPDebugXCFramework' in order for XCode build to work)")
+    return readlnOrNull()?.trim()?.lowercase() == "y"
 }
 
 fun removeLicense() {
