@@ -262,7 +262,7 @@ fun readInput(): Pair<String, String> {
 
 fun confirmBuild(): Boolean {
     println()
-    println("The script will now build Swift Package for the first time.\n(This is optional, but needs to be done manually for the first time using './gradlew assembleKMPDebugXCFramework' in order for XCode build to work)\n\nConfirm [Y/n]: ")
+    println("The script will now build Swift Package for the first time.\n(You can skip this, but will need to do later using './gradlew assembleKMPDebugXCFramework')\n\nConfirm [Y/n]: ")
     return readlnOrNull()?.trim()?.lowercase() == "y"
 }
 
