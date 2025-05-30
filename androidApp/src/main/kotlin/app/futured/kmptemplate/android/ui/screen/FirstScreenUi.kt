@@ -3,6 +3,7 @@
 package app.futured.kmptemplate.android.ui.screen
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -79,20 +80,27 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text.localized())
+            Text(text = viewState.counter.localized())
             Spacer(modifier = Modifier.height(4.dp))
+            Text(text = viewState.createdAt.localized())
+            Spacer(modifier = Modifier.height(4.dp))
+            AnimatedVisibility(viewState.randomPerson != null) {
+                viewState.randomPerson?.let { person ->
+                    Column {
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = person.localized(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { actions.onNext() }) {
                 Text(text = kmpStringResource(MR.strings.first_screen_button))
-            }
-            viewState.randomPerson?.let { person ->
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = person.localized(),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    textAlign = TextAlign.Center,
-                )
             }
         }
     }
@@ -107,7 +115,7 @@ private fun FirstScreenPreview() {
     MyApplicationTheme {
         Surface {
             Content(
-                viewState = FirstViewState(text = "Hey there".desc()),
+                viewState = FirstViewState(counter = "Hey there".desc()),
                 actions = actions,
                 modifier = Modifier.fillMaxSize(),
             )
