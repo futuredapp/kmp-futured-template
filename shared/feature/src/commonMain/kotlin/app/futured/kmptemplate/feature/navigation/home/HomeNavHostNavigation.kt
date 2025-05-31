@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.home
 
+import app.futured.kmptemplate.feature.model.ui.Avatar
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenNavigation
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponent
@@ -24,11 +25,13 @@ internal class HomeNavigator : HomeNavHostNavigation {
     override fun FirstComponent.navigateToSecond() =
         navigator.pushNew(HomeConfig.Second)
 
+    override fun FirstComponent.navigateToThird(avatar: Avatar) {
+        navigator.pushNew(HomeConfig.Third(ThirdScreenArgs(avatar)))
+    }
+
     override fun SecondComponent.pop() =
         navigator.pop()
 
-    override fun SecondComponent.navigateToThird(id: String) =
-        navigator.pushNew(HomeConfig.Third(ThirdScreenArgs(id)))
 
     override fun ThirdComponent.pop() {
         navigator.pop()

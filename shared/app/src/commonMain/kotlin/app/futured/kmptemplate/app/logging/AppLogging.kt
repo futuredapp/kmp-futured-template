@@ -5,7 +5,6 @@ import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
 import kotlin.coroutines.cancellation.CancellationException
-import app.futured.kmptemplate.network.graphql.result.NetworkError as GraphqlNetworkError
 import app.futured.kmptemplate.network.rest.result.NetworkError as RestNetworkError
 
 /**
@@ -31,7 +30,6 @@ internal object AppLogging {
     )
 
     private fun throwableFilter(throwable: Throwable): Boolean = when (throwable) {
-        is GraphqlNetworkError.ConnectionError -> false
         is RestNetworkError.ConnectionError -> false
         is CancellationException -> false
         else -> true

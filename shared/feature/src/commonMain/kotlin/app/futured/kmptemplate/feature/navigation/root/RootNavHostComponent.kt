@@ -3,11 +3,10 @@ package app.futured.kmptemplate.feature.navigation.root
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkResolver
-import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostComponentFactory
+import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponentFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
-import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponentFactory
-import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
+import app.futured.kmptemplate.feature.ui.welcomeScreen.WelcomeComponentFactory
 import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.activate
@@ -34,37 +33,42 @@ internal class RootNavHostComponent(@InjectedParam componentContext: AppComponen
         handleBackButton = false,
         childFactory = { config, childCtx ->
             when (config) {
-                RootConfig.Login -> RootChild.Login(
-                    LoginComponentFactory.createComponent(
+                RootConfig.Intro -> RootChild.Intro(
+                    WelcomeComponentFactory.createComponent(
                         childCtx,
                         rootNavigator,
                     ),
                 )
 
-                is RootConfig.SignedIn -> RootChild.SignedIn(
-                    navHost = SignedInNavHostComponentFactory.createComponent(
+                is RootConfig.Home -> RootChild.Home(
+                    navHost = HomeNavHostComponentFactory.createComponent(
                         componentContext = childCtx,
-                        navigationToLogin = { rootNavigator.slotNavigator.activate(RootConfig.Login) },
-                        initialConfig = config.initialConfig,
+                        initialStack = config.initialStack,
                     ),
                 )
             }
         },
     ).asStateFlow()
 
-    init {
-        doOnCreate {
-            if (!consumeDeepLink()) {
-                rootNavigator.slotNavigator.activate(RootConfig.Login)
-            }
-        }
-    }
 
     override val actions: RootNavHost.Actions = object : RootNavHost.Actions {
         override fun onDeepLink(uri: String) {
             val deepLinkDestination = deepLinkResolver.resolve(uri) ?: return
             pendingDeepLink = deepLinkDestination
             consumeDeepLink()
+        }
+
+        override fun updateCameraPermission(allowed: Boolean) {
+            if (!consumeDeepLink()) {
+                rootNavigator.slotNavigator.activate(
+                    if (allowed) {
+                        RootConfig.Home()
+                    } else {
+                        RootConfig.Intro
+                    },
+                )
+            }
+
         }
     }
 
@@ -77,9 +81,6 @@ internal class RootNavHostComponent(@InjectedParam componentContext: AppComponen
         val deepLink = pendingDeepLink ?: return false
         val deepLinkConfig = when (deepLink) {
             DeepLinkDestination.HomeTab -> RootConfig.deepLinkHome()
-            DeepLinkDestination.ProfileTab -> RootConfig.deepLinkProfile()
-            DeepLinkDestination.SecondScreen -> RootConfig.deepLinkSecondScreen()
-            is DeepLinkDestination.ThirdScreen -> RootConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument))
         }
         rootNavigator.slotNavigator.activate(deepLinkConfig)
         return true

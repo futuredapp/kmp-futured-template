@@ -15,6 +15,7 @@ import app.futured.kmptemplate.android.ui.navigation.RootNavHostUi
 import app.futured.kmptemplate.feature.navigation.root.RootNavHost
 import app.futured.kmptemplate.feature.navigation.root.RootNavHostFactory
 import app.futured.kmptemplate.feature.ui.base.DefaultAppComponentContext
+import app.futured.mdevcamp.android.ui.theme.AppTheme
 import com.arkivanov.decompose.retainedComponent
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
+            AppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun RootNavHost.handleIntent(intent: Intent?) {
-        if (intent == null) {
+        if (intent==null) {
             return
         }
 

@@ -123,4 +123,7 @@ dependencies {
 
     implementation(libs.androidx.profileinstaller)
     baselineProfile(projects.baselineprofile)
+
+
+    implementation(libs.coil.compose)
 }

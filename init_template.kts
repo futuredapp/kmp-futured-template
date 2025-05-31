@@ -265,18 +265,18 @@ fun updateFastfileEnvVariables(file: File, varName: String, newValue: String) {
 
 fun readInput(): Triple<String, String, String> {
     print("Project name: ")
-    val appName: String = readLine()
+    val appName: String = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?.replace(" ", "_")
         ?: error("You need to enter name")
 
     print("Package name (e.g. com.example.test): ")
-    val packageName = readLine()
+    val packageName = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?: error("You need to enter package name")
 
     print("Framework name: (default 'shared'): ")
-    val frameworkName = readLine()
+    val frameworkName = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?.replace(" ", "_")
         ?: "shared"

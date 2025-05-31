@@ -5,8 +5,8 @@ package app.futured.kmptemplate.gradle.configuration
  */
 interface ProductFlavor {
     val name: String
-    val apolloApiUrl: String
     val restApiUrl: String
+    val apiKey: String
 }
 
 object ProductFlavors {
@@ -15,13 +15,13 @@ object ProductFlavors {
 
     object Dev : ProductFlavor {
         override val name: String = "dev"
-        override val apolloApiUrl: String = "https://rickandmortyapi.com/graphql"
-        override val restApiUrl: String = "https://swapi.dev/api/"
+        override val restApiUrl: String = "https://king-prawn-app-w8kae.ondigitalocean.app/api/v1/"
+        override val apiKey: String = ""
     }
 
     object Prod : ProductFlavor {
         override val name: String = "prod"
-        override val apolloApiUrl: String = "https://rickandmortyapi.com/graphql"
-        override val restApiUrl: String = "https://swapi.dev/api/"
+        override val restApiUrl: String = "https://king-prawn-app-w8kae.ondigitalocean.app/api/v1/"
+        override val apiKey: String = ""
     }
 }

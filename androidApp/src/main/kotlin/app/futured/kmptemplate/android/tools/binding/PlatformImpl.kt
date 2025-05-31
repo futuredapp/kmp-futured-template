@@ -7,7 +7,7 @@ import app.futured.kmptemplate.platform.binding.Platform
 import app.futured.kmptemplate.resources.MR
 
 class PlatformImpl(applicationContext: Context) : Platform {
-    override val appName: String = MR.strings.template_app_name.getString(applicationContext)
+    override val appName: String = MR.strings.app_name.getString(applicationContext)
     override val appVersionName: String = BuildConfig.VERSION_NAME
     override val appBuildNumber: String = BuildConfig.VERSION_CODE.toString()
     override val applicationId: String = BuildConfig.APPLICATION_ID
