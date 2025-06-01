@@ -88,8 +88,9 @@ extension FirstViewModel: FirstViewModelProtocol {
 
         self.image = image
 
-        guard let jpegData = image.jpegData(compressionQuality: 0.6) else { return }
-        // swiftlint:disable:next force_unwrapping
+        guard let jpegData = image.jpegData(compressionQuality: 0.6) else {
+            return
+        }
         let swiftByteArray: [Int8] = jpegData.map { Int8(bitPattern: $0) }
         let kotlinByteArray: KotlinByteArray = KotlinByteArray(size: Int32(swiftByteArray.count))
         for (index, element) in swiftByteArray.enumerated() {
@@ -100,7 +101,9 @@ extension FirstViewModel: FirstViewModelProtocol {
     }
 
     func refresh() async {
-        guard !isLoading else { return }
+        guard !isLoading else {
+            return
+        }
         actions.onRetry()
         try? await Task.sleep(for: .seconds(3))
     }

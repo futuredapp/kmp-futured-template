@@ -27,7 +27,7 @@ struct AppBackground: View {
             .ignoresSafeArea()
             .overlay {
                 if showColors {
-                    BluredColorsView()
+                    BlurredColorsView()
                         .frame(maxHeight: .infinity, alignment: .top)
                         .offset(offset)
                 }

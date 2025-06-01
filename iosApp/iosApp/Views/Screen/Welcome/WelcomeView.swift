@@ -28,7 +28,6 @@ struct WelcomeView<ViewModel: WelcomeViewModelProtocol>: View {
             }
         }
         .padding(.horizontal, 20)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .appBackground(showColors: false)
     }
 
@@ -73,12 +72,6 @@ struct WelcomeView<ViewModel: WelcomeViewModelProtocol>: View {
         Text(Localizable.onboarding_camera_permission_title.localized)
             .appFont(.heading1)
             .padding(.top, 8)
-    }
-
-    private var description: some View {
-        Text(Localizable.onboarding_camera_permission_description.localized)
-            .appFont(.description2)
-            .padding(.top, 20)
     }
 
     private var divider: some View {

@@ -51,9 +51,14 @@ struct FirstView<ViewModel: FirstViewModelProtocol & ImageHandlingViewModelProto
            }
            .sheet(isPresented: $isCameraPresented) {
                SelfieView(
-                              selection: photoBinding,
-                              cameraPermissionAlertConfiguration: .init(title: "", message: "", dismissButtonTitle: "", settingsButtonTitle: "")
-                          )
+                selection: photoBinding,
+                cameraPermissionAlertConfiguration: .init(
+                    title: "",
+                    message: "",
+                    dismissButtonTitle: "",
+                    settingsButtonTitle: ""
+                )
+               )
            }
        }
 

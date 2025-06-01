@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct BluredColorsView: View {
+struct BlurredColorsView: View {
     @State private var scale: CGFloat = 1
-    private let shouldOffest: Bool
+    private let shouldOffset: Bool
 
-    init(shouldOffest: Bool = true) {
-        self.shouldOffest = shouldOffest
+    init(shouldOffset: Bool = true) {
+        self.shouldOffset = shouldOffset
     }
 
     var body: some View {
@@ -18,7 +18,7 @@ struct BluredColorsView: View {
         .padding(20)
         .blur(radius: 75)
         .frame(maxHeight: UIScreen.main.bounds.height / 2)
-        .offset(y: shouldOffest ? -UIScreen.main.bounds.height / 8 : 0)
+        .offset(y: shouldOffset ? -UIScreen.main.bounds.height / 8 : 0)
         .scaleEffect(scale)
         .onAppear {
             withAnimation(
@@ -32,5 +32,5 @@ struct BluredColorsView: View {
 }
 
 #Preview {
-    BluredColorsView()
+    BlurredColorsView()
 }

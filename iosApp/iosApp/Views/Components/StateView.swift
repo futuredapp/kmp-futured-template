@@ -33,7 +33,7 @@ struct StateView<Content: View>: View {
     var body: some View {
         if let error {
             ZStack {
-                BluredColorsView(shouldOffest: false)
+                BlurredColorsView(shouldOffset: false)
                 VStack(spacing: 10) {
                     Text(error.title.localized())
                         .appFont(.heading1)

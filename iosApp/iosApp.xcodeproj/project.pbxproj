@@ -38,7 +38,7 @@
 		E7CD91962DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */; };
 		E7CD91982DEC5B8100DB5FB1 /* GradientColoredText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */; };
 		E7EFAF102DEC3F30003F9DD6 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF0F2DEC3F01003F9DD6 /* StateView.swift */; };
-		E7EFAF122DEC416E003F9DD6 /* BluredColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF112DEC4165003F9DD6 /* BluredColorsView.swift */; };
+		E7EFAF122DEC416E003F9DD6 /* BlurredColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF112DEC4165003F9DD6 /* BlurredColorsView.swift */; };
 		E7EFAF192DEC4293003F9DD6 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF132DEC4293003F9DD6 /* AppFont.swift */; };
 		E7EFAF1A2DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EFAF162DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf */; };
 		E7EFAF1B2DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EFAF172DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf */; };
@@ -128,7 +128,7 @@
 		E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPlaceholderView.swift; sourceTree = "<group>"; };
 		E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColoredText.swift; sourceTree = "<group>"; };
 		E7EFAF0F2DEC3F01003F9DD6 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
-		E7EFAF112DEC4165003F9DD6 /* BluredColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredColorsView.swift; sourceTree = "<group>"; };
+		E7EFAF112DEC4165003F9DD6 /* BlurredColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredColorsView.swift; sourceTree = "<group>"; };
 		E7EFAF132DEC4293003F9DD6 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		E7EFAF142DEC4293003F9DD6 /* Assets 2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 2.xcassets"; sourceTree = "<group>"; };
 		E7EFAF152DEC4293003F9DD6 /* AzeretMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AzeretMono-Medium.ttf"; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */,
-				E7EFAF112DEC4165003F9DD6 /* BluredColorsView.swift */,
+				E7EFAF112DEC4165003F9DD6 /* BlurredColorsView.swift */,
 				E7EFAF0F2DEC3F01003F9DD6 /* StateView.swift */,
 				E7EFAF332DEC43D6003F9DD6 /* AppButton.swift */,
 				E7EFAF352DEC43E2003F9DD6 /* LoadingView.swift */,
@@ -647,7 +647,7 @@
 				E7EFAF472DEC538B003F9DD6 /* SelfieView.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
-				E7EFAF122DEC416E003F9DD6 /* BluredColorsView.swift in Sources */,
+				E7EFAF122DEC416E003F9DD6 /* BlurredColorsView.swift in Sources */,
 				E7EFAF362DEC43E2003F9DD6 /* LoadingView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
