@@ -15,5 +15,7 @@ interface FirstScreen {
         fun onCameraPermissionDenied()
         fun onRetry()
         fun onRetakePhoto(imageName: String, imageData: ByteArray)
+
+        fun loadAvatars()
     }
 }

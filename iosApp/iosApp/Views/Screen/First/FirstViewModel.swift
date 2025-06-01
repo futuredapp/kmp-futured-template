@@ -14,6 +14,8 @@ protocol FirstViewModelProtocol: DynamicProperty {
     func createNewAvatar()
     func select(avatar: Avatar)
     func refresh() async
+
+    func loadAvatars()
 }
 
 struct FirstViewModel: ImageHandlingViewModelProtocol {
@@ -101,5 +103,9 @@ extension FirstViewModel: FirstViewModelProtocol {
         guard !isLoading else { return }
         actions.onRetry()
         try? await Task.sleep(for: .seconds(3))
+    }
+
+    func loadAvatars() {
+       actions.loadAvatars()
     }
 }

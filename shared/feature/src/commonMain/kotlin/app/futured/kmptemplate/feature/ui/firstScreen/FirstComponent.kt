@@ -133,6 +133,10 @@ internal class FirstComponent(
         }
     }
 
+    override fun loadAvatars() {
+        getAvatars()
+    }
+
     private fun loadPhoto() {
         loadPhotoUseCase.execute {
             onStart {

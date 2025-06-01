@@ -31,6 +31,8 @@
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
 		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
 		5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */; };
+		E750E8F32DEC923300D49EFA /* AvatarStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750E8F22DEC923300D49EFA /* AvatarStyleView.swift */; };
+		E750E8F52DECA6BA00D49EFA /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750E8F42DECA6BA00D49EFA /* ShareSheet.swift */; };
 		E7CD91922DEC59F800DB5FB1 /* FuturedKit in Frameworks */ = {isa = PBXBuildFile; productRef = E7CD91912DEC59F800DB5FB1 /* FuturedKit */; };
 		E7CD91942DEC5B0100DB5FB1 /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91932DEC5B0100DB5FB1 /* RemoteImageView.swift */; };
 		E7CD91962DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */; };
@@ -120,6 +122,8 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7FFCC52B691F0400A70102 /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		DC7FFCC72B69297800A70102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E750E8F22DEC923300D49EFA /* AvatarStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStyleView.swift; sourceTree = "<group>"; };
+		E750E8F42DECA6BA00D49EFA /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		E7CD91932DEC5B0100DB5FB1 /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPlaceholderView.swift; sourceTree = "<group>"; };
 		E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColoredText.swift; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 			children = (
 				1193BEF72AEA989F00C6203F /* SecondView.swift */,
 				5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */,
+				E750E8F22DEC923300D49EFA /* AvatarStyleView.swift */,
 			);
 			path = Second;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				E7EFAF462DEC538B003F9DD6 /* SelfieView.swift */,
 				E7CD91932DEC5B0100DB5FB1 /* RemoteImageView.swift */,
 				E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */,
+				E750E8F42DECA6BA00D49EFA /* ShareSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -645,6 +651,7 @@
 				E7EFAF362DEC43E2003F9DD6 /* LoadingView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
+				E750E8F32DEC923300D49EFA /* AvatarStyleView.swift in Sources */,
 				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
@@ -677,6 +684,7 @@
 				112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */,
 				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
 				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,
+				E750E8F52DECA6BA00D49EFA /* ShareSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

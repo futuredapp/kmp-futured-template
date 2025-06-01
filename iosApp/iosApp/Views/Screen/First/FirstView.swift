@@ -22,7 +22,9 @@ struct FirstView<ViewModel: FirstViewModelProtocol & ImageHandlingViewModelProto
 
     private var wrappedContent: some View {
         StateView(state: viewModel.state) {
-            content
+            content.task {
+                viewModel.loadAvatars()
+            }
         }
     }
 
@@ -49,9 +51,9 @@ struct FirstView<ViewModel: FirstViewModelProtocol & ImageHandlingViewModelProto
            }
            .sheet(isPresented: $isCameraPresented) {
                SelfieView(
-                   selection: photoBinding,
-                   cameraPermissionAlertConfiguration: .init(title: "", message: "", dismissButtonTitle: "", settingsButtonTitle: "")
-               )
+                              selection: photoBinding,
+                              cameraPermissionAlertConfiguration: .init(title: "", message: "", dismissButtonTitle: "", settingsButtonTitle: "")
+                          )
            }
        }
 
@@ -171,8 +173,8 @@ extension AvatarStyle {
 
 extension Array {
     func chunked(into size: Int) -> [[Element]] {
-        stride(from: 0, to: count, by: size).map {
+       stride(from: 0, to: count, by: size).map {
             Array(self[$0 ..< Swift.min($0 + size, count)])
-        }
+       }
     }
 }
