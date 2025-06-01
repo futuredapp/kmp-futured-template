@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "place_team_sticker_here.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

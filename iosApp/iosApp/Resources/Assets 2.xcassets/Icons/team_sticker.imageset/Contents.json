@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "team_sticker.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

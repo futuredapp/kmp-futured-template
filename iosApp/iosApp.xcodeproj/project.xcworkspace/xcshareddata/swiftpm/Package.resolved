@@ -1,0 +1,33 @@
+{
+  "originHash" : "a766e3af0eeea61e2f86bd760f2a475b4dea78453bbe485af07742587fb6eed4",
+  "pins" : [
+    {
+      "identity" : "bindingkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mkj-is/BindingKit",
+      "state" : {
+        "revision" : "fe58851b967301ec5c391a2c34979b676b854f89",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "collectionconcurrencykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnSundell/CollectionConcurrencyKit",
+      "state" : {
+        "revision" : "b4f23e24b5a1bff301efc5e70871083ca029ff95",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "futuredkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/futuredapp/FuturedKit.git",
+      "state" : {
+        "revision" : "6e10154aae361da530bf38b3add45978678facee",
+        "version" : "0.5.0"
+      }
+    }
+  ],
+  "version" : 3
+}
