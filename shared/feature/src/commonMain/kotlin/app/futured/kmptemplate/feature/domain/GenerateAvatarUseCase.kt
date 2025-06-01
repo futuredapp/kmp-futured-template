@@ -12,7 +12,7 @@ internal class GenerateAvatarUseCase(
 ) : UseCase<GenerateAvatarUseCase.Args, Unit>() {
 
     override suspend fun build(args: Args): Unit {
-        val srcUrl = rembrandApi.getAvatarSrc().getOrThrow().last()
+        val srcUrl = rembrandApi.getAvatarSrc().getOrThrow().data.last()
 
         rembrandApi.generateAvatar(
             GenerateAvatarRequest(
@@ -20,7 +20,7 @@ internal class GenerateAvatarUseCase(
                 poseImageUrl = srcUrl,
                 styleId = args.styleId,
             ),
-        ).getOrThrow()
+        ).getOrThrow().data
     }
 
     class Args(val styleId: Long)

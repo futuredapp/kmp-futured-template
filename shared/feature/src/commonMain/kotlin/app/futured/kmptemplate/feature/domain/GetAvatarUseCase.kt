@@ -13,8 +13,8 @@ internal class GetAvatarsUseCase(
 ) : UseCase<Unit, List<Avatar>>() {
 
     override suspend fun build(args: Unit): List<Avatar> {
-        val styles = rembrandApi.getAvatarStyles().getOrThrow().map { it.toUiModel() }
-        return rembrandApi.getAvatars().getOrThrow().mapNotNull { avatar ->
+        val styles = rembrandApi.getAvatarStyles().getOrThrow().data.map { it.toUiModel() }
+        return rembrandApi.getAvatars().getOrThrow().data.mapNotNull { avatar ->
             styles.find { it.id==avatar.styleId }?.let { style ->
                 avatar.toUiModel(style)
             }

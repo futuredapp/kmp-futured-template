@@ -16,7 +16,7 @@ internal class UploadPhotoUseCase(
     override suspend fun build(args: Args): String {
         val photos = rembrandApi.uploadAvatarSrc(
             uploadAvatarPartData(filename = args.filename, args.image),
-        ).getOrThrow()
+        ).getOrThrow().data
 
         userPersistence.savePhotoUrl(photos.last())
 

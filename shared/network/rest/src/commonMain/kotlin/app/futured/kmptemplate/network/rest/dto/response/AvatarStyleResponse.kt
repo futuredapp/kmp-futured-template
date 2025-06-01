@@ -9,3 +9,8 @@ data class AvatarStyleResponse(
     @SerialName("Name") val name: String,
     @SerialName("Preview") val preview: String,
 )
+
+@Serializable
+data class StyleResponseWrapper(
+    @SerialName("Data") val data: List<AvatarStyleResponse>,
+)

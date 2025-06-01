@@ -13,7 +13,7 @@ internal class GetStylesUseCase(
 ) : UseCase<Unit, List<AvatarStyle>>() {
 
     override suspend fun build(args: Unit): List<AvatarStyle> {
-        return rembrandAp.getAvatarStyles().getOrThrow()
+        return rembrandAp.getAvatarStyles().getOrThrow().data
             .map { it.toUiModel() }
     }
 }

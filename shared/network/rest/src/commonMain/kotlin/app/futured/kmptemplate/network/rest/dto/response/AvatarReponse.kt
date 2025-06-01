@@ -12,6 +12,11 @@ data class AvatarResponse(
     @SerialName("StyleId") val styleId: Long,
 )
 
+@Serializable
+data class AvatarResponseWrapper(
+    @SerialName("Data") val data: List<AvatarResponse>,
+)
+
 enum class AvatarStatus(val value: String) {
     Starting("starting"),
     Processing("processing"),

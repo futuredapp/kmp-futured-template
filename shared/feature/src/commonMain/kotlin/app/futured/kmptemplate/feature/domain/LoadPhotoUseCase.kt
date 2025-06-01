@@ -14,7 +14,7 @@ internal class LoadPhotoUseCase(
 ) : UseCase<Unit, String?>() {
 
     override suspend fun build(args: Unit): String? {
-        val photos = rembrandApi.getAvatarSrc().getOrThrow()
+        val photos = rembrandApi.getAvatarSrc().getOrThrow().data
         val res = photos.lastOrNull()?.run {
             userPersistence.savePhotoUrl(this)
             this
