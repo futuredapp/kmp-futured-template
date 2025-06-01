@@ -34,7 +34,7 @@ class ShareSheetItem: NSObject, UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
         metadata.title = title
-        metadata.imageProvider = .init(object: UIImage(named: "AppIcon")!)
+        metadata.imageProvider = .init(object: UIImage(resource: .app))
         metadata.originalURL = .init(fileURLWithPath: subtitle)
         return metadata
     }

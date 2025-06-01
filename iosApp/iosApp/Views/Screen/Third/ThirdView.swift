@@ -12,7 +12,7 @@ struct ThirdView<ViewModel: ThirdViewModelProtocol>: View {
 
     var body: some View {
         wrappedContent
-                   .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder private var wrappedContent: some View {
