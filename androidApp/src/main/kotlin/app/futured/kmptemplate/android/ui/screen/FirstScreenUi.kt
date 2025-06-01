@@ -274,6 +274,7 @@ private fun FirstScreenPreview() {
         override fun onCameraPermissionDenied() = Unit
         override fun onRetry() = Unit
         override fun onRetakePhoto(imageName: String, imageData: ByteArray) = Unit
+        override fun loadAvatars() = Unit
     }
     MyApplicationTheme {
         Surface {
