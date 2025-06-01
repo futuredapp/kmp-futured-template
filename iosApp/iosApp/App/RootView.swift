@@ -12,6 +12,8 @@ struct RootView: View {
 
     var body: some View {
         RootNavigationView(componentHolder.component)
+            .tint(.white)
+            .environment(\.colorScheme, .dark)
             .onChange(of: scenePhase) { newPhase in
                 switch newPhase {
                 case .background:
