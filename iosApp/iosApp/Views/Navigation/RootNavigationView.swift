@@ -15,10 +15,10 @@ struct RootNavigationView: View {
         ZStack {
             if let navigationEntry = slot.child?.instance {
                 switch onEnum(of: navigationEntry) {
-                case .login(let entry):
+                case .intro(let entry):
                     LoginView(LoginViewModel(entry.screen)).id(entry.iosViewId)
-                case .signedIn(let entry):
-                    SignedInNavigationView(entry.navHost).id(entry.iosViewId)
+                case .home(let entry):
+                    HomeTabNavigationView(entry.navHost).id(entry.iosViewId)
                 }
             }
         }

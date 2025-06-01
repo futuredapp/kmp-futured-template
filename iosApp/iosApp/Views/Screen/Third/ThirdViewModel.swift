@@ -2,7 +2,6 @@ import KMP
 import SwiftUI
 
 protocol ThirdViewModelProtocol: DynamicProperty {
-    var text: String { get }
 }
 
 struct ThirdViewModel {
@@ -16,7 +15,4 @@ struct ThirdViewModel {
 }
 
 extension ThirdViewModel: ThirdViewModelProtocol {
-    var text: String {
-        viewState.text.localized()
-    }
 }

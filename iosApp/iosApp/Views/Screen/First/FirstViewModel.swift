@@ -2,14 +2,12 @@ import KMP
 import SwiftUI
 
 protocol FirstViewModelProtocol: DynamicProperty {
-    var text: String { get }
-    var randomPerson: String? { get }
+
     var events: SkieSwiftFlow<FirstUiEvent> { get }
     var isAlertVisible: Binding<Bool> { get }
     var alertText: String { get }
 
     func onNext()
-    func showToast(event: FirstUiEvent.ShowToast)
     func hideToast()
 }
 
@@ -29,13 +27,6 @@ struct FirstViewModel {
 }
 
 extension FirstViewModel: FirstViewModelProtocol {
-    var text: String {
-        viewState.text.localized()
-    }
-
-    var randomPerson: String? {
-        viewState.randomPerson?.localized()
-    }
 
     var isAlertVisible: Binding<Bool> {
         Binding(
@@ -45,12 +36,6 @@ extension FirstViewModel: FirstViewModelProtocol {
     }
 
     func onNext() {
-        actions.onNext()
-    }
-
-    func showToast(event: FirstUiEvent.ShowToast) {
-        alertText = event.text.localized()
-        alertVisible = true
     }
 
     func hideToast() {

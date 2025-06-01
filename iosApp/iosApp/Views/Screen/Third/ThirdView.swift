@@ -10,8 +10,6 @@ struct ThirdView<ViewModel: ThirdViewModelProtocol>: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(viewModel.text)
         }
-        .navigationTitle(Localizable.third_screen_title.localized)
     }
 }

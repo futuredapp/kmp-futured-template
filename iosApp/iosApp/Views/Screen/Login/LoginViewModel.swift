@@ -6,10 +6,10 @@ protocol LoginViewModelProtocol: DynamicProperty {
 }
 
 struct LoginViewModel {
-    @StateObject @KotlinStateFlow private var viewState: LoginViewState
-    private let actions: LoginScreenActions
+    @StateObject @KotlinStateFlow private var viewState: WelcomeViewState
+    private let actions: WelcomeScreenActions
 
-    init(_ screen: LoginScreen) {
+    init(_ screen: WelcomeScreen) {
         _viewState = .init(screen.viewState)
         actions = screen.actions
     }
@@ -17,6 +17,5 @@ struct LoginViewModel {
 
 extension LoginViewModel: LoginViewModelProtocol {
     func onLoginClick() {
-        actions.onLoginClick()
     }
 }
