@@ -18,6 +18,8 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+    <string>We will make a great avatar from the photo you take</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */; };
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
@@ -32,6 +31,31 @@
 		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
 		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
 		5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */; };
+		E7CD91922DEC59F800DB5FB1 /* FuturedKit in Frameworks */ = {isa = PBXBuildFile; productRef = E7CD91912DEC59F800DB5FB1 /* FuturedKit */; };
+		E7CD91942DEC5B0100DB5FB1 /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91932DEC5B0100DB5FB1 /* RemoteImageView.swift */; };
+		E7CD91962DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */; };
+		E7CD91982DEC5B8100DB5FB1 /* GradientColoredText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */; };
+		E7EFAF102DEC3F30003F9DD6 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF0F2DEC3F01003F9DD6 /* StateView.swift */; };
+		E7EFAF122DEC416E003F9DD6 /* BluredColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF112DEC4165003F9DD6 /* BluredColorsView.swift */; };
+		E7EFAF192DEC4293003F9DD6 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF132DEC4293003F9DD6 /* AppFont.swift */; };
+		E7EFAF1A2DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EFAF162DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf */; };
+		E7EFAF1B2DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EFAF172DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf */; };
+		E7EFAF1C2DEC4293003F9DD6 /* AzeretMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EFAF152DEC4293003F9DD6 /* AzeretMono-Medium.ttf */; };
+		E7EFAF1D2DEC4293003F9DD6 /* Assets 2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7EFAF142DEC4293003F9DD6 /* Assets 2.xcassets */; };
+		E7EFAF2E2DEC438F003F9DD6 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF2C2DEC438F003F9DD6 /* ErrorAlertModifier.swift */; };
+		E7EFAF2F2DEC438F003F9DD6 /* BadgeViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF2B2DEC438F003F9DD6 /* BadgeViewModifier.swift */; };
+		E7EFAF302DEC438F003F9DD6 /* AppFontModfier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF2A2DEC438F003F9DD6 /* AppFontModfier.swift */; };
+		E7EFAF312DEC438F003F9DD6 /* AppBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF292DEC438F003F9DD6 /* AppBackgroundModifier.swift */; };
+		E7EFAF322DEC438F003F9DD6 /* ReadSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF2D2DEC438F003F9DD6 /* ReadSizeModifier.swift */; };
+		E7EFAF342DEC43D6003F9DD6 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF332DEC43D6003F9DD6 /* AppButton.swift */; };
+		E7EFAF362DEC43E2003F9DD6 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF352DEC43E2003F9DD6 /* LoadingView.swift */; };
+		E7EFAF382DEC44A9003F9DD6 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF372DEC44A9003F9DD6 /* UIApplication+Extensions.swift */; };
+		E7EFAF3C2DEC44E7003F9DD6 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF3B2DEC44E7003F9DD6 /* WelcomeViewModel.swift */; };
+		E7EFAF3D2DEC44E7003F9DD6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF3A2DEC44E7003F9DD6 /* WelcomeView.swift */; };
+		E7EFAF402DEC52ED003F9DD6 /* ImageHandlingViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF3F2DEC52ED003F9DD6 /* ImageHandlingViewModelProtocol.swift */; };
+		E7EFAF422DEC5327003F9DD6 /* CahcedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF412DEC5327003F9DD6 /* CahcedAsyncImage.swift */; };
+		E7EFAF452DEC5361003F9DD6 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF442DEC5361003F9DD6 /* FileService.swift */; };
+		E7EFAF472DEC538B003F9DD6 /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFAF462DEC538B003F9DD6 /* SelfieView.swift */; };
 		F4820AB72B0B51A100B13080 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4820AB62B0B51A100B13080 /* XCTest.framework */; };
 		F4820AB82B0B523E00B13080 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AA02B0B4D3E00B13080 /* iosAppTests.swift */; };
 		F4820AC22B0B528100B13080 /* iosAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AC12B0B528100B13080 /* iosAppUITestsLaunchTests.swift */; };
@@ -68,7 +92,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformBindingsImpl.swift; sourceTree = "<group>"; };
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +120,30 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7FFCC52B691F0400A70102 /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		DC7FFCC72B69297800A70102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E7CD91932DEC5B0100DB5FB1 /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
+		E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPlaceholderView.swift; sourceTree = "<group>"; };
+		E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColoredText.swift; sourceTree = "<group>"; };
+		E7EFAF0F2DEC3F01003F9DD6 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		E7EFAF112DEC4165003F9DD6 /* BluredColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredColorsView.swift; sourceTree = "<group>"; };
+		E7EFAF132DEC4293003F9DD6 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		E7EFAF142DEC4293003F9DD6 /* Assets 2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 2.xcassets"; sourceTree = "<group>"; };
+		E7EFAF152DEC4293003F9DD6 /* AzeretMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AzeretMono-Medium.ttf"; sourceTree = "<group>"; };
+		E7EFAF162DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FF_DIN_Pro_Medium_Italic.otf; sourceTree = "<group>"; };
+		E7EFAF172DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FF_DIN_Pro_Regular_Italic.otf; sourceTree = "<group>"; };
+		E7EFAF292DEC438F003F9DD6 /* AppBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBackgroundModifier.swift; sourceTree = "<group>"; };
+		E7EFAF2A2DEC438F003F9DD6 /* AppFontModfier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFontModfier.swift; sourceTree = "<group>"; };
+		E7EFAF2B2DEC438F003F9DD6 /* BadgeViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModifier.swift; sourceTree = "<group>"; };
+		E7EFAF2C2DEC438F003F9DD6 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
+		E7EFAF2D2DEC438F003F9DD6 /* ReadSizeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadSizeModifier.swift; sourceTree = "<group>"; };
+		E7EFAF332DEC43D6003F9DD6 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		E7EFAF352DEC43E2003F9DD6 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		E7EFAF372DEC44A9003F9DD6 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		E7EFAF3A2DEC44E7003F9DD6 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		E7EFAF3B2DEC44E7003F9DD6 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		E7EFAF3F2DEC52ED003F9DD6 /* ImageHandlingViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingViewModelProtocol.swift; sourceTree = "<group>"; };
+		E7EFAF412DEC5327003F9DD6 /* CahcedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CahcedAsyncImage.swift; sourceTree = "<group>"; };
+		E7EFAF442DEC5361003F9DD6 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		E7EFAF462DEC538B003F9DD6 /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
 		F4820AA02B0B4D3E00B13080 /* iosAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppTests.swift; sourceTree = "<group>"; };
 		F4820AAC2B0B4D6E00B13080 /* iosAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4820AB62B0B51A100B13080 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -110,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11B83C232D79C075007D03F7 /* KMP in Frameworks */,
+				E7CD91922DEC59F800DB5FB1 /* FuturedKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +221,8 @@
 		1193BEED2AEA985200C6203F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7EFAF1E2DEC435D003F9DD6 /* ViewModifiers */,
+				E7EFAF0E2DEC3EFB003F9DD6 /* Components */,
 				1193BEEF2AEA986000C6203F /* Screen */,
 				1193BEEE2AEA985B00C6203F /* Navigation */,
 			);
@@ -192,6 +242,7 @@
 		1193BEEF2AEA986000C6203F /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				E7EFAF392DEC44D6003F9DD6 /* Welcome */,
 				5B21BD332C11C505005B6191 /* First */,
 				5B21BD342C11C50E005B6191 /* Second */,
 				5B21BD352C11C513005B6191 /* Third */,
@@ -212,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				119A92E72B0F37A300D93E98 /* MR+Extensions.swift */,
+				E7EFAF372DEC44A9003F9DD6 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -287,6 +339,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				E7EFAF432DEC5353003F9DD6 /* Common */,
+				E7EFAF3E2DEC52DC003F9DD6 /* Protocols */,
 				DC7FFCC72B69297800A70102 /* Info.plist */,
 				1193BEE22AEA89D800C6203F /* Architecture */,
 				1113BA392AE6955200ABDE61 /* Platform */,
@@ -310,9 +364,74 @@
 		DC7FFCC62B69251D00A70102 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+				E7EFAF132DEC4293003F9DD6 /* AppFont.swift */,
+				E7EFAF142DEC4293003F9DD6 /* Assets 2.xcassets */,
+				E7EFAF182DEC4293003F9DD6 /* Fonts */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		E7EFAF0E2DEC3EFB003F9DD6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E7CD91972DEC5B8100DB5FB1 /* GradientColoredText.swift */,
+				E7EFAF112DEC4165003F9DD6 /* BluredColorsView.swift */,
+				E7EFAF0F2DEC3F01003F9DD6 /* StateView.swift */,
+				E7EFAF332DEC43D6003F9DD6 /* AppButton.swift */,
+				E7EFAF352DEC43E2003F9DD6 /* LoadingView.swift */,
+				E7EFAF412DEC5327003F9DD6 /* CahcedAsyncImage.swift */,
+				E7EFAF462DEC538B003F9DD6 /* SelfieView.swift */,
+				E7CD91932DEC5B0100DB5FB1 /* RemoteImageView.swift */,
+				E7CD91952DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E7EFAF182DEC4293003F9DD6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E7EFAF152DEC4293003F9DD6 /* AzeretMono-Medium.ttf */,
+				E7EFAF162DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf */,
+				E7EFAF172DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E7EFAF1E2DEC435D003F9DD6 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				E7EFAF292DEC438F003F9DD6 /* AppBackgroundModifier.swift */,
+				E7EFAF2A2DEC438F003F9DD6 /* AppFontModfier.swift */,
+				E7EFAF2B2DEC438F003F9DD6 /* BadgeViewModifier.swift */,
+				E7EFAF2C2DEC438F003F9DD6 /* ErrorAlertModifier.swift */,
+				E7EFAF2D2DEC438F003F9DD6 /* ReadSizeModifier.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		E7EFAF392DEC44D6003F9DD6 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				E7EFAF3A2DEC44E7003F9DD6 /* WelcomeView.swift */,
+				E7EFAF3B2DEC44E7003F9DD6 /* WelcomeViewModel.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		E7EFAF3E2DEC52DC003F9DD6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E7EFAF3F2DEC52ED003F9DD6 /* ImageHandlingViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E7EFAF432DEC5353003F9DD6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E7EFAF442DEC5361003F9DD6 /* FileService.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		F4820A9F2B0B4D3E00B13080 /* iosAppTests */ = {
@@ -446,6 +565,7 @@
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				11B83C212D79C062007D03F7 /* XCLocalSwiftPackageReference "shared/KMP" */,
+				E7EFAF482DEC552A003F9DD6 /* XCRemoteSwiftPackageReference "FuturedKit" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -464,8 +584,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7EFAF1A2DEC4293003F9DD6 /* FF_DIN_Pro_Medium_Italic.otf in Resources */,
+				E7EFAF1B2DEC4293003F9DD6 /* FF_DIN_Pro_Regular_Italic.otf in Resources */,
+				E7EFAF1C2DEC4293003F9DD6 /* AzeretMono-Medium.ttf in Resources */,
+				E7EFAF1D2DEC4293003F9DD6 /* Assets 2.xcassets in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
-				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,24 +636,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
+				E7EFAF452DEC5361003F9DD6 /* FileService.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
+				E7EFAF472DEC538B003F9DD6 /* SelfieView.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
 				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
+				E7EFAF122DEC416E003F9DD6 /* BluredColorsView.swift in Sources */,
+				E7EFAF362DEC43E2003F9DD6 /* LoadingView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
 				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
+				E7EFAF382DEC44A9003F9DD6 /* UIApplication+Extensions.swift in Sources */,
 				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
 				1193BEEA2AEA8B3E00C6203F /* DecomposeNavigationStack.swift in Sources */,
 				119A92E82B0F37A300D93E98 /* MR+Extensions.swift in Sources */,
+				E7EFAF422DEC5327003F9DD6 /* CahcedAsyncImage.swift in Sources */,
+				E7CD91942DEC5B0100DB5FB1 /* RemoteImageView.swift in Sources */,
 				1193BEF82AEA989F00C6203F /* SecondView.swift in Sources */,
+				E7EFAF3C2DEC44E7003F9DD6 /* WelcomeViewModel.swift in Sources */,
+				E7EFAF3D2DEC44E7003F9DD6 /* WelcomeView.swift in Sources */,
 				11B16AC52C32B84D00ECA63A /* HomeTabNavigationView.swift in Sources */,
+				E7EFAF2E2DEC438F003F9DD6 /* ErrorAlertModifier.swift in Sources */,
+				E7EFAF2F2DEC438F003F9DD6 /* BadgeViewModifier.swift in Sources */,
+				E7EFAF302DEC438F003F9DD6 /* AppFontModfier.swift in Sources */,
+				E7CD91962DEC5B1F00DB5FB1 /* AvatarPlaceholderView.swift in Sources */,
+				E7EFAF312DEC438F003F9DD6 /* AppBackgroundModifier.swift in Sources */,
+				E7EFAF322DEC438F003F9DD6 /* ReadSizeModifier.swift in Sources */,
 				1193BEFC2AEA9FA000C6203F /* LoginView.swift in Sources */,
 				1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */,
 				1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */,
 				1193BEF62AEA989600C6203F /* FirstView.swift in Sources */,
+				E7CD91982DEC5B8100DB5FB1 /* GradientColoredText.swift in Sources */,
 				111C3A7E2AEBE59900873511 /* View+EventsEffect.swift in Sources */,
+				E7EFAF402DEC52ED003F9DD6 /* ImageHandlingViewModelProtocol.swift in Sources */,
+				E7EFAF342DEC43D6003F9DD6 /* AppButton.swift in Sources */,
+				E7EFAF102DEC3F30003F9DD6 /* StateView.swift in Sources */,
+				E7EFAF192DEC4293003F9DD6 /* AppFont.swift in Sources */,
 				112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */,
 				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
 				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,
@@ -1107,11 +1250,27 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		E7EFAF482DEC552A003F9DD6 /* XCRemoteSwiftPackageReference "FuturedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/futuredapp/FuturedKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		11B83C222D79C075007D03F7 /* KMP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 11B83C212D79C062007D03F7 /* XCLocalSwiftPackageReference "shared/KMP" */;
 			productName = KMP;
+		};
+		E7CD91912DEC59F800DB5FB1 /* FuturedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7EFAF482DEC552A003F9DD6 /* XCRemoteSwiftPackageReference "FuturedKit" */;
+			productName = FuturedKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

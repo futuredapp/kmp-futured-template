@@ -56,8 +56,6 @@ internal class FirstComponent(
         }
     }
 
-
-
     override fun onCreateNewAvatar() {
         navigateToSecond()
     }

@@ -16,12 +16,12 @@ object ProductFlavors {
     object Dev : ProductFlavor {
         override val name: String = "dev"
         override val restApiUrl: String = "https://king-prawn-app-w8kae.ondigitalocean.app/api/v1/"
-        override val apiKey: String = ""
+        override val apiKey: String = "1"
     }
 
     object Prod : ProductFlavor {
         override val name: String = "prod"
         override val restApiUrl: String = "https://king-prawn-app-w8kae.ondigitalocean.app/api/v1/"
-        override val apiKey: String = ""
+        override val apiKey: String = "1"
     }
 }

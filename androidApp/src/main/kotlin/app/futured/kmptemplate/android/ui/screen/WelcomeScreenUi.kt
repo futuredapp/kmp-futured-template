@@ -135,10 +135,6 @@ private fun Content(
 
         VerticalSpacer(size = Grid.d3)
         HorizontalDivider(thickness = Dp.Hairline, color = colors.white20)
-        VerticalSpacer(size = Grid.d3)
-
-        VerticalSpacer(size = Grid.d3)
-        HorizontalDivider(thickness = Dp.Hairline, color = colors.white20)
         VerticalSpacer(size = Grid.d6)
         Spacer(modifier = Modifier.weight(1f))
 
