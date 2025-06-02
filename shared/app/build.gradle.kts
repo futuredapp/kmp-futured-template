@@ -119,7 +119,8 @@ android {
 
 skie {
     analytics {
-        disableUpload.set(true) // This is explicitly disabled, consider supporting authors by enabling.
+        // https://skie.touchlab.co/Analytics
+        disableUpload.set(false)
     }
     features {
         group {
