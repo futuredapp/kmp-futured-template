@@ -113,29 +113,29 @@ object PoetFactoryComponentGenerator {
             ?: error("Unable to find $APP_COMPONENT_CONTEXT_TYPE_NAME in $baseName's constructor")
         val navigationType = unInjectedConstructorParams
             .findTypeByName(NAVIGATION_TYPE_NAME)
-        val argsTypes = unInjectedConstructorParams
+        val argsNamesAndTypes = unInjectedConstructorParams
             .filter {
                 it.containsTypeName(NAVIGATION_TYPE_NAME).not() && it.containsTypeName(
                     APP_COMPONENT_CONTEXT_TYPE_NAME
                 ).not()
             }
-            .map { it.type.toTypeName() }
+            .mapIndexed { index, ksValueParameter ->
+                val paramName = ksValueParameter.name?.asString() ?: "param$index"
+                val typeName = ksValueParameter.type.toTypeName()
+                paramName to  typeName
+            }
+
 
         val returnType = ClassName(
             packageName = factoryComponentPackageName,
             simpleNames = listOf(baseName),
         )
-        val paramNameAndType = argsTypes.mapIndexed { index, arg ->
-            val paramName =
-                unInjectedConstructorParams.find { it.type.toTypeName() == arg }?.name?.asString()
-                    ?: "param$index"
-            paramName to arg
-        }
-        val paramNames = paramNameAndType.joinToString { it.first }
+
+        val paramNames = argsNamesAndTypes.joinToString { it.first }
 
         val params = when {
-            argsTypes.isNotEmpty() && navigationType != null -> "parameters = { parametersOf(componentContext, navigation, $paramNames) }"
-            argsTypes.isNotEmpty() -> "parameters = { parametersOf(componentContext, $paramNames) }"
+            argsNamesAndTypes.isNotEmpty() && navigationType != null -> "parameters = { parametersOf(componentContext, navigation, $paramNames) }"
+            argsNamesAndTypes.isNotEmpty() -> "parameters = { parametersOf(componentContext, $paramNames) }"
             navigationType != null -> "parameters = { parametersOf(componentContext, navigation) }"
             else -> "parameters = { parametersOf(componentContext) }"
         }
@@ -147,8 +147,8 @@ object PoetFactoryComponentGenerator {
             createComponentFunSpec.addParameter(name = "navigation", navigationType)
         }
 
-        if (paramNameAndType.isNotEmpty()) {
-            paramNameAndType.forEach { (name, type) ->
+        if (argsNamesAndTypes.isNotEmpty()) {
+            argsNamesAndTypes.forEach { (name, type) ->
                 createComponentFunSpec.addParameter(
                     name = name, type
                 )

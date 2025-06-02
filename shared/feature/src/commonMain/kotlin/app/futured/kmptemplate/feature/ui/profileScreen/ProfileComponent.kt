@@ -13,9 +13,9 @@ internal class ProfileComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: ProfileScreenNavigation,
 ) : ScreenComponent<ProfileViewState, Nothing, ProfileScreenNavigation>(
-        componentContext,
-        ProfileViewState,
-    ),
+    componentContext,
+    ProfileViewState,
+),
     ProfileScreen,
     ProfileScreenNavigation by navigation,
     ProfileScreen.Actions {

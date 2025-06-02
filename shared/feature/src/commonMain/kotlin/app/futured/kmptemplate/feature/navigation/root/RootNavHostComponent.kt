@@ -18,10 +18,9 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
 @Factory
-internal class RootNavHostComponent(
-    @InjectedParam componentContext: AppComponentContext,
-    private val deepLinkResolver: DeepLinkResolver,
-) : AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState), RootNavHost {
+internal class RootNavHostComponent(@InjectedParam componentContext: AppComponentContext, private val deepLinkResolver: DeepLinkResolver) :
+    AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState),
+    RootNavHost {
 
     private val rootNavigator: RootNavHostNavigation = RootNavHostNavigator()
     private var pendingDeepLink: DeepLinkDestination? = null

@@ -92,6 +92,16 @@ android {
     kotlinOptions {
         jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
+
+    lint {
+        textReport = true // Write a text report to the console (Useful for CI logs)
+        xmlReport = true // Write XML report
+        abortOnError = false // Do not abort build when error is found -> Danger will report this to the MR
+        explainIssues = false // HTML/XML reports are too verbose in console logs
+        checkDependencies = false // Required to get all unused resource from other modules (disabled to speed up linting)
+        checkTestSources = true // Also check test case code for lint issues
+        checkReleaseBuilds = false // If we run a full lint analysis as build part in CI, we can skip redundant checks
+    }
 }
 
 dependencies {

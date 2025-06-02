@@ -224,6 +224,10 @@ installed.
 kscript init_template.kts
 ```
 
+#### Note on iOS
+
+The Swift Package XCFramework has to be build manually for the first time using `./gradlew assembleAndCopyDebugSwiftPackage` in order for XCode to resolve Swift Package as being valid.
+
 ### Product Flavors
 
 The project utilizes [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) plugin for implementing

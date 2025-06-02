@@ -159,14 +159,12 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
                 this.disposePrevious = disposePrevious
             }
 
-            fun build(): UseCaseConfig<T> {
-                return UseCaseConfig(
-                    onStart ?: { },
-                    onSuccess ?: { },
-                    onError ?: { throw it },
-                    disposePrevious,
-                )
-            }
+            fun build(): UseCaseConfig<T> = UseCaseConfig(
+                onStart ?: { },
+                onSuccess ?: { },
+                onError ?: { throw it },
+                disposePrevious,
+            )
         }
     }
 }

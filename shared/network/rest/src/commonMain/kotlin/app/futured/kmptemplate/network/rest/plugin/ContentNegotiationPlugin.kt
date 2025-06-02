@@ -12,9 +12,7 @@ import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 
 @Single
-internal class ContentNegotiationPlugin(
-    @Named("restApiJson") private val json: Json,
-) : HttpClientPlugin {
+internal class ContentNegotiationPlugin(@Named("restApiJson") private val json: Json) : HttpClientPlugin {
 
     override fun install(config: HttpClientConfig<*>) {
         config.install(ContentNegotiation) {

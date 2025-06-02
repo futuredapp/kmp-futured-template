@@ -8,12 +8,10 @@ import okhttp3.OkHttpClient
 /**
  * Returns platform-native HTTP client for Ktor framework.
  */
-actual fun getNativeHttpClient(configure: HttpClientConfig<*>.() -> Unit): HttpClient {
-    return HttpClient(OkHttp) {
-        configure()
-        engine {
-            preconfigured = getOkHttpClient()
-        }
+actual fun getNativeHttpClient(configure: HttpClientConfig<*>.() -> Unit): HttpClient = HttpClient(OkHttp) {
+    configure()
+    engine {
+        preconfigured = getOkHttpClient()
     }
 }
 

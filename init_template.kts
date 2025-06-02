@@ -17,7 +17,7 @@ import kotlin.io.path.isRegularFile
 val templatePackageName = "app.futured.kmptemplate"
 val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
 
-val (appName, appPackageName, frameworkName) = readInput()
+val (appName, appPackageName) = readInput()
 val appPackagePath = Path.of(appPackageName.replace('.', '/'))
 
 // region Android + KMP + Gradle
@@ -32,117 +32,89 @@ renameGradleSubproject("shared/network/rest", appPackageName)
 renameGradleSubproject("shared/persistence", appPackageName)
 renameGradleSubproject("shared/platform", appPackageName)
 renameGradleSubproject("shared/resources", appPackageName)
-//"factory-generator/annotation", TODO ?
-//"factory-generator/processor", TODO ?
 
 findAndReplaceInFileTree(
     parent = Path.of("shared/arkitekt-decompose"),
     search = templatePackageName,
-    replaceWith = appPackageName
+    replaceWith = appPackageName,
 )
 
 findAndReplaceInFileTree(
     parent = Path.of("shared/arkitekt-cr-usecases"),
     search = templatePackageName,
-    replaceWith = appPackageName
+    replaceWith = appPackageName,
 )
 
 findAndReplaceInFileTree(
     parent = Path.of(".github"),
     search = templatePackageName,
-    replaceWith = appPackageName
+    replaceWith = appPackageName,
 )
 
 findAndReplaceInFile(
     file = File("gradle/libs.versions.toml"),
     search = templatePackageName,
-    replaceWith = appPackageName
+    replaceWith = appPackageName,
 )
 
 findAndReplaceInFile(
     file = File("build.gradle.kts"),
     search = templatePackageName,
-    replaceWith = appPackageName
+    replaceWith = appPackageName,
 )
 
 findAndReplaceInFile(
     file = File("settings.gradle.kts"),
     search = "KMP_Futured_template",
-    replaceWith = appName
+    replaceWith = appName,
 )
 
 // endregion
 
 // region XCode project
 
-findAndReplaceInFile(
-    file = Path.of("buildSrc/src/main/kotlin")
-        .resolve(appPackagePath)
-        .resolve("gradle/configuration/ProjectSettings.kt")
-        .toFile(),
-    search = "shared",
-    replaceWith = frameworkName
-)
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
     varName = "APP_IDENTIFIER",
-    newValue = appPackageName
+    newValue = appPackageName,
 )
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
     varName = "APP_NAME",
-    newValue = appName
+    newValue = appName,
 )
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
     varName = "APP_SCHEME",
-    newValue = appName
+    newValue = appName,
 )
 findAndReplaceInFile(
     file = File("iosApp/iosApp.xcodeproj/project.pbxproj"),
     search = "orgIdentifier.iosApp",
-    replaceWith = appPackageName
+    replaceWith = appPackageName,
 )
 findAndReplaceInFile(
     file = File("iosApp/iosApp.xcodeproj/project.pbxproj"),
     search = "orgIdentifier.iosApp.iosAppTests",
-    replaceWith = "${appPackageName}.${appName}Test"
+    replaceWith = "${appPackageName}.${appName}Test",
 )
 findAndReplaceInFile(
     file = File("iosApp/iosApp.xcodeproj/project.pbxproj"),
     search = "orgIdentifier.iosApp.iosAppUITests",
-    replaceWith = "${appPackageName}.${appName}UITest"
-)
-findAndReplaceInFileTree(
-    parent = Path.of("iosApp"),
-    search = "import shared",
-    replaceWith = "import $frameworkName",
-    extensionFilter = { extension -> extension == "swift"}
-)
-findAndReplaceInFileTree(
-    parent = Path.of("iosApp"),
-    search = "extension shared",
-    replaceWith = "extension $frameworkName",
-    extensionFilter = { extension -> extension == "swift"}
-)
-findAndReplaceInFileTree(
-    parent = Path.of("iosApp"),
-    search = "shared",
-    replaceWith = frameworkName,
-    extensionFilter = { extension -> extension == "xcconfig"}
+    replaceWith = "${appPackageName}.${appName}UITest",
 )
 
-findAndReplaceInFileTree(parent = Path.of("iosApp"), search = "iosApp", replaceWith = appName)
+findAndReplaceInFileTree(parent = Path.of("iosApp/iosApp.xcodeproj"), search = "iosApp", replaceWith = appName)
 
 moveFileTree(
     parent = Path.of("iosApp"),
     fromPath = Path.of("iosApp"),
-    toPath = Path.of(appName)
+    toPath = Path.of(appName),
 )
 moveFileTree(
     parent = Path.of("iosApp"),
     fromPath = Path.of("iosApp.xcodeproj"),
-    toPath = Path.of("$appName.xcodeproj")
+    toPath = Path.of("$appName.xcodeproj"),
 )
 Files.move(
     File("iosApp/iosAppTests/iosAppTests.swift").toPath(),
@@ -151,7 +123,7 @@ Files.move(
 moveFileTree(
     parent = Path.of("iosApp"),
     fromPath = Path.of("iosAppTests"),
-    toPath = Path.of("${appName}Tests")
+    toPath = Path.of("${appName}Tests"),
 )
 Files.move(
     File("iosApp/iosAppUITests/iosAppUITestsLaunchTests.swift").toPath(),
@@ -160,7 +132,7 @@ Files.move(
 moveFileTree(
     parent = Path.of("iosApp"),
     fromPath = Path.of("iosAppUITests"),
-    toPath = Path.of("${appName}UITests")
+    toPath = Path.of("${appName}UITests"),
 )
 
 // endregion
@@ -169,6 +141,10 @@ moveFileTree(
 
 File("LICENSE").delete()
 File("init_template.kts").delete()
+
+if (confirmBuild()) {
+    ProcessBuilder("./gradlew", "assembleKMPDebugXCFramework").inheritIO().start().waitFor()
+}
 
 // endregion
 
@@ -180,14 +156,14 @@ fun renameGradleSubproject(subproject: String, appPackage: String) {
         Path.of("$subproject/src/commonMain/kotlin"),
         Path.of("$subproject/src/commonTest/kotlin"),
         Path.of("$subproject/src/androidMain/kotlin"),
-        Path.of("$subproject/src/iosMain/kotlin")
+        Path.of("$subproject/src/iosMain/kotlin"),
     )
 
     for (sourceSet in sourceSets) {
         moveFileTree(
             parent = sourceSet,
             fromPath = templatePackagePath,
-            toPath = appPackagePath
+            toPath = appPackagePath,
         )
     }
 
@@ -195,7 +171,7 @@ fun renameGradleSubproject(subproject: String, appPackage: String) {
         parent = Path.of(subproject),
         search = templatePackageName,
         replaceWith = appPackage,
-        extensionFilter = { extension -> extension == "kt" || extension == "kts"}
+        extensionFilter = { extension -> extension == "kt" || extension == "kts" },
     )
 }
 
@@ -213,7 +189,13 @@ fun findAndReplaceInFileTree(
         .filter { path -> extensionFilter(path.extension) }
         .map { it.toFile() }
         .forEach { file ->
-            with(file) { writeText(readText(Charsets.UTF_8).replace(search, replaceWith)) }
+            with(file) {
+                val text = readText(Charsets.UTF_8)
+                val shouldOverwrite = text.contains(search)
+                if (shouldOverwrite) {
+                    writeText(text.replace(search, replaceWith))
+                }
+            }
         }
 }
 
@@ -263,25 +245,25 @@ fun updateFastfileEnvVariables(file: File, varName: String, newValue: String) {
     }
 }
 
-fun readInput(): Triple<String, String, String> {
+fun readInput(): Pair<String, String> {
     print("Project name: ")
-    val appName: String = readLine()
+    val appName: String = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?.replace(" ", "_")
-        ?: error("You need to enter name")
+        ?: error("Invalid name entered")
 
     print("Package name (e.g. com.example.test): ")
-    val packageName = readLine()
+    val packageName = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
-        ?: error("You need to enter package name")
+        ?: error("Invalid package name")
 
-    print("Framework name: (default 'shared'): ")
-    val frameworkName = readLine()
-        ?.takeIf { it.isNotBlank() }
-        ?.replace(" ", "_")
-        ?: "shared"
+    return Pair(appName, packageName)
+}
 
-    return Triple(appName, packageName, frameworkName)
+fun confirmBuild(): Boolean {
+    println()
+    println("The script will now build Swift Package for the first time.\n(You can skip this, but will need to do later using './gradlew assembleKMPDebugXCFramework')\n\nConfirm [Y/n]: ")
+    return readlnOrNull()?.trim()?.lowercase() == "y"
 }
 
 fun removeLicense() {

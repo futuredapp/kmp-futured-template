@@ -20,6 +20,4 @@ fun ImageResource.asPainterResource(): Painter = painterResource(id = this.drawa
  * @return Shared image resource as Compose painter resource
  */
 @Composable
-fun kmpPainterResource(res: ImageResource): Painter {
-    return painterResource(id = res.drawableResId)
-}
+fun kmpPainterResource(res: ImageResource): Painter = painterResource(id = res.drawableResId)
