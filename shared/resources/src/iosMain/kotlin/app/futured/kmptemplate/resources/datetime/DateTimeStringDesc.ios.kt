@@ -18,10 +18,7 @@ import platform.Foundation.NSDateFormatter
  * See [Android docs](https://developer.android.com/reference/android/icu/text/SimpleDateFormat)
  * See [iOS docs](https://developer.apple.com/documentation/foundation/dateformatter)
  */
-actual class DateTimeStringDesc actual constructor(
-    private val instant: Instant,
-    private val pattern: String,
-) : StringDesc {
+actual class DateTimeStringDesc actual constructor(private val instant: Instant, private val pattern: String) : StringDesc {
 
     private val formatter by lazy { NSDateFormatter() }
 

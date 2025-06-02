@@ -20,10 +20,7 @@ import java.util.Date
  * See [Android docs](https://developer.android.com/reference/android/icu/text/SimpleDateFormat)
  * See [iOS docs](https://developer.apple.com/documentation/foundation/dateformatter)
  */
-actual class DateTimeStringDesc actual constructor(
-    private val instant: Instant,
-    private val pattern: String,
-) : StringDesc {
+actual class DateTimeStringDesc actual constructor(private val instant: Instant, private val pattern: String) : StringDesc {
 
     override fun toString(context: Context): String =
         DateFormat
