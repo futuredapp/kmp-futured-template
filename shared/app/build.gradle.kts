@@ -150,7 +150,9 @@ private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildT
     val iosDirectory = rootProject.layout.projectDirectory.dir("iosApp/shared/KMP/Sources")
 
     doFirst {
-        delete(iosDirectory)
+        if (iosDirectory.asFile.exists()) {
+            iosDirectory.asFile.deleteRecursively()
+        }
     }
 
     // Produces assembleKMPDebugXCFramework or assembleKMPReleaseXCFramework depending on input build type
