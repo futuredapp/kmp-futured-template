@@ -2,7 +2,8 @@ import KMP
 import SwiftUI
 
 protocol FirstViewModelProtocol: DynamicProperty {
-    var text: String { get }
+    var counter: String { get }
+    var createdAt: String { get }
     var randomPerson: String? { get }
     var events: SkieSwiftFlow<FirstUiEvent> { get }
     var isAlertVisible: Binding<Bool> { get }
@@ -29,8 +30,12 @@ struct FirstViewModel {
 }
 
 extension FirstViewModel: FirstViewModelProtocol {
-    var text: String {
-        viewState.text.localized()
+    var counter: String {
+        viewState.counter.localized()
+    }
+
+    var createdAt: String {
+        viewState.createdAt.localized()
     }
 
     var randomPerson: String? {
