@@ -39,7 +39,7 @@ internal class FirstComponent(
 
     private val logger = Logger.withTag("FirstComponent")
 
-    override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
+    override val viewState: StateFlow<FirstViewState> = componentState
     override val actions: FirstScreen.Actions = this
 
     init {
