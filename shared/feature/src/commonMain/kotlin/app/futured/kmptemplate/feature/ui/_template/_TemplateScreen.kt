@@ -41,7 +41,7 @@ internal class TEMPLATEComponent(
     TEMPLATEScreen.Actions {
 
     override val actions: TEMPLATEScreen.Actions = this
-    override val viewState: StateFlow<TEMPLATEViewState> = componentState.asStateFlow()
+    override val viewState: StateFlow<TEMPLATEViewState> = componentState
 
     override fun onBack() = pop()
 }
