@@ -2,6 +2,7 @@ package app.futured.arkitekt.crusecases.scope
 
 import app.futured.arkitekt.crusecases.FlowUseCase
 import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -12,6 +13,11 @@ import kotlinx.coroutines.flow.onStart
 import kotlin.coroutines.cancellation.CancellationException
 
 interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
+
+    /**
+     * Map of [Job] objects used to hold and cancel existing run of any [FlowUseCase] instance.
+     */
+    val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job>
 
     fun <T : Any?> FlowUseCase<Unit, T>.execute(config: FlowUseCaseConfig.Builder<T, T>.() -> Unit) =
         execute(Unit, config)
@@ -42,10 +48,10 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
         }
 
         if (flowUseCaseConfig.disposePrevious) {
-            job?.cancel()
+            useCaseJobPool[this]?.cancel()
         }
 
-        job = build(args)
+        useCaseJobPool[this] = build(args)
             .flowOn(getWorkerDispatcher())
             .onStart { flowUseCaseConfig.onStart() }
             .mapNotNull { flowUseCaseConfig.onMap?.invoke(it) }
@@ -65,7 +71,7 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
                 }
             }
             .catch { /* handled in onCompletion */ }
-            .launchIn(viewModelScope)
+            .launchIn(useCaseScope)
     }
 
     /**
@@ -91,10 +97,10 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
         }
 
         if (flowUseCaseConfig.disposePrevious) {
-            job?.cancel()
+            useCaseJobPool[this]?.cancel()
         }
 
-        job = build(args)
+        useCaseJobPool[this] = build(args)
             .flowOn(getWorkerDispatcher())
             .onStart { flowUseCaseConfig.onStart() }
             .onEach { flowUseCaseConfig.onNext(it) }
@@ -113,7 +119,7 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
                 }
             }
             .catch { /* handled in onCompletion */ }
-            .launchIn(viewModelScope)
+            .launchIn(useCaseScope)
     }
 
     /**

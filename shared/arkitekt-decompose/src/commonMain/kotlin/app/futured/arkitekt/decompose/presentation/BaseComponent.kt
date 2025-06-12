@@ -1,9 +1,13 @@
 package app.futured.arkitekt.decompose.presentation
 
+import app.futured.arkitekt.crusecases.FlowUseCase
+import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.scope.UseCaseExecutionScope
 import com.arkivanov.decompose.GenericComponentContext
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
@@ -73,9 +77,19 @@ abstract class BaseComponent<VS : Any, E : Any>(componentContext: GenericCompone
     // region UseCaseExecutionScope
 
     /**
+     * Job pool to store [FlowUseCase] jobs.
+     */
+    override val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job> = mutableMapOf()
+
+    /**
+     * Deferred pool to store running [UseCase] jobs.
+     */
+    override val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>> = mutableMapOf()
+
+    /**
      * The coroutine scope for executing use cases.
      */
-    override val viewModelScope: CoroutineScope = componentCoroutineScope
+    override val useCaseScope: CoroutineScope = componentCoroutineScope
 
     // endregion
 

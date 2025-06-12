@@ -2,8 +2,7 @@ package app.futured.kmptemplate.feature.ui.firstScreen
 
 import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.domain.CounterUseCase
-import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
-import app.futured.kmptemplate.feature.domain.SyncDataUseCase
+import app.futured.kmptemplate.feature.domain.FetchDataUseCase
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -23,7 +22,7 @@ import kotlin.time.Duration.Companion.milliseconds
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: FirstScreenNavigation,
-    private val syncDataUseCase: SyncDataUseCase,
+    private val fetchDataUseCase: FetchDataUseCase,
     private val counterUseCase: CounterUseCase,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
     componentContext = componentContext,
@@ -39,7 +38,7 @@ internal class FirstComponent(
 
     private val logger = Logger.withTag("FirstComponent")
 
-    override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
+    override val viewState: StateFlow<FirstViewState> = componentState
     override val actions: FirstScreen.Actions = this
 
     init {
@@ -52,7 +51,7 @@ internal class FirstComponent(
 
     override fun onNext() = navigateToSecond()
 
-    private fun syncData() = syncDataUseCase.execute {
+    private fun syncData() = fetchDataUseCase.execute {
         onSuccess { person ->
             componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format(person.name.orEmpty())) }
         }
@@ -62,7 +61,7 @@ internal class FirstComponent(
         }
     }
 
-    private fun observeCounter() = counterUseCase.execute(CounterUseCaseArgs(interval = 200.milliseconds)) {
+    private fun observeCounter() = counterUseCase.execute(CounterUseCase.Args(interval = 200.milliseconds)) {
         onNext { count ->
             updateCount(count)
 

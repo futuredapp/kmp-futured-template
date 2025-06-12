@@ -1,8 +1,14 @@
 package app.futured.arkitekt.crusecases.base
 
+import app.futured.arkitekt.crusecases.FlowUseCase
+import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.scope.UseCaseExecutionScope
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.resetMain
@@ -10,10 +16,14 @@ import kotlinx.coroutines.test.setMain
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
+@OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseUseCaseExecutionScopeTest : UseCaseExecutionScope {
 
+    override val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job> = mutableMapOf()
+    override val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>> = mutableMapOf()
+
     private val testDispatcher = StandardTestDispatcher()
-    override val viewModelScope = TestScope(testDispatcher)
+    override val useCaseScope = TestScope(testDispatcher)
     override fun getWorkerDispatcher(): CoroutineDispatcher = testDispatcher
 
     @BeforeTest
@@ -23,6 +33,7 @@ abstract class BaseUseCaseExecutionScopeTest : UseCaseExecutionScope {
 
     @AfterTest
     fun cleanupCoroutines() {
+        useCaseScope.cancel()
         Dispatchers.resetMain()
     }
 }

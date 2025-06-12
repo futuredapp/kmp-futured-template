@@ -4,11 +4,17 @@ import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
+
+    /**
+     * Map of [Deferred] objects used to hold and cancel existing run of any [UseCase] instance.
+     */
+    val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>>
 
     /**
      * Asynchronously executes use case and saves it's Deferred. By default, all previous
@@ -42,19 +48,19 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
             return@run build()
         }
         if (useCaseConfig.disposePrevious) {
-            deferred?.cancel()
+            useCaseDeferredPool[this]?.cancel()
         }
 
         useCaseConfig.onStart()
-        deferred = viewModelScope
+        useCaseDeferredPool[this] = useCaseScope
             .async(context = getWorkerDispatcher(), start = CoroutineStart.LAZY) {
                 build(args)
             }
             .also {
-                viewModelScope.launch(Dispatchers.Main) {
+                useCaseScope.launch(Dispatchers.Main) {
                     try {
                         useCaseConfig.onSuccess(it.await())
-                    } catch (cancellation: CancellationException) {
+                    } catch (_: CancellationException) {
                         // do nothing - this is normal way of suspend function interruption
                     } catch (error: Throwable) {
                         UseCaseErrorHandler.globalOnErrorLogger(error)
@@ -83,13 +89,13 @@ interface SingleUseCaseExecutionScope : CoroutineScopeOwner {
         cancelPrevious: Boolean = true,
     ): Result<T> {
         if (cancelPrevious) {
-            deferred?.cancel()
+            useCaseDeferredPool[this]?.cancel()
         }
 
         return try {
-            val newDeferred = viewModelScope.async(getWorkerDispatcher(), CoroutineStart.LAZY) {
+            val newDeferred = useCaseScope.async(getWorkerDispatcher(), CoroutineStart.LAZY) {
                 build(args)
-            }.also { deferred = it }
+            }.also { useCaseDeferredPool[this] = it }
 
             Result.success(newDeferred.await())
         } catch (exception: CancellationException) {
