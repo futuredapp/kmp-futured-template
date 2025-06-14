@@ -3,6 +3,10 @@ package app.futured.kmptemplate.feature.ui.base
 import app.futured.arkitekt.decompose.navigation.NavigationActions
 import app.futured.arkitekt.decompose.navigation.NavigationActionsProducer
 import app.futured.arkitekt.decompose.presentation.BaseComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 
 /**
  * Base class for application components - usually nav host components that are not screens and do not need to implement
@@ -13,8 +17,13 @@ import app.futured.arkitekt.decompose.presentation.BaseComponent
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class AppComponent<VS : Any, E : Any>(componentContext: AppComponentContext, defaultState: VS) :
-    BaseComponent<VS, E>(componentContext, defaultState),
+abstract class AppComponent<VS : Any, E : Any>(
+    componentContext: AppComponentContext,
+    defaultState: VS,
+    lifecycleScope: CoroutineScope = MainScope(),
+    workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
+) :
+    BaseComponent<VS, E>(componentContext, defaultState, lifecycleScope, workerDispatcher),
     AppComponentContext by componentContext
 
 /**
@@ -26,6 +35,11 @@ abstract class AppComponent<VS : Any, E : Any>(componentContext: AppComponentCon
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(componentContext: AppComponentContext, defaultState: VS) :
-    AppComponent<VS, E>(componentContext, defaultState),
+abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(
+    componentContext: AppComponentContext,
+    defaultState: VS,
+    lifecycleScope: CoroutineScope = MainScope(),
+    workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
+) :
+    AppComponent<VS, E>(componentContext, defaultState, lifecycleScope, workerDispatcher),
     NavigationActionsProducer<NAV>
