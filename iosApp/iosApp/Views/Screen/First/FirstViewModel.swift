@@ -10,7 +10,7 @@ protocol FirstViewModelProtocol: DynamicProperty {
     var alertText: String { get }
 
     func onNext()
-    func showToast(event: FirstUiEvent.ShowToast)
+    func notify(event: FirstUiEventNotify)
     func hideToast()
 }
 
@@ -30,16 +30,17 @@ struct FirstViewModel {
 }
 
 extension FirstViewModel: FirstViewModelProtocol {
+
     var counter: String {
-        viewState.counter.localized()
+        viewState.counterText.localized()
     }
 
     var createdAt: String {
-        viewState.createdAt.localized()
+        viewState.createdAtText.localized()
     }
 
     var randomPerson: String? {
-        viewState.randomPerson?.localized()
+        viewState.randomPersonText?.localized()
     }
 
     var isAlertVisible: Binding<Bool> {
@@ -53,7 +54,7 @@ extension FirstViewModel: FirstViewModelProtocol {
         actions.onNext()
     }
 
-    func showToast(event: FirstUiEvent.ShowToast) {
+    func notify(event: FirstUiEventNotify) {
         alertText = event.text.localized()
         alertVisible = true
     }
