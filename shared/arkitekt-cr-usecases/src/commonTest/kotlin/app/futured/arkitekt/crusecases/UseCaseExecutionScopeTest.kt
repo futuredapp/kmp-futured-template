@@ -22,6 +22,7 @@ import kotlin.test.fail
 /**
  * Sanity check UseCase tests ported from [Arkitekt](https://github.com/futuredapp/arkitekt).
  */
+@OptIn(ExperimentalCoroutinesApi::class)
 class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
 
     @BeforeTest
@@ -45,13 +46,13 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
                 fail("Exception thrown where shouldn't")
             }
         }
-        viewModelScope.advanceTimeByCompat(500)
+        useCaseScope.advanceTimeByCompat(500)
 
         testUseCase.execute(1) {
             onSuccess { executionCount++ }
             onError { fail("Exception thrown where shouldn't") }
         }
-        viewModelScope.advanceTimeByCompat(1000)
+        useCaseScope.advanceTimeByCompat(1000)
 
         assertEquals(1, executionCount)
     }
@@ -64,7 +65,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
         testFailureUseCase.execute(IllegalStateException()) {
             onError { resultError = it }
         }
-        viewModelScope.advanceTimeByCompat(1000)
+        useCaseScope.advanceTimeByCompat(1000)
 
         assertNotNull(resultError)
     }
@@ -85,7 +86,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
             onNext { resultList.add(it) }
             onError { fail("Exception thrown where shouldn't") }
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(testingList, resultList)
     }
@@ -100,7 +101,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
             onError { fail("Exception thrown where shouldn't") }
             onComplete { completed = true }
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(true, completed)
     }
@@ -115,7 +116,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
             onError { resultError = it }
             onComplete { fail("onComplete called where shouldn't") }
         }
-        viewModelScope.advanceTimeByCompat(1000)
+        useCaseScope.advanceTimeByCompat(1000)
 
         assertNotNull(resultError)
     }
@@ -125,10 +126,10 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
         val testUseCase = TestUseCase()
 
         var result: Result<Int>? = null
-        viewModelScope.launch {
+        useCaseScope.launch {
             result = testUseCase.execute(1)
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(Result.success(1), result)
     }
@@ -138,10 +139,10 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
         val testUseCase = TestFailureUseCase()
 
         var result: Result<Unit>? = null
-        viewModelScope.launch {
+        useCaseScope.launch {
             result = testUseCase.execute(IllegalStateException())
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertTrue { result?.isFailure == true }
         assertTrue { result?.exceptionOrNull() is IllegalStateException }
@@ -152,10 +153,10 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
         val testUseCase = TestFailureUseCase()
 
         var result: Result<Unit>? = null
-        viewModelScope.launch {
+        useCaseScope.launch {
             result = testUseCase.execute(CancellationException())
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertNull(result)
     }
@@ -165,14 +166,14 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
         val testUseCase = TestUseCase()
 
         var result: Result<Int>? = null
-        viewModelScope.launch {
+        useCaseScope.launch {
             testUseCase.execute(1)
             fail("Execute should be cancelled")
         }
-        viewModelScope.launch {
+        useCaseScope.launch {
             result = testUseCase.execute(1)
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(Result.success(1), result)
     }
@@ -183,13 +184,13 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
 
         var result1: Result<Int>? = null
         var result2: Result<Int>? = null
-        viewModelScope.launch {
+        useCaseScope.launch {
             result1 = testUseCase.execute(1, cancelPrevious = false)
         }
-        viewModelScope.launch {
+        useCaseScope.launch {
             result2 = testUseCase.execute(2, cancelPrevious = false)
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(Result.success(1), result1)
         assertEquals(Result.success(2), result2)
@@ -210,7 +211,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
 
         val exception = IllegalStateException()
         testOwner.launchWithHandler { throw exception }
-        testOwner.viewModelScope.advanceTimeByCompat(10000)
+        testOwner.useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(exception, logException)
         assertEquals(exception, handlerException)
@@ -231,7 +232,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
 
         val exception = CancellationException()
         testOwner.launchWithHandler { throw exception }
-        testOwner.viewModelScope.advanceTimeByCompat(10000)
+        testOwner.useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(null, logException)
         assertEquals(null, handlerException)
@@ -252,7 +253,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
 
         val exception = CancellationException("Message", cause = IllegalStateException())
         testOwner.launchWithHandler { throw exception }
-        testOwner.viewModelScope.advanceTimeByCompat(10000)
+        testOwner.useCaseScope.advanceTimeByCompat(10000)
 
         assertEquals(exception, logException)
         assertEquals(null, handlerException)
@@ -272,7 +273,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
                 resultError = error
             }
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertTrue(resultError is IllegalStateException)
         assertTrue(logException is IllegalStateException)
@@ -292,7 +293,7 @@ class UseCaseExecutionScopeTest : BaseUseCaseExecutionScopeTest() {
                 resultError = error
             }
         }
-        viewModelScope.advanceTimeByCompat(10000)
+        useCaseScope.advanceTimeByCompat(10000)
 
         assertTrue(resultError is IllegalStateException)
         assertTrue(logException is IllegalStateException)

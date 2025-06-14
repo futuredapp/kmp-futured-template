@@ -9,10 +9,17 @@ import kotlinx.coroutines.isActive
 import org.koin.core.annotation.Factory
 import kotlin.time.Duration
 
-@Factory
-internal class CounterUseCase : FlowUseCase<CounterUseCaseArgs, Long>() {
+/**
+ * Emits increment in intervals specified by [Args.interval].
+ */
+internal fun interface CounterUseCase : FlowUseCase<CounterUseCase.Args, Long> {
+    data class Args(val interval: Duration)
+}
 
-    override fun build(args: CounterUseCaseArgs): Flow<Long> = flow {
+@Factory
+internal class CounterUseCaseImpl : CounterUseCase {
+
+    override fun build(args: CounterUseCase.Args): Flow<Long> = flow {
         var counter = 0L
         while (currentCoroutineContext().isActive) {
             emit(counter++)
@@ -20,5 +27,3 @@ internal class CounterUseCase : FlowUseCase<CounterUseCaseArgs, Long>() {
         }
     }
 }
-
-internal data class CounterUseCaseArgs(val interval: Duration)
