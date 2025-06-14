@@ -17,7 +17,7 @@ interface FlowUseCaseExecutionScope : CoroutineScopeOwner {
     /**
      * Map of [Job] objects used to hold and cancel existing run of any [FlowUseCase] instance.
      */
-    val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job>
+    val useCaseJobPool: MutableMap<Any, Job>
 
     fun <T : Any?> FlowUseCase<Unit, T>.execute(config: FlowUseCaseConfig.Builder<T, T>.() -> Unit) =
         execute(Unit, config)

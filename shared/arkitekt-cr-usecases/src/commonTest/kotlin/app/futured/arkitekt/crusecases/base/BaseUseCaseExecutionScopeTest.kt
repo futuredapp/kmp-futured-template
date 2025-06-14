@@ -1,10 +1,7 @@
 package app.futured.arkitekt.crusecases.base
 
-import app.futured.arkitekt.crusecases.FlowUseCase
-import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.scope.UseCaseExecutionScope
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -19,8 +16,7 @@ import kotlin.test.BeforeTest
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseUseCaseExecutionScopeTest : UseCaseExecutionScope {
 
-    override val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job> = mutableMapOf()
-    override val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>> = mutableMapOf()
+    override val useCaseJobPool: MutableMap<Any, Job> = mutableMapOf()
 
     private val testDispatcher = StandardTestDispatcher()
     override val useCaseScope = TestScope(testDispatcher)
