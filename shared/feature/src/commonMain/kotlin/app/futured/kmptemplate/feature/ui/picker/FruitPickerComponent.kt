@@ -23,7 +23,7 @@ internal class FruitPickerComponent(
     Picker,
     Picker.Actions {
 
-    override val viewState: StateFlow<PickerState> = componentState.asStateFlow()
+    override val viewState: StateFlow<PickerState> = componentState
 
     override val actions: Picker.Actions = this
 

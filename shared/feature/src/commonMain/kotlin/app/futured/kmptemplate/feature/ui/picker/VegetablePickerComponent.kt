@@ -24,7 +24,7 @@ internal class VegetablePickerComponent(
     Picker.Actions {
 
     override val actions: Picker.Actions = this
-    override val viewState: StateFlow<PickerState> = componentState.asStateFlow()
+    override val viewState: StateFlow<PickerState> = componentState
 
     init {
         doOnCreate {
