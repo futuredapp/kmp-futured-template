@@ -3,6 +3,7 @@
 package app.futured.kmptemplate.android.ui.screen
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -78,8 +80,25 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text.localized())
+            Text(text = viewState.counter.localized())
             Spacer(modifier = Modifier.height(4.dp))
+            Text(text = viewState.createdAt.localized())
+            Spacer(modifier = Modifier.height(4.dp))
+            AnimatedVisibility(viewState.randomPerson != null) {
+                viewState.randomPerson?.let { person ->
+                    Column {
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = person.localized(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { actions.onNext() }) {
                 Text(text = kmpStringResource(MR.strings.first_screen_button))
             }
@@ -96,7 +115,7 @@ private fun FirstScreenPreview() {
     MyApplicationTheme {
         Surface {
             Content(
-                viewState = FirstViewState(text = "Hey there".desc()),
+                viewState = FirstViewState(counter = "Hey there".desc()),
                 actions = actions,
                 modifier = Modifier.fillMaxSize(),
             )

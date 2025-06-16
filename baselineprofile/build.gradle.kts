@@ -2,8 +2,8 @@ import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.android.build.api.dsl.ManagedVirtualDevice
 
 plugins {
-    id(libs.plugins.android.test.get().pluginId)
-    id(libs.plugins.kotlin.android.get().pluginId)
+    alias(libs.plugins.android.test)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.baselineprofile)
 }
 

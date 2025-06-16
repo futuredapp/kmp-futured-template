@@ -11,9 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
  * @param T The type of the value.
  * @property decomposeValue The Decompose Value to be wrapped.
  */
-internal class ValueStateFlow<out T : Any>(
-    private val decomposeValue: Value<T>,
-) : StateFlow<T> {
+internal class ValueStateFlow<out T : Any>(private val decomposeValue: Value<T>) : StateFlow<T> {
 
     override val value: T
         get() = decomposeValue.value

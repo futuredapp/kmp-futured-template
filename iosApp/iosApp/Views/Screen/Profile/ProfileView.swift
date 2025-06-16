@@ -1,4 +1,4 @@
-import shared
+import KMP
 import SwiftUI
 
 struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
@@ -10,8 +10,9 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(Localizable.login_screen_title.localized)
             Button(Localizable.generic_sign_out.localized, action: viewModel.onLogoutClick)
+            Button(Localizable.profile_navigate_to_third.localized, action: viewModel.onThirdClick)
         }
+        .navigationTitle(Localizable.profile_screen_title.localized)
     }
 }

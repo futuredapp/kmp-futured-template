@@ -1,11 +1,11 @@
 // swiftlint:disable:this file_name
-import shared
+import KMP
 import SwiftUI
 
 // swiftlint:disable:next identifier_name
 let Localizable = MR.strings()
 
-extension shared.StringResource {
+extension KMP.StringResource {
     /**
      Localizes shared KMP String resource when accessed directly by `Localizable` object.
      */
@@ -14,7 +14,7 @@ extension shared.StringResource {
     }
 }
 
-extension shared.ColorResource {
+extension KMP.ColorResource {
     /**
      Converts KMP Color resource to SwiftUI Color.
      */
@@ -23,7 +23,7 @@ extension shared.ColorResource {
     }
 }
 
-extension shared.ImageResource {
+extension KMP.ImageResource {
     /**
      Converts KMP Image resource to SwiftUI Image.
      */

@@ -33,6 +33,13 @@ jobs:
     name: Deploy iOS Beta
     if: ${{ inputs.DEPLOY_IOS }}
     uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-build.yml@main
+    with:
+      kmp_swift_package_integration: true
+      kmp_swift_package_path: iosApp/shared/KMP
+      # TODO PROJECT-SETUP verify product flavor configuration
+      # Specifies API environment for KMP build.
+      # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
+      kmp_swift_package_flavor: dev
     secrets:
       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}

@@ -7,5 +7,5 @@ import org.koin.core.component.KoinComponent
 object RootNavHostFactory : KoinComponent {
     fun create(
         componentContext: AppComponentContext,
-    ): RootNavHost = AppComponentFactory.createComponent<RootNavHostComponent>(componentContext)
+    ): RootNavHost = AppComponentFactory.createAppComponent<RootNavHostComponent>(componentContext)
 }

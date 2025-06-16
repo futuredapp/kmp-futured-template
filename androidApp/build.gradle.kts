@@ -1,17 +1,15 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 
 plugins {
-    // Wondering why not `alias`? https://github.com/gradle/gradle/issues/17968
-    // (this is only for plugins we already have dependency on in `buildSrc`)
-    id(libs.plugins.com.android.application.get().pluginId)
-    id(libs.plugins.kotlin.android.get().pluginId)
-    id(libs.plugins.conventions.lint.get().pluginId)
-
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
     // TODO PROJECT-SETUP enable after providing google-services.json
     // alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.distribution)
+
+    id(libs.plugins.conventions.lint.get().pluginId)
 }
 
 kotlin {
@@ -93,6 +91,16 @@ android {
 
     kotlinOptions {
         jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
+    }
+
+    lint {
+        textReport = true // Write a text report to the console (Useful for CI logs)
+        xmlReport = true // Write XML report
+        abortOnError = false // Do not abort build when error is found -> Danger will report this to the MR
+        explainIssues = false // HTML/XML reports are too verbose in console logs
+        checkDependencies = false // Required to get all unused resource from other modules (disabled to speed up linting)
+        checkTestSources = true // Also check test case code for lint issues
+        checkReleaseBuilds = false // If we run a full lint analysis as build part in CI, we can skip redundant checks
     }
 }
 
