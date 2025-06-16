@@ -44,10 +44,6 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
-
-        /*sourceSets.named("commonMain").configure {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-        }*/
     }
 }
 
