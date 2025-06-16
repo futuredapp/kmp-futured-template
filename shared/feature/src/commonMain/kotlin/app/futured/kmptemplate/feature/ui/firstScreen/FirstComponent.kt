@@ -7,11 +7,13 @@ import app.futured.kmptemplate.feature.domain.SyncDataUseCase
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
+import app.futured.kmptemplate.resources.datetime.desc
 import co.touchlab.kermit.Logger
 import com.arkivanov.essenty.lifecycle.doOnCreate
 import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds
@@ -32,18 +34,19 @@ internal class FirstComponent(
     FirstScreen.Actions {
 
     companion object {
-        private const val COUNTER_ALERT = 10L
+        private const val COUNTER_ALERT_AT_SECONDS = 30L
     }
 
     private val logger = Logger.withTag("FirstComponent")
 
-    override val viewState: StateFlow<FirstViewState> = componentState.asStateFlow()
+    override val viewState: StateFlow<FirstViewState> = componentState
     override val actions: FirstScreen.Actions = this
 
     init {
         doOnCreate {
             syncData()
             observeCounter()
+            updateCreatedAtTimestamp()
         }
     }
 
@@ -54,6 +57,7 @@ internal class FirstComponent(
             componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format(person.name.orEmpty())) }
         }
         onError { error ->
+            componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format("Failed to fetch")) }
             logger.e(error) { error.message.toString() }
         }
     }
@@ -62,9 +66,9 @@ internal class FirstComponent(
         onNext { count ->
             updateCount(count)
 
-            if (count == COUNTER_ALERT) {
+            if (count == COUNTER_ALERT_AT_SECONDS) {
                 logger.d { "Counter reached 10" }
-                sendUiEvent(FirstUiEvent.ShowToast(MR.strings.first_screen_counter_alert.format(COUNTER_ALERT)))
+                sendUiEvent(FirstUiEvent.ShowToast(MR.strings.first_screen_counter_alert.format(COUNTER_ALERT_AT_SECONDS)))
             }
         }
         onError { error ->
@@ -73,6 +77,12 @@ internal class FirstComponent(
     }
 
     private fun updateCount(count: Long) {
-        componentState.update { it.copy(text = MR.strings.first_screen_counter.format(count)) }
+        componentState.update { it.copy(counter = MR.strings.first_screen_counter.format(count)) }
+    }
+
+    private fun updateCreatedAtTimestamp() {
+        componentState.update {
+            it.copy(createdAt = MR.strings.first_screen_created_at.format(Clock.System.now().desc("Hms")))
+        }
     }
 }

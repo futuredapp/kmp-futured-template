@@ -119,7 +119,8 @@ android {
 
 skie {
     analytics {
-        disableUpload.set(true) // This is explicitly disabled, consider supporting authors by enabling.
+        // https://skie.touchlab.co/Analytics
+        disableUpload.set(false)
     }
     features {
         group {
@@ -150,7 +151,9 @@ private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildT
     val iosDirectory = rootProject.layout.projectDirectory.dir("iosApp/shared/KMP/Sources")
 
     doFirst {
-        delete(iosDirectory)
+        if (iosDirectory.asFile.exists()) {
+            iosDirectory.asFile.deleteRecursively()
+        }
     }
 
     // Produces assembleKMPDebugXCFramework or assembleKMPReleaseXCFramework depending on input build type
