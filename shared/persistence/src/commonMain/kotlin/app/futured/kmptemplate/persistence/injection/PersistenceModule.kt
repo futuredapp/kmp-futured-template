@@ -7,15 +7,11 @@ import app.futured.kmptemplate.persistence.persistence.JsonPersistence
 import app.futured.kmptemplate.persistence.persistence.PrimitivePersistence
 import app.futured.kmptemplate.persistence.platform.PlatformComponent
 import kotlinx.serialization.json.Json
-import okio.Path
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
 
 @Module(includes = [PersistencePlatformModule::class])
-@ComponentScan("app.futured.kmptemplate.persistence")
 class PersistenceModule {
 
     @Single
