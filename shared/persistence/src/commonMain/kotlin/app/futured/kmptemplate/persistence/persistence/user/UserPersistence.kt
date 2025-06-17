@@ -9,9 +9,7 @@ interface UserPersistence {
     suspend fun setUserLoggedIn(isLoggedIn: Boolean)
 }
 
-internal class UserPersistenceImpl(
-    private val primitivePersistence: PrimitivePersistence,
-): UserPersistence {
+internal class UserPersistenceImpl(private val primitivePersistence: PrimitivePersistence) : UserPersistence {
 
     private companion object {
         val IS_USER_LOGGED_IN_KEY = booleanPreferencesKey("IS_USER_LOGGED_IN")

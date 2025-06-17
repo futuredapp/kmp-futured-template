@@ -23,8 +23,7 @@ internal class RootNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     private val deepLinkResolver: DeepLinkResolver,
     private val isUserLoggedInUseCase: IsUserLoggedInUseCase,
-) :
-    AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState),
+) : AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState),
     RootNavHost {
 
     private val rootNavigator: RootNavHostNavigation = RootNavHostNavigator()
