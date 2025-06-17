@@ -19,7 +19,7 @@ afterEvaluate {
     if (extension.useKoin) {
         ksp {
             // enable compile time check
-            arg("KOIN_CONFIG_CHECK", "false")
+            arg("KOIN_CONFIG_CHECK", "true")
             // disable default module generation
             arg("KOIN_DEFAULT_MODULE", "false")
         }
@@ -32,6 +32,10 @@ afterEvaluate {
     dependencies {
         if (extension.useKoin) {
             add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+            add("kspAndroid", libs.koin.ksp.compiler)
+            add("kspIosX64", libs.koin.ksp.compiler)
+            add("kspIosArm64", libs.koin.ksp.compiler)
+            add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
         }
 
         // Enable source generation by KSP to commonMain only
