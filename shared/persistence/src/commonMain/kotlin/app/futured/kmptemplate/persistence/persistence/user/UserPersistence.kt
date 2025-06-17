@@ -2,6 +2,7 @@ package app.futured.kmptemplate.persistence.persistence.user
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import app.futured.kmptemplate.persistence.persistence.PrimitivePersistence
+import org.koin.core.annotation.Single
 
 interface UserPersistence {
     suspend fun isUserLoggedIn(): Boolean
@@ -9,6 +10,7 @@ interface UserPersistence {
     suspend fun setUserLoggedIn(isLoggedIn: Boolean)
 }
 
+@Single
 internal class UserPersistenceImpl(private val primitivePersistence: PrimitivePersistence) : UserPersistence {
 
     private companion object {
