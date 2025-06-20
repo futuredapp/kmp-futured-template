@@ -14,7 +14,7 @@ interface UseCaseExecutionScope :
     FlowUseCaseExecutionScope {
 
     /**
-     * Launch suspend [block] in [viewModelScope].
+     * Launch suspend [block] in [useCaseScope].
      *
      * Encapsulates this call with try catch block and when an exception is thrown
      * then it is logged in [UseCaseErrorHandler.globalOnErrorLogger] and handled by [defaultErrorHandler].
@@ -25,7 +25,7 @@ interface UseCaseExecutionScope :
      */
     @Suppress("TooGenericExceptionCaught")
     fun launchWithHandler(block: suspend CoroutineScope.() -> Unit) {
-        viewModelScope.launch {
+        useCaseScope.launch {
             try {
                 block()
             } catch (exception: CancellationException) {
