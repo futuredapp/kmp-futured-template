@@ -2,37 +2,27 @@ package app.futured.kmptemplate.feature.ui.firstScreen
 
 import app.cash.turbine.Turbine
 import app.cash.turbine.turbineScope
-import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.FetchDataUseCase
 import app.futured.kmptemplate.feature.navigation.home.HomeConfig
-import app.futured.kmptemplate.feature.ui.base.DefaultAppComponentContext
+import app.futured.kmptemplate.feature.ui.base.ComponentTest
+import app.futured.kmptemplate.feature.ui.base.ComponentTestPreparation
+import app.futured.kmptemplate.feature.ui.base.runComponentTest
 import app.futured.kmptemplate.network.rest.dto.Person
 import app.futured.kmptemplate.network.rest.result.NetworkError
-import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.essenty.lifecycle.create
-import com.arkivanov.essenty.lifecycle.destroy
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 import kotlinx.io.IOException
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class FirstComponentTest {
+class FirstComponentTest : ComponentTest by ComponentTestPreparation() {
 
     private class FakeNavigation : FirstScreenNavigation {
         val calls = Turbine<HomeConfig>()
@@ -42,24 +32,6 @@ class FirstComponentTest {
         }
     }
 
-    private val testScope = TestScope()
-    private val testDispatcher = UnconfinedTestDispatcher(testScope.testScheduler)
-
-    private val lifecycleRegistry = LifecycleRegistry()
-    private val appComponentContext = DefaultAppComponentContext(DefaultComponentContext(lifecycleRegistry))
-
-    @BeforeTest
-    fun setup() {
-        Dispatchers.setMain(testDispatcher)
-        UseCaseErrorHandler.globalOnErrorLogger = {}
-    }
-
-    @AfterTest
-    fun cleanup() {
-        lifecycleRegistry.destroy()
-        Dispatchers.resetMain()
-    }
-
     private fun createComponent(
         fetchDataUseCase: FetchDataUseCase,
         counterUseCase: CounterUseCase,
@@ -67,14 +39,14 @@ class FirstComponentTest {
     ): FirstComponent = FirstComponent(
         lifecycleScope = testScope,
         useCaseDispatcher = testDispatcher,
-        componentContext = appComponentContext,
+        componentContext = componentContext,
         fetchDataUseCase = fetchDataUseCase,
         counterUseCase = counterUseCase,
         navigation = navigation,
     )
 
     @Test
-    fun `when component is created, initial state has correct defaults`() = testScope.runTest {
+    fun `when component is created, initial state has correct defaults`() = runComponentTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
             counterUseCase = { flow { /* empty flow */ } },
@@ -88,7 +60,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `when lifecycle is created, person is fetched and state updated`() = testScope.runTest {
+    fun `when lifecycle is created, person is fetched and state updated`() = runComponentTest {
         val expectedPerson = Person(name = "Luke Skywalker")
         val component = createComponent(
             fetchDataUseCase = {
@@ -108,7 +80,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `when fetchDataUseCase fails, viewState contains error`() = testScope.runTest {
+    fun `when fetchDataUseCase fails, viewState contains error`() = runComponentTest {
         val expectedError = NetworkError.ConnectionError(IOException())
         val component = createComponent(
             fetchDataUseCase = { throw expectedError },
@@ -125,7 +97,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `counter updates viewState correctly with each emission`() = testScope.runTest {
+    fun `counter updates viewState correctly with each emission`() = runComponentTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
             counterUseCase = {
@@ -152,7 +124,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `when counter reaches 30, Notify event is emitted`() = testScope.runTest {
+    fun `when counter reaches 30, Notify event is emitted`() = runComponentTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
             counterUseCase = {
@@ -177,7 +149,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `when counter reaches 10, no Notify event is emitted`() = testScope.runTest {
+    fun `when counter reaches 10, no Notify event is emitted`() = runComponentTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
             counterUseCase = {
@@ -198,7 +170,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `state updates and events are both in correct order`() = testScope.runTest {
+    fun `state updates and events are both in correct order`() = runComponentTest {
         val expectedPerson = Person("Darth Vader")
         val component = createComponent(
             fetchDataUseCase = { expectedPerson },
@@ -243,7 +215,7 @@ class FirstComponentTest {
     }
 
     @Test
-    fun `when user taps next button, navigator is called`() = testScope.runTest {
+    fun `when user taps next button, navigator is called`() = runComponentTest {
         val navigation = FakeNavigation()
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
