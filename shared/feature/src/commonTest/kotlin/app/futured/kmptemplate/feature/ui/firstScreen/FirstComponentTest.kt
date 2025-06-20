@@ -128,7 +128,14 @@ class FirstComponentTest {
     fun `counter updates viewState correctly with each emission`() = testScope.runTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
-            counterUseCase = { flow { repeat(6) { rep -> emit(rep.toLong()); delay(it.interval) } } },
+            counterUseCase = {
+                flow {
+                    repeat(6) { rep ->
+                        emit(rep.toLong())
+                        delay(it.interval)
+                    }
+                }
+            },
         )
 
         turbineScope {
@@ -148,7 +155,14 @@ class FirstComponentTest {
     fun `when counter reaches 30, Notify event is emitted`() = testScope.runTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
-            counterUseCase = { flow { repeat(40) { rep -> emit(rep.toLong()); delay(it.interval) } } },
+            counterUseCase = {
+                flow {
+                    repeat(40) { rep ->
+                        emit(rep.toLong())
+                        delay(it.interval)
+                    }
+                }
+            },
         )
 
         turbineScope {
@@ -162,12 +176,18 @@ class FirstComponentTest {
         }
     }
 
-
     @Test
     fun `when counter reaches 10, no Notify event is emitted`() = testScope.runTest {
         val component = createComponent(
             fetchDataUseCase = { error("noop") },
-            counterUseCase = { flow { repeat(10) { rep -> emit(rep.toLong()); delay(it.interval) } } },
+            counterUseCase = {
+                flow {
+                    repeat(10) { rep ->
+                        emit(rep.toLong())
+                        delay(it.interval)
+                    }
+                }
+            },
         )
 
         turbineScope {

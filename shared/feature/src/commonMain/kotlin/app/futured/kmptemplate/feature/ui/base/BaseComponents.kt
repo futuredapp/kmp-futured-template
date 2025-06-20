@@ -22,8 +22,7 @@ abstract class AppComponent<VS : Any, E : Any>(
     defaultState: VS,
     lifecycleScope: CoroutineScope = MainScope(),
     workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
-) :
-    BaseComponent<VS, E>(componentContext, defaultState, lifecycleScope, workerDispatcher),
+) : BaseComponent<VS, E>(componentContext, defaultState, lifecycleScope, workerDispatcher),
     AppComponentContext by componentContext
 
 /**
@@ -40,6 +39,5 @@ abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(
     defaultState: VS,
     lifecycleScope: CoroutineScope = MainScope(),
     workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
-) :
-    AppComponent<VS, E>(componentContext, defaultState, lifecycleScope, workerDispatcher),
+) : AppComponent<VS, E>(componentContext, defaultState, lifecycleScope, workerDispatcher),
     NavigationActionsProducer<NAV>
