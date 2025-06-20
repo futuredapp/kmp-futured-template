@@ -33,6 +33,10 @@ abstract class BaseComponent<VS : Any, E : Any>(
     open val useCaseDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : UseCaseExecutionScope {
 
+    companion object {
+        private const val EVENTS_EXTRA_BUFFER_CAPACITY = 64
+    }
+
     init {
         componentContext.lifecycle.doOnDestroy {
             lifecycleScope.cancel()
@@ -49,7 +53,7 @@ abstract class BaseComponent<VS : Any, E : Any>(
     /**
      * Internal flow for sending UI events.
      */
-    private val eventFlow = MutableSharedFlow<E>()
+    private val eventFlow = MutableSharedFlow<E>(extraBufferCapacity = EVENTS_EXTRA_BUFFER_CAPACITY)
 
     /**
      * Flow of UI events.
