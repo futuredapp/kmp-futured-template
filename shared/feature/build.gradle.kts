@@ -85,21 +85,13 @@ android {
     }
 }
 
-tasks.withType<DokkaTask>().configureEach {
-    dokkaSourceSets.configureEach {
+dokka {
+    dokkaPublications.html {
         outputDirectory.set(layout.projectDirectory.dir("../../doc/documentation/html"))
-
-        val dokkaBaseConfiguration = """
-    {
-      "customStyleSheets": ["${file("../../assets/docs-style.css")}"],
-      "footerMessage": "(c) 2024 Futured - KMP Template"
     }
-    """
-        pluginsMapConfiguration.set(
-            mapOf(
-                // fully qualified plugin name to json configuration
-                "org.jetbrains.dokka.base.DokkaBase" to dokkaBaseConfiguration,
-            ),
-        )
+
+    pluginsConfiguration.html {
+        customStyleSheets.from(file("../../assets/docs-style.css"))
+        footerMessage.set("(c) 2024 Futured - KMP Template")
     }
 }
