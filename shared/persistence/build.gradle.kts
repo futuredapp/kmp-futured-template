@@ -7,6 +7,11 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 
     id(libs.plugins.conventions.lint.get().pluginId)
+    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
+}
+
+annotations {
+    useKoin = true
 }
 
 kotlin {
@@ -24,8 +29,11 @@ kotlin {
 
     sourceSets {
         commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.logging.kermit)
                 implementation(libs.kotlinx.serialization.json)
