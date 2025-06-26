@@ -1,5 +1,5 @@
 [versions]
-agp = "8.10.1"
+agp = "8.11.0"
 kotlin = "2.1.20"
 ksp = "2.1.20-1.0.32" # Must be compatible with: `kotlin`
 desugarLibs = "2.1.5"

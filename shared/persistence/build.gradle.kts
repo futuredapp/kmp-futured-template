@@ -33,7 +33,7 @@ kotlin {
 
             dependencies {
                 implementation(libs.koin.core)
-                api(libs.koin.annotations)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.logging.kermit)
                 implementation(libs.kotlinx.serialization.json)
