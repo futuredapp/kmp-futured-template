@@ -1,5 +1,4 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -7,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.dokka)
 
     id(libs.plugins.conventions.lint.get().pluginId)
     id(libs.plugins.conventions.annotationProcessing.get().pluginId)
@@ -82,16 +80,5 @@ android {
 
     buildFeatures {
         compose = true
-    }
-}
-
-dokka {
-    dokkaPublications.html {
-        outputDirectory.set(layout.projectDirectory.dir("../../doc/documentation/html"))
-    }
-
-    pluginsConfiguration.html {
-        customStyleSheets.from(file("../../assets/docs-style.css"))
-        footerMessage.set("(c) 2024 Futured - KMP Template")
     }
 }
