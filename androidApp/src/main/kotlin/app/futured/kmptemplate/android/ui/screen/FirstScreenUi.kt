@@ -37,7 +37,6 @@ import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
-import dev.icerock.moko.resources.desc.desc
 
 @Composable
 fun FirstScreenUi(
@@ -51,7 +50,7 @@ fun FirstScreenUi(
     Content(viewState = viewState, actions = actions, modifier = modifier)
 
     EventsEffect(eventsFlow = screen.events) {
-        onEvent<FirstUiEvent.ShowToast> { event ->
+        onEvent<FirstUiEvent.Notify> { event ->
             Toast.makeText(context, event.text.toString(context), Toast.LENGTH_SHORT).show()
         }
     }
@@ -80,12 +79,12 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.counter.localized())
+            Text(text = viewState.counterText.localized())
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = viewState.createdAt.localized())
+            Text(text = viewState.createdAtText.localized())
             Spacer(modifier = Modifier.height(4.dp))
-            AnimatedVisibility(viewState.randomPerson != null) {
-                viewState.randomPerson?.let { person ->
+            AnimatedVisibility(viewState.randomPersonText != null) {
+                viewState.randomPersonText?.let { person ->
                     Column {
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
@@ -115,7 +114,7 @@ private fun FirstScreenPreview() {
     MyApplicationTheme {
         Surface {
             Content(
-                viewState = FirstViewState(counter = "Hey there".desc()),
+                viewState = FirstViewState.mock(),
                 actions = actions,
                 modifier = Modifier.fillMaxSize(),
             )

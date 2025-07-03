@@ -39,6 +39,7 @@ dokkaVersion = "1.9.20"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.0.0"
 poet = "2.0.0"
+turbine = "1.2.1"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -104,6 +105,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 # Desugar
 androidTools-desugarLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarLibs" }

@@ -20,8 +20,8 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
         .navigationTitle(Localizable.first_screen_title.localized)
         .eventsEffect(for: viewModel.events) { event in
             switch onEnum(of: event) {
-            case .showToast(let event):
-                viewModel.showToast(event: event)
+            case .notify(let event):
+                viewModel.notify(event: event)
             }
         }
         .alert(viewModel.alertText, isPresented: viewModel.isAlertVisible) {

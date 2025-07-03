@@ -9,7 +9,7 @@ interface CoroutineScopeOwner {
      * It is your responsibility to cancel it when all running
      * tasks should be stopped
      */
-    val viewModelScope: CoroutineScope
+    val useCaseScope: CoroutineScope
 
     /**
      * Provides Dispatcher for background tasks. This may be overridden for testing purposes.
