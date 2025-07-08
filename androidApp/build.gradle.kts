@@ -1,4 +1,5 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
@@ -14,6 +15,9 @@ plugins {
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
+    compilerOptions {
+        jvmTarget = JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum)
+    }
 }
 
 android {
@@ -89,10 +93,6 @@ android {
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 
-    kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
-    }
-
     lint {
         textReport = true // Write a text report to the console (Useful for CI logs)
         xmlReport = true // Write XML report
@@ -111,7 +111,7 @@ dependencies {
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
-    implementation(projects.shared.arkitektDecompose)
+    implementation(projects.shared.arkitektDecompose.architecture)
     implementation(projects.shared.resources)
 
     implementation(platform(libs.androidx.compose.bom))
