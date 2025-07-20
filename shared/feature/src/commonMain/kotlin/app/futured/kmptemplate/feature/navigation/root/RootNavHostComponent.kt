@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.root
 
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.kmptemplate.feature.domain.IsUserLoggedInUseCase
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkResolver
 import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostComponentFactory
@@ -18,8 +19,11 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
 @Factory
-internal class RootNavHostComponent(@InjectedParam componentContext: AppComponentContext, private val deepLinkResolver: DeepLinkResolver) :
-    AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState),
+internal class RootNavHostComponent(
+    @InjectedParam componentContext: AppComponentContext,
+    private val deepLinkResolver: DeepLinkResolver,
+    private val isUserLoggedInUseCase: IsUserLoggedInUseCase,
+) : AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState),
     RootNavHost {
 
     private val rootNavigator: RootNavHostNavigation = RootNavHostNavigator()
@@ -55,7 +59,7 @@ internal class RootNavHostComponent(@InjectedParam componentContext: AppComponen
     init {
         doOnCreate {
             if (!consumeDeepLink()) {
-                rootNavigator.slotNavigator.activate(RootConfig.Login)
+                checkUserLoggedIn()
             }
         }
     }
@@ -83,5 +87,17 @@ internal class RootNavHostComponent(@InjectedParam componentContext: AppComponen
         }
         rootNavigator.slotNavigator.activate(deepLinkConfig)
         return true
+    }
+
+    private fun checkUserLoggedIn() {
+        isUserLoggedInUseCase.execute {
+            onSuccess { isLoggedIn ->
+                if (isLoggedIn) {
+                    rootNavigator.slotNavigator.activate(RootConfig.SignedIn())
+                } else {
+                    rootNavigator.slotNavigator.activate(RootConfig.Login)
+                }
+            }
+        }
     }
 }
