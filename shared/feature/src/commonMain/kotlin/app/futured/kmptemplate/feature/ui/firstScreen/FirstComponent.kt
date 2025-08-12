@@ -3,6 +3,7 @@ package app.futured.kmptemplate.feature.ui.firstScreen
 import app.futured.arkitekt.crusecases.execute
 import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.domain.*
+import app.futured.kmptemplate.feature.tools.executeWithLifecycle
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -51,7 +52,7 @@ internal class FirstComponent(
     }
 
     private fun runTimestamp() {
-        timeStampUseCase.executeWithLifecycle(Unit) {
+        timeStampUseCase.executeWithLifecycle {
             onNext {
                 logger.d { "Collect: $it" }
                 updateCreatedAtTimestamp(it)
