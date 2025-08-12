@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.arkitekt.decompose.event.onEvent
 import app.futured.kmptemplate.android.MyApplicationTheme
@@ -38,6 +39,7 @@ import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
 import dev.icerock.moko.resources.desc.desc
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun FirstScreenUi(
