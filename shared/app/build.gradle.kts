@@ -47,7 +47,7 @@ kotlin {
             isStatic = true
 
             export(projects.shared.platform)
-            export(projects.shared.arkitektDecompose)
+            export(projects.shared.arkitektDecompose.architecture)
             export(projects.shared.feature)
             export(projects.shared.resources)
 
@@ -88,7 +88,7 @@ kotlin {
         iosMain {
             dependencies {
                 api(projects.shared.platform)
-                api(projects.shared.arkitektDecompose)
+                api(projects.shared.arkitektDecompose.architecture)
                 api(projects.shared.feature)
                 api(projects.shared.resources)
 

@@ -1,6 +1,6 @@
 package app.futured.arkitekt.decompose.presentation
 
-import app.futured.arkitekt.crusecases.scope.UseCaseExecutionScope
+import app.futured.arkitekt.crusecases.scope.CoroutineScopeOwner
 import com.arkivanov.decompose.GenericComponentContext
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
  * @param defaultState The default Component state.
  */
 abstract class BaseComponent<VS : Any, E : Any>(componentContext: GenericComponentContext<*>, private val defaultState: VS) :
-    UseCaseExecutionScope {
+    CoroutineScopeOwner {
 
     /**
      * An internal state of the component of type [VS].

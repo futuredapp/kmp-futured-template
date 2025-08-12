@@ -35,6 +35,10 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    compilerOptions {
+        freeCompilerArgs.add("-Xcontext-parameters")
+    }
+
     sourceSets {
         commonMain {
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
@@ -51,7 +55,7 @@ kotlin {
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.arkitektDecompose)
+                implementation(projects.shared.arkitektDecompose.architecture)
                 implementation(projects.shared.arkitektDecompose.annotation)
                 implementation(projects.shared.resources)
 

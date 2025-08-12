@@ -19,7 +19,7 @@ rootProject.name = "KMP_Futured_template"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":androidApp")
-include(":shared:arkitekt-decompose")
+include(":shared:arkitekt-decompose:architecture")
 include(":shared:arkitekt-decompose:annotation")
 include(":shared:arkitekt-decompose:processor")
 include(":shared:arkitekt-cr-usecases")
