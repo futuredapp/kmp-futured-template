@@ -1,4 +1,4 @@
-package app.futured.factorygenerator.processor
+package app.futured.arkitekt.factorygenerator.processor
 
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment

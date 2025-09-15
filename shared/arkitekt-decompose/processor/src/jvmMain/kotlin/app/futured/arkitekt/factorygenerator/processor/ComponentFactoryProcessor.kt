@@ -1,4 +1,4 @@
-package app.futured.factorygenerator.processor
+package app.futured.arkitekt.factorygenerator.processor
 
 import app.futured.factorygenerator.annotation.GenerateFactory
 import com.google.devtools.ksp.processing.CodeGenerator
