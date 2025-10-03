@@ -19,7 +19,7 @@ import kotlin.time.Duration.Companion.seconds
 internal class FruitPickerComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: PickerNavigation,
-    @InjectedParam args: PickerArgs,
+    @InjectedParam private val args: PickerArgs,
 ) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()),
     PickerScreen,
     PickerScreen.Actions,
@@ -47,8 +47,8 @@ internal class FruitPickerComponent(
         }
     }
 
-    override fun onPick(item: String) {
-        // TODO result
+    override fun onPick(item: String) = launchWithHandler {
+        args.results.sendResult(item)
         dismiss()
     }
 
