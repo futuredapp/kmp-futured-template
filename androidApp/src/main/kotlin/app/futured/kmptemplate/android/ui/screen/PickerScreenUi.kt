@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.feature.ui.picker.Picker
+import app.futured.kmptemplate.feature.ui.picker.PickerScreen
 import app.futured.kmptemplate.feature.ui.picker.PickerState
 import app.futured.kmptemplate.feature.ui.picker.pickerStatePreviews
 import app.futured.kmptemplate.resources.MR
@@ -35,12 +35,12 @@ import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
 
 @Composable
-fun PickerUi(
-    picker: Picker,
+fun PickerScreenUi(
+    pickerScreen: PickerScreen,
     modifier: Modifier = Modifier,
 ) {
-    val actions = picker.actions
-    val viewState by picker.viewState.collectAsStateWithLifecycle()
+    val actions = pickerScreen.actions
+    val viewState by pickerScreen.viewState.collectAsStateWithLifecycle()
 
     Content(viewState = viewState, actions = actions, modifier = modifier)
 }
@@ -49,7 +49,7 @@ fun PickerUi(
 @Composable
 private fun Content(
     viewState: PickerState,
-    actions: Picker.Actions,
+    actions: PickerScreen.Actions,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -114,7 +114,7 @@ private fun PickerUiPreview(
     MaterialTheme {
         Content(
             viewState = state,
-            actions = object : Picker.Actions {
+            actions = object : PickerScreen.Actions {
                 override fun onPick(item: String) = Unit
                 override fun onDismiss() = Unit
             },
