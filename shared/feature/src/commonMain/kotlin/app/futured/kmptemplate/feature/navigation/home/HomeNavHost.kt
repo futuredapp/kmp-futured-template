@@ -44,7 +44,7 @@ sealed interface HomeConfig {
 sealed interface HomeSheetConfig {
 
     @Serializable
-    data class Picker(val type: PickerType, val args: PickerArgs) : HomeSheetConfig
+    data class Picker(val pickerType: PickerType, val args: PickerArgs) : HomeSheetConfig
 }
 
 sealed interface HomeChild {

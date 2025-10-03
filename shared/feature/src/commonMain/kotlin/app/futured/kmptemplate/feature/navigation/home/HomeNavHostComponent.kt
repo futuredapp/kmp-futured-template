@@ -74,7 +74,7 @@ internal class HomeNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 is HomeSheetConfig.Picker -> {
-                    when (config.type) {
+                    when (config.pickerType) {
                         PickerType.Fruit -> HomeSheetChild.Picker(
                             FruitPickerComponentFactory.createComponent(
                                 componentContext = childCtx,
