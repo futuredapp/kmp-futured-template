@@ -44,7 +44,7 @@ jobs:
       # TODO PROJECT-SETUP verify product flavor configuration
       # Specifies API environment for KMP build.
       # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
-      KMP_FLAVOR: 'test'
+      KMP_FLAVOR: 'dev'
       KMP_SWIFT_PACKAGE_INTEGRATION: true
       KMP_SWIFT_PACKAGE_PATH: 'iosApp/shared/KMP'
       # TODO PROJECT-SETUP Verify app distribution groups
