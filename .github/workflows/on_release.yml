@@ -7,7 +7,7 @@ on:
 jobs:
   release_ios:
     name: iOS Release
-    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-release.yml@main
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-release.yml@2.0.0
     with:
       kmp_swift_package_integration: true
       kmp_swift_package_path: iosApp/shared/KMP
@@ -23,11 +23,10 @@ jobs:
 
   release_android:
     name: Android Release
-    uses: futuredapp/.github/.github/workflows/android-cloud-release-googlePlay.yml@main
+    uses: futuredapp/.github/.github/workflows/android-cloud-release-googlePlay.yml@2.0.0
     with:
       VERSION_NAME: ${{ github.event.release.tag_name }}
       BUNDLE_GRADLE_TASK: bundleRelease
-      SIGNING_KEYSTORE_PATH: androidApp/keystore/release.keystore
       # TODO PROJECT-SETUP This has to be applicationId
       GOOGLE_PLAY_APPLICATION_ID: app.futured.kmptemplate.android
       GOOGLE_PLAY_WHATSNEW_DIRECTORY: androidApp/whatsnew

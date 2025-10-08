@@ -1,0 +1,62 @@
+name: Nightly build
+
+on:
+  schedule:
+    - cron: "0 0 * * 2-6" # https://crontab.guru/#0_0_*_*_2-6
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: 'Version name (Android)'
+        required: true
+        type: string
+        default: '1.x.x-snapshot'
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  generate_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version_name: ${{ steps.version.outputs.version_name }}
+    steps:
+      - name: Generate version name with timestamp
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION_NAME="${{ inputs.version_name }}"
+            echo "[DEBUG] Using manual input version name: $VERSION_NAME"
+          else
+            VERSION_NAME="nightly-${{ github.run_id }}"
+            echo "[DEBUG] Generated automatic version name: $VERSION_NAME"
+          fi
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+  nightly_build:
+    needs: generate_version
+    uses: futuredapp/.github/.github/workflows/kmp-combined-nightly-build.yml@2.0.0
+    with:
+      # `testReleaseUnitTest` covers androidApp module and all shared modules all at once. No need to call `testEnterpriseUnitTest` and `testReleaseUnitTest`.
+      ANDROID_TEST_GRADLE_TASK: testReleaseUnitTest
+      ANDROID_PACKAGE_GRADLE_TASK: packageEnterpriseUniversalApk
+      ANDROID_UPLOAD_GRADLE_TASK: appDistributionUploadEnterprise
+      ANDROID_VERSION_NAME: ${{ needs.generate_version.outputs.version_name }}
+      # TODO PROJECT-SETUP verify product flavor configuration
+      # Specifies API environment for KMP build.
+      # One of [dev|prod] as per configuration of Buildkonfig plugin in :shared:network:* Gradle module.
+      KMP_FLAVOR: 'dev'
+      KMP_SWIFT_PACKAGE_INTEGRATION: true
+      KMP_SWIFT_PACKAGE_PATH: 'iosApp/shared/KMP'
+      # TODO PROJECT-SETUP Verify app distribution groups
+      FIREBASE_APP_DISTRIBUTION_GROUPS: futured-devs, futured-qa
+      CHANGELOG_DEBUG: true
+      CHANGELOG_CHECKOUT_DEPTH: 100
+      CHANGELOG_FALLBACK_LOOKBACK: "2 weeks"
+    secrets:
+      FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT: ${{ secrets.APP_DISTRIBUTION_SERVICE_ACCOUNT }}
+      # TODO PROJECT-SETUP create random secure string in repository secrets, or leave out to disable configuration cache
+      GRADLE_CACHE_ENCRYPTION_KEY: ${{ secrets.GRADLE_CACHE_ENCRYPTION_KEY }}
+      IOS_MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      IOS_APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+      IOS_APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      IOS_APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
