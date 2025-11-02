@@ -1,7 +1,7 @@
 [versions]
 agp = "8.11.1"
 kotlin = "2.2.10"
-ksp = "2.3.0" # Must be compatible with: `kotlin`
+ksp = "2.3.0"
 desugarLibs = "2.1.5"
 androidxLifecycle = "2.9.1"
 androidxComposeBom = "2025.06.01"
