@@ -14,6 +14,7 @@ plugins {
 annotations {
     useKoin = true
     useComponentFactory = true
+    androidBuildTypes = ProjectSettings.Android.BuildTypes.all
 }
 
 dependencies {
