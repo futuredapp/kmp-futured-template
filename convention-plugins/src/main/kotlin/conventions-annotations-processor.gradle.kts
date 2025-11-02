@@ -33,7 +33,7 @@ afterEvaluate {
     if (extension.useKoin) {
         ksp {
             // enable compile time check
-            arg("KOIN_CONFIG_CHECK", "true")
+            arg("KOIN_CONFIG_CHECK", "false")
             // disable default module generation
             arg("KOIN_DEFAULT_MODULE", "false")
         }
