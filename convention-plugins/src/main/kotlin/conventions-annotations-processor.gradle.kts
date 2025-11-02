@@ -1,4 +1,5 @@
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 // As of now, we cannot use Gradle version catalogs with Precompiled Script plugins: https://github.com/gradle/gradle/issues/15383
@@ -8,8 +9,21 @@ plugins {
 
 // Allow configuring which processor to use (or both)
 abstract class AnnotationsExtension {
+
+    /**
+     * Configures Koin annotations if enabled.
+     */
     var useKoin: Boolean = false
+
+    /**
+     * Configures Component factory generation if enabled
+     */
     var useComponentFactory: Boolean = false
+
+    /**
+     * Configures Android build variant KSP task dependencies for each build variant provided
+     */
+    var androidBuildTypes: List<String> = emptyList()
 }
 
 val extension = extensions.create("annotations", AnnotationsExtension::class)
@@ -57,4 +71,12 @@ tasks.withType<KotlinCompilationTask<*>>().configureEach {
             dependsOn("kspCommonMainKotlinMetadata")
         }
     }
+}
+
+// Manual wiring of task dependencies needed for build variant-dependent KSP tasks
+tasks.named { taskName ->
+    val taskNames = extension.androidBuildTypes.map { "ksp${it.uppercaseFirstChar()}KotlinAndroid" }
+    taskName in taskNames
+}.configureEach {
+    mustRunAfter("kspCommonMainKotlinMetadata")
 }

@@ -26,6 +26,8 @@ object ProjectSettings {
             const val Debug = "debug"
             const val Enterprise = "enterprise"
             const val Release = "release"
+
+            val all = listOf(Debug, Enterprise, Release)
         }
 
         object Signing {

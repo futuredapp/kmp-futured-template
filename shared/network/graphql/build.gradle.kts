@@ -15,6 +15,7 @@ plugins {
 
 annotations {
     useKoin = true
+    androidBuildTypes = ProjectSettings.Android.BuildTypes.all
 }
 
 kotlin {
