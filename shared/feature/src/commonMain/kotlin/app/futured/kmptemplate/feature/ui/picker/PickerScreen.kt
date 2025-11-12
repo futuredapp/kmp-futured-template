@@ -2,7 +2,7 @@ package app.futured.kmptemplate.feature.ui.picker
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface Picker {
+interface PickerScreen {
     val viewState: StateFlow<PickerState>
     val actions: Actions
 

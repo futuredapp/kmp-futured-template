@@ -15,9 +15,9 @@ protocol PickerViewModelProtocol: DynamicProperty {
 
 struct PickerViewModel {
     @StateObject @KotlinStateFlow private var viewState: PickerState
-    private let actions: PickerActions
+    private let actions: PickerScreenActions
 
-    init(_ screen: KMP.Picker) {
+    init(_ screen: PickerScreen) {
         _viewState = .init(screen.viewState)
         actions = screen.actions
     }
