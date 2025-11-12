@@ -24,8 +24,8 @@ android {
         applicationId = ProjectSettings.Android.ApplicationId
         minSdk = ProjectSettings.Android.MinSdkVersion
         targetSdk = ProjectSettings.Android.TargetSdkVersion
-        versionCode = ProjectSettings.Android.VersionCode
-        versionName = ProjectSettings.Android.VersionName
+        versionCode = System.getenv("ANDROID_BUILD_NUMBER")?.toIntOrNull() ?: 1
+        versionName = System.getenv("ANDROID_VERSION_NAME") ?: "1.x.x-local"
     }
 
     buildFeatures {
@@ -48,9 +48,9 @@ android {
         }
         create(ProjectSettings.Android.BuildTypes.Release) {
             storeFile = file("keystore/todo_your_release_keystore.keystore")
-            storePassword = ProjectSettings.Android.Signing.Release.StorePassword
-            keyAlias = ProjectSettings.Android.Signing.Release.KeyAlias
-            keyPassword = ProjectSettings.Android.Signing.Release.KeyPassword
+            storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD").orEmpty()
+            keyAlias = System.getenv("ANDROID_KEY_ALIAS").orEmpty()
+            keyPassword = System.getenv("ANDROID_KEY_PASSWORD").orEmpty()
         }
     }
 
