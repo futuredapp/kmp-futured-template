@@ -4,10 +4,12 @@ import SwiftUI
 struct HomeTabNavigationView: View {
 
     private let stack: SkieSwiftStateFlow<ChildStack<HomeConfig, HomeChild>>
+    @StateObject @KotlinStateFlow private var sheet: ChildSlot<HomeSheetConfig, HomeSheetChild>
     private let actions: HomeNavHostActions
 
     init(_ component: HomeNavHost) {
         self.stack = component.stack
+        self._sheet = .init(component.sheet)
         self.actions = component.actions
     }
 
@@ -23,6 +25,20 @@ struct HomeTabNavigationView: View {
                 SecondView(SecondViewModel(entry.screen))
             case .third(let entry):
                 ThirdView(ThirdViewModel(entry.screen))
+            }
+        }
+        .sheet(
+            isPresented: .init(
+                get: { sheet.child != nil },
+                set: { _ in actions.onSheetDismissed() }
+            )
+        ) {
+            if let child = sheet.child?.instance {
+                switch onEnum(of: child) {
+                case .picker(let instance):
+                    PickerView(PickerViewModel(instance.screen))
+                        .presentationDetents(.init([.medium]))
+                }
             }
         }
     }
