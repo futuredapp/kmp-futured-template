@@ -273,8 +273,4 @@ fun confirmBuild(): Boolean {
     return readlnOrNull()?.trim()?.lowercase() == "y"
 }
 
-fun removeLicense() {
-    File("LICENSE").delete()
-}
-
 // endregion
