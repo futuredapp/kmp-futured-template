@@ -8,10 +8,16 @@ import kotlin.io.path.exists
 import kotlin.io.path.extension
 import kotlin.io.path.isRegularFile
 
+data class UserInput(
+    val appName: String,
+    val androidPackageName: String,
+    val iosBetaAppIdentifier: String,
+)
+
 val templatePackageName = "app.futured.kmptemplate"
 val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
 
-val (appName, appPackageName) = readInput()
+val (appName, appPackageName, iosBetaAppId) = readInput()
 val appPackagePath = Path.of(appPackageName.replace('.', '/'))
 
 // region Android + KMP + Gradle
@@ -70,7 +76,7 @@ findAndReplaceInFile(
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
     varName = "APP_IDENTIFIER",
-    newValue = appPackageName,
+    newValue = iosBetaAppId,
 )
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
@@ -240,19 +246,25 @@ fun updateFastfileEnvVariables(file: File, varName: String, newValue: String) {
     }
 }
 
-fun readInput(): Pair<String, String> {
+fun readInput(): UserInput {
     print("Project name: ")
     val appName: String = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?.replace(" ", "_")
         ?: error("Invalid name entered")
 
-    print("Package name (e.g. com.example.test): ")
+    print("KMP + Android package name (e.g. com.example.test): ")
     val packageName = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?: error("Invalid package name")
 
-    return Pair(appName, packageName)
+    print("iOS Beta app identifier: app.futured.")
+    val iosBetaAppId = readlnOrNull()
+        ?.takeIf { it.isNotBlank() }
+        ?.let { "app.futured.$it" }
+        ?: error("Invalid app identifier")
+
+    return UserInput(appName, packageName, iosBetaAppId)
 }
 
 fun confirmBuild(): Boolean {
