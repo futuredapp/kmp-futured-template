@@ -1,8 +1,9 @@
 # Source: https://github.com/futuredapp/iOS-project-template/blob/main/fastlane/Fastfile
 
-ENV['APP_NAME'] = 'AppName'
-ENV['APP_SCHEME'] = 'AppName'
-ENV['APP_IDENTIFIER'] = 'app.futured.app_name'
+ENV['APP_NAME'] = 'KmpTemplate'
+ENV['APP_SCHEME'] = 'KmpTemplate'
+ENV['APP_IDENTIFIER'] = 'app.futured.kmptemplate'
+
 # If you use any app's extension (notification, widget, etc.), uncomment next line and fill all the extension names (comma separated):
 #ENV['APP_EXTENSIONS'] = 'extension1,extension2'
 
