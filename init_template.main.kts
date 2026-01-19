@@ -1,10 +1,4 @@
-#!/bin/bash
-
-//usr/bin/env echo '
-/**** BOOTSTRAP kscript ****\'>/dev/null
-command -v kscript >/dev/null 2>&1 || curl -L "https://git.io/fpF1K" | bash 1>&2
-exec kscript $0 "$@"
-\*** IMPORTANT: Any code including imports and annotations must come after this line ***/
+#!/usr/bin/env kotlin
 
 import java.io.File
 import java.nio.file.Files
@@ -140,7 +134,8 @@ moveFileTree(
 // region Repo
 
 File("LICENSE").delete()
-File("init_template.kts").delete()
+File("init_template.main.kts").delete()
+File("init_template.sh").delete()
 
 if (confirmBuild()) {
     ProcessBuilder("./gradlew", "assembleKMPDebugXCFramework").inheritIO().start().waitFor()
