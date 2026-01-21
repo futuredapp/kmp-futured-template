@@ -1,10 +1,4 @@
-#!/bin/bash
-
-//usr/bin/env echo '
-/**** BOOTSTRAP kscript ****\'>/dev/null
-command -v kscript >/dev/null 2>&1 || curl -L "https://git.io/fpF1K" | bash 1>&2
-exec kscript $0 "$@"
-\*** IMPORTANT: Any code including imports and annotations must come after this line ***/
+#!/usr/bin/env kotlin
 
 import java.io.File
 import java.nio.file.Files
@@ -14,10 +8,16 @@ import kotlin.io.path.exists
 import kotlin.io.path.extension
 import kotlin.io.path.isRegularFile
 
+data class UserInput(
+    val appName: String,
+    val androidPackageName: String,
+    val iosBetaAppIdentifier: String,
+)
+
 val templatePackageName = "app.futured.kmptemplate"
 val templatePackagePath: Path = Path.of("app/futured/kmptemplate")
 
-val (appName, appPackageName) = readInput()
+val (appName, appPackageName, iosBetaAppId) = readInput()
 val appPackagePath = Path.of(appPackageName.replace('.', '/'))
 
 // region Android + KMP + Gradle
@@ -76,7 +76,7 @@ findAndReplaceInFile(
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
     varName = "APP_IDENTIFIER",
-    newValue = appPackageName,
+    newValue = iosBetaAppId,
 )
 updateFastfileEnvVariables(
     file = File("iosApp/fastlane/Fastfile"),
@@ -140,7 +140,8 @@ moveFileTree(
 // region Repo
 
 File("LICENSE").delete()
-File("init_template.kts").delete()
+File("init_template.main.kts").delete()
+File("init_template.sh").delete()
 
 if (confirmBuild()) {
     ProcessBuilder("./gradlew", "assembleKMPDebugXCFramework").inheritIO().start().waitFor()
@@ -245,29 +246,31 @@ fun updateFastfileEnvVariables(file: File, varName: String, newValue: String) {
     }
 }
 
-fun readInput(): Pair<String, String> {
+fun readInput(): UserInput {
     print("Project name: ")
     val appName: String = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?.replace(" ", "_")
         ?: error("Invalid name entered")
 
-    print("Package name (e.g. com.example.test): ")
+    print("KMP + Android package name (e.g. com.example.test): ")
     val packageName = readlnOrNull()
         ?.takeIf { it.isNotBlank() }
         ?: error("Invalid package name")
 
-    return Pair(appName, packageName)
+    print("iOS Beta app identifier: app.futured.")
+    val iosBetaAppId = readlnOrNull()
+        ?.takeIf { it.isNotBlank() }
+        ?.let { "app.futured.$it" }
+        ?: error("Invalid app identifier")
+
+    return UserInput(appName, packageName, iosBetaAppId)
 }
 
 fun confirmBuild(): Boolean {
     println()
     println("The script will now build Swift Package for the first time.\n(You can skip this, but will need to do later using './gradlew assembleKMPDebugXCFramework')\n\nConfirm [Y/n]: ")
     return readlnOrNull()?.trim()?.lowercase() == "y"
-}
-
-fun removeLicense() {
-    File("LICENSE").delete()
 }
 
 // endregion
