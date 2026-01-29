@@ -212,16 +212,14 @@ Navigation("RootNavHost") {
 
 ### Initial script
 
-Use `init_template.kts` script to set up the template.
-The script renames directories and package names in files to the given package name.
-
-It is written in Kotlin. To run it you need to have [kscript](https://github.com/kscripting/kscript)
-installed.
+Use the `init_template.sh` script to set up the template.
+The script is a Kotlin-based tool (`init_template.main.kts`) that renames directories and package names throughout the project to match your specified package name.
+The shell wrapper automatically ensures Kotlin is installed via SDKMAN if needed.
 
 #### Usage
 
 ```shell
-kscript init_template.kts
+./init_template.sh
 ```
 
 #### Note on iOS
