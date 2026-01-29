@@ -38,7 +38,6 @@ kotlin {
     val xcf = XCFramework(ProjectSettings.IOS.FrameworkName)
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach {

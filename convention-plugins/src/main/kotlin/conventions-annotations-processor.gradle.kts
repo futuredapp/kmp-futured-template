@@ -47,7 +47,6 @@ afterEvaluate {
         if (extension.useKoin) {
             add("kspCommonMainMetadata", libs.koin.ksp.compiler)
             add("kspAndroid", libs.koin.ksp.compiler)
-            add("kspIosX64", libs.koin.ksp.compiler)
             add("kspIosArm64", libs.koin.ksp.compiler)
             add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
         }
