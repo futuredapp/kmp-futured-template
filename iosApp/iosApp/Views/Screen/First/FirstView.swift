@@ -18,6 +18,12 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
             Button(Localizable.first_screen_button.localized, action: viewModel.onNext).buttonStyle(.borderedProminent)
         }
         .navigationTitle(Localizable.first_screen_title.localized)
+        .eventsEffect(for: viewModel.events) { event in
+            switch onEnum(of: event) {
+            case .showToast(let event):
+                viewModel.showToast(event: event)
+            }
+        }
         .alert(viewModel.alertText, isPresented: viewModel.isAlertVisible) {
             Button(Localizable.generic_close.localized) { viewModel.hideToast() }
         }
@@ -29,6 +35,7 @@ private struct FirstViewPreviewViewModel: FirstViewModelProtocol {
     var counter: String { "42" }
     var createdAt: String { "2026-01-29" }
     var randomPerson: String? { "Ada Lovelace\nGrace Hopper\nAlan Turing" }
+    let events: SkieSwiftFlow<FirstUiEvent> = SwiftPreviewHelpersKt.mockEmptyFlow().cast()
 
     var isAlertVisible: Binding<Bool> { .constant(false) }
     var alertText: String { "" }

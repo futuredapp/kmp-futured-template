@@ -5,6 +5,7 @@ protocol FirstViewModelProtocol: DynamicProperty {
     var counter: String { get }
     var createdAt: String { get }
     var randomPerson: String? { get }
+    var events: SkieSwiftFlow<FirstUiEvent> { get }
     var isAlertVisible: Binding<Bool> { get }
     var alertText: String { get }
 
@@ -16,6 +17,7 @@ protocol FirstViewModelProtocol: DynamicProperty {
 struct FirstViewModel {
     @StateObject @KotlinStateFlow private var viewState: FirstViewState
     private let actions: FirstScreenActions
+    let events: SkieSwiftFlow<FirstUiEvent>
 
     @State private var alertVisible: Bool = false
     @State private(set) var alertText: String = ""
@@ -23,6 +25,7 @@ struct FirstViewModel {
     init(_ screen: FirstScreen) {
         _viewState = .init(screen.viewState)
         actions = screen.actions
+        events = screen.events
     }
 }
 
