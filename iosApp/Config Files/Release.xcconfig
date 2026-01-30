@@ -2,3 +2,4 @@
 
 KMP_BUILD_FLAVOR = prod
 KMP_FRAMEWORK_BUILD_TYPE = release
+KMP_IS_STATIC = true
