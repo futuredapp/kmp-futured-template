@@ -44,5 +44,6 @@ object ProjectSettings {
         const val FrameworkBundleId = "app.futured.kmptemplate.shared"
         const val MokoBaseLocalizationRegion = "en"
         const val BuildModeProperty = "kmpBuildMode"
+        const val IsStaticFrameworkProperty = "isStatic"
     }
 }

@@ -48,12 +48,13 @@ kotlin {
         "device" -> listOf(arm64)
         else -> listOf(arm64, simArm64)
     }
+    val isStaticFramework = project.findProperty(ProjectSettings.IOS.IsStaticFrameworkProperty)?.toString()?.toBoolean() ?: true
 
     frameworkTargets.forEach {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
-            isStatic = true
+            isStatic = isStaticFramework
 
             export(projects.shared.platform)
             export(projects.shared.arkitektDecompose)
@@ -64,6 +65,8 @@ kotlin {
             export(libs.essenty)
             export(libs.kotlinx.immutableCollections)
             export(libs.moko.resources)
+
+            linkerOpts("-lsqlite3")
 
             xcf.add(this)
         }
