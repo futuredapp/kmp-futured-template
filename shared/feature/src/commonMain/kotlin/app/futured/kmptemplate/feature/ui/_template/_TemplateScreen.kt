@@ -19,6 +19,12 @@ interface TEMPLATEScreen {
 
     interface Actions {
         fun onBack()
+
+        companion object {
+            fun noOpActions(): Actions = object : Actions {
+                override fun onBack() = Unit
+            }
+        }
     }
 }
 
@@ -28,6 +34,7 @@ internal interface TEMPLATEScreenNavigation : NavigationActions {
 
 data object TEMPLATEViewState
 
+//@GenerateFactory
 @Factory
 internal class TEMPLATEComponent(
     @InjectedParam componentContext: AppComponentContext,

@@ -32,9 +32,10 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
 
 #if DEBUG
 private struct FirstViewPreviewViewModel: FirstViewModelProtocol {
-    var counter: String { "42" }
-    var createdAt: String { "2026-01-29" }
-    var randomPerson: String? { "Ada Lovelace\nGrace Hopper\nAlan Turing" }
+    let viewState: FirstViewState = FirstViewState.Companion().mock
+    var counter: String { viewState.counter.localized() }
+    var createdAt: String { viewState.createdAt.localized() }
+    var randomPerson: String? { viewState.randomPerson?.localized() }
     let events: SkieSwiftFlow<FirstUiEvent> = SwiftPreviewHelpersKt.mockEmptyFlow().cast()
 
     var isAlertVisible: Binding<Bool> { .constant(false) }

@@ -30,14 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.arkitekt.decompose.event.onEvent
-import app.futured.kmptemplate.android.MyApplicationTheme
+import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen.Actions.Companion.noOpActions
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
-import dev.icerock.moko.resources.desc.desc
 
 @Composable
 fun FirstScreenUi(
@@ -108,17 +108,12 @@ private fun Content(
 
 @Preview
 @Composable
-private fun FirstScreenPreview() {
-    val actions = object : FirstScreen.Actions {
-        override fun onNext() = Unit
-    }
-    MyApplicationTheme {
-        Surface {
-            Content(
-                viewState = FirstViewState(counter = "Hey there".desc()),
-                actions = actions,
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
+private fun FirstScreenPreview() = Showcase {
+    Surface {
+        Content(
+            viewState = FirstViewState.mock,
+            actions = noOpActions(),
+            modifier = Modifier.fillMaxSize(),
+        )
     }
 }

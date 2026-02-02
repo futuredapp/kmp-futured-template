@@ -27,7 +27,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen
+import app.futured.kmptemplate.feature.ui.picker.PickerScreen.Actions.Companion.noOpActions
 import app.futured.kmptemplate.feature.ui.picker.PickerState
 import app.futured.kmptemplate.feature.ui.picker.pickerStatePreviews
 import app.futured.kmptemplate.resources.MR
@@ -110,15 +112,10 @@ private class PickerUiPreviewProvider : PreviewParameterProvider<PickerState> {
 @Composable
 private fun PickerUiPreview(
     @PreviewParameter(PickerUiPreviewProvider::class) state: PickerState,
-) {
-    MaterialTheme {
-        Content(
-            viewState = state,
-            actions = object : PickerScreen.Actions {
-                override fun onPick(item: String) = Unit
-                override fun onDismiss() = Unit
-            },
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
+) = Showcase {
+    Content(
+        viewState = state,
+        actions = noOpActions(),
+        modifier = Modifier.fillMaxWidth(),
+    )
 }
