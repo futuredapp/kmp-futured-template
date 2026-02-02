@@ -14,8 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.futured.kmptemplate.android.MyApplicationTheme
+import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
+import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen.Actions.Companion.noOpActions
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 
@@ -52,16 +53,11 @@ private fun Content(
 
 @Preview
 @Composable
-private fun FirstScreenPreview() {
-    val actions = object : LoginScreen.Actions {
-        override fun onLoginClick() = Unit
-    }
-    MyApplicationTheme {
-        Surface {
-            Content(
-                actions = actions,
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
+private fun LoginScreenPreview() = Showcase {
+    Surface {
+        Content(
+            actions = noOpActions(),
+            modifier = Modifier.fillMaxSize(),
+        )
     }
 }
