@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui._template.TEMPLATEScreen
 import app.futured.kmptemplate.feature.ui._template.TEMPLATEScreen.Actions.Companion.noOpActions
+import app.futured.kmptemplate.feature.ui._template.TEMPLATEScreenPreviews
 import app.futured.kmptemplate.feature.ui._template.TEMPLATEViewState
 
 /**
@@ -45,8 +46,7 @@ private fun Content(
 @Preview
 private fun TEMPLATEScreenPreview() = Showcase {
     Content(
-        viewState = TEMPLATEViewState,
+        viewState = TEMPLATEScreenPreviews.viewState(),
         actions = noOpActions(),
     )
 }
-

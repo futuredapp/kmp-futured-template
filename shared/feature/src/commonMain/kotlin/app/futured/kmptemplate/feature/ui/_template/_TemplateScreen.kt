@@ -3,6 +3,7 @@ package app.futured.kmptemplate.feature.ui._template
 import app.futured.arkitekt.decompose.navigation.NavigationActions
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
@@ -51,4 +52,13 @@ internal class TEMPLATEComponent(
     override val viewState: StateFlow<TEMPLATEViewState> = componentState
 
     override fun onBack() = pop()
+}
+
+object TEMPLATEScreenPreviews {
+    fun viewState() = TEMPLATEViewState
+
+    fun screen(viewState: TEMPLATEViewState = viewState()): TEMPLATEScreen = object : TEMPLATEScreen {
+        override val viewState: StateFlow<TEMPLATEViewState> = MutableStateFlow(viewState)
+        override val actions: TEMPLATEScreen.Actions = TEMPLATEScreen.Actions.noOpActions()
+    }
 }
