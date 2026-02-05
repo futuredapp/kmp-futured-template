@@ -33,6 +33,7 @@ import app.futured.arkitekt.decompose.event.onEvent
 import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen.Actions.Companion.noOpActions
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenPreviews
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
@@ -111,7 +112,7 @@ private fun Content(
 private fun FirstScreenPreview() = Showcase {
     Surface {
         Content(
-            viewState = FirstViewState.mock,
+            viewState = FirstScreenPreviews.viewState(),
             actions = noOpActions(),
             modifier = Modifier.fillMaxSize(),
         )
