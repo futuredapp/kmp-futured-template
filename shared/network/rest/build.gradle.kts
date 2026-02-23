@@ -96,3 +96,8 @@ buildkonfig {
         }
     }
 }
+
+ktorfit {
+    // See https://github.com/Foso/Ktorfit/releases/tag/2.7.1
+    compilerPluginVersion.set("2.3.3")
+}

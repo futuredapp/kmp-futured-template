@@ -1,4 +1,5 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
@@ -14,6 +15,10 @@ plugins {
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
+    }
 }
 
 android {
@@ -87,10 +92,6 @@ android {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-
-    kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
 
     lint {
