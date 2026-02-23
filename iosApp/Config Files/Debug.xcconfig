@@ -2,3 +2,6 @@
 
 KMP_BUILD_FLAVOR = dev
 KMP_FRAMEWORK_BUILD_TYPE = debug
+// Dynamic framework is required to enable SwiftUI previews in Xcode.
+// Static linking prevents the preview process from loading the KMP framework.
+KMP_IS_STATIC = false

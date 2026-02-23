@@ -37,6 +37,12 @@ kotlin {
 
     val xcf = XCFramework(ProjectSettings.IOS.FrameworkName)
 
+    // Controls whether the KMP XCFramework is built as static or dynamic.
+    // Dynamic (false) is needed for SwiftUI previews in Xcode (Debug builds).
+    // Static (true, default) is used for Beta and Release builds.
+    // Controlled via -PisStatic=true|false Gradle property, set from KMP_IS_STATIC in .xcconfig files.
+    val isStaticFramework = project.findProperty(ProjectSettings.IOS.IsStaticFrameworkProperty)?.toString()?.toBoolean() ?: true
+
     listOf(
         iosArm64(),
         iosSimulatorArm64(),
@@ -44,7 +50,7 @@ kotlin {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
-            isStatic = true
+            isStatic = isStaticFramework
 
             export(projects.shared.platform)
             export(projects.shared.arkitektDecompose)
@@ -55,6 +61,8 @@ kotlin {
             export(libs.essenty)
             export(libs.kotlinx.immutableCollections)
             export(libs.moko.resources)
+
+            linkerOpts("-lsqlite3")
 
             xcf.add(this)
         }

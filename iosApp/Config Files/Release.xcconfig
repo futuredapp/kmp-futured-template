@@ -2,3 +2,5 @@
 
 KMP_BUILD_FLAVOR = prod
 KMP_FRAMEWORK_BUILD_TYPE = release
+// Static framework is used for beta (TestFlight) and release builds.
+KMP_IS_STATIC = true

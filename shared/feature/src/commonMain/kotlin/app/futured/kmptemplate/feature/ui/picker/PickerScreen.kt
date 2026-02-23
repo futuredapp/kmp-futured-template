@@ -9,5 +9,12 @@ interface PickerScreen {
     interface Actions {
         fun onPick(item: String)
         fun onDismiss()
+
+        companion object {
+            fun noOpActions(): Actions = object : Actions {
+                override fun onPick(item: String) = Unit
+                override fun onDismiss() = Unit
+            }
+        }
     }
 }

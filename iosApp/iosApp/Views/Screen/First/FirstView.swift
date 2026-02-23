@@ -15,7 +15,10 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
             if let randomPerson = viewModel.randomPerson {
                 Text(randomPerson).multilineTextAlignment(.center)
             }
-            Button(Localizable.first_screen_button.localized, action: viewModel.onNext).buttonStyle(.borderedProminent)
+            Button(
+                Localizable.first_screen_button.localized,
+                action: viewModel.onNext
+            ).buttonStyle(.borderedProminent)
         }
         .navigationTitle(Localizable.first_screen_title.localized)
         .eventsEffect(for: viewModel.events) { event in
@@ -25,7 +28,26 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
             }
         }
         .alert(viewModel.alertText, isPresented: viewModel.isAlertVisible) {
-            Button(Localizable.generic_close.localized) { viewModel.hideToast() }
+            Button(Localizable.generic_close.localized) {
+                viewModel.hideToast()
+            }
         }
     }
 }
+
+#if DEBUG
+    #Preview("FirstView") {
+        NavigationStack {
+            let viewState = FirstScreenPreviews.shared.viewState(
+                counter: "42",
+                randomPerson: "Obi-Wan Kenobi",
+                createdAt: "Created at: 1977-05-25"
+            )
+            FirstView(
+                FirstViewModel(
+                    FirstScreenPreviews.shared.screen(viewState: viewState)
+                )
+            )
+        }
+    }
+#endif
