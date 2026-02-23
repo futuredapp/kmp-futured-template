@@ -18,7 +18,10 @@ ifdef KMP_BUILD_MODE
     GRADLE_ARGS += -PkmpBuildMode=$(KMP_BUILD_MODE)
 endif
 
-# Add isStatic
+# KMP_IS_STATIC controls static vs dynamic framework linking.
+# Dynamic (false) is used in Debug builds to enable SwiftUI previews.
+# Static (true) is used in Beta and Release builds.
+# Defaults to static (true) in Gradle if not explicitly set.
 ifdef KMP_IS_STATIC
     GRADLE_ARGS += -PisStatic=$(KMP_IS_STATIC)
 endif
