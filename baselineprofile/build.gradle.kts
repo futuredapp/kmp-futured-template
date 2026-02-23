@@ -1,10 +1,17 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.android.build.api.dsl.ManagedVirtualDevice
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.test)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.baselineprofile)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
+    }
 }
 
 android {
@@ -14,10 +21,6 @@ android {
     compileOptions {
         sourceCompatibility = ProjectSettings.Android.JavaCompatibility
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-
-    kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
     }
 
     defaultConfig {

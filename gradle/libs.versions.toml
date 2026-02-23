@@ -1,7 +1,7 @@
 [versions]
-agp = "8.13.1"
-kotlin = "2.2.20"
-ksp = "2.3.0"
+agp = "8.13.2"
+kotlin = "2.3.0"
+ksp = "2.3.4"
 desugarLibs = "2.1.5"
 androidxLifecycle = "2.9.1"
 androidxComposeBom = "2025.06.01"
@@ -19,12 +19,12 @@ ktlint = "1.6.0"
 detektGradlePlugin = "1.23.8"
 composeLint = "1.4.2"
 apollo = "4.3.1"
-ktorfit = "2.6.5" # Must be compatible with: `ksp`
-ktor = "3.3.3" # Must be compatible with: `ktorfit`
+ktorfit = "2.7.2" # Must be compatible with: `ksp`
+ktor = "3.4.0" # Must be compatible with: `ktorfit`
 kotlinx-serialization = "1.8.0" # Must be compatible with: `kotlin`
 timber = "5.0.1"
 kermit = "2.0.8"
-skie = "0.10.8" # Must be compatible with: `kotlin`
+skie = "0.10.9" # Must be compatible with: `kotlin`
 buildkonfig = "0.17.1"
 nsExceptionKt = "1.0.0-BETA-7"
 datastore = "1.1.1"
