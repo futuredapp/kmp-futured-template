@@ -54,11 +54,6 @@ afterEvaluate {
         // Enable source generation by KSP to commonMain only
         if (extension.useComponentFactory) {
             add("kspCommonMainMetadata", project(":shared:arkitekt-decompose:processor"))
-            // DO NOT add bellow dependencies
-            // add("kspAndroid", Deps.Koin.kspCompiler)
-            // add("kspIosX64", Deps.Koin.kspCompiler)
-            // add("kspIosArm64", Deps.Koin.kspCompiler)
-            // add("kspIosSimulatorArm64", Deps.Koin.kspCompiler)
         }
     }
 }
@@ -66,9 +61,7 @@ afterEvaluate {
 // WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
 tasks.withType<KotlinCompilationTask<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
-        if (tasks.findByName("kspCommonMainKotlinMetadata") != null) {
-            dependsOn("kspCommonMainKotlinMetadata")
-        }
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
 
