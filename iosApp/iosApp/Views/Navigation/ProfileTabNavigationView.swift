@@ -18,9 +18,9 @@ struct ProfileTabNavigationView: View {
         ) { child in
             switch onEnum(of: child) {
             case .profile(let entry):
-                ProfileView(ProfileViewModel(entry.screen))
+                ProfileView(entry.screen)
             case .third(let entry):
-                ThirdView(ThirdViewModel(entry.screen))
+                ThirdView(entry.screen)
             }
         }
     }

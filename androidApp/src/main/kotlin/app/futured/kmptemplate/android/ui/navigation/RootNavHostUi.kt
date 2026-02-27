@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.android.ui.screen.LoginScreenUi
+import app.futured.kmptemplate.ui.screen.LoginScreenUi
 import app.futured.kmptemplate.feature.navigation.root.RootChild
 import app.futured.kmptemplate.feature.navigation.root.RootConfig
 import app.futured.kmptemplate.feature.navigation.root.RootNavHost

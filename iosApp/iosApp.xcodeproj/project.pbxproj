@@ -10,7 +10,6 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		11057D522CF5C438004A383B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11057D512CF5C436004A383B /* ProfileView.swift */; };
-		11057D542CF5C43F004A383B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11057D532CF5C43D004A383B /* ProfileViewModel.swift */; };
 		1113BA3B2AE6956A00ABDE61 /* PlatformBindingsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */; };
 		1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */; };
 		1113BA402AE6993800ABDE61 /* KmpTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */; };
@@ -34,11 +33,6 @@
 		11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */; };
 		11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D407532C17232F0055C0F2 /* PlatformImpl.swift */; };
 		11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1D2CF4CF9A0088E48F /* PickerView.swift */; };
-		11D73F202CF4CFA40088E48F /* PickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */; };
-		5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD382C11C55F005B6191 /* FirstViewModel.swift */; };
-		5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */; };
-		5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */; };
-		5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */; };
 		F4820AB72B0B51A100B13080 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4820AB62B0B51A100B13080 /* XCTest.framework */; };
 		F4820AB82B0B523E00B13080 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4820AA02B0B4D3E00B13080 /* iosAppTests.swift */; };
 /* End PBXBuildFile section */
@@ -70,7 +64,6 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		11057D512CF5C436004A383B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		11057D532CF5C43D004A383B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1113BA3A2AE6956A00ABDE61 /* PlatformBindingsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformBindingsImpl.swift; sourceTree = "<group>"; };
 		1113BA3D2AE696A600ABDE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1113BA3F2AE6993800ABDE61 /* KmpTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmpTemplateApp.swift; sourceTree = "<group>"; };
@@ -95,11 +88,6 @@
 		11C4D2F22AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFirebaseCrashlyticsImpl.swift; sourceTree = "<group>"; };
 		11D407532C17232F0055C0F2 /* PlatformImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImpl.swift; sourceTree = "<group>"; };
 		11D73F1D2CF4CF9A0088E48F /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
-		11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewModel.swift; sourceTree = "<group>"; };
-		5B21BD382C11C55F005B6191 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
-		5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
-		5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
-		5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7FFCC52B691F0400A70102 /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		DC7FFCC72B69297800A70102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -139,7 +127,6 @@
 		11057D502CF5C429004A383B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				11057D532CF5C43D004A383B /* ProfileViewModel.swift */,
 				11057D512CF5C436004A383B /* ProfileView.swift */,
 			);
 			path = Profile;
@@ -240,7 +227,6 @@
 		11D73F1C2CF4CF1A0088E48F /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				11D73F1F2CF4CFA10088E48F /* PickerViewModel.swift */,
 				11D73F1D2CF4CF9A0088E48F /* PickerView.swift */,
 			);
 			path = Picker;
@@ -250,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				1193BEF52AEA989600C6203F /* FirstView.swift */,
-				5B21BD382C11C55F005B6191 /* FirstViewModel.swift */,
 			);
 			path = First;
 			sourceTree = "<group>";
@@ -259,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				1193BEF72AEA989F00C6203F /* SecondView.swift */,
-				5B21BD3A2C11CD0B005B6191 /* SecondViewModel.swift */,
 			);
 			path = Second;
 			sourceTree = "<group>";
@@ -268,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				1193BEF92AEA98A800C6203F /* ThirdView.swift */,
-				5B21BD3C2C11CEE8005B6191 /* ThirdViewModel.swift */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -277,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				1193BEFB2AEA9FA000C6203F /* LoginView.swift */,
-				5B21BD3E2C11CF5C005B6191 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -494,17 +476,12 @@
 			files = (
 				1193BEEC2AEA97C900C6203F /* RootView.swift in Sources */,
 				1193BEFA2AEA98A800C6203F /* ThirdView.swift in Sources */,
-				11057D542CF5C43F004A383B /* ProfileViewModel.swift in Sources */,
 				119C5F4D2AEBDFCB00CB58E3 /* KotlinStateFlow.swift in Sources */,
-				5B21BD3B2C11CD0B005B6191 /* SecondViewModel.swift in Sources */,
 				114970172C399DC9005C6924 /* TabContentView.swift in Sources */,
 				1113BA3E2AE696A600ABDE61 /* AppDelegate.swift in Sources */,
-				11D73F202CF4CFA40088E48F /* PickerViewModel.swift in Sources */,
 				1193BEE62AEA8A4A00C6203F /* ComponentHolder.swift in Sources */,
-				5B21BD3D2C11CEE8005B6191 /* ThirdViewModel.swift in Sources */,
 				1193BEF22AEA987D00C6203F /* RootNavigationView.swift in Sources */,
 				11C4D2F32AF920DC00E272CF /* PlatformFirebaseCrashlyticsImpl.swift in Sources */,
-				5B21BD392C11C55F005B6191 /* FirstViewModel.swift in Sources */,
 				11057D522CF5C438004A383B /* ProfileView.swift in Sources */,
 				11B16AC12C32B34F00ECA63A /* SignedInNavigationView.swift in Sources */,
 				11D73F1E2CF4CF9E0088E48F /* PickerView.swift in Sources */,
@@ -520,7 +497,6 @@
 				11B16AC32C32B81200ECA63A /* ProfileTabNavigationView.swift in Sources */,
 				112B170E2C35459100ADCCBF /* KotlinOptionalStateFlow.swift in Sources */,
 				11D407542C17232F0055C0F2 /* PlatformImpl.swift in Sources */,
-				5B21BD3F2C11CF5C005B6191 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

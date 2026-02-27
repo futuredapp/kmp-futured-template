@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.android.ui.screen
+package app.futured.kmptemplate.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,11 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen.Actions.Companion.noOpActions
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.resources.kmpStringResource
+import app.futured.kmptemplate.ui.components.Showcase
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun LoginScreenUi(
@@ -41,12 +41,12 @@ private fun Content(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = kmpStringResource(MR.strings.login_screen_title),
+            text = stringResource(MR.strings.login_screen_title),
             modifier = Modifier.padding(horizontal = 24.dp),
         )
         Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = { actions.onLoginClick() }) {
-            Text(text = kmpStringResource(MR.strings.generic_sign_in))
+            Text(text = stringResource(MR.strings.generic_sign_in))
         }
     }
 }

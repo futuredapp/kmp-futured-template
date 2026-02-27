@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.android.ui.screen
+package app.futured.kmptemplate.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature.ui.profileScreen.ProfileScreen
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.resources.kmpStringResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun ProfileScreenUi(
@@ -39,7 +39,7 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(kmpStringResource(MR.strings.profile_screen_title)) },
+                title = { Text(stringResource(MR.strings.profile_screen_title)) },
                 windowInsets = WindowInsets.navigationBars,
             )
         },
@@ -52,11 +52,11 @@ private fun Content(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(onClick = actions::onLogout) {
-                Text(kmpStringResource(MR.strings.generic_sign_out))
+                Text(stringResource(MR.strings.generic_sign_out))
             }
             Spacer(modifier = Modifier.height(8.dp))
             Button(onClick = actions::onThird) {
-                Text(kmpStringResource(MR.strings.profile_navigate_to_third))
+                Text(stringResource(MR.strings.profile_navigate_to_third))
             }
         }
     }

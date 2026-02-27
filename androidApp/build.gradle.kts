@@ -110,6 +110,7 @@ dependencies {
 
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
+    implementation(projects.shared.ui)
     implementation(projects.shared.platform)
     implementation(projects.shared.arkitektDecompose)
     implementation(projects.shared.kmpResources)

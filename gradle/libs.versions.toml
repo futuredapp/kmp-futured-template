@@ -24,10 +24,10 @@ ktorfit = "2.7.2" # Must be compatible with: `ksp`
 ktor = "3.4.0" # Must be compatible with: `ktorfit`
 kotlinx-serialization = "1.10.0" # Must be compatible with: `kotlin`
 timber = "5.0.1"
-kermit = "2.0.8"
+kermit = "2.0.4"
 skie = "0.10.10" # Must be compatible with: `kotlin`
 buildkonfig = "0.17.1"
-nsExceptionKt = "1.0.7"
+nsExceptionKt = "1.0.0-BETA-7"
 datastore = "1.2.0"
 moko-resources = "0.26.0"
 baselineProfile = "1.5.0-alpha02"
@@ -39,6 +39,7 @@ profileinstaller = "1.4.1"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.2.0"
 poet = "2.2.0"
+composeMultiplatform = "1.11.0-alpha03"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -54,6 +55,7 @@ project-shared-arkitekt-decompose-namespace = "app.futured.arkitekt.decompose.an
 project-shared-platform-namespace = "app.futured.kmptemplate.platform.android"
 project-shared-resources-namespace = "app.futured.kmptemplate.resources.android"
 project-shared-resources-packageName = "app.futured.kmptemplate.resources"
+project-shared-ui-namespace = "app.futured.kmptemplate.ui.android"
 project-baselineprofile-namespace = "app.futured.kmptemplate.baselineprofile"
 
 [libraries]
@@ -67,7 +69,15 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" , version.ref = "materialIcons"}
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeRuntime" }
+
+# Compose Multiplatform
+cmp-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "composeMultiplatform" }
+cmp-foundation = { group = "org.jetbrains.compose.foundation", name = "foundation", version.ref = "composeMultiplatform" }
+cmp-ui = { group = "org.jetbrains.compose.ui", name = "ui", version.ref = "composeMultiplatform" }
+cmp-ui-backhandler = { group = "org.jetbrains.compose.ui", name = "ui-backhandler", version.ref = "composeMultiplatform" }
+cmp-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "composeMultiplatform" }
+cmp-tooling-preview = { group = "org.jetbrains.compose.ui", name = "ui-tooling-preview", version.ref = "composeMultiplatform" }
+cmp-resources = { group = "org.jetbrains.compose.components", name = "components-resources", version.ref = "composeMultiplatform" }
 
 # Koin
 #koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
@@ -123,6 +133,7 @@ skie-annotations = { group = "co.touchlab.skie", name = "configuration-annotatio
 
 # Moko
 moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }
+moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources"}
 
 # Network
 network-apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
@@ -168,8 +179,18 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }
 conventions-annotationProcessing = { id = "conventions-annotations-processor" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrainsComposeRuntime" }
 
 [bundles]
+cmp = [
+    "cmp-runtime",
+    "cmp-foundation",
+    "cmp-ui",
+    "cmp-ui-backhandler",
+    "cmp-material3",
+    "cmp-tooling-preview",
+    "cmp-resources",
+]
 compose = [
     "androidx-compose-runtime",
     "androidx-compose-foundation",

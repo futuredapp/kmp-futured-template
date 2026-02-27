@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.android.ui.screen.ProfileScreenUi
-import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
+import app.futured.kmptemplate.ui.screen.ProfileScreenUi
+import app.futured.kmptemplate.ui.screen.ThirdScreenUi
 import app.futured.kmptemplate.feature.navigation.profile.ProfileChild
 import app.futured.kmptemplate.feature.navigation.profile.ProfileConfig
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHost

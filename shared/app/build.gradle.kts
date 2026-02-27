@@ -59,6 +59,7 @@ kotlin {
             export(projects.shared.arkitektDecompose)
             export(projects.shared.feature)
             export(projects.shared.kmpResources)
+            export(projects.shared.ui)
 
             export(libs.decompose)
             export(libs.essenty)
@@ -103,6 +104,7 @@ kotlin {
                 api(projects.shared.arkitektDecompose)
                 api(projects.shared.feature)
                 api(projects.shared.kmpResources)
+                api(projects.shared.ui)
 
                 api(libs.decompose)
                 api(libs.kotlinx.immutableCollections)

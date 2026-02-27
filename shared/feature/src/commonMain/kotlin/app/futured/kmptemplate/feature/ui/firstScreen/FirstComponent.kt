@@ -13,9 +13,9 @@ import com.arkivanov.essenty.lifecycle.doOnCreate
 import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlin.time.Clock
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.milliseconds
 
 @Factory
@@ -68,7 +68,9 @@ internal class FirstComponent(
 
             if (count == COUNTER_ALERT_AT_SECONDS) {
                 logger.d { "Counter reached 10" }
-                sendUiEvent(FirstUiEvent.ShowToast(MR.strings.first_screen_counter_alert.format(COUNTER_ALERT_AT_SECONDS)))
+                sendUiEvent(
+                    FirstUiEvent.ShowToast,
+                )
             }
         }
         onError { error ->

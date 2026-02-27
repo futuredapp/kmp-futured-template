@@ -1,4 +1,4 @@
-package app.futured.kmptemplate.android.ui.screen
+package app.futured.kmptemplate.ui.screen
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,14 +24,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen.Actions.Companion.noOpActions
 import app.futured.kmptemplate.feature.ui.picker.PickerState
 import app.futured.kmptemplate.feature.ui.picker.pickerStatePreviews
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.resources.kmpStringResource
-import app.futured.kmptemplate.resources.localized
+import app.futured.kmptemplate.ui.components.Showcase
+import dev.icerock.moko.resources.compose.localized
+import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun PickerScreenUi(
@@ -57,10 +56,13 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(kmpStringResource(MR.strings.picker_title)) },
+                title = { Text(stringResource(MR.strings.picker_title)) },
                 actions = {
                     IconButton(onClick = actions::onDismiss) {
-                        Icon(Icons.Filled.Close, contentDescription = kmpStringResource(MR.strings.generic_close))
+                        Icon(
+                            painter = painterResource(MR.images.ic_close),
+                            contentDescription = stringResource(MR.strings.generic_close),
+                        )
                     }
                 },
                 windowInsets = WindowInsets(0),

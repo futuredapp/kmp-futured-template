@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package app.futured.kmptemplate.android.ui.screen
+package app.futured.kmptemplate.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -24,8 +22,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreen
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdViewState
 import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.resources.kmpStringResource
-import app.futured.kmptemplate.resources.localized
+import dev.icerock.moko.resources.compose.localized
+import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun ThirdScreenUi(
@@ -48,11 +47,14 @@ private fun Content(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(kmpStringResource(res = MR.strings.third_screen_title)) },
+                title = { Text(stringResource(MR.strings.third_screen_title)) },
                 windowInsets = WindowInsets.navigationBars,
                 navigationIcon = {
                     IconButton(onClick = { actions.onBack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                        Icon(
+                            painter = painterResource(MR.images.ic_back),
+                            contentDescription = null,
+                        )
                     }
                 },
             )

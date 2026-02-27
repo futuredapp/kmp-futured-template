@@ -1,18 +1,19 @@
 import KMP
 import SwiftUI
 
-struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
-    private let viewModel: ViewModel
-
-    init(_ viewModel: ViewModel) {
-        self.viewModel = viewModel
+struct ProfileComposeView: UIViewControllerRepresentable {
+    private let screen: ProfileScreen
+    init(_ screen: ProfileScreen) { self.screen = screen }
+    func makeUIViewController(context: Context) -> some UIViewController {
+        ProfileUiController(screen: screen)
     }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}
 
+struct ProfileView: View {
+    private let screen: ProfileScreen
+    init(_ screen: ProfileScreen) { self.screen = screen }
     var body: some View {
-        VStack(spacing: 10) {
-            Button(Localizable.generic_sign_out.localized, action: viewModel.onLogoutClick)
-            Button(Localizable.profile_navigate_to_third.localized, action: viewModel.onThirdClick)
-        }
-        .navigationTitle(Localizable.profile_screen_title.localized)
+        ProfileComposeView(screen).ignoresSafeArea()
     }
 }

@@ -1,6 +1,5 @@
-package app.futured.kmptemplate.android.ui.theme
+package app.futured.kmptemplate.ui.theme
 
-import app.futured.kmptemplate.android.tools.Constants
 import com.arkivanov.decompose.extensions.compose.stack.animation.StackAnimation
 import com.arkivanov.decompose.extensions.compose.stack.animation.StackAnimationProvider
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation

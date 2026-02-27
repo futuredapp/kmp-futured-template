@@ -1,18 +1,19 @@
 import KMP
 import SwiftUI
 
-struct SecondView<ViewModel: SecondViewModelProtocol>: View {
-    private let viewModel: ViewModel
-
-    init(_ viewModel: ViewModel) {
-        self.viewModel = viewModel
+struct SecondComposeView: UIViewControllerRepresentable {
+    private let screen: SecondScreen
+    init(_ screen: SecondScreen) { self.screen = screen }
+    func makeUIViewController(context: Context) -> some UIViewController {
+        SecondUiController(screen: screen)
     }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}
 
+struct SecondView: View {
+    private let screen: SecondScreen
+    init(_ screen: SecondScreen) { self.screen = screen }
     var body: some View {
-        HStack {
-            Button(Localizable.second_screen_button_fruit.localized, action: viewModel.onPickFruit).buttonStyle(.bordered)
-            Button(Localizable.second_screen_button_veggie.localized, action: viewModel.onPickVeggie).buttonStyle(.bordered)
-        }
-        .navigationTitle(Localizable.second_screen_title.localized)
+        SecondComposeView(screen).ignoresSafeArea()
     }
 }

@@ -42,7 +42,7 @@ kotlin {
                 implementation(libs.kotlinx.immutableCollections)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
-                implementation(libs.jetbrains.compose.runtime)
+                implementation(libs.cmp.runtime)
 
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)

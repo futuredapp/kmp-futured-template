@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.android.ui.screen.FirstScreenUi
-import app.futured.kmptemplate.android.ui.screen.PickerScreenUi
-import app.futured.kmptemplate.android.ui.screen.SecondScreenUi
-import app.futured.kmptemplate.android.ui.screen.ThirdScreenUi
+import app.futured.kmptemplate.ui.screen.FirstScreenUi
+import app.futured.kmptemplate.ui.screen.PickerScreenUi
+import app.futured.kmptemplate.ui.screen.SecondScreenUi
+import app.futured.kmptemplate.ui.screen.ThirdScreenUi
 import app.futured.kmptemplate.feature.navigation.home.HomeChild
 import app.futured.kmptemplate.feature.navigation.home.HomeConfig
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHost
