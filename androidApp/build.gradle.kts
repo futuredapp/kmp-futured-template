@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
     // TODO PROJECT-SETUP enable after providing google-services.json
@@ -113,7 +112,7 @@ dependencies {
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
     implementation(projects.shared.arkitektDecompose)
-    implementation(projects.shared.resources)
+    implementation(projects.shared.kmpResources)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)

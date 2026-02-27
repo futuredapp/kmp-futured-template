@@ -1,8 +1,7 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
@@ -17,17 +16,16 @@ annotations {
     androidBuildTypes = ProjectSettings.Android.BuildTypes.all
 }
 
-dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-}
-
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+
+    android {
+        namespace = libs.versions.project.shared.feature.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
 
     iosArm64()
@@ -50,8 +48,8 @@ kotlin {
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
                 implementation(projects.shared.arkitektDecompose)
-                implementation(projects.shared.arkitektDecompose.annotation)
-                implementation(projects.shared.resources)
+                implementation(projects.shared.arkitektDecompose.arkitektAnnotation)
+                implementation(projects.shared.kmpResources)
 
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
@@ -64,21 +62,11 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
-    }
-}
 
-android {
-    namespace = libs.versions.project.shared.feature.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-
-    buildFeatures {
-        compose = true
+        androidMain {
+            dependencies {
+                implementation(project.dependencies.platform(libs.androidx.compose.bom))
+            }
+        }
     }
 }

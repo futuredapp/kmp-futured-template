@@ -6,13 +6,12 @@ import co.touchlab.skie.configuration.SealedInterop
 import co.touchlab.skie.configuration.SuppressSkieWarning
 import co.touchlab.skie.configuration.SuspendInterop
 import dev.icerock.gradle.MRVisibility
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.skie)
     alias(libs.plugins.moko.resources)
 
@@ -29,10 +28,14 @@ kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
     applyDefaultHierarchyTemplate()
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+
+    android {
+        namespace = libs.versions.project.shared.app.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
+        androidResources { enable = true }
     }
 
     val xcf = XCFramework(ProjectSettings.IOS.FrameworkName)
@@ -63,7 +66,7 @@ kotlin {
             export(projects.shared.platform)
             export(projects.shared.arkitektDecompose)
             export(projects.shared.feature)
-            export(projects.shared.resources)
+            export(projects.shared.kmpResources)
 
             export(libs.decompose)
             export(libs.essenty)
@@ -86,12 +89,13 @@ kotlin {
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.resources)
+                implementation(projects.shared.kmpResources)
 
                 implementation(libs.decompose)
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
                 implementation(libs.logging.kermit)
+                implementation(libs.logging.kermitCrashlytics)
             }
         }
 
@@ -106,7 +110,7 @@ kotlin {
                 api(projects.shared.platform)
                 api(projects.shared.arkitektDecompose)
                 api(projects.shared.feature)
-                api(projects.shared.resources)
+                api(projects.shared.kmpResources)
 
                 api(libs.decompose)
                 api(libs.kotlinx.immutableCollections)
@@ -114,22 +118,6 @@ kotlin {
                 implementation(libs.logging.nsExceptionKt.core)
             }
         }
-    }
-}
-
-android {
-    namespace = libs.versions.project.shared.app.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-
-    buildFeatures {
-        buildConfig = true
     }
 }
 

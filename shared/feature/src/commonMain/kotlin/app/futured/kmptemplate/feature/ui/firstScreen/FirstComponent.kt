@@ -13,7 +13,7 @@ import com.arkivanov.essenty.lifecycle.doOnCreate
 import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds

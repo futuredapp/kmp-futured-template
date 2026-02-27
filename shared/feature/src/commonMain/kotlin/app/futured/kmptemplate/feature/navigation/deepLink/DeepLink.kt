@@ -20,9 +20,9 @@ internal data class DeepLink(val regex: Regex, val uri: String) {
         }
     }
 
-    inline fun pathParameter(key: String): String? = regex.find(uri)?.groups?.get(key)?.value
+    fun pathParameter(key: String): String? = regex.find(uri)?.groups?.get(key)?.value
 
-    inline fun queryParameter(key: String): String? {
+    fun queryParameter(key: String): String? {
         val params = Url(uri).parameters.toMap()
         return params[key]?.firstOrNull()
     }

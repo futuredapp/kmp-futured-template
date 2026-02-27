@@ -63,8 +63,8 @@ set up, incl. navigation and some API calls.
 ### Android
 
 - ApplicationId: ~~`app.futured.project`~~
-- minSdk: ~~`28`~~
-- targetSdk: ~~`34`~~
+- minSdk: ~~`29`~~
+- targetSdk: ~~`36`~~
 - Supports: ~~**Dark mode, landscape orientation**~~
 - Build Variants: debug, enterprise, release
 

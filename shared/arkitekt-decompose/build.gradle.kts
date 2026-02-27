@@ -1,25 +1,20 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
 
     id(libs.plugins.conventions.lint.get().pluginId)
 }
 
-dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-}
-
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    android {
+        namespace = libs.versions.project.shared.arkitekt.decompose.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
 
     iosArm64()
@@ -43,17 +38,11 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.test)
             }
         }
-    }
-}
 
-android {
-    namespace = libs.versions.project.shared.arkitekt.decompose.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
+        androidMain {
+            dependencies {
+                implementation(project.dependencies.platform(libs.androidx.compose.bom))
+            }
+        }
     }
 }
