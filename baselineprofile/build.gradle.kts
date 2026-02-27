@@ -1,17 +1,13 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.android.build.api.dsl.ManagedVirtualDevice
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.test)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.baselineprofile)
 }
 
 kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-    }
+    jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 }
 
 android {
@@ -32,7 +28,7 @@ android {
 
     targetProjectPath = ":androidApp"
 
-    testOptions.managedDevices.devices {
+    testOptions.managedDevices.allDevices {
         create<ManagedVirtualDevice>("pixel6Api34") {
             device = "Pixel 6"
             apiLevel = 34

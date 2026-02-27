@@ -1,10 +1,9 @@
 import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
@@ -22,10 +21,10 @@ annotations {
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    android {
+        namespace = libs.versions.project.shared.network.rest.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
 
     iosArm64()
@@ -62,18 +61,6 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
-    }
-}
-
-android {
-    namespace = libs.versions.project.shared.network.rest.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }
 

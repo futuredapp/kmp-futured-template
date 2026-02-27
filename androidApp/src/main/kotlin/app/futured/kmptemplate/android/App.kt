@@ -17,6 +17,7 @@ class App : Application() {
     private fun initializeKmp() {
         SharedApp.initializeSharedApplication(
             platformBindings = PlatformBindingsImpl(applicationContext = this),
+            isDebugBuild = BuildConfig.DEBUG,
         ) {
             androidContext(this@App)
         }

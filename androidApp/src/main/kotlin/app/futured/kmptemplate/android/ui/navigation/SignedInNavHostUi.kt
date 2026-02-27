@@ -24,7 +24,6 @@ import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostViewSt
 import app.futured.kmptemplate.resources.localized
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandler
@@ -82,7 +81,6 @@ private fun TabsContent(
         animation = predictiveBackAnimation(
             backHandler = backHandler,
             onBack = onBack,
-            selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
         ),
     ) { child ->
         when (val childInstance = child.instance) {

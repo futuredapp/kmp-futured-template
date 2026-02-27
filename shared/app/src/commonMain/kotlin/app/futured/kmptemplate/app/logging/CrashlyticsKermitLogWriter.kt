@@ -3,10 +3,8 @@ package app.futured.kmptemplate.app.logging
 import app.futured.kmptemplate.app.crashreporting.CrashlyticsReporter
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.LogWriter
-import co.touchlab.kermit.Message
 import co.touchlab.kermit.MessageStringFormatter
 import co.touchlab.kermit.Severity
-import co.touchlab.kermit.Tag
 
 /**
  * Custom implementation of Kermit [LogWriter] that logs messages and non-fatal
@@ -31,10 +29,8 @@ internal class CrashlyticsKermitLogWriter(
 ) : LogWriter() {
 
     init {
-        if (minCrashSeverity != null) {
-            require(minSeverity <= minCrashSeverity) {
-                "minSeverity ($minSeverity) cannot be greater than minCrashSeverity ($minCrashSeverity)"
-            }
+        if (minCrashSeverity != null && minSeverity > minCrashSeverity) {
+            throw IllegalArgumentException("minSeverity ($minSeverity) cannot be greater than minCrashSeverity ($minCrashSeverity)")
         }
     }
 
@@ -45,28 +41,8 @@ internal class CrashlyticsKermitLogWriter(
             return
         }
 
-        val plainMessage = messageStringFormatter.formatMessage(severity, Tag(tag), Message(message))
-        crashlytics.logMessage(plainMessage)
-
-        if (minCrashSeverity != null && severity >= minCrashSeverity) {
-            if (throwable != null) {
-                crashlytics.sendNonFatalException(throwable)
-            } else {
-                crashlytics.sendNonFatalException(LoggingException(plainMessage))
-            }
-        }
-
         if (throwable != null && minCrashSeverity != null && severity >= minCrashSeverity) {
             crashlytics.sendNonFatalException(throwable)
         }
     }
 }
-
-/**
- * This exception serves as a way to log Crashlytics messages, using
- * `Logger.e { "Message" }` call, so they display in Crashlytics console as non-fatal exceptions.
- *
- * When above logger call is executed, the [CrashlyticsKermitLogWriter] will wrap provided message in this exception to elevate
- * the plain message log to non-fatal exception in Crashlytics console.
- */
-internal class LoggingException(message: String) : IllegalStateException(message)

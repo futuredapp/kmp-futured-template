@@ -7,7 +7,7 @@ import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenNavigation
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.pushNew
 
 internal interface ProfileNavHostNavigation :
     ProfileScreenNavigation,
@@ -21,7 +21,7 @@ internal class ProfileNavHostNavigator(private val onNavigateToLogin: () -> Unit
     override fun ProfileScreen.navigateToLogin() = onNavigateToLogin()
 
     override fun ProfileScreen.navigateToThird(id: String) {
-        stackNavigator.push(ProfileConfig.Third(ThirdScreenArgs(id)))
+        stackNavigator.pushNew(ProfileConfig.Third(ThirdScreenArgs(id)))
     }
 
     override fun ThirdComponent.pop() {
