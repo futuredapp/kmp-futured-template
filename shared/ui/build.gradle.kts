@@ -44,7 +44,7 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(compose.uiTooling)
+                implementation(libs.androidx.ui.tooling)
             }
         }
 

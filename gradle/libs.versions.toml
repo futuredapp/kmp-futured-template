@@ -40,6 +40,7 @@ google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.2.0"
 poet = "2.2.0"
 composeMultiplatform = "1.11.0-alpha03"
+androidxUiTooling = "1.9.3"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -98,6 +99,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "androidxUiTooling" }
 
 # Decompose
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
