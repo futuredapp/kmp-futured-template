@@ -12,7 +12,7 @@ struct RootView: View {
 
     var body: some View {
         RootNavigationView(componentHolder.component)
-            .onChange(of: scenePhase) { newPhase in
+            .onChange(of: scenePhase) { _, newPhase in
                 switch newPhase {
                 case .background:
                     LifecycleRegistryExtKt.stop(componentHolder.lifecycle)

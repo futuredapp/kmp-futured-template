@@ -1,4 +1,4 @@
-import KMP
+@preconcurrency import KMP
 
 /**
  This class is responsible for managing a root Decompose component at the application root.
