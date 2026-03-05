@@ -1,7 +1,8 @@
 import Testing
 
-struct iosAppTests {
-    @Test func example() {
+struct AppTests {
+    @Test
+    func example() {
         #expect(true)
     }
 }
