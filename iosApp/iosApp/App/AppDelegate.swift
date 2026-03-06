@@ -1,11 +1,10 @@
 import KMP
 import SwiftUI
 
-// swiftlint:disable discouraged_optional_collection
 final class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(
-        _ application: UIApplication,
+        _ application: UIApplication, // swiftlint:disable:next discouraged_optional_collection
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         initializeSharedApplication()
@@ -16,4 +15,3 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         KmpApplication().initializeSharedApplication(platformBindings: PlatformBindingsImpl())
     }
 }
-// swiftlint:enable discouraged_optional_collection

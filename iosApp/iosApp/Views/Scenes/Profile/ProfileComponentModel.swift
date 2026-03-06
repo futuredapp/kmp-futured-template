@@ -26,7 +26,12 @@ final class ProfileComponentModel: ProfileComponentModelProtocol {
 #if DEBUG
 @Observable
 final class ProfileComponentModelMock: ProfileComponentModelProtocol {
-    func onLogoutClick() { print("Logout tapped") }
-    func onThirdClick() { print("Third tapped") }
+    func onLogoutClick() {
+        print("Logout tapped")
+    }
+
+    func onThirdClick() {
+        print("Third tapped")
+    }
 }
 #endif

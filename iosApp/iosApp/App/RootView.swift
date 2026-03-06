@@ -3,12 +3,12 @@ import SwiftUI
 
 struct RootView: View {
 
+    @Environment(\.scenePhase)
+    var scenePhase: ScenePhase
+
     @State private var componentHolder = ComponentHolder {
         RootNavHostFactory().create(componentContext: $0)
     }
-
-    @Environment(\.scenePhase)
-    var scenePhase: ScenePhase
 
     var body: some View {
         RootNavigationView(componentHolder.component)

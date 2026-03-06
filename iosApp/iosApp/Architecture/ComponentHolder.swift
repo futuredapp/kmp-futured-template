@@ -1,9 +1,9 @@
-@preconcurrency import KMP
+import KMP
 
 /**
  This class is responsible for managing a root Decompose component at the application root.
  */
-final class ComponentHolder<T> {
+nonisolated final class ComponentHolder<T> {
     let lifecycle: LifecycleRegistry
     let component: T
 
