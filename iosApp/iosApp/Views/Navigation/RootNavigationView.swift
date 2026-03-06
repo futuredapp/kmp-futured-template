@@ -2,22 +2,22 @@ import KMP
 import SwiftUI
 
 struct RootNavigationView: View {
+    @State private var slot: StateFlowObserver<ChildSlot<RootConfig, RootChild>>
 
-    @StateObject @KotlinStateFlow private var slot: ChildSlot<RootConfig, RootChild>
     private let openDeepLink: (String) -> Void
 
     init(_ component: RootNavHost) {
-        self._slot = .init(component.slot)
-        self.openDeepLink = component.actions.onDeepLink
+        _slot = State(wrappedValue: StateFlowObserver(component.slot))
+        openDeepLink = component.actions.onDeepLink
     }
 
     var body: some View {
         ZStack {
-            if let navigationEntry = slot.child?.instance {
+            if let navigationEntry = slot.value.child?.instance {
                 switch onEnum(of: navigationEntry) {
-                case .login(let entry):
-                    LoginView(LoginViewModel(entry.screen)).id(entry.iosViewId)
-                case .signedIn(let entry):
+                case let .login(entry):
+                    LoginComponent(model: LoginComponentModel(entry.screen)).id(entry.iosViewId)
+                case let .signedIn(entry):
                     SignedInNavigationView(entry.navHost).id(entry.iosViewId)
                 }
             }
