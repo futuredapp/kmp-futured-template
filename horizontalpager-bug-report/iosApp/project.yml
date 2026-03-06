@@ -1,0 +1,35 @@
+name: iosApp
+options:
+  bundleIdPrefix: app.futured
+  deploymentTarget:
+    iOS: "16.0"
+
+targets:
+  iosApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: .
+        includes:
+          - "*.swift"
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        PRODUCT_BUNDLE_IDENTIFIER: app.futured.horizontalpagerbug
+        INFOPLIST_FILE: Info.plist
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    preBuildScripts:
+      - name: Build KMP XCFramework
+        script: |
+          export JAVA_HOME="$(/usr/libexec/java_home)"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          cd "$SRCROOT/.."
+          ./gradlew assembleComposeAppDebugXCFramework
+        basedOnDependencyAnalysis: false
+    dependencies:
+      - framework: ../composeApp/build/XCFrameworks/debug/ComposeApp.xcframework
+        embed: true
