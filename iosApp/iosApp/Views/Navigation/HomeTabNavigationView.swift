@@ -20,11 +20,11 @@ struct HomeTabNavigationView: View {
         ) { child in
             switch onEnum(of: child) {
             case .first(let entry):
-                FirstView(entry.screen)
+                FirstView(FirstViewModel(entry.screen))
             case .second(let entry):
-                SecondView(entry.screen)
+                SecondView(SecondViewModel(entry.screen))
             case .third(let entry):
-                ThirdView(entry.screen)
+                ThirdView(ThirdViewModel(entry.screen))
             }
         }
         .sheet(
@@ -36,7 +36,7 @@ struct HomeTabNavigationView: View {
             if let child = sheet.child?.instance {
                 switch onEnum(of: child) {
                 case .picker(let instance):
-                    PickerView(instance.screen)
+                    PickerView(PickerViewModel(instance.screen))
                         .presentationDetents(.init([.medium]))
                 }
             }

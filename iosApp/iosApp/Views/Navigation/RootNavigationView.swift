@@ -16,7 +16,7 @@ struct RootNavigationView: View {
             if let navigationEntry = slot.child?.instance {
                 switch onEnum(of: navigationEntry) {
                 case .login(let entry):
-                    LoginView(entry.screen).id(entry.iosViewId)
+                    LoginView(LoginViewModel(entry.screen)).id(entry.iosViewId)
                 case .signedIn(let entry):
                     SignedInNavigationView(entry.navHost).id(entry.iosViewId)
                 }

@@ -1,19 +1,17 @@
 import KMP
 import SwiftUI
 
-struct LoginComposeView: UIViewControllerRepresentable {
-    private let screen: LoginScreen
-    init(_ screen: LoginScreen) { self.screen = screen }
-    func makeUIViewController(context: Context) -> some UIViewController {
-        LoginUiController(screen: screen)
-    }
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
-}
+struct LoginView<ViewModel: LoginViewModelProtocol>: View {
+    private let viewModel: ViewModel
 
-struct LoginView: View {
-    private let screen: LoginScreen
-    init(_ screen: LoginScreen) { self.screen = screen }
+    init(_ viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
-        LoginComposeView(screen).ignoresSafeArea()
+        VStack(spacing: 10) {
+            Text(Localizable.login_screen_title.localized)
+            Button(Localizable.generic_sign_in.localized, action: viewModel.onLoginClick).buttonStyle(.borderedProminent)
+        }
     }
 }
