@@ -1,6 +1,8 @@
 import KMP
 import Observation
 
+/// KMP deviation: Conforms to `AnyObject` instead of FuturedKit's `ComponentModel` protocol
+/// because navigation and event handling are managed by KMP Decompose, not a Swift Coordinator.
 protocol SecondComponentModelProtocol: AnyObject {
     func onPickFruit()
     func onPickVeggie()

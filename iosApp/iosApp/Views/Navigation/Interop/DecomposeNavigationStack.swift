@@ -6,6 +6,10 @@ import SwiftUI
 
  It simplifies navigation stack implementation across application by abstracting away boilerplate needed to set up
  native `NavigationStack` view with Decompose stack stored in KMP.
+
+ **KMP deviation from FuturedKit**: This replaces FuturedKit's `NavigationStackFlow` / `Coordinator` pattern.
+ Navigation state is owned by Kotlin Decompose, not by a Swift `Coordinator`. The Kotlin `ChildStack`
+ is observed via `StateFlowObserver` and bridged into SwiftUI's `NavigationStack(path:)`.
  */
 struct DecomposeNavigationStack<
     Child: ChildCreated<Destination, Entry>,

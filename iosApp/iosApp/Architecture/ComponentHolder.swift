@@ -2,6 +2,10 @@ import KMP
 
 /**
  This class is responsible for managing a root Decompose component at the application root.
+
+ **KMP deviation from FuturedKit**: In a pure FuturedKit project the application root is managed by
+ a `Coordinator`. Here, Decompose owns the component tree and lifecycle. `ComponentHolder` bridges
+ Decompose's `LifecycleRegistry` to the SwiftUI application lifecycle (create on init, destroy on deinit).
  */
 nonisolated final class ComponentHolder<T> {
     let lifecycle: LifecycleRegistry
