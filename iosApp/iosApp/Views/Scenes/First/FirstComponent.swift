@@ -15,10 +15,8 @@ struct FirstComponent<Model: FirstComponentModelProtocol>: View {
                 .buttonStyle(.borderedProminent)
         }
         .navigationTitle(Localizable.first_screen_title.localized)
-        .alert(model.alertText, isPresented: $model.isAlertVisible) {
-            Button(Localizable.generic_close.localized) {
-                model.isAlertVisible = false
-            }
+        .alert(model.alert?.message ?? "", isPresented: $model.alert.isPresented) {
+            Button(Localizable.generic_close.localized, role: .cancel) {}
         }
     }
 }

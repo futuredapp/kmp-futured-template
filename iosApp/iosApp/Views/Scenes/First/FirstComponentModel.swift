@@ -7,17 +7,14 @@ protocol FirstComponentModelProtocol: AnyObject {
     var counter: String { get }
     var createdAt: String { get }
     var randomPerson: String? { get }
-    var isAlertVisible: Bool { get set }
-    var alertText: String { get }
+    var alert: AlertModel? { get set }
 
     func onNext()
 }
 
 @Observable
 final class FirstComponentModel: FirstComponentModelProtocol {
-    var isAlertVisible: Bool = false
-
-    private(set) var alertText: String = ""
+    var alert: AlertModel?
 
     var counter: String {
         viewState.counter.localized()
@@ -66,8 +63,7 @@ final class FirstComponentModel: FirstComponentModelProtocol {
     private func handleEvent(_ event: FirstUiEvent) {
         switch onEnum(of: event) {
         case let .showToast(toast):
-            alertText = toast.text.localized()
-            isAlertVisible = true
+            alert = AlertModel(message: toast.text.localized())
         }
     }
 }
@@ -78,8 +74,7 @@ final class FirstComponentModelMock: FirstComponentModelProtocol {
     var counter = "42"
     var createdAt = "2024-01-01"
     var randomPerson: String? = "Obi-Wan Kenobi"
-    var isAlertVisible = false
-    var alertText = ""
+    var alert: AlertModel?
 
     func onNext() {
         print("Next tapped")
