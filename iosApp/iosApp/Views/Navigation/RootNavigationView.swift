@@ -12,7 +12,7 @@ struct RootNavigationView: View {
     }
 
     var body: some View {
-        ZStack {
+        Group {
             if let navigationEntry = slot.value.child?.instance {
                 switch onEnum(of: navigationEntry) {
                 case let .login(entry):

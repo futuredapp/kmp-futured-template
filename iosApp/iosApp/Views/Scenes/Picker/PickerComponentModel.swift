@@ -5,6 +5,8 @@ struct PickerItem: Identifiable {
     let id: String
 }
 
+/// KMP deviation: Conforms to `AnyObject` instead of FuturedKit's `ComponentModel` protocol
+/// because navigation and event handling are managed by KMP Decompose, not a Swift Coordinator.
 protocol PickerComponentModelProtocol: AnyObject {
     var isLoading: Bool { get }
     var items: [PickerItem] { get }

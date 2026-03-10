@@ -21,7 +21,7 @@ struct TabContentView<Entry: SignedInChild, Content: View>: View {
     }
 
     var body: some View {
-        ZStack {
+        Group {
             if let navEntry {
                 // The .id() modifier is very important, tells TabView to render again whenever underlying navEntry is updated.
                 // I literally spent hours figuring this out 🔫.
