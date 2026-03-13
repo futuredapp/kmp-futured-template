@@ -19,8 +19,11 @@ annotations {
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
-    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+    compilerOptions {
+        // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+        freeCompilerArgs.add("-Xcontext-parameters")
+    }
 
     android {
         namespace = libs.versions.project.shared.feature.namespace.get()

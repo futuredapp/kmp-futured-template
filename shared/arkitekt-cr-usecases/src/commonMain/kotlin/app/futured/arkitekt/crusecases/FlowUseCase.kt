@@ -1,11 +1,11 @@
 package app.futured.arkitekt.crusecases
 
-import app.futured.arkitekt.crusecases.scope.FlowUseCaseExecutionScope
+import app.futured.arkitekt.crusecases.scope.CoroutineScopeOwner
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Base [Flow] use case meant to use in [FlowUseCaseExecutionScope] implementations
+ * Base [Flow] use case meant to use in [CoroutineScopeOwner] implementations
  */
 abstract class FlowUseCase<ARGS, T> {
 

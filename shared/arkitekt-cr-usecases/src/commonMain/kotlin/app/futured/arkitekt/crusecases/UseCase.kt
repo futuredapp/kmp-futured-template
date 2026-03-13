@@ -1,10 +1,10 @@
 package app.futured.arkitekt.crusecases
 
-import app.futured.arkitekt.crusecases.scope.SingleUseCaseExecutionScope
+import app.futured.arkitekt.crusecases.scope.CoroutineScopeOwner
 import kotlinx.coroutines.Deferred
 
 /**
- * Base Coroutine use case meant to use in [SingleUseCaseExecutionScope] implementations
+ * Base Coroutine use case meant to use in [CoroutineScopeOwner] implementations
  */
 abstract class UseCase<ARGS, T> {
 
