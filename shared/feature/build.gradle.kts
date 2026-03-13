@@ -26,6 +26,10 @@ kotlin {
         namespace = libs.versions.project.shared.feature.namespace.get()
         compileSdk = ProjectSettings.Android.CompileSdkVersion
         minSdk = ProjectSettings.Android.MinSdkVersion
+
+        withHostTest {
+            isIncludeAndroidResources = true
+        }
     }
 
     iosArm64()
