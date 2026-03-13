@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.navigation.root
 
+import app.futured.arkitekt.crusecases.execute
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature.domain.IsUserLoggedInUseCase
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination

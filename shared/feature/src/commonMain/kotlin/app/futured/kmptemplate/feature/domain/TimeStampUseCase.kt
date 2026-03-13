@@ -19,13 +19,13 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 @Factory
-internal class TimeStampUseCase : FlowUseCase<Unit, Instant>() {
+internal class TimeStampUseCase : FlowUseCase<Unit, Instant> {
     override fun build(args: Unit): Flow<Instant> = flow {
         for (i in 0..1000) {
             emit(Clock.System.now())
@@ -46,7 +46,7 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.executeWithLifecycle(
     }
 
     if (flowUseCaseConfig.disposePrevious) {
-        job?.cancel()
+        coroutineScopeOwner.useCaseJobPool[this]?.cancel()
     }
 
     val lifecycleState = MutableStateFlow(false)
@@ -56,7 +56,7 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.executeWithLifecycle(
     )
     val targetFlow = build(args)
 
-    job = lifecycleState
+    coroutineScopeOwner.useCaseJobPool[this] = lifecycleState
         .flatMapLatest { active ->
             if (active) targetFlow else emptyFlow()
         }
@@ -78,5 +78,5 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.executeWithLifecycle(
             }
         }
         .catch { /* handled in onCompletion */ }
-        .launchIn(coroutineScopeOwner.viewModelScope)
+        .launchIn(coroutineScopeOwner.useCaseScope)
 }

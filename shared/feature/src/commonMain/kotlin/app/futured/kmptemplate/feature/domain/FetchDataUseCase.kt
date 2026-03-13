@@ -7,8 +7,14 @@ import app.futured.kmptemplate.network.rest.result.getOrThrow
 import org.koin.core.annotation.Factory
 import kotlin.random.Random
 
-@Factory
-internal class SyncDataUseCase(private val starWarsApi: StarWarsApi) : UseCase<Unit, Person>() {
+/**
+ * Fetches a random person from StarWars API.
+ */
+internal interface FetchDataUseCase : UseCase<Unit, Person>
 
-    override suspend fun build(args: Unit): Person = starWarsApi.getPerson(Random.nextInt(until = 100)).getOrThrow()
+@Factory
+internal class FetchDataUseCaseImpl(private val starWarsApi: StarWarsApi) : FetchDataUseCase {
+
+    override suspend fun build(args: Unit): Person =
+        starWarsApi.getPerson(Random.nextInt(until = 100)).getOrThrow()
 }

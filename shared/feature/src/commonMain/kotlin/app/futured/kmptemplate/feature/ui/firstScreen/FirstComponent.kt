@@ -3,8 +3,7 @@ package app.futured.kmptemplate.feature.ui.firstScreen
 import app.futured.arkitekt.crusecases.execute
 import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.domain.CounterUseCase
-import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
-import app.futured.kmptemplate.feature.domain.SyncDataUseCase
+import app.futured.kmptemplate.feature.domain.FetchDataUseCase
 import app.futured.kmptemplate.feature.domain.TimeStampUseCase
 import app.futured.kmptemplate.feature.domain.executeWithLifecycle
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
@@ -16,17 +15,17 @@ import com.arkivanov.essenty.lifecycle.doOnCreate
 import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Instant
 
 @Factory
 @GenerateFactory
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: FirstScreenNavigation,
-    private val syncDataUseCase: SyncDataUseCase,
+    private val fetchDataUseCase: FetchDataUseCase,
     private val counterUseCase: CounterUseCase,
     private val timeStampUseCase: TimeStampUseCase,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
@@ -69,7 +68,7 @@ internal class FirstComponent(
     override fun onNext() = navigateToSecond()
 
     private fun syncData() {
-        syncDataUseCase.execute {
+        fetchDataUseCase.execute {
             onSuccess { person ->
                 componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format(person.name.orEmpty())) }
             }
@@ -81,7 +80,7 @@ internal class FirstComponent(
     }
 
     private fun observeCounter() {
-        counterUseCase.execute(CounterUseCaseArgs(interval = 1000.milliseconds)) {
+        counterUseCase.execute(CounterUseCase.Args(interval = 1000.milliseconds)) {
             onNext { count ->
                 updateCount(count)
 

@@ -3,7 +3,6 @@ package app.futured.arkitekt.crusecases
 import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler
 import app.futured.arkitekt.crusecases.scope.CoroutineScopeOwner
 import app.futured.arkitekt.crusecases.scope.FlowUseCaseConfig
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -37,10 +36,10 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.execute(
     }
 
     if (flowUseCaseConfig.disposePrevious) {
-        job?.cancel()
+        coroutineScopeOwner.useCaseJobPool[this]?.cancel()
     }
 
-    job = build(args)
+    coroutineScopeOwner.useCaseJobPool[this] = build(args)
         .flowOn(coroutineScopeOwner.getWorkerDispatcher())
         .onStart { flowUseCaseConfig.onStart() }
         .onEach { flowUseCaseConfig.onNext(it) }
@@ -59,7 +58,7 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.execute(
             }
         }
         .catch { /* handled in onCompletion */ }
-        .launchIn(coroutineScopeOwner.viewModelScope)
+        .launchIn(coroutineScopeOwner.useCaseScope)
 }
 
 context(coroutineScopeOwner: CoroutineScopeOwner)
@@ -94,10 +93,10 @@ fun <ARGS, T : Any?, M : Any?> FlowUseCase<ARGS, T>.executeMapped(
     }
 
     if (flowUseCaseConfig.disposePrevious) {
-        job?.cancel()
+        coroutineScopeOwner.useCaseJobPool[this]?.cancel()
     }
 
-    job = build(args)
+    coroutineScopeOwner.useCaseJobPool[this] = build(args)
         .flowOn(coroutineScopeOwner.getWorkerDispatcher())
         .onStart { flowUseCaseConfig.onStart() }
         .mapNotNull { flowUseCaseConfig.onMap?.invoke(it) }
@@ -117,5 +116,5 @@ fun <ARGS, T : Any?, M : Any?> FlowUseCase<ARGS, T>.executeMapped(
             }
         }
         .catch { /* handled in onCompletion */ }
-        .launchIn(coroutineScopeOwner.viewModelScope)
+        .launchIn(coroutineScopeOwner.useCaseScope)
 }

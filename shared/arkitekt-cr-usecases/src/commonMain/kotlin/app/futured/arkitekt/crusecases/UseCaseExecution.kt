@@ -43,19 +43,19 @@ fun <ARGS, T : Any?> UseCase<ARGS, T>.execute(
         return@run build()
     }
     if (useCaseConfig.disposePrevious) {
-        deferred?.cancel()
+        coroutineScopeOwner.useCaseDeferredPool[this]?.cancel()
     }
 
     useCaseConfig.onStart()
-    deferred = coroutineScopeOwner.viewModelScope
+    coroutineScopeOwner.useCaseDeferredPool[this] = coroutineScopeOwner.useCaseScope
         .async(context = coroutineScopeOwner.getWorkerDispatcher(), start = CoroutineStart.LAZY) {
             build(args)
         }
         .also {
-            coroutineScopeOwner.viewModelScope.launch(Dispatchers.Main) {
+            coroutineScopeOwner.useCaseScope.launch(Dispatchers.Main) {
                 try {
                     useCaseConfig.onSuccess(it.await())
-                } catch (cancellation: CancellationException) {
+                } catch (_: CancellationException) {
                     // do nothing - this is normal way of suspend function interruption
                 } catch (error: Throwable) {
                     UseCaseErrorHandler.globalOnErrorLogger(error)
@@ -72,7 +72,7 @@ fun <ARGS, T : Any?> UseCase<ARGS, T>.execute(
  *
  * [UseCaseErrorHandler.globalOnErrorLogger] is not used in this version of the execute
  * method since it is recommended to call all execute methods with [Result] return type
- * from [CoroutineScopeOwnerExecution.launchWithHandler] method,
+ * from [CoroutineScopeOwner.launchWithHandler] method,
  * where [UseCaseErrorHandler.globalOnErrorLogger] is used.
  *
  * @param args Arguments used for initial use case initialization.
@@ -85,13 +85,13 @@ suspend fun <ARGS, T : Any?> UseCase<ARGS, T>.execute(
     cancelPrevious: Boolean = true,
 ): Result<T> {
     if (cancelPrevious) {
-        deferred?.cancel()
+        coroutineScopeOwner.useCaseDeferredPool[this]?.cancel()
     }
 
     return try {
-        val newDeferred = coroutineScopeOwner.viewModelScope.async(coroutineScopeOwner.getWorkerDispatcher(), CoroutineStart.LAZY) {
+        val newDeferred = coroutineScopeOwner.useCaseScope.async(coroutineScopeOwner.getWorkerDispatcher(), CoroutineStart.LAZY) {
             build(args)
-        }.also { deferred = it }
+        }.also { coroutineScopeOwner.useCaseDeferredPool[this] = it }
 
         Result.success(newDeferred.await())
     } catch (exception: CancellationException) {

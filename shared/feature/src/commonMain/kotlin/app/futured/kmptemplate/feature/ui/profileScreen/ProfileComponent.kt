@@ -1,5 +1,6 @@
 package app.futured.kmptemplate.feature.ui.profileScreen
 
+import app.futured.arkitekt.crusecases.execute
 import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.domain.SetUserLoggedInUseCase
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext

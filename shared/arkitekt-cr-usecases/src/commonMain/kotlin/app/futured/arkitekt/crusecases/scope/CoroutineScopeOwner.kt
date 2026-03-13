@@ -5,14 +5,16 @@ import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler
 import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler.globalOnErrorLogger
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * This interface gives your class ability to execute [UseCase] and [FlowUseCase] Coroutine use cases.
  * You may find handy to implement this interface in custom Presenters, ViewHolders etc.
- * It is your responsibility to cancel [coroutineScope] when all running tasks should be stopped.
+ * It is your responsibility to cancel [useCaseScope] when all running tasks should be stopped.
  */
 interface CoroutineScopeOwner {
     /**
@@ -20,7 +22,17 @@ interface CoroutineScopeOwner {
      * It is your responsibility to cancel it when all running
      * tasks should be stopped
      */
-    val viewModelScope: CoroutineScope
+    val useCaseScope: CoroutineScope
+
+    /**
+     * Map of [Job] objects used to hold and cancel existing run of any [FlowUseCase] instance.
+     */
+    val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job>
+
+    /**
+     * Map of [Deferred] objects used to hold and cancel existing run of any [UseCase] instance.
+     */
+    val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>>
 
     /**
      * Provides Dispatcher for background tasks. This may be overridden for testing purposes.
@@ -28,7 +40,7 @@ interface CoroutineScopeOwner {
     fun getWorkerDispatcher() = Dispatchers.Default
 
     /**
-     * Launch suspend [block] in [viewModelScope].
+     * Launch suspend [block] in [useCaseScope].
      *
      * Encapsulates this call with try catch block and when an exception is thrown
      * then it is logged in [UseCaseErrorHandler.globalOnErrorLogger] and handled by [defaultErrorHandler].
@@ -39,7 +51,7 @@ interface CoroutineScopeOwner {
      */
     @Suppress("TooGenericExceptionCaught")
     fun launchWithHandler(block: suspend CoroutineScope.() -> Unit) {
-        viewModelScope.launch {
+        useCaseScope.launch {
             try {
                 block()
             } catch (exception: CancellationException) {
