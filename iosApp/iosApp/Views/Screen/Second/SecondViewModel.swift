@@ -2,6 +2,7 @@ import KMP
 import SwiftUI
 
 protocol SecondViewModelProtocol: DynamicProperty {
+    var createdAt: String { get }
     func onPickFruit()
     func onPickVeggie()
 }
@@ -17,6 +18,10 @@ struct SecondViewModel {
 }
 
 extension SecondViewModel: SecondViewModelProtocol {
+
+    var createdAt: String {
+        viewState.createdAtText.localized()
+    }
 
     func onPickFruit() {
         actions.onPickFruit()

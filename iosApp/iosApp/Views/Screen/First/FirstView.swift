@@ -11,7 +11,7 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
     var body: some View {
         VStack(spacing: 10) {
             Text(viewModel.counter)
-            Text(viewModel.createdAt)
+
             if let randomPerson = viewModel.randomPerson {
                 Text(randomPerson).multilineTextAlignment(.center)
             }
@@ -23,7 +23,7 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
         .navigationTitle(Localizable.first_screen_title.localized)
         .eventsEffect(for: viewModel.events) { event in
             switch onEnum(of: event) {
-            case .showToast(let event):
+            case .notify(let event):
                 viewModel.showToast(event: event)
             }
         }
@@ -38,14 +38,11 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
 #if DEBUG
     #Preview("FirstView") {
         NavigationStack {
-            let viewState = FirstScreenPreviews.shared.viewState(
-                counter: "42",
-                randomPerson: "Obi-Wan Kenobi",
-                createdAt: "Created at: 1977-05-25"
-            )
+            let viewState = FirstViewState.companion.mock()
+            
             FirstView(
                 FirstViewModel(
-                    FirstScreenPreviews.shared.screen(viewState: viewState)
+                    FirstScreenPreviews().screen(viewState: viewState)
                 )
             )
         }

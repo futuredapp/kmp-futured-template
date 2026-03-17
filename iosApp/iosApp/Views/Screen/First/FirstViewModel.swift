@@ -3,14 +3,13 @@ import SwiftUI
 
 protocol FirstViewModelProtocol: DynamicProperty {
     var counter: String { get }
-    var createdAt: String { get }
     var randomPerson: String? { get }
     var events: SkieSwiftFlow<FirstUiEvent> { get }
     var isAlertVisible: Binding<Bool> { get }
     var alertText: String { get }
 
     func onNext()
-    func showToast(event: FirstUiEvent.ShowToast)
+    func showToast(event: FirstUiEventNotify)
     func hideToast()
 }
 
@@ -31,15 +30,11 @@ struct FirstViewModel {
 
 extension FirstViewModel: FirstViewModelProtocol {
     var counter: String {
-        viewState.counter.localized()
-    }
-
-    var createdAt: String {
-        viewState.createdAt.localized()
+        viewState.counterText.localized()
     }
 
     var randomPerson: String? {
-        viewState.randomPerson?.localized()
+        viewState.randomPersonText?.localized()
     }
 
     var isAlertVisible: Binding<Bool> {
@@ -53,7 +48,7 @@ extension FirstViewModel: FirstViewModelProtocol {
         actions.onNext()
     }
 
-    func showToast(event: FirstUiEvent.ShowToast) {
+    func showToast(event: FirstUiEventNotify) {
         alertText = "todo"
         alertVisible = true
     }

@@ -33,6 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen.Actions.Companion.noOpActions
+import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenPreviews
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
@@ -118,10 +119,8 @@ private fun Content(
 @Composable
 private fun FirstScreenPreview() = Showcase {
     Surface {
-        Content(
-            viewState = FirstViewState.mock(),
-            actions = noOpActions(),
-            snackbarHostState = remember { SnackbarHostState() },
+        FirstScreenUi(
+            screen = FirstScreenPreviews.screen(FirstViewState.mock()) ,
             modifier = Modifier.fillMaxSize(),
         )
     }
