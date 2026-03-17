@@ -10,7 +10,7 @@ import kotlin.random.Random
 /**
  * Fetches a random person from StarWars API.
  */
-internal interface FetchDataUseCase : UseCase<Unit, Person>
+internal fun interface FetchDataUseCase : UseCase<Unit, Person>
 
 @Factory
 internal class FetchDataUseCaseImpl(private val starWarsApi: StarWarsApi) : FetchDataUseCase {

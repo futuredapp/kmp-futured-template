@@ -1,25 +1,17 @@
 package app.futured.arkitekt.decompose.presentation
 
-import app.futured.arkitekt.crusecases.FlowUseCase
-import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.scope.CoroutineScopeOwner
 import com.arkivanov.decompose.GenericComponentContext
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 /**
@@ -30,70 +22,55 @@ import kotlinx.coroutines.launch
  * @param E The type of the UI events.
  * @param componentContext The context of the component.
  * @param defaultState The default Component state.
+ * @param lifecycleScope The coroutine scope tied to the lifecycle of the component.
+ * It will be automatically cancelled when component's lifecycle is destroyed.
+ * @param useCaseDispatcher A [CoroutineDispatcher] for executing UseCases in [CoroutineScopeOwner].
  */
 abstract class BaseComponent<VS : Any, E : Any>(
     componentContext: GenericComponentContext<*>,
     private val defaultState: VS,
+    open val lifecycleScope: CoroutineScope = MainScope(),
+    open val useCaseDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : CoroutineScopeOwner {
+
+    companion object {
+        private const val EVENTS_EXTRA_BUFFER_CAPACITY = 64
+    }
+
+    init {
+        componentContext.lifecycle.doOnDestroy {
+            lifecycleScope.cancel()
+        }
+    }
 
     /**
      * An internal state of the component of type [VS].
      */
     protected val componentState: MutableStateFlow<VS> = MutableStateFlow(defaultState)
 
-    // region Lifecycle
-
-    /**
-     * The coroutine scope tied to the lifecycle of the component.
-     * It is cancelled when the component is destroyed.
-     */
-    protected val componentCoroutineScope = MainScope().also { scope ->
-        componentContext.lifecycle.doOnDestroy { scope.cancel() }
-    }
-
-    /**
-     * Converts a [Flow] of component states to a [StateFlow].
-     *
-     * @param started The [SharingStarted] strategy for the [StateFlow].
-     * @return A [StateFlow] emitting the values of the [Flow].
-     */
-    protected fun Flow<VS>.asStateFlow(started: SharingStarted = SharingStarted.Lazily) =
-        stateIn(componentCoroutineScope, started, defaultState)
-
-    // endregion
-
     // region UI events
 
     /**
-     * Channel for sending UI events.
+     * Internal flow for sending UI events.
      */
-    private val uiEventChannel = Channel<E>(Channel.BUFFERED)
+    private val eventFlow = MutableSharedFlow<E>(extraBufferCapacity = EVENTS_EXTRA_BUFFER_CAPACITY)
 
     /**
      * Flow of UI events.
      */
-    val events: Flow<E> = uiEventChannel
-        .receiveAsFlow()
-        .shareIn(componentCoroutineScope, SharingStarted.Lazily)
+    val events: Flow<E>
+        get() = eventFlow
 
     // endregion
 
     // region UseCaseExecutionScope
 
-    /**
-     * Job pool to store [FlowUseCase] jobs.
-     */
-    override val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job> = mutableMapOf()
+    override val useCaseJobPool: MutableMap<Any, Job> = mutableMapOf()
 
-    /**
-     * Deferred pool to store running [UseCase] jobs.
-     */
-    override val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>> = mutableMapOf()
+    override val useCaseScope: CoroutineScope
+        get() = lifecycleScope
 
-    /**
-     * The coroutine scope for executing use cases.
-     */
-    override val useCaseScope: CoroutineScope = componentCoroutineScope
+    override fun getWorkerDispatcher(): CoroutineDispatcher = useCaseDispatcher
 
     // endregion
 
@@ -104,9 +81,9 @@ abstract class BaseComponent<VS : Any, E : Any>(
      *
      * @param event The event to send.
      */
-    protected fun sendUiEvent(event: E) {
-        componentCoroutineScope.launch {
-            uiEventChannel.send(event)
+    protected fun sendEvent(event: E) {
+        lifecycleScope.launch {
+            eventFlow.emit(event)
         }
     }
 

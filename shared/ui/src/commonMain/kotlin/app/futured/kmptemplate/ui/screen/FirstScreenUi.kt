@@ -33,7 +33,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.arkitekt.decompose.event.EventsEffect
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreen.Actions.Companion.noOpActions
-import app.futured.kmptemplate.feature.ui.firstScreen.FirstScreenPreviews
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstUiEvent
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstViewState
 import app.futured.kmptemplate.resources.MR
@@ -56,7 +55,7 @@ fun FirstScreenUi(
 
     EventsEffect(eventsFlow = screen.events) {
         when (this) {
-            is FirstUiEvent.ShowToast -> {
+            is FirstUiEvent.Notify -> {
                 scope.launch { snackbarHostState.showSnackbar(message) }
             }
         }
@@ -90,12 +89,11 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.counter.localized())
+            Text(text = viewState.counterText.localized())
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = viewState.createdAt.localized())
             Spacer(modifier = Modifier.height(4.dp))
-            AnimatedVisibility(viewState.randomPerson != null) {
-                viewState.randomPerson?.let { person ->
+            AnimatedVisibility(viewState.randomPersonText != null) {
+                viewState.randomPersonText?.let { person ->
                     Column {
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
@@ -121,7 +119,7 @@ private fun Content(
 private fun FirstScreenPreview() = Showcase {
     Surface {
         Content(
-            viewState = FirstScreenPreviews.viewState(),
+            viewState = FirstViewState.mock(),
             actions = noOpActions(),
             snackbarHostState = remember { SnackbarHostState() },
             modifier = Modifier.fillMaxSize(),

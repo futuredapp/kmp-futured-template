@@ -3,9 +3,7 @@ package app.futured.arkitekt.crusecases.scope
 import app.futured.arkitekt.crusecases.FlowUseCase
 import app.futured.arkitekt.crusecases.UseCase
 import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler
-import app.futured.arkitekt.crusecases.error.UseCaseErrorHandler.globalOnErrorLogger
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -25,14 +23,9 @@ interface CoroutineScopeOwner {
     val useCaseScope: CoroutineScope
 
     /**
-     * Map of [Job] objects used to hold and cancel existing run of any [FlowUseCase] instance.
+     * Map of [Job] objects used to hold and cancel existing run of any [FlowUseCase] or [UseCase] instance.
      */
-    val useCaseJobPool: MutableMap<FlowUseCase<*, *>, Job>
-
-    /**
-     * Map of [Deferred] objects used to hold and cancel existing run of any [UseCase] instance.
-     */
-    val useCaseDeferredPool: MutableMap<UseCase<*, *>, Deferred<*>>
+    val useCaseJobPool: MutableMap<Any, Job>
 
     /**
      * Provides Dispatcher for background tasks. This may be overridden for testing purposes.

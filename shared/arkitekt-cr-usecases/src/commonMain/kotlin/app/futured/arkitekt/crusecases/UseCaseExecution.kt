@@ -43,18 +43,18 @@ fun <ARGS, T : Any?> UseCase<ARGS, T>.execute(
         return@run build()
     }
     if (useCaseConfig.disposePrevious) {
-        coroutineScopeOwner.useCaseDeferredPool[this]?.cancel()
+        coroutineScopeOwner.useCaseJobPool[this]?.cancel()
     }
 
     useCaseConfig.onStart()
-    coroutineScopeOwner.useCaseDeferredPool[this] = coroutineScopeOwner.useCaseScope
+    coroutineScopeOwner.useCaseJobPool[this] = coroutineScopeOwner.useCaseScope
         .async(context = coroutineScopeOwner.getWorkerDispatcher(), start = CoroutineStart.LAZY) {
-            build(args)
+            runCatching { build(args) }
         }
         .also {
             coroutineScopeOwner.useCaseScope.launch(Dispatchers.Main) {
                 try {
-                    useCaseConfig.onSuccess(it.await())
+                    useCaseConfig.onSuccess(it.await().getOrThrow())
                 } catch (_: CancellationException) {
                     // do nothing - this is normal way of suspend function interruption
                 } catch (error: Throwable) {
@@ -85,15 +85,18 @@ suspend fun <ARGS, T : Any?> UseCase<ARGS, T>.execute(
     cancelPrevious: Boolean = true,
 ): Result<T> {
     if (cancelPrevious) {
-        coroutineScopeOwner.useCaseDeferredPool[this]?.cancel()
+        coroutineScopeOwner.useCaseJobPool[this]?.cancel()
     }
 
     return try {
-        val newDeferred = coroutineScopeOwner.useCaseScope.async(coroutineScopeOwner.getWorkerDispatcher(), CoroutineStart.LAZY) {
-            build(args)
-        }.also { coroutineScopeOwner.useCaseDeferredPool[this] = it }
+        val newDeferred = coroutineScopeOwner.useCaseScope.async(
+            context = coroutineScopeOwner.getWorkerDispatcher(),
+            start = CoroutineStart.LAZY,
+        ) {
+            runCatching { build(args) }
+        }.also { coroutineScopeOwner.useCaseJobPool[this] = it }
 
-        Result.success(newDeferred.await())
+        Result.success(newDeferred.await().getOrThrow())
     } catch (exception: CancellationException) {
         throw exception
     } catch (exception: Throwable) {

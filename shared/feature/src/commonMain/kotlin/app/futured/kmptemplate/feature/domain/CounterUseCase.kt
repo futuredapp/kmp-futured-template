@@ -12,7 +12,7 @@ import kotlin.time.Duration
 /**
  * Emits increment in intervals specified by [Args.interval].
  */
-internal interface CounterUseCase : FlowUseCase<CounterUseCase.Args, Long> {
+internal fun interface CounterUseCase : FlowUseCase<CounterUseCase.Args, Long> {
     data class Args(val interval: Duration)
 }
 
