@@ -29,7 +29,7 @@ internal class SignedInNavHostComponent(
     SignedInNavHost {
 
     companion object {
-        val DEFAULT_STATE = SignedInNavHostViewState()
+        private val DEFAULT_STATE = SignedInNavHostViewState()
     }
 
     private val stackNavigator = StackNavigation<SignedInConfig>()

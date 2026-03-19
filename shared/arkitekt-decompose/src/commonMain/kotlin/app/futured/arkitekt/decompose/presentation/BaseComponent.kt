@@ -9,9 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 
 /**
@@ -33,10 +36,6 @@ abstract class BaseComponent<VS : Any, E : Any>(
     open val useCaseDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : CoroutineScopeOwner {
 
-    companion object {
-        private const val EVENTS_EXTRA_BUFFER_CAPACITY = 64
-    }
-
     init {
         componentContext.lifecycle.doOnDestroy {
             lifecycleScope.cancel()
@@ -51,15 +50,15 @@ abstract class BaseComponent<VS : Any, E : Any>(
     // region UI events
 
     /**
-     * Internal flow for sending UI events.
+     * Channel for sending UI events.
      */
-    private val eventFlow = MutableSharedFlow<E>(extraBufferCapacity = EVENTS_EXTRA_BUFFER_CAPACITY)
+    private val uiEventChannel = Channel<E>(Channel.BUFFERED)
 
     /**
      * Flow of UI events.
      */
-    val events: Flow<E>
-        get() = eventFlow
+    val events: Flow<E> = uiEventChannel.receiveAsFlow()
+        .shareIn(lifecycleScope, SharingStarted.Lazily)
 
     // endregion
 
@@ -83,7 +82,7 @@ abstract class BaseComponent<VS : Any, E : Any>(
      */
     protected fun sendEvent(event: E) {
         lifecycleScope.launch {
-            eventFlow.emit(event)
+            uiEventChannel.send(event)
         }
     }
 

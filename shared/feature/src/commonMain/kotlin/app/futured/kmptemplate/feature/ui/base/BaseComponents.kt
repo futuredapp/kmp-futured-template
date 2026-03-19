@@ -17,7 +17,7 @@ import kotlinx.coroutines.MainScope
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class AppComponent<VS : Any, E : Any>(
+internal abstract class AppComponent<VS : Any, E : Any>(
     componentContext: AppComponentContext,
     defaultState: VS,
     lifecycleScope: CoroutineScope = MainScope(),
@@ -35,7 +35,7 @@ abstract class AppComponent<VS : Any, E : Any>(
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(
+internal abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(
     componentContext: AppComponentContext,
     defaultState: VS,
     lifecycleScope: CoroutineScope = MainScope(),

@@ -4,7 +4,6 @@ import app.cash.turbine.Turbine
 import app.cash.turbine.turbineScope
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.FetchDataUseCase
-import app.futured.kmptemplate.feature.domain.TimeStampUseCase
 import app.futured.kmptemplate.feature.navigation.home.HomeConfig
 import app.futured.kmptemplate.feature.ui.base.ComponentTest
 import app.futured.kmptemplate.feature.ui.base.ComponentTestPreparation
@@ -42,7 +41,7 @@ class FirstComponentTest : ComponentTest by ComponentTestPreparation() {
         lifecycleScope: CoroutineScope = testScope,
     ): FirstComponent = FirstComponent(
         lifecycleScope = lifecycleScope,
-        useCaseDispatcher = testDispatcher,
+        workerDispatcher = testDispatcher,
         componentContext = componentContext,
         fetchDataUseCase = fetchDataUseCase,
         counterUseCase = counterUseCase,
@@ -54,6 +53,7 @@ class FirstComponentTest : ComponentTest by ComponentTestPreparation() {
         val component = createComponent(
             fetchDataUseCase = { awaitCancellation() },
             counterUseCase = { flow { /* empty flow */ } },
+            lifecycleScope = backgroundScope,
         )
 
         // Component starts with default state
@@ -72,6 +72,7 @@ class FirstComponentTest : ComponentTest by ComponentTestPreparation() {
                 expectedPerson
             },
             counterUseCase = { flowOf() },
+            lifecycleScope = backgroundScope,
         )
 
         turbineScope {
@@ -184,6 +185,7 @@ class FirstComponentTest : ComponentTest by ComponentTestPreparation() {
         val component = createComponent(
             fetchDataUseCase = { expectedPerson },
             counterUseCase = { flowOf(29, 30, 31, 40) },
+            lifecycleScope = backgroundScope,
         )
 
         turbineScope {
@@ -230,6 +232,7 @@ class FirstComponentTest : ComponentTest by ComponentTestPreparation() {
             fetchDataUseCase = { awaitCancellation() },
             counterUseCase = { flowOf() },
             navigation = navigation,
+            lifecycleScope = backgroundScope,
         )
 
         component.actions.onNext()

@@ -50,7 +50,7 @@ internal class SecondComponent(
     }
 
     private fun runTimestamp() {
-        timeStampUseCase.executeWithLifecycle(Unit) {
+        timeStampUseCase.executeWithLifecycle {
             onNext { timeStamp ->
                 logger.d { "Collect timeStamp: $timeStamp" }
                 componentState.update { it.copy(createdAt = timeStamp) }

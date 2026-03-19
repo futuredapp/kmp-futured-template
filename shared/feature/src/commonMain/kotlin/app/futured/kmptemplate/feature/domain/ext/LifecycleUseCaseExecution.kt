@@ -1,3 +1,4 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
 package app.futured.kmptemplate.feature.domain.ext
 
 import app.futured.arkitekt.crusecases.FlowUseCase
@@ -18,8 +19,13 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlin.coroutines.cancellation.CancellationException
 
+context(coroutineScopeOwner: CoroutineScopeOwner, lifecycleOwner: LifecycleOwner)
+fun <T : Any?> FlowUseCase<Unit, T>.executeWithLifecycle(
+    config: FlowUseCaseConfig.Builder<T, T>.() -> Unit,
+) = executeWithLifecycle(Unit, config)
+
 /**
- * Lifecycle-aware variant of [FlowUseCaseExecution] execution. Unlike the standard `execute`, this function
+ * Lifecycle-aware variant of [FlowUseCase] execution. Unlike the standard `execute`, this function
  * automatically **pauses** the upstream flow when the component enters the background (onPause) and
  * **resumes** it when the component comes back to the foreground (onResume), without cancelling
  * the coroutine or losing the subscription.
@@ -36,7 +42,6 @@ import kotlin.coroutines.cancellation.CancellationException
  * @param config [FlowUseCaseConfig] builder used to handle `onStart`, `onNext`, `onError`, and
  * `onComplete` callbacks, as well as `disposePrevious` configuration.
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 context(coroutineScopeOwner: CoroutineScopeOwner, lifecycleOwner: LifecycleOwner)
 fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.executeWithLifecycle(
     args: ARGS,
@@ -52,7 +57,7 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.executeWithLifecycle(
     }
 
     val lifecycleState = MutableStateFlow(false)
-    lifecycleOwner.lifecycle.subscribe(
+    val lifecycleCallbacks = lifecycleOwner.lifecycle.subscribe(
         onResume = { lifecycleState.value = true },
         onPause = { lifecycleState.value = false },
     )
@@ -78,6 +83,7 @@ fun <ARGS, T : Any?> FlowUseCase<ARGS, T>.executeWithLifecycle(
 
                 else -> flowUseCaseConfig.onComplete()
             }
+            lifecycleOwner.lifecycle.unsubscribe(lifecycleCallbacks)
         }
         .catch { /* handled in onCompletion */ }
         .launchIn(coroutineScopeOwner.useCaseScope)

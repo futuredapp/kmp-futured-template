@@ -42,7 +42,7 @@ struct FirstView<ViewModel: FirstViewModelProtocol>: View {
             
             FirstView(
                 FirstViewModel(
-                    FirstScreenPreviews().screen(viewState: viewState)
+                    FirstScreenPreviews.shared.screen(viewState: viewState)
                 )
             )
         }

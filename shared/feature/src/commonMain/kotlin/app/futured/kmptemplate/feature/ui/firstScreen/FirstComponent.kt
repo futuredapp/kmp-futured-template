@@ -21,15 +21,17 @@ import kotlin.time.Duration.Companion.milliseconds
 @Factory
 @GenerateFactory
 internal class FirstComponent(
-    @InjectedParam componentContext: AppComponentContext,
+    @InjectedParam val componentContext: AppComponentContext,
     @InjectedParam override val navigation: FirstScreenNavigation,
     private val fetchDataUseCase: FetchDataUseCase,
     private val counterUseCase: CounterUseCase,
-    override val lifecycleScope: CoroutineScope = MainScope(),
-    override val useCaseDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    lifecycleScope: CoroutineScope = MainScope(),
+    workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
     componentContext = componentContext,
     defaultState = FirstViewState(),
+    lifecycleScope = lifecycleScope,
+    workerDispatcher = workerDispatcher,
 ),
     FirstScreen,
     FirstScreenNavigation by navigation,
