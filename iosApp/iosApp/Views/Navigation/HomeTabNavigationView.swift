@@ -2,15 +2,15 @@ import KMP
 import SwiftUI
 
 struct HomeTabNavigationView: View {
+    @State private var sheet: StateFlowObserver<ChildSlot<HomeSheetConfig, HomeSheetChild>>
 
     private let stack: SkieSwiftStateFlow<ChildStack<HomeConfig, HomeChild>>
-    @StateObject @KotlinStateFlow private var sheet: ChildSlot<HomeSheetConfig, HomeSheetChild>
     private let actions: HomeNavHostActions
 
     init(_ component: HomeNavHost) {
-        self.stack = component.stack
-        self._sheet = .init(component.sheet)
-        self.actions = component.actions
+        _sheet = State(wrappedValue: StateFlowObserver(component.sheet))
+        stack = component.stack
+        actions = component.actions
     }
 
     var body: some View {
@@ -19,24 +19,26 @@ struct HomeTabNavigationView: View {
             setPath: actions.navigate
         ) { child in
             switch onEnum(of: child) {
-            case .first(let entry):
-                FirstView(FirstViewModel(entry.screen))
-            case .second(let entry):
-                SecondView(SecondViewModel(entry.screen))
-            case .third(let entry):
-                ThirdView(ThirdViewModel(entry.screen))
+            case let .first(entry):
+                FirstComponent(model: FirstComponentModel(entry.screen))
+            case let .second(entry):
+                SecondComponent(model: SecondComponentModel(entry.screen))
+            case let .third(entry):
+                ThirdComponent(model: ThirdComponentModel(entry.screen))
             }
         }
         .sheet(
             isPresented: .init(
-                get: { sheet.child != nil },
-                set: { _ in actions.onSheetDismissed() }
+                get: { sheet.value.child != nil },
+                set: { _ in
+                    actions.onSheetDismissed()
+                }
             )
         ) {
-            if let child = sheet.child?.instance {
+            if let child = sheet.value.child?.instance {
                 switch onEnum(of: child) {
-                case .picker(let instance):
-                    PickerView(PickerViewModel(instance.screen))
+                case let .picker(instance):
+                    PickerComponent(model: PickerComponentModel(instance.screen))
                         .presentationDetents(.init([.medium]))
                 }
             }

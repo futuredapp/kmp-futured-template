@@ -2,13 +2,12 @@ import KMP
 import SwiftUI
 
 struct ProfileTabNavigationView: View {
-
     private let stack: SkieSwiftStateFlow<ChildStack<ProfileConfig, ProfileChild>>
     private let actions: ProfileNavHostActions
 
     init(_ component: ProfileNavHost) {
-        self.stack = component.stack
-        self.actions = component.actions
+        stack = component.stack
+        actions = component.actions
     }
 
     var body: some View {
@@ -17,10 +16,10 @@ struct ProfileTabNavigationView: View {
             setPath: actions.navigate
         ) { child in
             switch onEnum(of: child) {
-            case .profile(let entry):
-                ProfileView(ProfileViewModel(entry.screen))
-            case .third(let entry):
-                ThirdView(ThirdViewModel(entry.screen))
+            case let .profile(entry):
+                ProfileComponent(model: ProfileComponentModel(entry.screen))
+            case let .third(entry):
+                ThirdComponent(model: ThirdComponentModel(entry.screen))
             }
         }
     }

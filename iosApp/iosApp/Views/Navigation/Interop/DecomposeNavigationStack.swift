@@ -3,9 +3,13 @@ import SwiftUI
 
 /**
  This view displays Decompose navigation stack from KMP.
- 
+
  It simplifies navigation stack implementation across application by abstracting away boilerplate needed to set up
  native `NavigationStack` view with Decompose stack stored in KMP.
+
+ **KMP deviation from FuturedKit**: This replaces FuturedKit's `NavigationStackFlow` / `Coordinator` pattern.
+ Navigation state is owned by Kotlin Decompose, not by a Swift `Coordinator`. The Kotlin `ChildStack`
+ is observed via `StateFlowObserver` and bridged into SwiftUI's `NavigationStack(path:)`.
  */
 struct DecomposeNavigationStack<
     Child: ChildCreated<Destination, Entry>,
@@ -13,12 +17,12 @@ struct DecomposeNavigationStack<
     Entry: AnyObject,
     Content: View
 >: View {
-    @StateObject @KotlinStateFlow private var kotlinStack: ChildStack<Destination, Entry>
+    @State private var kotlinStack: StateFlowObserver<ChildStack<Destination, Entry>>
     private let setPath: ([Child]) -> Void
     @ViewBuilder private let content: (Entry) -> Content
 
     private var swiftStack: [Child] {
-        guard let swiftStack = kotlinStack.items as? [Child] else {
+        guard let swiftStack = kotlinStack.value.items as? [Child] else {
             fatalError("Kotlin navigation stack can't be converted to Swift stack.")
         }
         return swiftStack
@@ -40,7 +44,7 @@ struct DecomposeNavigationStack<
         setPath: @escaping ([Child]) -> Void,
         @ViewBuilder content: @escaping (Entry) -> Content
     ) {
-        self._kotlinStack = .init(kotlinStack)
+        _kotlinStack = State(wrappedValue: StateFlowObserver(kotlinStack))
         self.setPath = setPath
         self.content = content
     }
