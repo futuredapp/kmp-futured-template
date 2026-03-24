@@ -1,0 +1,4 @@
+// Default local build settings — shared across all developers
+// To override, create Local.xcconfig (gitignored) in this directory
+
+KMP_BUILD_MODE = all

@@ -1,24 +1,33 @@
-# Define the default target
-all: build
-
-# Define the build target
-build:
-	@echo "KMP_FRAMEWORK_BUILD_TYPE: $(KMP_FRAMEWORK_BUILD_TYPE)"
-	@echo "KMP_BUILD_FLAVOR: $(KMP_BUILD_FLAVOR)"
+# Check build type
 ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), debug)
-	@echo "Building debug framework"
-	cd ../../.. && \
-	./gradlew assembleAndCopyDebugSwiftPackage --no-daemon -P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)
+    BUILD_MODE := Debug
 else ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), release)
-	@echo "Building release framework"
-	cd ../../.. && \
-	./gradlew assembleAndCopyReleaseSwiftPackage --no-daemon -P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)
+    BUILD_MODE := Release
 else
-	@echo "Unknown or no build type specified. Please provide 'KMP_FRAMEWORK_BUILD_TYPE' env variable: [debug|release]"
-	exit 1
+    $(error KMP_FRAMEWORK_BUILD_TYPE must be 'debug' or 'release')
 endif
 
-# Define the clean target
+# Task name: assembleAndCopy[Debug|Release]SwiftPackage
+GRADLE_TASK := assembleAndCopy$(BUILD_MODE)SwiftPackage
+
+# Initialize args with the flavor
+GRADLE_ARGS := -Pbuildkonfig.flavor=$(KMP_BUILD_FLAVOR)
+
+# Add build mode (simulator/device/all)
+ifdef KMP_BUILD_MODE
+    GRADLE_ARGS += -PkmpBuildMode=$(KMP_BUILD_MODE)
+endif
+
+all: build
+
+build:
+	@echo "------------------------------------------------"
+	@echo "Config: $(KMP_FRAMEWORK_BUILD_TYPE) | Flavor: $(KMP_BUILD_FLAVOR) | Mode: $(KMP_BUILD_MODE)"
+	@echo "Executing: ./gradlew $(GRADLE_TASK) $(GRADLE_ARGS)"
+	@echo "------------------------------------------------"
+	cd ../../.. && \
+	./gradlew $(GRADLE_TASK) --no-daemon $(GRADLE_ARGS)
+
 clean:
 	cd ../../.. && \
 	./gradlew clean

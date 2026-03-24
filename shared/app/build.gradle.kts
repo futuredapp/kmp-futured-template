@@ -36,11 +36,19 @@ kotlin {
 
     val xcf = XCFramework(ProjectSettings.IOS.FrameworkName)
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach {
+    // Always declare both targets for source set compatibility
+    val arm64 = iosArm64()
+    val simArm64 = iosSimulatorArm64()
+
+    // Only build framework binaries for the selected mode
+    val kmpBuildMode = project.findProperty(ProjectSettings.IOS.BuildModeProperty)?.toString() ?: "all"
+    val frameworkTargets = when (kmpBuildMode) {
+        "simulator" -> listOf(simArm64)
+        "device" -> listOf(arm64)
+        else -> listOf(arm64, simArm64)
+    }
+
+    frameworkTargets.forEach {
         it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
