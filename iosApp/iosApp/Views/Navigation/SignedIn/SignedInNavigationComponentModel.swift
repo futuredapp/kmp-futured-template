@@ -2,6 +2,8 @@ import KMP
 import Observation
 
 protocol SignedInNavigationComponentModelProtocol {
+    /// Settable to enable `$model.selectedTab` binding in the view.
+    /// The setter dispatches the tab change to KMP.
     var selectedTab: NavigationTab { get set }
     var homeTab: SignedInChildHome? { get }
     var profileTab: SignedInChildProfile? { get }
@@ -38,6 +40,8 @@ final class SignedInNavigationComponentModel: SignedInNavigationComponentModelPr
         viewState = component.viewState.value
         actions = component.actions
 
+        // Safe: SKIE's StateFlow replays the current value to new collectors,
+        // so no emissions are lost between the synchronous reads above and these Tasks.
         homeTabTask = Task { [weak self] in
             for await state in component.homeTab {
                 self?.homeTab = state

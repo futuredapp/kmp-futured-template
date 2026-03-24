@@ -29,6 +29,8 @@ final class RootNavigationComponentModel: RootNavigationComponentModelProtocol {
         _slot = component.slot.value
         actions = component.actions
 
+        // Safe: SKIE's StateFlow replays the current value to new collectors,
+        // so no emissions are lost between the synchronous read above and this Task.
         stateTask = Task { [weak self] in
             for await state in component.slot {
                 self?._slot = state

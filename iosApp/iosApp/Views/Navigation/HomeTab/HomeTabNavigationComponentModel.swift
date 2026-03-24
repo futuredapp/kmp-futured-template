@@ -20,7 +20,10 @@ final class HomeTabNavigationComponentModel: HomeTabNavigationComponentModelProt
             }
             return DecomposeSlotItem(id: ObjectIdentifier(child), instance: child.instance)
         }
-        set { // swiftlint:disable:this unused_setter_value
+        // swiftlint:disable:next unused_setter_value
+        set {
+            // SwiftUI sets this to nil on dismiss; we delegate to KMP
+            // instead of managing state locally.
             actions.onSheetDismissed()
         }
     }
@@ -42,6 +45,8 @@ final class HomeTabNavigationComponentModel: HomeTabNavigationComponentModelProt
         stack = component.stack
         actions = component.actions
 
+        // Safe: SKIE's StateFlow replays the current value to new collectors,
+        // so no emissions are lost between the synchronous read above and this Task.
         stateTask = Task { [weak self] in
             for await state in component.sheet {
                 self?._sheet = state
