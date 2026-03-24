@@ -11,7 +11,7 @@ struct RootView: View {
     }
 
     var body: some View {
-        RootNavigationView(componentHolder.component)
+        RootNavigationComponent(model: RootNavigationComponentModel(componentHolder.component))
             .onChange(of: scenePhase) { _, newPhase in
                 switch newPhase {
                 case .background:

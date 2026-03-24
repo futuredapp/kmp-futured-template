@@ -1,22 +1,13 @@
 import KMP
 import SwiftUI
 
-struct HomeTabNavigationView: View {
-    @State private var sheet: StateFlowObserver<ChildSlot<HomeSheetConfig, HomeSheetChild>>
-
-    private let stack: SkieSwiftStateFlow<ChildStack<HomeConfig, HomeChild>>
-    private let actions: HomeNavHostActions
-
-    init(_ component: HomeNavHost) {
-        _sheet = State(wrappedValue: StateFlowObserver(component.sheet))
-        stack = component.stack
-        actions = component.actions
-    }
+struct HomeTabNavigationComponent: View {
+    @State var model: HomeTabNavigationComponentModel
 
     var body: some View {
         DecomposeNavigationStack(
-            kotlinStack: stack,
-            setPath: actions.navigate
+            kotlinStack: model.stack,
+            setPath: model.actions.navigate
         ) { child in
             switch onEnum(of: child) {
             case let .first(entry):
@@ -29,13 +20,13 @@ struct HomeTabNavigationView: View {
         }
         .sheet(
             isPresented: .init(
-                get: { sheet.value.child != nil },
+                get: { model.sheet.child != nil },
                 set: { _ in
-                    actions.onSheetDismissed()
+                    model.onSheetDismissed()
                 }
             )
         ) {
-            if let child = sheet.value.child?.instance {
+            if let child = model.sheet.child?.instance {
                 switch onEnum(of: child) {
                 case let .picker(instance):
                     PickerComponent(model: PickerComponentModel(instance.screen))
