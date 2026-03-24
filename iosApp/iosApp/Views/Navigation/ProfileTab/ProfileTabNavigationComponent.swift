@@ -1,13 +1,13 @@
 import KMP
 import SwiftUI
 
-struct ProfileTabNavigationComponent: View {
-    @State var model: ProfileTabNavigationComponentModel
+struct ProfileTabNavigationComponent<Model: ProfileTabNavigationComponentModelProtocol>: View {
+    @State var model: Model
 
     var body: some View {
         DecomposeNavigationStack(
             kotlinStack: model.stack,
-            setPath: model.actions.navigate
+            setPath: model.navigate
         ) { child in
             switch onEnum(of: child) {
             case let .profile(entry):

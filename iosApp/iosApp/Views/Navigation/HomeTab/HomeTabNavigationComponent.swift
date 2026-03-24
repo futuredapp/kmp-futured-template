@@ -1,13 +1,13 @@
 import KMP
 import SwiftUI
 
-struct HomeTabNavigationComponent: View {
-    @State var model: HomeTabNavigationComponentModel
+struct HomeTabNavigationComponent<Model: HomeTabNavigationComponentModelProtocol>: View {
+    @State var model: Model
 
     var body: some View {
         DecomposeNavigationStack(
             kotlinStack: model.stack,
-            setPath: model.actions.navigate
+            setPath: model.navigate
         ) { child in
             switch onEnum(of: child) {
             case let .first(entry):
@@ -18,20 +18,11 @@ struct HomeTabNavigationComponent: View {
                 ThirdComponent(model: ThirdComponentModel(entry.screen))
             }
         }
-        .sheet(
-            isPresented: .init(
-                get: { model.sheet.child != nil },
-                set: { _ in
-                    model.onSheetDismissed()
-                }
-            )
-        ) {
-            if let child = model.sheet.child?.instance {
-                switch onEnum(of: child) {
-                case let .picker(instance):
-                    PickerComponent(model: PickerComponentModel(instance.screen))
-                        .presentationDetents(.init([.medium]))
-                }
+        .sheet(item: $model.sheetItem) { item in
+            switch onEnum(of: item.instance) {
+            case let .picker(instance):
+                PickerComponent(model: PickerComponentModel(instance.screen))
+                    .presentationDetents(.init([.medium]))
             }
         }
     }

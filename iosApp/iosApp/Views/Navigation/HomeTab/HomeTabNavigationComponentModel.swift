@@ -1,22 +1,50 @@
 import KMP
 import Observation
 
+protocol HomeTabNavigationComponentModelProtocol {
+    var stack: SkieSwiftStateFlow<ChildStack<HomeConfig, HomeChild>> { get }
+    var sheetItem: DecomposeSlotItem<HomeSheetChild>? { get set }
+
+    func navigate(_ path: [ChildCreated<HomeConfig, HomeChild>])
+}
+
 @Observable
-final class HomeTabNavigationComponentModel {
-    private(set) var sheet: ChildSlot<HomeSheetConfig, HomeSheetChild>
+final class HomeTabNavigationComponentModel: HomeTabNavigationComponentModelProtocol {
+
+    // MARK: Public computed properties
+
+    var sheetItem: DecomposeSlotItem<HomeSheetChild>? {
+        get {
+            guard let child = _sheet.child else {
+                return nil
+            }
+            return DecomposeSlotItem(id: ObjectIdentifier(child), instance: child.instance)
+        }
+        set { // swiftlint:disable:this unused_setter_value
+            actions.onSheetDismissed()
+        }
+    }
+
+    // MARK: Private stored properties
+
+    private var _sheet: ChildSlot<HomeSheetConfig, HomeSheetChild>
+
+    // MARK: Private @ObservationIgnored properties
 
     @ObservationIgnored let stack: SkieSwiftStateFlow<ChildStack<HomeConfig, HomeChild>>
-    @ObservationIgnored let actions: HomeNavHostActions
+    @ObservationIgnored private let actions: HomeNavHostActions
     @ObservationIgnored private var stateTask: Task<Void, Never>?
 
+    // MARK: Init / Deinit
+
     init(_ component: HomeNavHost) {
-        sheet = component.sheet.value
+        _sheet = component.sheet.value
         stack = component.stack
         actions = component.actions
 
         stateTask = Task { [weak self] in
             for await state in component.sheet {
-                self?.sheet = state
+                self?._sheet = state
             }
         }
     }
@@ -25,7 +53,9 @@ final class HomeTabNavigationComponentModel {
         stateTask?.cancel()
     }
 
-    func onSheetDismissed() {
-        actions.onSheetDismissed()
+    // MARK: Public functions
+
+    func navigate(_ path: [ChildCreated<HomeConfig, HomeChild>]) {
+        actions.navigate(newStack: path)
     }
 }

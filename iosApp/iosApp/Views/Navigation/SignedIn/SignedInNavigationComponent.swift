@@ -1,16 +1,11 @@
 import KMP
 import SwiftUI
 
-struct SignedInNavigationComponent: View {
-    @State var model: SignedInNavigationComponentModel
+struct SignedInNavigationComponent<Model: SignedInNavigationComponentModelProtocol>: View {
+    @State var model: Model
 
     var body: some View {
-        TabView(
-            selection: Binding(
-                get: { model.selectedTab },
-                set: { model.onTabSelected($0) }
-            )
-        ) {
+        TabView(selection: $model.selectedTab) {
             TabContentView(ofNavigationEntry: model.homeTab, forNavigationTab: NavigationTab.home) { child in
                 HomeTabNavigationComponent(model: HomeTabNavigationComponentModel(child.navHost))
             }

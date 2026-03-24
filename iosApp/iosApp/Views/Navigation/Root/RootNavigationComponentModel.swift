@@ -1,20 +1,37 @@
 import KMP
 import Observation
 
-@Observable
-final class RootNavigationComponentModel {
-    private(set) var slot: ChildSlot<RootConfig, RootChild>
+protocol RootNavigationComponentModelProtocol {
+    var slotChild: RootChild? { get }
 
-    @ObservationIgnored private let openDeepLink: (String) -> Void
+    func onDeepLink(_ url: String)
+}
+
+@Observable
+final class RootNavigationComponentModel: RootNavigationComponentModelProtocol {
+
+    // MARK: Public computed properties
+
+    var slotChild: RootChild? { _slot.child?.instance }
+
+    // MARK: Private stored properties
+
+    private var _slot: ChildSlot<RootConfig, RootChild>
+
+    // MARK: Private @ObservationIgnored properties
+
+    @ObservationIgnored private let actions: RootNavHostActions
     @ObservationIgnored private var stateTask: Task<Void, Never>?
 
+    // MARK: Init / Deinit
+
     init(_ component: RootNavHost) {
-        slot = component.slot.value
-        openDeepLink = component.actions.onDeepLink
+        _slot = component.slot.value
+        actions = component.actions
 
         stateTask = Task { [weak self] in
             for await state in component.slot {
-                self?.slot = state
+                self?._slot = state
             }
         }
     }
@@ -23,7 +40,9 @@ final class RootNavigationComponentModel {
         stateTask?.cancel()
     }
 
+    // MARK: Public functions
+
     func onDeepLink(_ url: String) {
-        openDeepLink(url)
+        actions.onDeepLink(uri: url)
     }
 }
