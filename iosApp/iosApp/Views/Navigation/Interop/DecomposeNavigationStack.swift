@@ -1,6 +1,12 @@
 import KMP
 import SwiftUI
 
+/// Identifiable wrapper for a Decompose `ChildSlot` item, enabling use with SwiftUI's `.sheet(item:)` and `.fullScreenCover(item:)`.
+struct DecomposeSlotItem<T>: Identifiable {
+    let id: ObjectIdentifier
+    let instance: T
+}
+
 /**
  This view displays Decompose navigation stack from KMP.
 
