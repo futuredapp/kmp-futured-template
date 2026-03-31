@@ -140,7 +140,7 @@ Key components:
 
 ### Environment Variables
 
-Two critical environment variables control the build process:
+Three environment variables control the build process:
 
 - **`KMP_FRAMEWORK_BUILD_TYPE`**: Specifies the framework build type (`debug` or `release`)
     - Set in `.xcconfig` files for each Xcode build configuration
@@ -152,6 +152,25 @@ Two critical environment variables control the build process:
     - Set in `.xcconfig` files for each Xcode build configuration
     - Controls API endpoints and environment-specific configuration
     - Passed to Gradle as `-P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)`
+
+- **`KMP_BUILD_MODE`**: Controls which architectures are compiled (`simulator`, `device`, or `all`)
+    - `simulator` — builds only `iosSimulatorArm64` (fastest for local development)
+    - `device` — builds only `iosArm64`
+    - `all` — builds both targets (default, required for XCFramework distribution)
+    - Configured in `.xcconfig` files; Beta and Release always use `all`
+    - Passed to Gradle as `-PkmpBuildMode=$(KMP_BUILD_MODE)`
+
+### Local Build Configuration
+
+Developers can override `KMP_BUILD_MODE` locally for faster iteration:
+
+1. Copy `iosApp/Config Files/Local.default.xcconfig` → `iosApp/Config Files/Local.xcconfig`
+2. Set `KMP_BUILD_MODE = simulator` in `Local.xcconfig`
+3. `Local.xcconfig` is gitignored — changes won't affect other developers
+
+The Debug configuration includes both files (`Local.default.xcconfig` with optional include for
+`Local.xcconfig`), so local overrides take precedence. Beta and Release configurations hardcode
+`KMP_BUILD_MODE = all` and do not use local overrides.
 
 ### Development Workflow
 
