@@ -197,28 +197,28 @@ navigation state in KMP.
 The following meta-description provides an overview of Decompose navigation tree:
 
 ```kotlin
-Navigation("RootNavHost") {
+Navigation("Root") {
     Slot {
-        Screen("LoginScreen")
-        Navigation("SignedInNavHost") {
+        Screen("Login")
+        Navigation("SignedIn") {
             // Bottom navigation stack
             Stack {
                 // Home tab
-                Navigation("HomeNavHost") {
+                Navigation("Home") {
                     Stack {
-                        Screen("FirstScreen")
-                        Screen("SecondScreen") {
+                        Screen("First")
+                        Screen("Second") {
                             Slot {
                                 Screen("Picker")
                             }
                         }
-                        Screen("ThirdScreen")
+                        Screen("Third")
                     }
                 }
                 // Profile tab
-                Navigation("ProfileNavHost") {
+                Navigation("Profile") {
                     Stack {
-                        Screen("ProfileScreen")
+                        Screen("Profile")
                     }
                 }
             }
