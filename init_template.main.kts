@@ -117,7 +117,7 @@ moveFileTree(
     toPath = Path.of("$appName.xcodeproj"),
 )
 Files.move(
-    File("iosApp/iosAppTests/iosAppTests.swift").toPath(),
+    File("iosApp/iosAppTests/AppTests.swift").toPath(),
     File("iosApp/iosAppTests/${appName}Tests.swift").toPath(),
 )
 moveFileTree(
@@ -125,16 +125,6 @@ moveFileTree(
     fromPath = Path.of("iosAppTests"),
     toPath = Path.of("${appName}Tests"),
 )
-Files.move(
-    File("iosApp/iosAppUITests/iosAppUITestsLaunchTests.swift").toPath(),
-    File("iosApp/iosAppUITests/${appName}UITestsLaunchTests.swift").toPath(),
-)
-moveFileTree(
-    parent = Path.of("iosApp"),
-    fromPath = Path.of("iosAppUITests"),
-    toPath = Path.of("${appName}UITests"),
-)
-
 // endregion
 
 // region Repo
