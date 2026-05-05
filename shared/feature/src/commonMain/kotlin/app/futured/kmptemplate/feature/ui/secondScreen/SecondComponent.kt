@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.ui.secondScreen
 
+import app.futured.arkitekt.annotation.GenerateFactory
 import app.futured.arkitekt.decompose.navigation.ResultFlow
-import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.feature.ui.picker.PickerArgs

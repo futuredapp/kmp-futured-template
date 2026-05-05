@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.ui.firstScreen
 
-import app.futured.factorygenerator.annotation.GenerateFactory
+import app.futured.arkitekt.annotation.GenerateFactory
+import app.futured.arkitekt.crusecases.execute
 import app.futured.kmptemplate.feature.domain.CounterUseCase
 import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
 import app.futured.kmptemplate.feature.domain.SyncDataUseCase

@@ -19,8 +19,12 @@ annotations {
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
-    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+    compilerOptions {
+        // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+        // Arkitekt UseCases support (will become stable in Kotlin 2.4.0)
+        freeCompilerArgs.add("-Xcontext-parameters")
+    }
 
     android {
         namespace = libs.versions.project.shared.feature.namespace.get()
@@ -51,8 +55,9 @@ kotlin {
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.arkitektDecompose)
-                implementation(projects.shared.arkitektDecompose.arkitektAnnotation)
+                implementation(libs.futured.arkitekt.decompose)
+                implementation(libs.futured.arkitekt.decomposeAnnotation)
+                implementation(libs.futured.arkitekt.crUseCases)
                 implementation(projects.shared.kmpResources)
 
                 implementation(libs.logging.kermit)

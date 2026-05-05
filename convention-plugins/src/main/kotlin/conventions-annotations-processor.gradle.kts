@@ -53,7 +53,7 @@ afterEvaluate {
 
         // Enable source generation by KSP to commonMain only
         if (extension.useComponentFactory) {
-            add("kspCommonMainMetadata", project(":shared:arkitekt-decompose:processor"))
+            add("kspCommonMainMetadata", libs.futured.arkitekt.decomposeProcessor)
         }
     }
 }

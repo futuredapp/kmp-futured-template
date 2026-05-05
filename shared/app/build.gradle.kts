@@ -64,7 +64,7 @@ kotlin {
             isStatic = isStaticFramework
 
             export(projects.shared.platform)
-            export(projects.shared.arkitektDecompose)
+            export(libs.futured.arkitekt.decompose)
             export(projects.shared.feature)
             export(projects.shared.kmpResources)
 
@@ -108,7 +108,7 @@ kotlin {
         iosMain {
             dependencies {
                 api(projects.shared.platform)
-                api(projects.shared.arkitektDecompose)
+                api(libs.futured.arkitekt.decompose)
                 api(projects.shared.feature)
                 api(projects.shared.kmpResources)
 

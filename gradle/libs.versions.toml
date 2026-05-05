@@ -38,7 +38,7 @@ benchmarkMacroJunit4 = "1.4.1"
 profileinstaller = "1.4.1"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.2.0"
-poet = "2.2.0"
+arkitekt = "6.0.0-beta03"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
@@ -57,6 +57,12 @@ project-shared-resources-packageName = "app.futured.kmptemplate.resources"
 project-baselineprofile-namespace = "app.futured.kmptemplate.baselineprofile"
 
 [libraries]
+
+# Arkitekt
+futured-arkitekt-decompose = { module = "app.futured.arkitekt:decompose", version.ref = "arkitekt" }
+futured-arkitekt-decomposeAnnotation = { module = "app.futured.arkitekt:decompose-annotation", version.ref = "arkitekt" }
+futured-arkitekt-decomposeProcessor = { module = "app.futured.arkitekt:decompose-processor", version.ref = "arkitekt" }
+futured-arkitekt-crUseCases = { module = "app.futured.arkitekt:cr-usecases", version.ref = "arkitekt" }
 
 # Compose
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
@@ -93,10 +99,6 @@ androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-r
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-compose-ext = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 essenty = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
-
-# KSP api
-ksp-lib = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
-poet-interop = { module = "com.squareup:kotlinpoet-ksp", version.ref = "poet" }
 
 # Testing
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
