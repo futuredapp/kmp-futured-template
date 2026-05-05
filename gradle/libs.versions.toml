@@ -1,7 +1,7 @@
 [versions]
-agp = "9.0.1"
-kotlin = "2.3.0"
-ksp = "2.3.4"
+agp = "9.1.1"
+kotlin = "2.3.20"
+ksp = "2.3.7"
 desugarLibs = "2.1.5"
 androidxLifecycle = "2.10.0"
 androidxComposeBom = "2026.01.01"
@@ -25,7 +25,7 @@ ktor = "3.4.0" # Must be compatible with: `ktorfit`
 kotlinx-serialization = "1.10.0" # Must be compatible with: `kotlin`
 timber = "5.0.1"
 kermit = "2.0.8"
-skie = "0.10.10" # Must be compatible with: `kotlin`
+skie = "0.10.11" # Must be compatible with: `kotlin`
 buildkonfig = "0.17.1"
 nsExceptionKt = "1.0.7"
 datastore = "1.2.0"
@@ -65,7 +65,7 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" , version.ref = "materialIcons"}
+androidx-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIcons" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeRuntime" }
 
