@@ -25,8 +25,12 @@ internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam navigationToLogin: () -> Unit,
     @InjectedParam initialConfig: SignedInConfig,
-) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()),
+) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, DEFAULT_STATE),
     SignedInNavHost {
+
+    companion object {
+        private val DEFAULT_STATE = SignedInNavHostViewState()
+    }
 
     private val stackNavigator = StackNavigation<SignedInConfig>()
 
@@ -62,7 +66,7 @@ internal class SignedInNavHostComponent(
                 is SignedInChild.Profile -> NavigationTab.PROFILE
             },
         )
-    }.asStateFlow()
+    }.stateIn(lifecycleScope, SharingStarted.Lazily, DEFAULT_STATE)
 
     override val homeTab: StateFlow<SignedInChild.Home?> = stack.map { childStack ->
         childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Home>().firstOrNull()
