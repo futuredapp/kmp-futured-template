@@ -12,12 +12,14 @@ import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 
 @Module
 @ComponentScan("app.futured.kmptemplate.network.rest")
+@Configuration
 class NetworkRestModule {
 
     @Single

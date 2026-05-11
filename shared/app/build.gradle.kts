@@ -14,14 +14,9 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.skie)
     alias(libs.plugins.moko.resources)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
-    androidBuildTypes = ProjectSettings.Android.BuildTypes.all
 }
 
 kotlin {
@@ -81,8 +76,6 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-
             dependencies {
                 implementation(projects.shared.platform)
                 implementation(projects.shared.feature)
@@ -145,6 +138,10 @@ multiplatformResources {
     resourcesVisibility.set(MRVisibility.Internal)
     resourcesClassName.set("MR")
     iosBaseLocalizationRegion.set(ProjectSettings.IOS.MokoBaseLocalizationRegion)
+}
+
+koinCompiler {
+    userLogs.set(true)
 }
 
 private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildType) {

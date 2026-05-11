@@ -1,19 +1,25 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
 }
 
-annotations {
-    useKoin = true
-    useComponentFactory = true
-    androidBuildTypes = ProjectSettings.Android.BuildTypes.all
+dependencies {
+    add("kspCommonMainMetadata", libs.futured.arkitekt.decomposeProcessor)
+}
+
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 
 kotlin {
@@ -78,4 +84,8 @@ kotlin {
             }
         }
     }
+}
+
+koinCompiler {
+    userLogs.set(true)
 }

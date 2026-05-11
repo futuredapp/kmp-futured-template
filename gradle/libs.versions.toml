@@ -10,8 +10,8 @@ jetbrainsComposeRuntime = "1.10.1" # Needs to align with version in Compose BOM 
 androidxActivity = "1.12.4"
 decompose = "3.4.0"
 essenty = "2.5.0"
-koin = "4.1.1"
-koinAnnotations = "2.3.1" # Must be compatible with: `ksp`
+koin = "4.2.1"
+koinCompilerPlugin = "1.0.0-RC2"
 kotlinx-coroutines = "1.10.2"
 kotlinx-immutableCollections = "0.4.0"
 kotlinx-dateTime = "0.7.1"
@@ -76,11 +76,9 @@ androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime
 jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrainsComposeRuntime" }
 
 # Koin
-#koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koinAnnotations" }
-koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koinAnnotations" }
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin" }
 
 # KotlinX
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -166,6 +164,7 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 firebase-distribution = { id = "com.google.firebase.appdistribution", version.ref = "google-firebaseAppDistributionPlugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+koin = { id = "io.insert-koin.compiler.plugin", version.ref = "koinCompilerPlugin" }
 
 # Precompiled script plugins
 conventions-lint = { id = "conventions-lint" }

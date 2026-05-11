@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.koin) apply false
 }
 
 tasks.register<LintCheckTask>("lintCheck")
