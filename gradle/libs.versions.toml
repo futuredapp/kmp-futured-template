@@ -38,7 +38,7 @@ benchmarkMacroJunit4 = "1.4.1"
 profileinstaller = "1.4.1"
 google-servicesPlugin = "4.4.2"
 google-firebaseAppDistributionPlugin = "5.2.0"
-arkitekt = "6.0.0-beta03"
+arkitekt = "6.0.0-beta04"
 
 # Android Namespaces
 project-android-namespace = "app.futured.kmptemplate.android"
