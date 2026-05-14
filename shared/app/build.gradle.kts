@@ -141,7 +141,7 @@ multiplatformResources {
 }
 
 koinCompiler {
-    userLogs.set(true)
+    userLogs.set(false)
 }
 
 private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildType) {

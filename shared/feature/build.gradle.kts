@@ -87,5 +87,5 @@ kotlin {
 }
 
 koinCompiler {
-    userLogs.set(true)
+    userLogs.set(false)
 }

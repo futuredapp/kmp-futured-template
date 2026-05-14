@@ -75,5 +75,5 @@ buildkonfig {
 }
 
 koinCompiler {
-    userLogs.set(true)
+    userLogs.set(false)
 }
