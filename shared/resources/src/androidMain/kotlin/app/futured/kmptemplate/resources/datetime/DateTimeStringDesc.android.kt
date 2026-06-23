@@ -3,9 +3,9 @@ package app.futured.kmptemplate.resources.datetime
 import android.content.Context
 import android.icu.text.DateFormat
 import dev.icerock.moko.resources.desc.StringDesc
-import kotlinx.datetime.Instant
-import kotlinx.datetime.toJavaInstant
+import kotlin.time.Instant
 import java.util.Date
+import kotlin.time.toJavaInstant
 
 /**
  * A [StringDesc] implementation which translates provided [Instant] into localized date-time string.

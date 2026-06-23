@@ -36,8 +36,8 @@ jobs:
     needs: generate_version
     uses: futuredapp/.github/.github/workflows/kmp-combined-nightly-build.yml@2.0.0
     with:
-      # `testReleaseUnitTest` covers androidApp module and all shared modules all at once. No need to call `testEnterpriseUnitTest` and `testReleaseUnitTest`.
-      ANDROID_TEST_GRADLE_TASK: testReleaseUnitTest
+      # `testAndroidHostTest` covers androidApp module and all shared modules all at once.
+      ANDROID_TEST_GRADLE_TASK: testAndroidHostTest
       ANDROID_PACKAGE_GRADLE_TASK: packageEnterpriseUniversalApk
       ANDROID_UPLOAD_GRADLE_TASK: appDistributionUploadEnterprise
       ANDROID_VERSION_NAME: ${{ needs.generate_version.outputs.version_name }}

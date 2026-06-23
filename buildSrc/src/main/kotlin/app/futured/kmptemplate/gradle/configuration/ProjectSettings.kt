@@ -14,8 +14,8 @@ object ProjectSettings {
 
     object Android {
         const val MinSdkVersion = 29
-        const val TargetSdkVersion = 35
-        const val CompileSdkVersion = 35
+        const val TargetSdkVersion = 36
+        const val CompileSdkVersion = 36
 
         const val ApplicationId = "app.futured.kmptemplate.android"
 
@@ -26,6 +26,8 @@ object ProjectSettings {
             const val Debug = "debug"
             const val Enterprise = "enterprise"
             const val Release = "release"
+
+            val all = listOf(Debug, Enterprise, Release)
         }
 
         object Signing {
@@ -42,5 +44,6 @@ object ProjectSettings {
         const val FrameworkBundleId = "app.futured.kmptemplate.shared"
         const val MokoBaseLocalizationRegion = "en"
         const val BuildModeProperty = "kmpBuildMode"
+        const val IsStaticFrameworkProperty = "isStatic"
     }
 }

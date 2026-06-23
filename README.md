@@ -63,8 +63,8 @@ set up, incl. navigation and some API calls.
 ### Android
 
 - ApplicationId: ~~`app.futured.project`~~
-- minSdk: ~~`28`~~
-- targetSdk: ~~`34`~~
+- minSdk: ~~`29`~~
+- targetSdk: ~~`36`~~
 - Supports: ~~**Dark mode, landscape orientation**~~
 - Build Variants: debug, enterprise, release
 
@@ -140,7 +140,7 @@ Key components:
 
 ### Environment Variables
 
-Three environment variables control the build process:
+Four environment variables control the build process:
 
 - **`KMP_FRAMEWORK_BUILD_TYPE`**: Specifies the framework build type (`debug` or `release`)
     - Set in `.xcconfig` files for each Xcode build configuration
@@ -159,6 +159,14 @@ Three environment variables control the build process:
     - `all` — builds both targets (default, required for XCFramework distribution)
     - Configured in `.xcconfig` files; Beta and Release always use `all`
     - Passed to Gradle as `-PkmpBuildMode=$(KMP_BUILD_MODE)`
+- 
+- **`KMP_IS_STATIC`**: Controls whether the KMP XCFramework is linked statically or dynamically
+    - `false` (dynamic) — set in `Debug.xcconfig`; **required for SwiftUI previews** to work in
+      Xcode, as the preview process cannot load a statically linked KMP framework
+    - `true` (static) — set in `Release.xcconfig` and `Beta.xcconfig`; used for beta (TestFlight)
+      and release builds
+    - If not set, Gradle defaults to static (`true`)
+    - Passed to Gradle as `-PisStatic=$(KMP_IS_STATIC)`
 
 ### Local Build Configuration
 
@@ -189,6 +197,40 @@ To build and update the KMP package during development:
 3. **After KMP code changes**:
     - Always rebuild the "KMP Package" target to update the XCFramework
     - Then build the main app target to use the updated KMP code
+
+### SwiftUI Previews
+
+SwiftUI previews require a **dynamically linked** KMP framework. The `Debug` build configuration
+sets `KMP_IS_STATIC = false` in `Debug.xcconfig` to enable this. `Beta` and `Release`
+configurations use static linking.
+
+#### Preview mock pattern
+
+Shared KMP code exposes preview mock objects (e.g. `FirstScreenPreviews`) that provide fake,
+no-op implementations of screen interfaces with configurable view states. These are consumed on the
+iOS side inside `#if DEBUG` / `#Preview` blocks.
+
+**Kotlin side** (`shared/feature/src/commonMain/kotlin/.../firstScreen/FirstScreenPreviews.kt`):
+
+```kotlin
+object FirstScreenPreviews {
+    fun viewState(...) = FirstViewState(...)
+    fun screen(viewState: FirstViewState = viewState()): FirstScreen = object : FirstScreen { ... }
+}
+```
+
+**Swift side** (`iosApp/iosApp/Views/Screen/First/FirstView.swift`):
+
+```swift
+#if DEBUG
+#Preview("FirstView") {
+    FirstView(FirstViewModel(FirstScreenPreviews.shared.screen()))
+}
+#endif
+```
+
+When adding a new screen, create a `*Previews` object in the screen's package following the same
+pattern.
 
 ## Navigation Structure
 
@@ -303,9 +345,9 @@ project:
 1. Set up Firebase Crashlytics on both platforms as you would usually do.
 2. After dependencies are in place, on each platform uncomment the code in
    `PlatformFirebaseCrashlyticsImpl` classes (follow comments).
-3. On iOS, do not forget to also upload debug symbols to Crashlytics. The KMP framework is static,
-   so no standalone debug symbols are generated for KMP, instead, they are included in the app
-   itself.
+3. On iOS, do not forget to also upload debug symbols to Crashlytics. The KMP framework is static
+   in Beta and Release builds, so no standalone debug symbols are generated for KMP, instead, they
+   are included in the app itself.
 
 ## Deep Linking
 

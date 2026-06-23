@@ -8,7 +8,7 @@ import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import com.arkivanov.decompose.router.slot.ChildSlot
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

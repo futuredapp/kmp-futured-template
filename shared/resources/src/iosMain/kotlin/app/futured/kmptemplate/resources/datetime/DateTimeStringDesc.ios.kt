@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.resources.datetime
 
 import dev.icerock.moko.resources.desc.StringDesc
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.datetime.toNSDate
 import platform.Foundation.NSDateFormatter
 

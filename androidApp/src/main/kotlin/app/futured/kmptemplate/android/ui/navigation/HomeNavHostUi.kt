@@ -25,7 +25,6 @@ import app.futured.kmptemplate.feature.navigation.home.HomeSheetConfig
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.stack.ChildStack
@@ -51,7 +50,6 @@ fun HomeNavHostUi(
                 animation = predictiveBackAnimation(
                     backHandler = navHost.backHandler,
                     onBack = actions::pop,
-                    selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
                 ),
             ) { child ->
                 when (val childInstance = child.instance) {

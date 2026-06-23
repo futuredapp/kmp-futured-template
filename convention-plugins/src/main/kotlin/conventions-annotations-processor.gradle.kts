@@ -1,4 +1,5 @@
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 // As of now, we cannot use Gradle version catalogs with Precompiled Script plugins: https://github.com/gradle/gradle/issues/15383
@@ -8,8 +9,21 @@ plugins {
 
 // Allow configuring which processor to use (or both)
 abstract class AnnotationsExtension {
+
+    /**
+     * Configures Koin annotations if enabled.
+     */
     var useKoin: Boolean = false
+
+    /**
+     * Configures Component factory generation if enabled
+     */
     var useComponentFactory: Boolean = false
+
+    /**
+     * Configures Android build variant KSP task dependencies for each build variant provided
+     */
+    var androidBuildTypes: List<String> = emptyList()
 }
 
 val extension = extensions.create("annotations", AnnotationsExtension::class)
@@ -19,7 +33,7 @@ afterEvaluate {
     if (extension.useKoin) {
         ksp {
             // enable compile time check
-            arg("KOIN_CONFIG_CHECK", "true")
+            arg("KOIN_CONFIG_CHECK", "false")
             // disable default module generation
             arg("KOIN_DEFAULT_MODULE", "false")
         }
@@ -40,11 +54,6 @@ afterEvaluate {
         // Enable source generation by KSP to commonMain only
         if (extension.useComponentFactory) {
             add("kspCommonMainMetadata", project(":shared:arkitekt-decompose:processor"))
-            // DO NOT add bellow dependencies
-            // add("kspAndroid", Deps.Koin.kspCompiler)
-            // add("kspIosX64", Deps.Koin.kspCompiler)
-            // add("kspIosArm64", Deps.Koin.kspCompiler)
-            // add("kspIosSimulatorArm64", Deps.Koin.kspCompiler)
         }
     }
 }
@@ -52,8 +61,14 @@ afterEvaluate {
 // WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
 tasks.withType<KotlinCompilationTask<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
-        if (tasks.findByName("kspCommonMainKotlinMetadata") != null) {
-            dependsOn("kspCommonMainKotlinMetadata")
-        }
+        dependsOn("kspCommonMainKotlinMetadata")
     }
+}
+
+// Manual wiring of task dependencies needed for build variant-dependent KSP tasks
+tasks.named { taskName ->
+    val taskNames = extension.androidBuildTypes.map { "ksp${it.uppercaseFirstChar()}KotlinAndroid" }
+    taskName in taskNames
+}.configureEach {
+    mustRunAfter("kspCommonMainKotlinMetadata")
 }

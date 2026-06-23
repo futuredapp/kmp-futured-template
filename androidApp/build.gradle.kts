@@ -1,8 +1,8 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
     // TODO PROJECT-SETUP enable after providing google-services.json
@@ -14,6 +14,10 @@ plugins {
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
+    }
 }
 
 android {
@@ -89,10 +93,6 @@ android {
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 
-    kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
-    }
-
     lint {
         textReport = true // Write a text report to the console (Useful for CI logs)
         xmlReport = true // Write XML report
@@ -112,7 +112,7 @@ dependencies {
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
     implementation(projects.shared.arkitektDecompose)
-    implementation(projects.shared.resources)
+    implementation(projects.shared.kmpResources)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
