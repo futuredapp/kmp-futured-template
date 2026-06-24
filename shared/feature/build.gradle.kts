@@ -28,8 +28,6 @@ kotlin {
     compilerOptions {
         // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
         freeCompilerArgs.add("-Xexpect-actual-classes")
-        // Arkitekt UseCases support (will become stable in Kotlin 2.4.0)
-        freeCompilerArgs.add("-Xcontext-parameters")
     }
 
     android {

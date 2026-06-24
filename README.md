@@ -123,9 +123,7 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
    iOS Swift Package as dependency. (This task shouldn't be used directly, build the KMP target in
    Xcode, instead.)
 6. `generateMRcommonMain` - Regenerate shared resource IDs.
-7. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download the latest Apollo
-   schema.
-8. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after
+7. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after
    adding modifying queries, mutations, etc.).
 
 ## Kotlin Multiplatform Swift Package Integration
