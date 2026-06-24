@@ -7,7 +7,7 @@ on:
 jobs:
   release_ios:
     name: iOS Release
-    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-release.yml@2.0.0
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-release.yml@2.4.2
     with:
       kmp_swift_package_integration: true
       kmp_swift_package_path: iosApp/shared/KMP
@@ -23,7 +23,7 @@ jobs:
 
   release_android:
     name: Android Release
-    uses: futuredapp/.github/.github/workflows/android-cloud-release-googlePlay.yml@2.0.0
+    uses: futuredapp/.github/.github/workflows/android-cloud-release-googlePlay.yml@2.4.2
     with:
       VERSION_NAME: ${{ github.event.release.tag_name }}
       BUNDLE_GRADLE_TASK: bundleRelease
