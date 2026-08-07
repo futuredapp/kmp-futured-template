@@ -1,8 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.signedIn
 
+import app.futured.arkitekt.annotation.GenerateFactory
 import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.arkitekt.decompose.ext.switchTab
-import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.navigation.home.HomeNavHostComponentFactory
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHostComponentFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
@@ -25,8 +25,12 @@ internal class SignedInNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam navigationToLogin: () -> Unit,
     @InjectedParam initialConfig: SignedInConfig,
-) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, SignedInNavHostViewState()),
+) : AppComponent<SignedInNavHostViewState, Nothing>(componentContext, DEFAULT_STATE),
     SignedInNavHost {
+
+    companion object {
+        private val DEFAULT_STATE = SignedInNavHostViewState()
+    }
 
     private val stackNavigator = StackNavigation<SignedInConfig>()
 
@@ -62,15 +66,15 @@ internal class SignedInNavHostComponent(
                 is SignedInChild.Profile -> NavigationTab.PROFILE
             },
         )
-    }.asStateFlow()
+    }.stateIn(lifecycleScope, SharingStarted.Lazily, DEFAULT_STATE)
 
     override val homeTab: StateFlow<SignedInChild.Home?> = stack.map { childStack ->
         childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Home>().firstOrNull()
-    }.stateIn(componentCoroutineScope, SharingStarted.Lazily, null)
+    }.stateIn(lifecycleScope, SharingStarted.Lazily, null)
 
     override val profileTab: StateFlow<SignedInChild.Profile?> = stack.map { childStack ->
         childStack.items.map { it.instance }.filterIsInstance<SignedInChild.Profile>().firstOrNull()
-    }.stateIn(componentCoroutineScope, SharingStarted.Lazily, null)
+    }.stateIn(lifecycleScope, SharingStarted.Lazily, null)
 
     override val actions: SignedInNavHost.Actions = object : SignedInNavHost.Actions {
 

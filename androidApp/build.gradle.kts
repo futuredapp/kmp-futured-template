@@ -111,7 +111,7 @@ dependencies {
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
-    implementation(projects.shared.arkitektDecompose)
+    implementation(libs.futured.arkitekt.decompose)
     implementation(projects.shared.kmpResources)
 
     implementation(platform(libs.androidx.compose.bom))

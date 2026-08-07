@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.ui.thirdScreen
 
-import app.futured.factorygenerator.annotation.GenerateFactory
+import app.futured.arkitekt.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR

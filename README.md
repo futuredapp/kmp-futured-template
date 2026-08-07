@@ -13,8 +13,13 @@ To give you a short overview of our stack, we use:
   application is shared in KMP.
 - [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation
   state.
+- [Arkitekt](https://github.com/futuredapp/arkitekt) (`decompose` + `cr-usecases`) for our
+  opinionated component base, use-case execution scopes, and `@GenerateFactory` codegen on top of
+  Decompose.
 - The presentation layer follows the MVI-like design pattern.
-- [Koin](https://insert-koin.io/) for dependency injection.
+- [Koin](https://insert-koin.io/) for dependency injection, wired with
+  [Koin Annotations](https://insert-koin.io/docs/reference/koin-annotations/definitions/) and the
+  Koin Compiler plugin (no KSP processor required).
 - [SKIE](https://skie.touchlab.co/) for better Kotlin->Swift interop (exhaustive enums, sealed
   classes, Coroutines support).
 - [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string (and other types
@@ -58,7 +63,8 @@ set up, incl. navigation and some API calls.
 ### KMP
 
 - Product Flavors: dev, prod
-- Use-Cases: Kotlin Coroutines [cr-usecases](https://github.com/futuredapp/arkitekt)
+- Architecture: [Arkitekt](https://github.com/futuredapp/arkitekt) — `decompose` components and
+  `cr-usecases` for coroutine-based use cases.
 
 ### Android
 
@@ -117,9 +123,7 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
    iOS Swift Package as dependency. (This task shouldn't be used directly, build the KMP target in
    Xcode, instead.)
 6. `generateMRcommonMain` - Regenerate shared resource IDs.
-7. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download the latest Apollo
-   schema.
-8. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after
+7. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after
    adding modifying queries, mutations, etc.).
 
 ## Kotlin Multiplatform Swift Package Integration

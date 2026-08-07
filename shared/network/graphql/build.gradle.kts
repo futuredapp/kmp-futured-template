@@ -7,14 +7,9 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.apollo)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
-    androidBuildTypes = ProjectSettings.Android.BuildTypes.all
 }
 
 kotlin {
@@ -31,8 +26,6 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
@@ -79,4 +72,8 @@ buildkonfig {
             buildConfigField(STRING, "apiUrl", it.apolloApiUrl)
         }
     }
+}
+
+koinCompiler {
+    userLogs.set(false)
 }

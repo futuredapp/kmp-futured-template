@@ -14,14 +14,9 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.skie)
     alias(libs.plugins.moko.resources)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
-    androidBuildTypes = ProjectSettings.Android.BuildTypes.all
 }
 
 kotlin {
@@ -64,7 +59,7 @@ kotlin {
             isStatic = isStaticFramework
 
             export(projects.shared.platform)
-            export(projects.shared.arkitektDecompose)
+            export(libs.futured.arkitekt.decompose)
             export(projects.shared.feature)
             export(projects.shared.kmpResources)
 
@@ -81,8 +76,6 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-
             dependencies {
                 implementation(projects.shared.platform)
                 implementation(projects.shared.feature)
@@ -108,7 +101,7 @@ kotlin {
         iosMain {
             dependencies {
                 api(projects.shared.platform)
-                api(projects.shared.arkitektDecompose)
+                api(libs.futured.arkitekt.decompose)
                 api(projects.shared.feature)
                 api(projects.shared.kmpResources)
 
@@ -145,6 +138,10 @@ multiplatformResources {
     resourcesVisibility.set(MRVisibility.Internal)
     resourcesClassName.set("MR")
     iosBaseLocalizationRegion.set(ProjectSettings.IOS.MokoBaseLocalizationRegion)
+}
+
+koinCompiler {
+    userLogs.set(false)
 }
 
 private fun Copy.assembleAndCopySwiftPackageForBuildType(buildType: NativeBuildType) {

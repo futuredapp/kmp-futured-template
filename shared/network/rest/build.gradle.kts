@@ -9,13 +9,9 @@ plugins {
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
 }
 
 kotlin {
@@ -84,7 +80,6 @@ buildkonfig {
     }
 }
 
-ktorfit {
-    // See https://github.com/Foso/Ktorfit/releases/tag/2.7.1
-    compilerPluginVersion.set("2.3.3")
+koinCompiler {
+    userLogs.set(false)
 }

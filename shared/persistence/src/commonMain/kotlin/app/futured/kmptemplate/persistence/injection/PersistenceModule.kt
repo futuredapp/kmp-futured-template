@@ -4,11 +4,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module(includes = [DataStoreModule::class])
 @ComponentScan("app.futured.kmptemplate.persistence")
+@Configuration
 class PersistenceModule {
 
     @Single

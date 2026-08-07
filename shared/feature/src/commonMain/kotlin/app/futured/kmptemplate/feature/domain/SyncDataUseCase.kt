@@ -8,7 +8,7 @@ import org.koin.core.annotation.Factory
 import kotlin.random.Random
 
 @Factory
-internal class SyncDataUseCase(private val starWarsApi: StarWarsApi) : UseCase<Unit, Person>() {
+internal class SyncDataUseCase(private val starWarsApi: StarWarsApi) : UseCase<Unit, Person> {
 
     override suspend fun build(args: Unit): Person = starWarsApi.getPerson(Random.nextInt(until = 100)).getOrThrow()
 }
