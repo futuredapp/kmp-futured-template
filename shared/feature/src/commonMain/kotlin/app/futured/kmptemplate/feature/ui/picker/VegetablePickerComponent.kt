@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.ui.picker
 
 import app.futured.arkitekt.annotation.GenerateFactory
+import app.futured.arkitekt.decompose.navigation.resultFlow
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -49,7 +50,7 @@ internal class VegetablePickerComponent(
     }
 
     override fun onPick(item: String) = launchWithHandler {
-        args.results.sendResult(item)
+        resultFlow(args.resultKey).sendResult(item)
         dismiss()
     }
 
