@@ -34,7 +34,7 @@ jobs:
           echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
   nightly_build:
     needs: generate_version
-    uses: futuredapp/.github/.github/workflows/kmp-combined-nightly-build.yml@2.4.2
+    uses: futuredapp/.github/.github/workflows/kmp-combined-nightly-build.yml@2.4.6
     with:
       # `testAndroidHostTest` covers androidApp module and all shared modules all at once.
       ANDROID_TEST_GRADLE_TASK: testAndroidHostTest

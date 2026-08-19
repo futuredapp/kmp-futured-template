@@ -8,12 +8,12 @@ concurrency:
 
 jobs:
   detect-changes:
-    uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@2.4.2
+    uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@2.4.6
 
   check-android:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
-    uses: futuredapp/.github/.github/workflows/android-cloud-check.yml@2.4.2
+    uses: futuredapp/.github/.github/workflows/android-cloud-check.yml@2.4.6
     with:
       LINT_GRADLE_TASKS: lintCheck
       # `testAndroidHostTest` covers androidApp module and all shared modules all at once.
@@ -22,7 +22,7 @@ jobs:
   check-ios:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
-    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@2.4.2
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@2.4.6
     with:
       kmp_swift_package_integration: true
       kmp_swift_package_path: iosApp/shared/KMP
