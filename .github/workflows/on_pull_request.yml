@@ -27,3 +27,15 @@ jobs:
       kmp_swift_package_integration: true
       kmp_swift_package_path: iosApp/shared/KMP
       kmp_swift_package_flavor: dev
+
+  # Single required status check for branch protection; passes when checks succeed or are skipped.
+  ci-status:
+    if: always()
+    needs: [ detect-changes, check-android, check-ios ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify check results
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: |
+          echo "One or more checks failed"
+          exit 1
