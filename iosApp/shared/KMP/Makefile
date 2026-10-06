@@ -1,13 +1,22 @@
-# Task name: assembleAndCopy[Debug|Release]SwiftPackage
+# Check build type
 ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), debug)
-    GRADLE_TASK := assembleAndCopyDebugSwiftPackage
+    BUILD_MODE := Debug
 else ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), release)
-    GRADLE_TASK := assembleAndCopyReleaseSwiftPackage
+    BUILD_MODE := Release
 else
     $(error KMP_FRAMEWORK_BUILD_TYPE must be 'debug' or 'release')
 endif
 
-GRADLE_ARGS := -Pbuildkonfig.flavor=$(KMP_BUILD_FLAVOR) -PkmpFrameworkTargets=$(KMP_FRAMEWORK_TARGETS)
+# Task name: assembleAndCopy[Debug|Release]SwiftPackage
+GRADLE_TASK := assembleAndCopy$(BUILD_MODE)SwiftPackage
+
+# Initialize args with the flavor
+GRADLE_ARGS := -Pbuildkonfig.flavor=$(KMP_BUILD_FLAVOR)
+
+# Add build mode (simulator/device/all)
+ifdef KMP_BUILD_MODE
+    GRADLE_ARGS += -PkmpBuildMode=$(KMP_BUILD_MODE)
+endif
 
 # KMP_IS_STATIC controls static vs dynamic framework linking.
 # Dynamic (false) is used in Debug builds to enable SwiftUI previews.
@@ -21,7 +30,7 @@ all: build
 
 build:
 	@echo "------------------------------------------------"
-	@echo "Build type: $(KMP_FRAMEWORK_BUILD_TYPE) | API Flavor: $(KMP_BUILD_FLAVOR) | Kotlin Native Targets: $(KMP_FRAMEWORK_TARGETS) | Static: $(KMP_IS_STATIC)"
+	@echo "Config: $(KMP_FRAMEWORK_BUILD_TYPE) | Flavor: $(KMP_BUILD_FLAVOR) | Mode: $(KMP_BUILD_MODE) | Static: $(KMP_IS_STATIC)"
 	@echo "Executing: ./gradlew $(GRADLE_TASK) $(GRADLE_ARGS)"
 	@echo "------------------------------------------------"
 	cd ../../.. && \

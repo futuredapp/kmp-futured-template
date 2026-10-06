@@ -39,23 +39,21 @@ kotlin {
     val arm64 = iosArm64()
     val simArm64 = iosSimulatorArm64()
 
-    // Only build framework binaries for the selected targets
-    val kmpFrameworkTargets = project.findProperty(ProjectSettings.IOS.KmpFrameworkTargetsBuildProperty)?.toString().let { targets ->
-        when (targets) {
-            "device" -> listOf(arm64)
-            "simulator" -> listOf(simArm64)
-            else -> listOf(arm64, simArm64)
-        }
+    // Only build framework binaries for the selected mode
+    val kmpBuildMode = project.findProperty(ProjectSettings.IOS.BuildModeProperty)?.toString() ?: "all"
+    val frameworkTargets = when (kmpBuildMode) {
+        "simulator" -> listOf(simArm64)
+        "device" -> listOf(arm64)
+        else -> listOf(arm64, simArm64)
     }
-
     // Controls whether the KMP XCFramework is built as static or dynamic.
     // Dynamic (false) is needed for SwiftUI previews in Xcode (Debug builds).
     // Static (true, default) is used for Beta and Release builds.
     // Controlled via -PisStatic=true|false Gradle property, set from KMP_IS_STATIC in .xcconfig files.
     val isStaticFramework = project.findProperty(ProjectSettings.IOS.IsStaticFrameworkProperty)?.toString()?.toBoolean() ?: true
 
-    kmpFrameworkTargets.forEach { target ->
-        target.binaries.framework {
+    frameworkTargets.forEach {
+        it.binaries.framework {
             baseName = ProjectSettings.IOS.FrameworkName
             binaryOptions += "bundleId" to ProjectSettings.IOS.FrameworkBundleId
             isStatic = isStaticFramework

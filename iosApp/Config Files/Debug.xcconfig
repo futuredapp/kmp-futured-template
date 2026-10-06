@@ -1,5 +1,5 @@
 // Based on https://www.kodeco.com/21441177-building-your-app-using-build-configurations-and-xcconfig#toc-anchor-003
-// Local.default.xcconfig defines default KMP_FRAMEWORK_TARGETS
+// Local.default.xcconfig defines default KMP_BUILD_MODE
 // Local.xcconfig (gitignored) can override it per developer
 #include "Local.default.xcconfig"
 #include? "Local.xcconfig"
