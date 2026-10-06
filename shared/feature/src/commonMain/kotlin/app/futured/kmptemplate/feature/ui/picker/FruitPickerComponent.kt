@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.ui.picker
 
-import app.futured.factorygenerator.annotation.GenerateFactory
+import app.futured.arkitekt.annotation.GenerateFactory
+import app.futured.arkitekt.decompose.navigation.resultFlow
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -19,11 +20,14 @@ import kotlin.time.Duration.Companion.seconds
 internal class FruitPickerComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: PickerNavigation,
-) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()), Picker, Picker.Actions {
+    @InjectedParam private val args: PickerArgs,
+) : ScreenComponent<PickerState, Nothing, PickerNavigation>(componentContext, PickerState()),
+    PickerScreen,
+    PickerScreen.Actions,
+    PickerNavigation by navigation {
 
-    override val viewState: StateFlow<PickerState> = componentState.asStateFlow()
-
-    override val actions: Picker.Actions = this
+    override val viewState: StateFlow<PickerState> = componentState
+    override val actions: PickerScreen.Actions = this
 
     init {
         doOnCreate {
@@ -44,7 +48,10 @@ internal class FruitPickerComponent(
         }
     }
 
-    override fun onPick(item: String) = navigation.dismiss(item)
+    override fun onPick(item: String) = launchWithHandler {
+        resultFlow(args.resultKey).sendResult(item)
+        dismiss()
+    }
 
-    override fun onDismiss() = navigation.dismiss(null)
+    override fun onDismiss() = dismiss()
 }

@@ -1,39 +1,31 @@
 import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.apollo)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
 }
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    android {
+        namespace = libs.versions.project.shared.network.graphql.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
     sourceSets {
         commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
@@ -49,18 +41,6 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
-    }
-}
-
-android {
-    namespace = libs.versions.project.shared.network.graphql.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }
 
@@ -92,4 +72,8 @@ buildkonfig {
             buildConfigField(STRING, "apiUrl", it.apolloApiUrl)
         }
     }
+}
+
+koinCompiler {
+    userLogs.set(false)
 }

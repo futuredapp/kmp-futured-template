@@ -4,11 +4,7 @@ import SwiftUI
 /**
  This view is used to display content inside native `TabView` in a KMP-compatible manner.
  */
-struct TabContentView<
-    Entry: SignedInChild,
-    Content: View
->: View {
-
+struct TabContentView<Entry: SignedInChild, Content: View>: View {
     let navEntry: Entry?
     let navigationTab: NavigationTab
 
@@ -19,17 +15,18 @@ struct TabContentView<
         forNavigationTab tab: NavigationTab,
         @ViewBuilder content: @escaping (Entry) -> Content
     ) {
-        self.navEntry = entry
-        self.navigationTab = tab
+        navEntry = entry
+        navigationTab = tab
         self.content = content
     }
 
     var body: some View {
-        ZStack {
-            if let entry = navEntry {
+        Group {
+            if let navEntry {
                 // The .id() modifier is very important, tells TabView to render again whenever underlying navEntry is updated.
                 // I literally spent hours figuring this out 🔫.
-                content(entry).id(entry.iosViewId)
+                content(navEntry)
+                    .id(navEntry.iosViewId)
             }
         }
         .tag(navigationTab)

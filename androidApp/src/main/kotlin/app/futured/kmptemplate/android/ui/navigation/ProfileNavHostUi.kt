@@ -16,7 +16,6 @@ import app.futured.kmptemplate.feature.navigation.profile.ProfileConfig
 import app.futured.kmptemplate.feature.navigation.profile.ProfileNavHost
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.androidPredictiveBackAnimatable
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
 import com.arkivanov.decompose.router.stack.ChildStack
 
@@ -39,7 +38,6 @@ fun ProfileNavHostUi(
                 animation = predictiveBackAnimation(
                     backHandler = navHost.backHandler,
                     onBack = actions::pop,
-                    selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
                 ),
             ) { child ->
                 when (val childInstance = child.instance) {

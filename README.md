@@ -13,8 +13,13 @@ To give you a short overview of our stack, we use:
   application is shared in KMP.
 - [Decompose](https://github.com/arkivanov/Decompose) for sharing presentation logic and navigation
   state.
+- [Arkitekt](https://github.com/futuredapp/arkitekt) (`decompose` + `cr-usecases`) for our
+  opinionated component base, use-case execution scopes, and `@GenerateFactory` codegen on top of
+  Decompose.
 - The presentation layer follows the MVI-like design pattern.
-- [Koin](https://insert-koin.io/) for dependency injection.
+- [Koin](https://insert-koin.io/) for dependency injection, wired with
+  [Koin Annotations](https://insert-koin.io/docs/reference/koin-annotations/definitions/) and the
+  Koin Compiler plugin (no KSP processor required).
 - [SKIE](https://skie.touchlab.co/) for better Kotlin->Swift interop (exhaustive enums, sealed
   classes, Coroutines support).
 - [moko-resources](https://github.com/icerockdev/moko-resources) for sharing string (and other types
@@ -58,13 +63,14 @@ set up, incl. navigation and some API calls.
 ### KMP
 
 - Product Flavors: dev, prod
-- Use-Cases: Kotlin Coroutines [cr-usecases](https://github.com/futuredapp/arkitekt)
+- Architecture: [Arkitekt](https://github.com/futuredapp/arkitekt) — `decompose` components and
+  `cr-usecases` for coroutine-based use cases.
 
 ### Android
 
 - ApplicationId: ~~`app.futured.project`~~
-- minSdk: ~~`28`~~
-- targetSdk: ~~`34`~~
+- minSdk: ~~`29`~~
+- targetSdk: ~~`36`~~
 - Supports: ~~**Dark mode, landscape orientation**~~
 - Build Variants: debug, enterprise, release
 
@@ -117,9 +123,7 @@ This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security s
    iOS Swift Package as dependency. (This task shouldn't be used directly, build the KMP target in
    Xcode, instead.)
 6. `generateMRcommonMain` - Regenerate shared resource IDs.
-7. `:shared:network:graphql:downloadApolloSchemaFromIntrospection` - Download the latest Apollo
-   schema.
-8. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after
+7. `:shared:network:graphql:generateApolloSources` - Generate Apollo sources (rebuilds models after
    adding modifying queries, mutations, etc.).
 
 ## Kotlin Multiplatform Swift Package Integration
@@ -140,7 +144,7 @@ Key components:
 
 ### Environment Variables
 
-Two critical environment variables control the build process:
+Four environment variables control the build process:
 
 - **`KMP_FRAMEWORK_BUILD_TYPE`**: Specifies the framework build type (`debug` or `release`)
     - Set in `.xcconfig` files for each Xcode build configuration
@@ -152,6 +156,33 @@ Two critical environment variables control the build process:
     - Set in `.xcconfig` files for each Xcode build configuration
     - Controls API endpoints and environment-specific configuration
     - Passed to Gradle as `-P buildkonfig.flavor=$(KMP_BUILD_FLAVOR)`
+
+- **`KMP_BUILD_MODE`**: Controls which architectures are compiled (`simulator`, `device`, or `all`)
+    - `simulator` — builds only `iosSimulatorArm64` (fastest for local development)
+    - `device` — builds only `iosArm64`
+    - `all` — builds both targets (default, required for XCFramework distribution)
+    - Configured in `.xcconfig` files; Beta and Release always use `all`
+    - Passed to Gradle as `-PkmpBuildMode=$(KMP_BUILD_MODE)`
+- 
+- **`KMP_IS_STATIC`**: Controls whether the KMP XCFramework is linked statically or dynamically
+    - `false` (dynamic) — set in `Debug.xcconfig`; **required for SwiftUI previews** to work in
+      Xcode, as the preview process cannot load a statically linked KMP framework
+    - `true` (static) — set in `Release.xcconfig` and `Beta.xcconfig`; used for beta (TestFlight)
+      and release builds
+    - If not set, Gradle defaults to static (`true`)
+    - Passed to Gradle as `-PisStatic=$(KMP_IS_STATIC)`
+
+### Local Build Configuration
+
+Developers can override `KMP_BUILD_MODE` locally for faster iteration:
+
+1. Copy `iosApp/Config Files/Local.default.xcconfig` → `iosApp/Config Files/Local.xcconfig`
+2. Set `KMP_BUILD_MODE = simulator` in `Local.xcconfig`
+3. `Local.xcconfig` is gitignored — changes won't affect other developers
+
+The Debug configuration includes both files (`Local.default.xcconfig` with optional include for
+`Local.xcconfig`), so local overrides take precedence. Beta and Release configurations hardcode
+`KMP_BUILD_MODE = all` and do not use local overrides.
 
 ### Development Workflow
 
@@ -171,6 +202,40 @@ To build and update the KMP package during development:
     - Always rebuild the "KMP Package" target to update the XCFramework
     - Then build the main app target to use the updated KMP code
 
+### SwiftUI Previews
+
+SwiftUI previews require a **dynamically linked** KMP framework. The `Debug` build configuration
+sets `KMP_IS_STATIC = false` in `Debug.xcconfig` to enable this. `Beta` and `Release`
+configurations use static linking.
+
+#### Preview mock pattern
+
+Shared KMP code exposes preview mock objects (e.g. `FirstScreenPreviews`) that provide fake,
+no-op implementations of screen interfaces with configurable view states. These are consumed on the
+iOS side inside `#if DEBUG` / `#Preview` blocks.
+
+**Kotlin side** (`shared/feature/src/commonMain/kotlin/.../firstScreen/FirstScreenPreviews.kt`):
+
+```kotlin
+object FirstScreenPreviews {
+    fun viewState(...) = FirstViewState(...)
+    fun screen(viewState: FirstViewState = viewState()): FirstScreen = object : FirstScreen { ... }
+}
+```
+
+**Swift side** (`iosApp/iosApp/Views/Screen/First/FirstView.swift`):
+
+```swift
+#if DEBUG
+#Preview("FirstView") {
+    FirstView(FirstViewModel(FirstScreenPreviews.shared.screen()))
+}
+#endif
+```
+
+When adding a new screen, create a `*Previews` object in the screen's package following the same
+pattern.
+
 ## Navigation Structure
 
 The app utilizes [Decompose](https://arkivanov.github.io/Decompose/) to share presentation logic and
@@ -178,28 +243,28 @@ navigation state in KMP.
 The following meta-description provides an overview of Decompose navigation tree:
 
 ```kotlin
-Navigation("RootNavHost") {
+Navigation("Root") {
     Slot {
-        Screen("LoginScreen")
-        Navigation("SignedInNavHost") {
+        Screen("Login")
+        Navigation("SignedIn") {
             // Bottom navigation stack
             Stack {
                 // Home tab
-                Navigation("HomeNavHost") {
+                Navigation("Home") {
                     Stack {
-                        Screen("FirstScreen")
-                        Screen("SecondScreen") {
+                        Screen("First")
+                        Screen("Second") {
                             Slot {
                                 Screen("Picker")
                             }
                         }
-                        Screen("ThirdScreen")
+                        Screen("Third")
                     }
                 }
                 // Profile tab
-                Navigation("ProfileNavHost") {
+                Navigation("Profile") {
                     Stack {
-                        Screen("ProfileScreen")
+                        Screen("Profile")
                     }
                 }
             }
@@ -212,17 +277,19 @@ Navigation("RootNavHost") {
 
 ### Initial script
 
-Use `init_template.kts` script to set up the template.
-The script renames directories and package names in files to the given package name.
-
-It is written in Kotlin. To run it you need to have [kscript](https://github.com/kscripting/kscript)
-installed.
+Use the `init_template.sh` script to set up the template.
+The script is a Kotlin-based tool (`init_template.main.kts`) that renames directories and package names throughout the project to match your specified package name.
+The shell wrapper automatically ensures Kotlin is installed via SDKMAN if needed.
 
 #### Usage
 
 ```shell
-kscript init_template.kts
+./init_template.sh
 ```
+
+#### Note on iOS
+
+The Swift Package XCFramework has to be build manually for the first time using `./gradlew assembleAndCopyDebugSwiftPackage` in order for XCode to resolve Swift Package as being valid.
 
 ### Product Flavors
 
@@ -282,9 +349,9 @@ project:
 1. Set up Firebase Crashlytics on both platforms as you would usually do.
 2. After dependencies are in place, on each platform uncomment the code in
    `PlatformFirebaseCrashlyticsImpl` classes (follow comments).
-3. On iOS, do not forget to also upload debug symbols to Crashlytics. The KMP framework is static,
-   so no standalone debug symbols are generated for KMP, instead, they are included in the app
-   itself.
+3. On iOS, do not forget to also upload debug symbols to Crashlytics. The KMP framework is static
+   in Beta and Release builds, so no standalone debug symbols are generated for KMP, instead, they
+   are included in the app itself.
 
 ## Deep Linking
 

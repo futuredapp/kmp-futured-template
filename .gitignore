@@ -8,4 +8,5 @@ captures
 .cxx
 local.properties
 xcuserdata
+Local.xcconfig
 .kotlin

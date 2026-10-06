@@ -1,34 +1,28 @@
 import app.futured.kmptemplate.gradle.configuration.ProductFlavors
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
 }
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    android {
+        namespace = libs.versions.project.shared.network.rest.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
@@ -66,18 +60,6 @@ kotlin {
     }
 }
 
-android {
-    namespace = libs.versions.project.shared.network.rest.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-}
-
 buildkonfig {
     packageName = libs.versions.project.shared.network.rest.packageName.get()
     objectName = "FlavorConstants"
@@ -96,4 +78,8 @@ buildkonfig {
             buildConfigField(STRING, "ktorUserAgentVersion", libs.versions.ktor.get())
         }
     }
+}
+
+koinCompiler {
+    userLogs.set(false)
 }

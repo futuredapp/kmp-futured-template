@@ -15,11 +15,14 @@ import app.futured.kmptemplate.network.rest.result.NetworkError as RestNetworkEr
  */
 internal object AppLogging {
 
-    fun initialize(crashlyticsReporter: CrashlyticsReporter) {
+    fun initialize(
+        isDebugBuild: Boolean,
+        crashlytics: CrashlyticsReporter,
+    ) {
         with(Logger) {
             setMinSeverity(Severity.Debug)
             setTag("KmpTemplate")
-            setLogWriters(getPlatformLogWriters() + getCrashlyticsLogWriter(crashlyticsReporter))
+            setLogWriters(getPlatformLogWriters(isDebugBuild) + getCrashlyticsLogWriter(crashlytics))
         }
     }
 
@@ -43,4 +46,4 @@ internal object AppLogging {
  * This way, we can customize logging behaviour per-platform
  * (eg. Android should not use any log writers in production builds, etc).
  */
-internal expect fun getPlatformLogWriters(): List<LogWriter>
+internal expect fun getPlatformLogWriters(isDebug: Boolean): List<LogWriter>

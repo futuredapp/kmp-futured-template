@@ -10,5 +10,11 @@ interface FirstScreen {
 
     interface Actions {
         fun onNext()
+
+        companion object {
+            fun noOpActions(): Actions = object : Actions {
+                override fun onNext() = Unit
+            }
+        }
     }
 }

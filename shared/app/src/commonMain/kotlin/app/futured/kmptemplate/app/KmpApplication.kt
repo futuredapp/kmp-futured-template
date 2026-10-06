@@ -16,6 +16,7 @@ object KmpApplication {
 
     fun initializeSharedApplication(
         platformBindings: PlatformBindings,
+        isDebugBuild: Boolean,
         appDeclaration: KoinAppDeclaration? = null,
     ) {
         val crashlyticsReporter = CrashlyticsReporter(platformBindings.firebaseCrashlytics())
@@ -25,6 +26,9 @@ object KmpApplication {
             appDeclaration = appDeclaration,
         )
         AppCrashReporting.initialize(crashlyticsReporter)
-        AppLogging.initialize(crashlyticsReporter)
+        AppLogging.initialize(
+            isDebugBuild = isDebugBuild,
+            crashlytics = crashlyticsReporter,
+        )
     }
 }

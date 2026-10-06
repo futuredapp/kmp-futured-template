@@ -1,9 +1,8 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
 
     id(libs.plugins.conventions.lint.get().pluginId)
 }
@@ -11,13 +10,15 @@ plugins {
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
-        }
+    // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+
+    android {
+        namespace = libs.versions.project.shared.platform.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
@@ -25,6 +26,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
             }
         }
 
@@ -33,17 +35,5 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
-    }
-}
-
-android {
-    namespace = libs.versions.project.shared.platform.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 }

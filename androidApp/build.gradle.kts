@@ -1,8 +1,8 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidx.baselineprofile)
     // TODO PROJECT-SETUP enable after providing google-services.json
@@ -14,6 +14,10 @@ plugins {
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
+    }
 }
 
 android {
@@ -24,8 +28,8 @@ android {
         applicationId = ProjectSettings.Android.ApplicationId
         minSdk = ProjectSettings.Android.MinSdkVersion
         targetSdk = ProjectSettings.Android.TargetSdkVersion
-        versionCode = ProjectSettings.Android.VersionCode
-        versionName = ProjectSettings.Android.VersionName
+        versionCode = System.getenv("ANDROID_BUILD_NUMBER")?.toIntOrNull() ?: 1
+        versionName = System.getenv("ANDROID_VERSION_NAME") ?: "1.x.x-local"
     }
 
     buildFeatures {
@@ -48,9 +52,9 @@ android {
         }
         create(ProjectSettings.Android.BuildTypes.Release) {
             storeFile = file("keystore/todo_your_release_keystore.keystore")
-            storePassword = ProjectSettings.Android.Signing.Release.StorePassword
-            keyAlias = ProjectSettings.Android.Signing.Release.KeyAlias
-            keyPassword = ProjectSettings.Android.Signing.Release.KeyPassword
+            storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD").orEmpty()
+            keyAlias = System.getenv("ANDROID_KEY_ALIAS").orEmpty()
+            keyPassword = System.getenv("ANDROID_KEY_PASSWORD").orEmpty()
         }
     }
 
@@ -89,8 +93,14 @@ android {
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 
-    kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
+    lint {
+        textReport = true // Write a text report to the console (Useful for CI logs)
+        xmlReport = true // Write XML report
+        abortOnError = false // Do not abort build when error is found -> Danger will report this to the MR
+        explainIssues = false // HTML/XML reports are too verbose in console logs
+        checkDependencies = false // Required to get all unused resource from other modules (disabled to speed up linting)
+        checkTestSources = true // Also check test case code for lint issues
+        checkReleaseBuilds = false // If we run a full lint analysis as build part in CI, we can skip redundant checks
     }
 }
 
@@ -101,8 +111,8 @@ dependencies {
     implementation(projects.shared.app)
     implementation(projects.shared.feature)
     implementation(projects.shared.platform)
-    implementation(projects.shared.arkitektDecompose)
-    implementation(projects.shared.resources)
+    implementation(libs.futured.arkitekt.decompose)
+    implementation(projects.shared.kmpResources)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)

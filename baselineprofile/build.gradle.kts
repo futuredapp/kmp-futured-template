@@ -3,8 +3,11 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 
 plugins {
     alias(libs.plugins.android.test)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.baselineprofile)
+}
+
+kotlin {
+    jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 }
 
 android {
@@ -16,10 +19,6 @@ android {
         targetCompatibility = ProjectSettings.Android.JavaCompatibility
     }
 
-    kotlinOptions {
-        jvmTarget = ProjectSettings.Android.KotlinJvmTargetNum
-    }
-
     defaultConfig {
         minSdk = ProjectSettings.Android.MinSdkVersion
         targetSdk = ProjectSettings.Android.TargetSdkVersion
@@ -29,7 +28,7 @@ android {
 
     targetProjectPath = ":androidApp"
 
-    testOptions.managedDevices.devices {
+    testOptions.managedDevices.allDevices {
         create<ManagedVirtualDevice>("pixel6Api34") {
             device = "Pixel 6"
             apiLevel = 34

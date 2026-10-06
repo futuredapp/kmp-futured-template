@@ -10,7 +10,7 @@ import org.koin.core.annotation.Factory
 import kotlin.time.Duration
 
 @Factory
-internal class CounterUseCase : FlowUseCase<CounterUseCaseArgs, Long>() {
+internal class CounterUseCase : FlowUseCase<CounterUseCaseArgs, Long> {
 
     override fun build(args: CounterUseCaseArgs): Flow<Long> = flow {
         var counter = 0L
