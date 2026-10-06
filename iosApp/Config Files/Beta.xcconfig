@@ -2,6 +2,6 @@
 
 KMP_BUILD_FLAVOR = dev
 KMP_FRAMEWORK_BUILD_TYPE = release
-KMP_BUILD_MODE = all
+KMP_FRAMEWORK_TARGETS = device
 // Static framework is used for beta (TestFlight) and release builds.
 KMP_IS_STATIC = true
