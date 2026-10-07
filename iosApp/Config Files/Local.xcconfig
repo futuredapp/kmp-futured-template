@@ -1,1 +1,1 @@
-KMP_BUILD_MODE = simulator
+KMP_FRAMEWORK_TARGETS = simulator
