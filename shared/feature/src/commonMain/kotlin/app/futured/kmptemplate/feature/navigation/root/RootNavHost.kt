@@ -8,7 +8,7 @@ import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import com.arkivanov.decompose.router.slot.ChildSlot
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -79,13 +79,7 @@ sealed interface RootChild {
      */
     val iosViewId: String
 
-    data class Login(
-        val screen: LoginScreen,
-        override val iosViewId: String = Uuid.random().toString(),
-    ) : RootChild
+    data class Login(val screen: LoginScreen, override val iosViewId: String = Uuid.random().toString()) : RootChild
 
-    data class SignedIn(
-        val navHost: SignedInNavHost,
-        override val iosViewId: String = Uuid.random().toString(),
-    ) : RootChild
+    data class SignedIn(val navHost: SignedInNavHost, override val iosViewId: String = Uuid.random().toString()) : RootChild
 }

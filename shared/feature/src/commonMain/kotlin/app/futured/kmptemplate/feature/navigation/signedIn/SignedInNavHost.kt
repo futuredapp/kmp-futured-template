@@ -34,14 +34,10 @@ interface SignedInNavHost : BackHandlerOwner {
 sealed interface SignedInConfig {
 
     @Serializable
-    data class Home(
-        val initialStack: List<HomeConfig> = listOf(HomeConfig.First),
-    ) : SignedInConfig
+    data class Home(val initialStack: List<HomeConfig> = listOf(HomeConfig.First)) : SignedInConfig
 
     @Serializable
-    data class Profile(
-        val initialStack: List<ProfileConfig> = listOf(ProfileConfig.Profile),
-    ) : SignedInConfig
+    data class Profile(val initialStack: List<ProfileConfig> = listOf(ProfileConfig.Profile)) : SignedInConfig
 }
 
 @OptIn(ExperimentalUuidApi::class)
@@ -54,13 +50,7 @@ sealed interface SignedInChild {
      */
     val iosViewId: String
 
-    data class Home(
-        val navHost: HomeNavHost,
-        override val iosViewId: String = Uuid.random().toString(),
-    ) : SignedInChild
+    data class Home(val navHost: HomeNavHost, override val iosViewId: String = Uuid.random().toString()) : SignedInChild
 
-    data class Profile(
-        val navHost: ProfileNavHost,
-        override val iosViewId: String = Uuid.random().toString(),
-    ) : SignedInChild
+    data class Profile(val navHost: ProfileNavHost, override val iosViewId: String = Uuid.random().toString()) : SignedInChild
 }

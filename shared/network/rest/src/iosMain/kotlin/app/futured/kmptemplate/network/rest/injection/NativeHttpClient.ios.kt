@@ -7,8 +7,6 @@ import io.ktor.client.engine.darwin.Darwin
 /**
  * Returns platform-native HTTP client for Ktor framework.
  */
-actual fun getNativeHttpClient(configure: HttpClientConfig<*>.() -> Unit): HttpClient {
-    return HttpClient(Darwin) {
-        configure()
-    }
+actual fun getNativeHttpClient(configure: HttpClientConfig<*>.() -> Unit): HttpClient = HttpClient(Darwin) {
+    configure()
 }

@@ -1,7 +1,7 @@
 package app.futured.kmptemplate.feature.navigation.profile
 
+import app.futured.arkitekt.annotation.GenerateFactory
 import app.futured.arkitekt.decompose.ext.asStateFlow
-import app.futured.factorygenerator.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.profileScreen.ProfileComponentFactory
@@ -21,7 +21,8 @@ internal class ProfileNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam toLogin: () -> Unit,
     @InjectedParam private val initialStack: List<ProfileConfig>,
-) : AppComponent<Unit, Nothing>(componentContext, Unit), ProfileNavHost {
+) : AppComponent<Unit, Nothing>(componentContext, Unit),
+    ProfileNavHost {
 
     private val navigator: ProfileNavHostNavigation = ProfileNavHostNavigator(toLogin)
 

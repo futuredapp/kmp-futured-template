@@ -73,9 +73,7 @@ tasks.withType<Detekt> {
  * - https://github.com/JLLeitschuh/ktlint-gradle/issues/751
  */
 tasks.matching { it.name == "runKtlintCheckOverCommonMainSourceSet" }.configureEach {
-    if (project.tasks.findByName("kspCommonMainKotlinMetadata") != null) {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
+    dependsOn(project.tasks.matching { it.name == "kspCommonMainKotlinMetadata" })
 }
 
 /**
@@ -89,9 +87,7 @@ tasks.matching { it.name == "runKtlintCheckOverCommonMainSourceSet" }.configureE
  * - https://github.com/JLLeitschuh/ktlint-gradle/issues/724
  */
 tasks.matching { it.name == "runKtlintFormatOverCommonMainSourceSet" }.configureEach {
-    if (project.tasks.findByName("kspCommonMainKotlinMetadata") != null) {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
+    dependsOn(project.tasks.matching { it.name == "kspCommonMainKotlinMetadata" })
 }
 
 rootProject.tasks.named("detektReportMerge", ReportMergeTask::class.java) {

@@ -8,5 +8,11 @@ interface LoginScreen {
 
     interface Actions {
         fun onLoginClick()
+
+        companion object {
+            fun noOpActions() = object : Actions {
+                override fun onLoginClick() = Unit
+            }
+        }
     }
 }

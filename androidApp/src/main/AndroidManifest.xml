@@ -8,6 +8,7 @@
         android:name=".App"
         android:allowBackup="false"
         android:enableOnBackInvokedCallback="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/template_app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -34,7 +35,6 @@
             </intent-filter>
         </activity>
 
-        <profileable
-            android:shell="true" />
+        <profileable android:shell="true" />
     </application>
 </manifest> 

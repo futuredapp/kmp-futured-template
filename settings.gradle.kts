@@ -1,15 +1,15 @@
 pluginManagement {
     repositories {
-        google()
         gradlePluginPortal()
         mavenCentral()
+        google()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        google()
         mavenCentral()
+        google()
     }
 }
 
@@ -19,10 +19,6 @@ rootProject.name = "KMP_Futured_template"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":androidApp")
-include(":shared:arkitekt-decompose")
-include(":shared:arkitekt-decompose:annotation")
-include(":shared:arkitekt-decompose:processor")
-include(":shared:arkitekt-cr-usecases")
 include(":shared:app")
 include(":shared:network:graphql")
 include(":shared:network:rest")
@@ -30,6 +26,8 @@ include(":shared:feature")
 include(":shared:persistence")
 include(":shared:platform")
 include(":shared:resources")
+// this removes compiler warning about same KLIB name https://youtrack.jetbrains.com/projects/KT/issues/KT-66568/w-KLIB-resolver-The-same-uniquename...-found-in-more-than-one-library
+project(":shared:resources").name = "kmp-resources"
 include(":baselineprofile")
 
 includeBuild("convention-plugins")

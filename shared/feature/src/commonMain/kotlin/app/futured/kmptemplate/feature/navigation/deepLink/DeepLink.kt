@@ -10,26 +10,19 @@ import io.ktor.util.toMap
  * @param regex Regular expression that matches given deep link [uri].
  * @param uri Raw value of deeplink URI from which path and query parameters can be extracted.
  */
-internal data class DeepLink(
-    val regex: Regex,
-    val uri: String,
-) {
+internal data class DeepLink(val regex: Regex, val uri: String) {
 
     companion object {
-        fun from(regex: Regex, uri: String): DeepLink? {
-            return if (regex.matches(uri)) {
-                DeepLink(regex, uri)
-            } else {
-                null
-            }
+        fun from(regex: Regex, uri: String): DeepLink? = if (regex.matches(uri)) {
+            DeepLink(regex, uri)
+        } else {
+            null
         }
     }
 
-    inline fun pathParameter(key: String): String? {
-        return regex.find(uri)?.groups?.get(key)?.value
-    }
+    fun pathParameter(key: String): String? = regex.find(uri)?.groups?.get(key)?.value
 
-    inline fun queryParameter(key: String): String? {
+    fun queryParameter(key: String): String? {
         val params = Url(uri).parameters.toMap()
         return params[key]?.firstOrNull()
     }

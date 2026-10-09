@@ -1,6 +1,7 @@
 package app.futured.kmptemplate.feature.ui.base
 
 import app.futured.arkitekt.decompose.ArkitektComponentContext
+import app.futured.arkitekt.decompose.navigation.NavigationResultRegistry
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ComponentContextFactory
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
@@ -21,15 +22,24 @@ interface AppComponentContext : ArkitektComponentContext<AppComponentContext>
  */
 class DefaultAppComponentContext(
     componentContext: ComponentContext,
-) : AppComponentContext,
+    override val navigationResultRegistry: NavigationResultRegistry,
+) :
+    AppComponentContext,
     LifecycleOwner by componentContext,
     StateKeeperOwner by componentContext,
     InstanceKeeperOwner by componentContext,
     BackHandlerOwner by componentContext {
 
+    constructor(
+        componentContext: ComponentContext,
+    ) : this(
+        componentContext = componentContext,
+        navigationResultRegistry = NavigationResultRegistry(componentContext.stateKeeper),
+    )
+
     override val componentContextFactory: ComponentContextFactory<AppComponentContext> =
         ComponentContextFactory { lifecycle, stateKeeper, instanceKeeper, backHandler ->
             val ctx = componentContext.componentContextFactory(lifecycle, stateKeeper, instanceKeeper, backHandler)
-            DefaultAppComponentContext(ctx)
+            DefaultAppComponentContext(ctx, navigationResultRegistry)
         }
 }

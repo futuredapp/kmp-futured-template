@@ -1,8 +1,11 @@
 package app.futured.kmptemplate.feature.ui.base
 
+import app.futured.arkitekt.crusecases.CoroutineScopeOwner
 import app.futured.arkitekt.decompose.navigation.NavigationActions
 import app.futured.arkitekt.decompose.navigation.NavigationActionsProducer
 import app.futured.arkitekt.decompose.presentation.BaseComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 
 /**
  * Base class for application components - usually nav host components that are not screens and do not need to implement
@@ -13,10 +16,14 @@ import app.futured.arkitekt.decompose.presentation.BaseComponent
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class AppComponent<VS : Any, E : Any>(
-    componentContext: AppComponentContext,
-    defaultState: VS,
-) : BaseComponent<VS, E>(componentContext, defaultState), AppComponentContext by componentContext
+abstract class AppComponent<VS : Any, E : Any>(componentContext: AppComponentContext, defaultState: VS) :
+    BaseComponent<VS, E>(componentContext, defaultState),
+    AppComponentContext by componentContext,
+    CoroutineScopeOwner {
+
+    override val useCaseScope: CoroutineScope = lifecycleScope
+    override val useCaseJobPool: MutableMap<Any, Job> = mutableMapOf()
+}
 
 /**
  * Base class for screen components with navigation actions.
@@ -27,7 +34,6 @@ abstract class AppComponent<VS : Any, E : Any>(
  * @param componentContext The context of the component.
  * @param defaultState The default state of the component.
  */
-abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(
-    componentContext: AppComponentContext,
-    defaultState: VS,
-) : AppComponent<VS, E>(componentContext, defaultState), NavigationActionsProducer<NAV>
+abstract class ScreenComponent<VS : Any, E : Any, NAV : NavigationActions>(componentContext: AppComponentContext, defaultState: VS) :
+    AppComponent<VS, E>(componentContext, defaultState),
+    NavigationActionsProducer<NAV>

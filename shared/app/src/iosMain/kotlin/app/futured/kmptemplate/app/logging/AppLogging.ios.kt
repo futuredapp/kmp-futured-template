@@ -8,4 +8,8 @@ import co.touchlab.kermit.XcodeSeverityWriter
  * This way, we can customize logging behaviour per-platform
  * (eg. Android should not use any log writers in production builds, etc).
  */
-internal actual fun getPlatformLogWriters(): List<LogWriter> = listOf(XcodeSeverityWriter())
+internal actual fun getPlatformLogWriters(isDebug: Boolean): List<LogWriter> = if (isDebug) {
+    listOf(XcodeSeverityWriter())
+} else {
+    emptyList()
+}

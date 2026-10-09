@@ -1,37 +1,45 @@
 import app.futured.kmptemplate.gradle.configuration.ProjectSettings
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.dokka)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.koin)
 
     id(libs.plugins.conventions.lint.get().pluginId)
-    id(libs.plugins.conventions.annotationProcessing.get().pluginId)
-}
-
-annotations {
-    useKoin = true
-    useComponentFactory = true
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
+    add("kspCommonMainMetadata", libs.futured.arkitekt.decomposeProcessor)
+}
+
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 
 kotlin {
     jvmToolchain(ProjectSettings.Kotlin.JvmToolchainVersion)
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(ProjectSettings.Android.KotlinJvmTargetNum))
+    compilerOptions {
+        // Turns off warnings about beta feature https://youtrack.jetbrains.com/issue/KT-61573
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
+    android {
+        namespace = libs.versions.project.shared.feature.namespace.get()
+        compileSdk = ProjectSettings.Android.CompileSdkVersion
+        minSdk = ProjectSettings.Android.MinSdkVersion
+
+        withHostTest {
+            isIncludeAndroidResources = true
         }
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
@@ -51,9 +59,10 @@ kotlin {
                 implementation(projects.shared.network.graphql)
                 implementation(projects.shared.network.rest)
                 implementation(projects.shared.persistence)
-                implementation(projects.shared.arkitektDecompose)
-                implementation(projects.shared.arkitektDecompose.annotation)
-                implementation(projects.shared.resources)
+                implementation(libs.futured.arkitekt.decompose)
+                implementation(libs.futured.arkitekt.decomposeAnnotation)
+                implementation(libs.futured.arkitekt.crUseCases)
+                implementation(projects.shared.kmpResources)
 
                 implementation(libs.logging.kermit)
                 implementation(libs.skie.annotations)
@@ -66,40 +75,15 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
+
+        androidMain {
+            dependencies {
+                implementation(project.dependencies.platform(libs.androidx.compose.bom))
+            }
+        }
     }
 }
 
-android {
-    namespace = libs.versions.project.shared.feature.namespace.get()
-    compileSdk = ProjectSettings.Android.CompileSdkVersion
-    defaultConfig {
-        minSdk = ProjectSettings.Android.MinSdkVersion
-    }
-    compileOptions {
-        sourceCompatibility = ProjectSettings.Android.JavaCompatibility
-        targetCompatibility = ProjectSettings.Android.JavaCompatibility
-    }
-
-    buildFeatures {
-        compose = true
-    }
-}
-
-tasks.withType<DokkaTask>().configureEach {
-    dokkaSourceSets.configureEach {
-        outputDirectory.set(layout.projectDirectory.dir("../../doc/documentation/html"))
-
-        val dokkaBaseConfiguration = """
-    {
-      "customStyleSheets": ["${file("../../assets/docs-style.css")}"],
-      "footerMessage": "(c) 2024 Futured - KMP Template"
-    }
-    """
-        pluginsMapConfiguration.set(
-            mapOf(
-                // fully qualified plugin name to json configuration
-                "org.jetbrains.dokka.base.DokkaBase" to dokkaBaseConfiguration,
-            ),
-        )
-    }
+koinCompiler {
+    userLogs.set(false)
 }

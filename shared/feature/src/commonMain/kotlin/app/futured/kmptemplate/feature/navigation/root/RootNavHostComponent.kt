@@ -1,6 +1,8 @@
 package app.futured.kmptemplate.feature.navigation.root
 
+import app.futured.arkitekt.crusecases.execute
 import app.futured.arkitekt.decompose.ext.asStateFlow
+import app.futured.kmptemplate.feature.domain.IsUserLoggedInUseCase
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkDestination
 import app.futured.kmptemplate.feature.navigation.deepLink.DeepLinkResolver
 import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostComponentFactory
@@ -8,7 +10,6 @@ import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponentFactory
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
-import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
@@ -21,12 +22,12 @@ import org.koin.core.annotation.InjectedParam
 internal class RootNavHostComponent(
     @InjectedParam componentContext: AppComponentContext,
     private val deepLinkResolver: DeepLinkResolver,
-) : AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState), RootNavHost {
+    private val isUserLoggedInUseCase: IsUserLoggedInUseCase,
+) : AppComponent<RootNavHostViewState, Nothing>(componentContext, RootNavHostViewState),
+    RootNavHost {
 
     private val rootNavigator: RootNavHostNavigation = RootNavHostNavigator()
     private var pendingDeepLink: DeepLinkDestination? = null
-
-    private val logger = Logger.withTag("RootNavHostComponent")
 
     override val slot: StateFlow<ChildSlot<RootConfig, RootChild>> = childSlot(
         source = rootNavigator.slotNavigator,
@@ -56,7 +57,7 @@ internal class RootNavHostComponent(
     init {
         doOnCreate {
             if (!consumeDeepLink()) {
-                rootNavigator.slotNavigator.activate(RootConfig.Login)
+                checkUserLoggedIn()
             }
         }
     }
@@ -84,5 +85,17 @@ internal class RootNavHostComponent(
         }
         rootNavigator.slotNavigator.activate(deepLinkConfig)
         return true
+    }
+
+    private fun checkUserLoggedIn() {
+        isUserLoggedInUseCase.execute {
+            onSuccess { isLoggedIn ->
+                if (isLoggedIn) {
+                    rootNavigator.slotNavigator.activate(RootConfig.SignedIn())
+                } else {
+                    rootNavigator.slotNavigator.activate(RootConfig.Login)
+                }
+            }
+        }
     }
 }

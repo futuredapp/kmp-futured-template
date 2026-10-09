@@ -1,6 +1,6 @@
 package app.futured.kmptemplate.feature.ui.thirdScreen
 
-import app.futured.factorygenerator.annotation.GenerateFactory
+import app.futured.arkitekt.annotation.GenerateFactory
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
 import app.futured.kmptemplate.resources.MR
@@ -13,12 +13,12 @@ import org.koin.core.annotation.InjectedParam
 @Factory
 internal class ThirdComponent(
     @InjectedParam componentContext: AppComponentContext,
-    @InjectedParam args: ThirdScreenArgs,
     @InjectedParam override val navigation: ThirdScreenNavigation,
+    @InjectedParam args: ThirdScreenArgs,
 ) : ScreenComponent<ThirdViewState, Nothing, ThirdScreenNavigation>(
-        componentContext = componentContext,
-        defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
-    ),
+    componentContext = componentContext,
+    defaultState = ThirdViewState(text = MR.strings.third_screen_text.format(args.id)),
+),
     ThirdScreen,
     ThirdScreenNavigation by navigation,
     ThirdScreen.Actions {

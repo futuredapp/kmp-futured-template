@@ -8,23 +8,34 @@ concurrency:
 
 jobs:
   detect-changes:
-    uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@main
+    uses: futuredapp/.github/.github/workflows/kmp-cloud-detect-changes.yml@2.7.0
 
   check-android:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.androidFiles == 'true' }}
-    uses: futuredapp/.github/.github/workflows/android-cloud-check.yml@main
+    uses: futuredapp/.github/.github/workflows/android-cloud-check.yml@2.7.0
     with:
-      # `lintRelease` covers androidApp module and all shared modules all at once. No need to call `lintEnterprise` and `lintRelease`.
-      LINT_GRADLE_TASKS: lintCheck lintRelease
-      # `testReleaseUnitTest` covers androidApp module and all shared modules all at once. No need to call `testEnterpriseUnitTest` and `testReleaseUnitTest`.
-      TEST_GRADLE_TASKS: testReleaseUnitTest
+      LINT_GRADLE_TASKS: lintCheck
+      # `testAndroidHostTest` covers androidApp module and all shared modules all at once.
+      TEST_GRADLE_TASKS: testAndroidHostTest
 
   check-ios:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.iosFiles == 'true' }}
-    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@main
+    uses: futuredapp/.github/.github/workflows/ios-kmp-selfhosted-test.yml@2.7.0
     with:
       kmp_swift_package_integration: true
       kmp_swift_package_path: iosApp/shared/KMP
       kmp_swift_package_flavor: dev
+
+  # Single required status check for branch protection; passes when checks succeed or are skipped.
+  ci-status:
+    if: always()
+    needs: [ detect-changes, check-android, check-ios ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify check results
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: |
+          echo "One or more checks failed"
+          exit 1
